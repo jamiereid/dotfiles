@@ -12,7 +12,8 @@ Run this:
 
 ```sh
 git clone https://github.com/jamiereid/dotfiles.git ~/.dotfiles
-./.dotfiles/bootstrap.zsh
+cd .dotfiles
+./bootstrap.sh
 ```
 
 This will symlink the appropriate files in `.dotfiles` to your home directory.
