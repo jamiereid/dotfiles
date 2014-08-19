@@ -1,0 +1,165 @@
+;; -*- mode: elisp -*-
+
+;;; enable ditaa
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t))) ; this line activates ditaa
+
+;;; Package stuff
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+(add-to-list 'package-archives 
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;; Theme stuff 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
+
+;;; Add to load-path
+(add-to-list 'load-path "~/.emacs.d/")
+
+;; linum
+(global-linum-mode t)
+(require 'linum-off)
+
+;; visual-line-mode
+(global-visual-line-mode 1) ; 1 for on, 0 for off.
+
+;;; Enable php-mode
+(require 'php-mode)
+
+;;;;org-mode configuration
+;; Enable org-mode
+(require 'org)
+;; Make org-mode work with files ending in .org
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; The above is the default in recent emacsen
+
+;; Set some org-mode stuff
+(setq org-agenda-files (list "~/Dropbox/org/work.org"
+			     "~/Dropbox/org/home.org"
+			     "~/Dropbox/org/projects.org"
+			     "~/Dropbox/org/bts.org"
+			     "~/Dropbox/org/notes.org"
+			     "~/Dropbox/org/refile.org"
+			     "~/Dropbox/org/mhv.org"))
+
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+(define-key global-map "\C-cc" 'org-capture)
+
+;; Org Capture
+(setq org-default-notes-file "~/Dropbox/org/refile.org")
+(setq org-capture-templates
+      '(("w" "Work" entry (file "~/Dropbox/org/refile.org")
+         "* TODO %? :WORK:\n ADDED:%U")
+	("h" "Home" entry (file "~/Dropbox/org/refile.org")
+         "* TODO %? \n ADDED:%U")
+	("b" "BtS" entry (file "~/Dropbox/org/refile.org")
+         "* TODO %? \n ADDED:%U")
+	("m" "MHV" entry (file "~/Dropbox/org/refile.org")
+         "* TODO %? \n ADDED:%U")
+	("p" "Projects" entry (file "~/Dropbox/org/refile.org")
+         "* TODO %? \n ADDED:%U")
+	("n" "Notes" entry (file "~/Dropbox/org/notes.org")
+         "* %?\n ADDED:%U")))
+
+;; Turns on fast state selection
+(setq org-use-fast-todo-selection t)
+
+;; TODO sequences
+(setq org-todo-keywords
+       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
+; Use full outline paths for refile targets - we file directly with IDO
+(setq org-refile-use-outline-path t)
+
+; Targets complete directly with IDO
+(setq org-outline-path-complete-in-steps nil)
+
+; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+
+;;;; Refile settings
+
+;; Refile stuff
+; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                 (org-agenda-files :maxlevel . 9))))
+
+; Exclude DONE state tasks from refile targets
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
+(setq org-refile-target-verify-function 'bh/verify-refile-target)
+
+;; Recursive events settings
+(setq org-log-done t)
+(setq org-log-repeat "time")
+
+
+;;; disable splash
+(setq inhibit-splash-screen t)
+
+;;; turn off tool bar
+(tool-bar-mode -1)
+
+;;; kill whole line (more like vi's dd)
+(setq kill-whole-line t)
+
+;;; hide droppings
+(setq backup-directory-alist
+`((".*" . ,"~/.emacs-tmp/")))
+(setq auto-save-file-name-transforms
+`((".*" ,"~/.emacs-tmp/" t)))
+
+;;; fonts
+(set-default-font "Source Code Pro-11")
+
+;; Reload files if they have changed on disk but not in the buffer
+(global-auto-revert-mode 1)
+
+;; refresh agenda view regurally
+(defun kiwon/org-agenda-redo-in-other-window ()
+  "Call org-agenda-redo function even in the non-agenda buffer."
+  (interactive)
+  (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+    (when agenda-window
+      (with-selected-window agenda-window (org-agenda-redo)))))
+(run-at-time nil 60 'kiwon/org-agenda-redo-in-other-window)
+
+; Use IDO for both buffer and file completion and ido-everywhere to t
+(setq org-completion-use-ido t)
+(setq ido-everywhere t)
+(setq ido-max-directory-size 100000)
+(ido-mode (quote both))
+; Use the current window when visiting files and buffers with ido
+(setq ido-default-file-method 'selected-window)
+(setq ido-default-buffer-method 'selected-window)
+; Use the current window for indirect buffer display
+(setq org-indirect-buffer-display 'current-window)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("4031c1ea0bb235b75a048bd92f3bf3aa984c9f7cc5b408f00f62ed99a6eecc09" "e26780280b5248eb9b2d02a237d9941956fc94972443b0f7aeec12b5c15db9f3" "68769179097d800e415631967544f8b2001dae07972939446e21438b1010748c" "1989847d22966b1403bab8c674354b4a2adf6e03e0ffebe097a6bd8a32be1e19" "c7359bd375132044fe993562dfa736ae79efc620f68bab36bd686430c980df1c" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(linum-format " %7i "))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
