@@ -25,7 +25,6 @@ function prompt_jambulance_precmd {
    unsetopt XTRACE KSH_ARRAYS
 
    prompt_jambulance_pwd
-
 }
 
 function prompt_jambulance_setup {
@@ -35,6 +34,9 @@ function prompt_jambulance_setup {
 
   # Load required functions
   autoload -Uz add-zsh-hook
+
+  # Add hook for calling vcs_info before each command.
+  add-zsh-hook precmd prompt_jambulance_precmd
 
   # Add hook for calling things before each command
   add-zsh-hook precmd prompt_jambulance_precmd
