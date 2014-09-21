@@ -10,14 +10,14 @@ pmodload 'helper'
 function prompt_jambulance_pwd {
   setopt PROMPT_SUBST
 
-  local pwd="${PWD/#$HOME/~}"
+  #local pwd="${PWD/#$HOME/~}"
 
-  if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_jambulance_pwd="$MATCH"
-    unset MATCH
-  else
+  #if [[ "$pwd" == (#m)[/~] ]]; then
+  #  _prompt_jambulance_pwd="$MATCH"
+  #  unset MATCH
+  #else
     _prompt_jambulance_pwd="%{%F{166}%}${${(%):-%~}//\//%F{166\}/%f}%f"
-  fi
+  #fi
 }
 
 function prompt_jambulance_precmd {
