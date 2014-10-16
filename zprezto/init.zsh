@@ -112,3 +112,5 @@ zstyle -a ':prezto:load' pmodule 'pmodules'
 pmodload "$pmodules[@]"
 unset pmodules
 
+#source custom zscripts
+source ~/.dotfiles/custom_zscripts/k.sh
