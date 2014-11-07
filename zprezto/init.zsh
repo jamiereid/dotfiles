@@ -114,3 +114,6 @@ unset pmodules
 
 #source custom zscripts
 source ~/.dotfiles/custom_zscripts/k.sh
+
+#echo
+echo "WALRUS"
