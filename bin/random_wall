@@ -1,0 +1,4 @@
+#/bin/zsh
+
+WALL=`ls /home/jam/Pictures/wallrotation/*.jpg | shuf -n 1`
+feh --bg-fill $WALL
