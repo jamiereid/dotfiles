@@ -17,7 +17,7 @@ exec --no-startup-id /home/jam/.dotfiles/bin/random_wall
 
 ## Autoexec apps
 exec xscreensaver -no-splash
-exec insync start
+exec owncloud 
 
 set $mod Mod4
 
@@ -193,7 +193,7 @@ for_window [class="libreoffice"] border none
 exec --no-startup-id nm-applet ## Wireless Network
 exec --no-startup-id xmodmap -e "keycode 96 = Insert"  ## remap Shift+F12 to Insert (for macbook)
 exec --no-startup-id i3-msg 'workspace "2: term"; exec sakura'
-exec --no-startup-id i3-msg 'workspace "9: mail"; exec geary'
+exec --no-startup-id i3-msg 'workspace "9: mail"; exec thunderbird'
 exec --no-startup-id i3-msg 'workspace "1: web"; exec chromium-browser'
 
 ## Custom Bindings
