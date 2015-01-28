@@ -1,0 +1,16 @@
+urxvt*loginShell:true
+urxvt*inheritPixmap: true
+urxvt*tintColor: white
+urxvt*transparent:true
+urxvt*shading:40
+urxvt*background:Black
+urxvt*foreground:White
+urxvt*scrollBar:false
+urxvt*scrollBar_right:true
+urxvt*transpscrollbar:true
+urxvt*saveLines:50000
+urxvt*font: xft:droid sans mono:pixelsize=8
+urxvt.perl-ext-common: default,matcher
+urxvt.urlLauncher: google-chrome
+urxvt.matcher.button: 2
+urxvt.matcher.pattern.1: \bwww\.[\w-]\.[\w./?&@#-]*[\w/-]

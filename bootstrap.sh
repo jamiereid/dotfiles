@@ -129,6 +129,7 @@ mkdir $HOME/.emacs-tmp
 ln -s $HOME/.dotfiles/emacs/emacs.d $HOME/.emacs.d
 mkdir $HOME/.config/dunst
 ln -s $HOME/.dotfiles/dunst $HOME/.config/dunst/dunstrc
+ln -s $HOME/.dotfiles/Xdefaults $HOME/.Xdefaults
 
 echo ''
 echo '  All installed!'
