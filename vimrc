@@ -6,7 +6,6 @@ filetype off
 call pathogen#infect()
 " generate helptags for everything in 'runtimepath'
 call pathogen#helptags()
-filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
