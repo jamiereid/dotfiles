@@ -178,6 +178,18 @@ map <leader>bd :Bclose<cr>
 " Close all the buffers
 map <leader>ba :1,1000 bd!<cr>
 
+" Make buffer switching a little easier
+map <leader>1 :1b<CR>
+map <leader>2 :2b<CR>
+map <leader>3 :3b<CR>
+map <leader>4 :4b<CR>
+map <leader>5 :5b<CR>
+map <leader>6 :6b<CR>
+map <leader>7 :7b<CR>
+map <leader>8 :8b<CR>
+map <leader>9 :9b<CR>
+map <leader>0 :10b<CR>
+
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
@@ -213,6 +225,9 @@ set viminfo^=%
 " Always show the status line
 set laststatus=2
 
+" Don't send buffer information to command line
+let g:bufferline_echo = 0
+
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
@@ -228,6 +243,9 @@ nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" Toggle NERDTree
+map <leader>d :NERDTreeToggle<CR>
 
 if has("mac") || has("macunix")
   nmap <D-j> <M-j>
@@ -258,6 +276,8 @@ map <leader>q :e ~/buffer<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" If NERDTree is the only window left open, close vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
