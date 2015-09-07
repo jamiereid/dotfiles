@@ -130,6 +130,9 @@ ln -s $HOME/.dotfiles/emacs/emacs.d $HOME/.emacs.d
 mkdir $HOME/.config/dunst
 ln -s $HOME/.dotfiles/dunst $HOME/.config/dunst/dunstrc
 ln -s $HOME/.dotfiles/Xdefaults $HOME/.Xdefaults
+ln -s $HOME/.dotfiles/vimrc $HOME/.vimrc
+ln -s $HOME/.dotfiles/vim/ $HOME/.vim
+ln -s $HOME/.dotfiles/dircolors.256dark $HOME/.dircolors
 
 echo ''
 echo '  All installed!'

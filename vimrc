@@ -94,8 +94,8 @@ set cursorline
 " Enable syntax highlighting
 syntax enable
 
-colorscheme badwolf
 set background=dark
+colorscheme base16-default
 
 " Set extra options when running in GUI mode
 if has("gui_running")
