@@ -43,6 +43,9 @@ export PATH="$PATH:$HOME/.rvm/bin:$HOME/bin" # Add RVM to PATH for scripting
 # source dircolors
 eval `dircolors $HOME/.dircolors`
 
+# let's import some things
+source ~/.dotfiles/custom_zscripts/*.sh
+
 # We're all ready :)
 echo "WALRUS"
 
