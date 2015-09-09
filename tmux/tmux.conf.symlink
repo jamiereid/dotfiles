@@ -90,3 +90,7 @@ set-window-option -g automatic-rename off
 
 # listen to alerts from all windows
 set -g bell-action any
+
+# Powerline (Can maybe get rid of stuff above?)
+run-shell "powerline-daemon -q"
+source "/usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
