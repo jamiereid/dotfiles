@@ -21,8 +21,8 @@ set-option -g base-index 1
 setw -g pane-base-index 1
 
 # a mouse
-set -g mode-mouse on
-setw -g mouse-select-window on
+#set -g mode-mouse on
+#setw -g mouse-select-window on
 #setw -g mouse-select-pane on
 
 # reload ~/.tmux.conf using PREFIX r
