@@ -230,7 +230,7 @@ let g:bufferline_echo = 0
 
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
+let base16colorspace=256
 """"""""""""""""""""""""""""""
 " => Powerline
 """""""""""""""""""""""""""""
