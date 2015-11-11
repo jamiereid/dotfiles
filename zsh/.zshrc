@@ -42,6 +42,7 @@ antigen apply
 sources=(
   'hub'
   'path'
+  'base16-shell'
   'vcsinfo'
   'prompt'
   'completions'
@@ -60,4 +61,6 @@ if [[ -e $DOTSPATH/zsh/zsh/custom.zsh ]]; then
   source $DOTSPATH/zsh/zsh/custom.zsh
 fi
 
-source ~/.zsh.local
+if [[ -e ~/.zsh.local ]]; then
+    source ~/.zsh.local
+fi
