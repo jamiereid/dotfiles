@@ -1,5 +1,3 @@
-# dotfiles
-
 Your dotfiles are how you personalize your system. These are mine.
 
 If you're interested in the philosophy behind why projects like these are
@@ -13,13 +11,21 @@ Run this:
 ```sh
 git clone https://github.com/jamiereid/dotfiles.git ~/.dotfiles
 cd .dotfiles
-./bootstrap.sh
+./dots put
 ```
 
 This will symlink the appropriate files in `.dotfiles` to your home directory.
 Everything is configured and tweaked within `~/.dotfiles`.
 
-## thanks
+#### zsh
 
-I started by forking [Zach Holman](http://github.com/holman)'s excellent
-[dotfiles](http://github.com/holman/dotfiles); this repository contains my changes.
+You'll want to have zsh installed and setup for your user. Install it, then run the following command.
+
+``` bash
+$ chsh -s $(which zsh)
+```
+
+Afterward, log out and log back in for the change to take effect. The first time you open a zsh shell, zsh antigen (a zsh package manager) will download the packages I use. Don't interrupt this process.
+
+## thanks
+A lot of my config is taken from many different repos. The current layout and deployment is based on [blaenk's dotfiles](https://github.com/blaenk/dots).
