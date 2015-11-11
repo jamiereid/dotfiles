@@ -1,6 +1,4 @@
 .DS_Store
 
-vim/.vim/bundle/
-
 zsh/zsh/antigen/
 zsh/zsh/cache/

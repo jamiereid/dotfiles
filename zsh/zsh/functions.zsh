@@ -260,6 +260,10 @@ function dots() {
   case "$1" in
     get )
       get_dots;;
+    put )
+      put_dots;;
+    edit )
+      edit_dots;;
     go )
       go_dots;;
     * )

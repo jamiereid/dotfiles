@@ -42,19 +42,14 @@ antigen apply
 sources=(
   'hub'
   'path'
-  'rbenv'
-  'chruby'
   'vcsinfo'
   'prompt'
   'completions'
-  'zle'
   'highlight'
   'functions'
   'alias'
   'linux'
-  'osx'
   'gtags'
-  'gnome-keyring'
 )
 
 for src in $sources; do
