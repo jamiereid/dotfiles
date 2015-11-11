@@ -1,0 +1,46 @@
+[include]
+    path = .gitconfig.local
+
+[hub]
+    protocol = https
+
+[user]
+    name = Jamie Reid
+    email = jamie@jre.id.au
+
+[core]
+    editor = vim
+    pager = kess -+$LESS -FRX
+
+
+[alias]
+    co = checkout
+    cl = clone
+    df = diff
+    br = branch
+    lg = log --graph --oneline --format='%C(green)%h%C(auto)%d%Creset %C(magenta)%aN%Creset %s %C(yellow)%cr%Creset'
+    rs = reset
+    rh = reset --hard
+    sm = submodule
+    st = status
+    up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
+
+
+[color]
+    ui = true
+    diff = auto
+    grep = auto
+    branch = auto
+
+[diff]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
+
+[push]
+    default = simple
+
+[grep]
+    extendRegexp = true
+    lineNumber = true
