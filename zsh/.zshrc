@@ -33,6 +33,7 @@ source $DOTSPATH/zsh/zsh/antigen/antigen.zsh
 # antigen
 antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
+  zsh-users/zsh-history-substring-search
   zsh-users/zsh-completions src
 EOBUNDLES
 
@@ -47,6 +48,7 @@ sources=(
   'prompt'
   'completions'
   'highlight'
+  'history'
   'functions'
   'alias'
   'linux'
