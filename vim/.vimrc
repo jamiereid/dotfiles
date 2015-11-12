@@ -95,6 +95,7 @@ set cursorline
 syntax enable
 
 set background=dark
+let base16colorspace=256
 colorscheme base16-default
 
 " Set extra options when running in GUI mode
@@ -230,7 +231,6 @@ let g:bufferline_echo = 0
 
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-let base16colorspace=256
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
