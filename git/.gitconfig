@@ -10,7 +10,7 @@
 
 [core]
     editor = vim
-    pager = kess -+$LESS -FRX
+    pager = less -+$LESS -FRX
 
 
 [alias]
