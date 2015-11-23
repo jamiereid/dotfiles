@@ -10,4 +10,8 @@ path+=($DOTSPATH/bin)
 # prune paths that don't exist
 path=($^path(N))
 
-export GOPATH="~/Code/go"
+if [[ $OSTYPE == 'cygwin' ]]; then
+	export GOPATH="/cygdrive/c/Go/"
+else
+	export GOPATH="~/Code/go"
+fi
