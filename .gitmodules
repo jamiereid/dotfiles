@@ -19,3 +19,12 @@
 [submodule "vim/.vim/bundle/vim-go"]
 	path = vim/.vim/bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
+[submodule "vim/.vim/bundle/YCM"]
+	path = vim/.vim/bundle/YCM
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "vim/.vim/bundle/ultisnips"]
+	path = vim/.vim/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "vim/.vim/bundle/vim-snippits"]
+	path = vim/.vim/bundle/vim-snippits
+	url = https://github.com/honza/vim-snippets.git
