@@ -95,7 +95,9 @@ set cursorline
 syntax enable
 
 set background=dark
-let base16colorspace=256
+if &term != "putty-256color"
+  let base16colorspace=256
+endif
 colorscheme base16-default
 
 " Set extra options when running in GUI mode
