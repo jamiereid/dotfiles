@@ -95,7 +95,10 @@ set cursorline
 syntax enable
 
 set background=dark
-if &term != "putty-256color"
+
+let putty=$PUTTY
+
+if putty != '1'
   let base16colorspace=256
 endif
 colorscheme base16-default
