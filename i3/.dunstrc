@@ -74,7 +74,3 @@
     #background = "#900000"
     #foreground = "#ffffff"
     timeout = 0
-
-[i3blocks]
-    summary="*"
-    script=/home/jam/.dotfiles/i3/notify

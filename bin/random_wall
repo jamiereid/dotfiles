@@ -1,4 +1,2 @@
 #/bin/zsh
-
-WALL=`ls /home/jam/Pictures/wallrotation/*.jpg | shuf -n 1`
-feh --bg-fill $WALL
+feh --randomize /home/jam/Pictures/Wallpapers --bg-fill
