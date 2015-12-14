@@ -12,25 +12,28 @@ urxvt*scrollBar:        false
 urxvt*scrollBar_right:  true
 urxvt*transpscrollbar:  true
 urxvt*saveLines:        50000
-urxvt*font:             xft:droid sans mono:pixelsize=8
+urxvt*font:             xft:droid sans mono:pixelsize=12
 urxvt.perl-ext-common:  default,matcher
 urxvt.urlLauncher:      google-chrome
 urxvt.matcher.button:   2
 urxvt.matcher.pattern.1:\bwww\.[\w-]\.[\w./?&@#-]*[\w/-]
 
 /*************************
- * xterm                 *
+ * urxvt256c             *
  *************************/
-xterm*termName:         xterm-256color
-xterm*borderWidth:      0
-xterm*utf8:             true
-xterm*faceName:         Droid Sans Mono:  style=Medium: size=8:  antialias=true
-xterm*dynamicColors:    true
-xterm*locale:           true
-xterm*scrollTtyOutput:  true
-xterm*scrollBar:        false
-xterm*rightScrollBar:   false
-xterm*jumpScroll:       true
-xterm*multiScroll:      true
-xterm*toolBar:          false
-xterm*saveLines:        20000
+urxvt256c*loginShell:       true
+urxvt256c*inheritPixmap:    true
+urxvt256c*tintColor:        white
+urxvt256c*transparent:      true
+urxvt256c*shading:          40
+urxvt256c*background:       Black
+urxvt256c*foreground:       White
+urxvt256c*scrollBar:        false
+urxvt256c*scrollBar_right:  true
+urxvt256c*transpscrollbar:  true
+urxvt256c*saveLines:        50000
+urxvt256c*font:             xft:droid sans mono:pixelsize=12
+urxvt256c.perl-ext-common:  default,matcher
+urxvt256c.urlLauncher:      google-chrome
+urxvt256c.matcher.button:   2
+urxvt256c.matcher.pattern.1:\bwww\.[\w-]\.[\w./?&@#-]*[\w/-]
