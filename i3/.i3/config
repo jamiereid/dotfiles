@@ -62,7 +62,7 @@ new_window              pixel $bordersize
 #                         launcher & terminal                         #
 #######################################################################
 
-bindsym                 $mod+space exec rofi -show run -terminal xterm -font 'Droid Sans 16' -lines 3 -eh 2 -width 100 -padding 700 -opacity "95" -bw 0 -bc "$black" -bg "$black" -fg "$darkgrey" -hlbg "$black" -hlfg "$white"
+bindsym                 $mod+space exec rofi -show run -terminal xterm -font 'Droid Sans 16' -lines 3 -eh 2 -width 100 -padding 100 -opacity "95" -bw 0 -bc "$black" -bg "$black" -fg "$darkgrey" -hlbg "$black" -hlfg "$white"
 bindsym                 $mod+Return exec xfce4-terminal 
 
 #######################################################################
@@ -115,27 +115,27 @@ bindsym                 $mod+Right focus right
 bindsym                 $mod+Shift+Tab workspace prev
 bindsym                 $mod+Tab workspace next
 
-bindsym                 $mod+1 workspace 1: 
-bindsym                 $mod+2 workspace 2: 
-bindsym                 $mod+3 workspace 3: 
-bindsym                 $mod+4 workspace 4: 
-bindsym                 $mod+5 workspace 5: 
-bindsym                 $mod+6 workspace 6: 
-bindsym                 $mod+7 workspace 7: 
-bindsym                 $mod+8 workspace 8: 
-bindsym                 $mod+9 workspace 9: 
-bindsym                 $mod+0 workspace 10:  
+bindsym                 $mod+1 workspace 1 
+bindsym                 $mod+2 workspace 2 
+bindsym                 $mod+3 workspace 3 
+bindsym                 $mod+4 workspace 4 
+bindsym                 $mod+5 workspace 5 
+bindsym                 $mod+6 workspace 6 
+bindsym                 $mod+7 workspace 7 
+bindsym                 $mod+8 workspace 8 
+bindsym                 $mod+9 workspace 9 
+bindsym                 $mod+0 workspace 10  
 
-bindsym                 $mod+Shift+1 move container to workspace 1: 
-bindsym                 $mod+Shift+2 move container to workspace 2: 
-bindsym                 $mod+Shift+3 move container to workspace 3: 
-bindsym                 $mod+Shift+4 move container to workspace 4: 
-bindsym                 $mod+Shift+5 move container to workspace 5: 
-bindsym                 $mod+Shift+6 move container to workspace 6: 
-bindsym                 $mod+Shift+7 move container to workspace 7: 
-bindsym                 $mod+Shift+8 move container to workspace 8: 
-bindsym                 $mod+Shift+9 move container to workspace 9: 
-bindsym                 $mod+Shift+0 move container to workspace 10: 
+bindsym                 $mod+Shift+1 move container to workspace 1 
+bindsym                 $mod+Shift+2 move container to workspace 2 
+bindsym                 $mod+Shift+3 move container to workspace 3 
+bindsym                 $mod+Shift+4 move container to workspace 4 
+bindsym                 $mod+Shift+5 move container to workspace 5 
+bindsym                 $mod+Shift+6 move container to workspace 6 
+bindsym                 $mod+Shift+7 move container to workspace 7 
+bindsym                 $mod+Shift+8 move container to workspace 8 
+bindsym                 $mod+Shift+9 move container to workspace 9 
+bindsym                 $mod+Shift+0 move container to workspace 10 
 
 #######################################################################
 #                          movement bindings                          #
@@ -218,7 +218,7 @@ bar {
     font pango:Fira Mono Medium 10
     separator_symbol "  "
     workspace_buttons yes
-    strip_workspace_numbers yes
+    strip_workspace_numbers no
     binding_mode_indicator yes
 
     colors {
@@ -236,8 +236,6 @@ bar {
 #######################################################################
 #                         window assignments                          #
 #######################################################################
-
-assign [class="Spotify"] 10: 
 
 #######################################################################
 #               specific window settings (use xprop)                  #
