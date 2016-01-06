@@ -80,14 +80,14 @@
 ;; turn off splashscreen
 (setq inhibit-splash-screen t)
 
-;; turn off tool bar
-(tool-bar-mode -1)
+;; turn off tool bar and scroll bar if we're in GUI mode
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)))
 
 ;; turn off menu bar
 (menu-bar-mode -1)
-
-;; Ditch scrollbars
-(scroll-bar-mode -1)
 
 ;; show which function the pointer is in
 (which-function-mode 1)
