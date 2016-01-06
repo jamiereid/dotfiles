@@ -1,5 +1,24 @@
 ;; -*- mode: elisp -*-
 
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; custom trust themes ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("79a3f477ac0cb4a106f78b6109614e991564a5c2467c36e6e854d4bc1102e178" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
 ;;;;;;;;;;;;;;
 ;; Packages ;;
 ;;;;;;;;;;;;;;
@@ -11,7 +30,9 @@
                      python-mode
                      markdown-mode
                      auto-complete
-                     jedi))
+                     jedi
+                     smart-mode-line
+                     smart-mode-line-powerline-theme))
 
 ;; add some package repos
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
@@ -38,6 +59,18 @@
       `((".*" . ,"~/.emacs-tmp/")))
 (setq auto-save-file-name-transforms
       `((".*" ,"~/.emacs-tmp/" t)))
+
+
+
+;;;;;;;;;;;;;;;
+;; mode line ;;
+;;;;;;;;;;;;;;;
+
+;; set smart-mode-line to powerline
+(setq sml/theme 'powerline)
+
+;; load smart-mode-line
+(sml/setup)
 
 ;;;;;;;;;;;;;
 ;; General ;;
@@ -224,6 +257,13 @@
 ;;;;;;;;;;;;
 
 (setq-default ispell-program-name "aspell")
+
+;;;;;;;;;;;
+;; tramp ;;
+;;;;;;;;;;;
+
+;; faster than default scp
+(setq tramp-default-method "ssh")
 
 ;;;;;;;;;;;;;;;;;
 ;; Keybindings ;;
