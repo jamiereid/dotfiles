@@ -60,8 +60,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,"~/.emacs-tmp/" t)))
 
-
-
 ;;;;;;;;;;;;;;;
 ;; mode line ;;
 ;;;;;;;;;;;;;;;
@@ -173,77 +171,56 @@
 ;; Org-mode ;;
 ;;;;;;;;;;;;;;
 
-;; ;; Enable org-mode
-;; (require 'org)
-;; ;; Make org-mode work with files ending in .org
+;; Enable org-mode
+(require 'org)
+
+;; Make org-mode work with files ending in .org
 ;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; ;; The above is the default in recent emacsen
+;; The above is the default in recent emacsen
 
-;; ;; Set some org-mode stuff
-;; (setq org-agenda-files (list "~/Dropbox/org/work.org"
-;; 			     "~/Dropbox/org/home.org"
-;; 			     "~/Dropbox/org/projects.org"
-;; 			     "~/Dropbox/org/bts.org"
-;; 			     "~/Dropbox/org/notes.org"
-;; 			     "~/Dropbox/org/refile.org"
-;; 			     "~/Dropbox/org/mhv.org"))
+;; define agenda files
+(setq org-agenda-files (list "~/gdrive/org/work.org"
+			     "~/gdrive/org/home.org"
+			     "~/gdrive/org/refile.org"))
 
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; (define-key global-map "\C-cl" 'org-store-link)
-;; (define-key global-map "\C-ca" 'org-agenda)
-;; (setq org-log-done t)
+;; capture settings
+(setq org-default-notes-file "~/gdrive/org/refile.org")
+(setq org-capture-templates
+      '(("w" "Work" entry (file "~/drive/org/refile.org")
+         "* TODO %? :WORK:\n ADDED:%U")
+	("h" "Home" entry (file "~/gdrive/org/refile.org")
+         "* TODO %? \n ADDED:%U")))
 
-;; (define-key global-map "\C-cc" 'org-capture)
+;; turn on fast state selection
+(setq org-use-fast-todo-selection t)
 
-;; ;; Org Capture
-;; (setq org-default-notes-file "~/Dropbox/org/refile.org")
-;; (setq org-capture-templates
-;;       '(("w" "Work" entry (file "~/Dropbox/org/refile.org")
-;;          "* TODO %? :WORK:\n ADDED:%U")
-;; 	("h" "Home" entry (file "~/Dropbox/org/refile.org")
-;;          "* TODO %? \n ADDED:%U")
-;; 	("b" "BtS" entry (file "~/Dropbox/org/refile.org")
-;;          "* TODO %? \n ADDED:%U")
-;; 	("m" "MHV" entry (file "~/Dropbox/org/refile.org")
-;;          "* TODO %? \n ADDED:%U")
-;; 	("p" "Projects" entry (file "~/Dropbox/org/refile.org")
-;;          "* TODO %? \n ADDED:%U")
-;; 	("n" "Notes" entry (file "~/Dropbox/org/notes.org")
-;;          "* %?\n ADDED:%U")))
+;; TODO sequences
+(setq org-todo-keywords
+       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")))
 
-;; ;; Turns on fast state selection
-;; (setq org-use-fast-todo-selection t)
+; Use full outline paths for refile targets - we file directly with IDO
+(setq org-refile-use-outline-path t)
 
-;; ;; TODO sequences
-;; (setq org-todo-keywords
-;;        '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+; Targets complete directly with IDO
+(setq org-outline-path-complete-in-steps nil)
 
-;; ; Use full outline paths for refile targets - we file directly with IDO
-;; (setq org-refile-use-outline-path t)
+; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
 
-;; ; Targets complete directly with IDO
-;; (setq org-outline-path-complete-in-steps nil)
+; targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                 (org-agenda-files :maxlevel . 9))))
 
-;; ; Allow refile to create parent tasks with confirmation
-;; (setq org-refile-allow-creating-parent-nodes (quote confirm))
+; exclude DONE state tasks from refile targets
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
-;; ;;;; Refile settings
+(setq org-refile-target-verify-function 'bh/verify-refile-target)
 
-;; ;; Refile stuff
-;; ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
-;; (setq org-refile-targets (quote ((nil :maxlevel . 9)
-;;                                  (org-agenda-files :maxlevel . 9))))
-
-;; ; Exclude DONE state tasks from refile targets
-;; (defun bh/verify-refile-target ()
-;;   "Exclude todo keywords with a done state from refile targets"
-;;   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-
-;; (setq org-refile-target-verify-function 'bh/verify-refile-target)
-
-;; ;; Recursive events settings
-;; (setq org-log-done t)
-;; (setq org-log-repeat "time")
+;; recursive events settings
+(setq org-log-done t)
+(setq org-log-repeat "time")
 
 ;;;;;;;;;;
 ;; Helm ;;
@@ -298,3 +275,8 @@
 
 ;; file navigation on steroids
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+;; key bindings for org-mode
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)

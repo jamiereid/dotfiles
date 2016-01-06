@@ -204,6 +204,7 @@ bindsym                 $mod+r mode "resize"
 exec "/home/jam/.dots/bin/random_wall" 
 exec "xcompmgr -n"
 exec "nm-applet"
+exec "insync start"
 exec "dunst &"
 exec "udiskie &"  
 
@@ -214,7 +215,7 @@ exec "udiskie &"
 bar {
     status_command i3blocks
     position top
-    tray_output primary
+    #tray_output primary
     font pango:Fira Mono Medium 10
     separator_symbol "  "
     workspace_buttons yes
