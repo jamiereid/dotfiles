@@ -1,3 +1,5 @@
+# fix for OS X - make sure to brew install coreutils
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # determine path to dots dir
 DOTSPATH="$(cd $(dirname $(dirname $(readlink -f ${(%):-%N}))); pwd)"
 
