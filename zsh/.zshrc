@@ -24,6 +24,7 @@ setopt extendedglob
 # env vars
 export EDITOR=vim
 export VISUAL=vim
+set -o emacs
 
 # bundles
 if [[ ! -d $DOTSPATH/zsh/zsh/antigen ]]; then
