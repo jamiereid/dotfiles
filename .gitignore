@@ -2,3 +2,7 @@
 
 zsh/zsh/antigen/
 zsh/zsh/cache/
+
+emacs/.emacs.d/ac-comphist.dat
+emacs/.emacs.d/elpa/
+emacs/.emacs.d/recentf
