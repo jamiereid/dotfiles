@@ -24,7 +24,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 function p_envs {
   local envs
   [[ -n $VIRTUAL_ENV ]] && envs+="P"
-  [[ -n $envs ]] && echo " %F{green}[%f$envs%F{green}]%f"
+  [[ -n $envs ]] && echo " %F{blue}[%f$envs%F{blue}]%f"
 }
 
 function p_remote {
@@ -32,6 +32,5 @@ function p_remote {
 }
 
 PROMPT='
-%F{red}λ%f %F{green}%n%f$(p_remote):$(p_colored_path)$(p_envs)$(p_vcs)
-%F{cyan}»%f '
-
+%(?.%F{green}.%F{red})λ%f %F{cyan}%n%f$(p_remote):$(p_colored_path)$(p_envs)$(p_vcs)
+%(?.%F{cyan}.%F{red})»%f '

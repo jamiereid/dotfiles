@@ -22,7 +22,7 @@ function +vi-git-aheadbehind() {
   (( $behind )) && gitstatus+=( " -%F{red}${behind}%f" )
 
   ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-  (( $ahead )) && gitstatus+=( " +%F{blue}${ahead}%f" )
+  (( $ahead )) && gitstatus+=( " +%F{green}${ahead}%f" )
 
   hook_com[misc]+=${(j::)gitstatus}
 
