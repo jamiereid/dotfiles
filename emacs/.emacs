@@ -32,10 +32,11 @@
                      auto-complete
                      jedi
                      smart-mode-line
-                     smart-mode-line-powerline-theme))
+                     smart-mode-line-powerline-theme
+                     flycheck))
 
 ;; add some package repos
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("org" . "http://orgmode.org/elpa/")))
@@ -280,3 +281,12 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
+
+;;;;;;;;;;;;
+;; Syntax ;;
+;;;;;;;;;;;;
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq-default
+ whitespace-line-column 80
+ whitespace-style       '(face lines-tail))
+(add-hook 'prog-mode-hook #'whitespace-mode)
