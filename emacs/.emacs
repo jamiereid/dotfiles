@@ -11,7 +11,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "79a3f477ac0cb4a106f78b6109614e991564a5c2467c36e6e854d4bc1102e178" default))))
+    ("b2f1d127439a017454308a94a095bde87c5d7bc24ec2288b406b7ca943e77926" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "79a3f477ac0cb4a106f78b6109614e991564a5c2467c36e6e854d4bc1102e178" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -137,7 +137,7 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 
 ;; load theme
-(load-theme 'cyberpunk-theme t)
+(load-theme 'cyberpunk t)
 
 ;; default font
 (set-default-font "Droid Sans Mono-8")
