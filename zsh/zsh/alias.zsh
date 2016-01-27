@@ -52,4 +52,4 @@ if (( $+commands[thefuck] )); then
 	eval $(thefuck --alias)
 fi
 
-alias t=todo.sh
+alias e="emacs"
