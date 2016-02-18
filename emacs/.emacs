@@ -137,10 +137,10 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 
 ;; load theme
-(load-theme 'cyberpunk t)
+(load-theme 'badwolf t)
 
 ;; default font
-(set-default-font "Droid Sans Mono-8")
+(set-default-font "Droid Sans Mono-12")
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete ;;
@@ -175,53 +175,38 @@
 ;; Enable org-mode
 (require 'org)
 
-;; Make org-mode work with files ending in .org
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; The above is the default in recent emacsen
+;; set some variables
+(setq org-dir "~/gdrive/org/")
 
-;; define agenda files
-(setq org-agenda-files (list "~/gdrive/org/work.org"
-			     "~/gdrive/org/home.org"
-			     "~/gdrive/org/refile.org"))
+;; set up some key bindings
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
 
-;; capture settings
-(setq org-default-notes-file "~/gdrive/org/refile.org")
-(setq org-capture-templates
-      '(("w" "Work" entry (file "~/drive/org/refile.org")
-         "* TODO %? :WORK:\n ADDED:%U")
-	("h" "Home" entry (file "~/gdrive/org/refile.org")
-         "* TODO %? \n ADDED:%U")))
+;; keep track of when a TODO is closed and record a note
+(setq org-log-done 'time)
+;(setq org-log-done 'note)
 
 ;; turn on fast state selection
 (setq org-use-fast-todo-selection t)
 
-;; TODO sequences
-(setq org-todo-keywords
-       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")))
+;; Define our agenda files
+(setq org-agenda-files (list (concat org-dir "work.org")
+                             (concat org-dir "home.org")
+                             (concat org-dir "inbox.org")))
 
-; Use full outline paths for refile targets - we file directly with IDO
-(setq org-refile-use-outline-path t)
+;; Default capture file
+(setq default-notes-file (concat org-dir "inbox.org"))
 
-; Targets complete directly with IDO
-(setq org-outline-path-complete-in-steps nil)
-
-; Allow refile to create parent tasks with confirmation
-(setq org-refile-allow-creating-parent-nodes (quote confirm))
-
-; targets include this file and any file contributing to the agenda - up to 9 levels deep
-(setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9))))
-
-; exclude DONE state tasks from refile targets
-(defun bh/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets"
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-
-(setq org-refile-target-verify-function 'bh/verify-refile-target)
-
-;; recursive events settings
-(setq org-log-done t)
-(setq org-log-repeat "time")
+;; Capture templates
+; http://orgmode.org/manual/Capture-templates.html#Capture-templates
+(setq org-capture-templates
+      '(("w" "Work" entry (file (concat org-dir "work.org"))
+         "* TODO %? :WORK:\n ADDED:%U")
+	("h" "Home" entry (file (concat org-dir "home.org"))
+         "* TODO %? \n ADDED:%U")
+        ("m" "Media" checkitem (file+headline (concat org-dir "home.org") "Media")
+         "[ ] %?")))
 
 ;;;;;;;;;;
 ;; Helm ;;

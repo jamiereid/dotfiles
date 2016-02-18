@@ -206,7 +206,7 @@ exec "xcompmgr -n"
 exec "nm-applet"
 exec "insync start"
 exec "dunst &"
-exec "udiskie &"  
+exec "udiskie --tray &"  
 
 #######################################################################
 #                                 bar                                 #
