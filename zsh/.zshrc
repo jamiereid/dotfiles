@@ -46,7 +46,7 @@ antigen apply
 sources=(
   'hub'
   'path'
-  'base16-shell'
+  'gotham-shell'
   'vcsinfo'
   'prompt'
   'completions'
