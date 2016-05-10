@@ -56,6 +56,7 @@ sources=(
   'alias'
   'linux'
   'gtags'
+  'keychain'
 )
 
 for src in $sources; do
