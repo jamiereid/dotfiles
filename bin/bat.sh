@@ -7,19 +7,19 @@ STATE=$(upower -i $BAT | grep state | awk '{print $2}')
 CURRENT_PERCENT=$(upower -i $BAT | grep percentage | awk '{print $2}')
 
 case "$CURRENT_PERCENT" in
-    [90-100]*)
+    9[0-9]*|100*)
         BATICON="  "
         RETCOLOR=$COLGOOD
         ;;
-    [89-51]*)
+    5[0-9]*|6[0-9]*|7[0-9]*|8[0-9]*)
         BATICON="  "
         RETCOLOR=$COLGOOD
         ;;
-    [50-31]*)
+    3[0-9]*|4[0-9]*)
         BATICON="  "
         RETCOLOR=$COLDEGRADED
         ;;
-    [30-11]*)
+    1[1-9]*|2[0-9]*)
         BATICON="  "
         RETCOLOR=$COLDEGRADED
         ;;
