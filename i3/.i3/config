@@ -68,8 +68,8 @@ new_window              pixel $bordersize
 #                         launcher & terminal                         #
 #######################################################################
 
-bindsym                 $mod+space exec rofi -show run -terminal xterm -font 'Droid Sans 16' -lines 3 -eh 2 -width 100 -padding 100 -opacity "95" -bw 0 -bc "$black" -bg "$black" -fg "$darkgrey" -hlbg "$black" -hlfg "$white"
-bindsym                 $mod+Return exec sakura 
+bindsym                 $mod+space exec kupfer 
+bindsym                 $mod+Return exec mate-terminal 
 
 #######################################################################
 #                             i3 bindings                             #
@@ -223,9 +223,9 @@ exec --no-startup-id "xcompmgr -n"
 exec --no-startup-id "nm-applet"
 exec --no-startup-id "dunst &"
 exec --no-startup-id "udiskie --tray &"  
-exec --no-startup-id i3-msg 'workspace $WS2; exec sakura'
+exec --no-startup-id i3-msg 'workspace $WS2; exec mate-terminal'
 exec thunderbird
-exec google-chrome-stable
+exec firefox
 
 #######################################################################
 #                                 bar                                 #
@@ -267,14 +267,14 @@ bar {
 #######################################################################
 
 assign [class="Thunderbird"] $WS4
-assign [class="google-chrome-stable"] $WS3
+assign [class="Firefox"] $WS3
 
 #######################################################################
 #               specific window settings (use xprop)                  #
 #######################################################################
 
-for_window [class="Google-chrome-stable"] border none
-for_window [class="Sakura"] border none
+for_window [class="Firefox"] border none
+for_window [class="Mate-terminal"] border none
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 for_window [class="Thunderbird"] border none
 for_window [class="libreoffice"] border none
