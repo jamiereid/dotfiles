@@ -235,7 +235,7 @@ bar {
     status_command i3blocks
     position top
     #tray_output primary
-    font pango:Fira Mono Medium 10
+    font pango:Fira Sans Mono Medium 6
     separator_symbol "  "
     workspace_buttons yes
     strip_workspace_numbers no

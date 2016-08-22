@@ -11,7 +11,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("b2f1d127439a017454308a94a095bde87c5d7bc24ec2288b406b7ca943e77926" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "79a3f477ac0cb4a106f78b6109614e991564a5c2467c36e6e854d4bc1102e178" default))))
+    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "b2f1d127439a017454308a94a095bde87c5d7bc24ec2288b406b7ca943e77926" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "79a3f477ac0cb4a106f78b6109614e991564a5c2467c36e6e854d4bc1102e178" default)))
+ '(package-selected-packages
+   (quote
+    (flycheck smart-mode-line-powerline-theme smart-mode-line jedi auto-complete markdown-mode python-mode helm magit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -140,7 +143,7 @@
 (load-theme 'gotham t)
 
 ;; default font
-(set-default-font "Droid Sans Mono-12")
+(set-default-font "Droid Sans Mono-8")
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete ;;
