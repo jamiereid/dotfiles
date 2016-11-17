@@ -54,7 +54,7 @@ client.urgent            #d33682     #d33682     #fdf6e3 #dc322f
 #######################################################################
 
 #font                    pango:Fira Mono Medium 10
-font                    pango:Droid Sans Mono, FontAwesome 6
+font                    pango:Droid Sans Mono, FontAwesome 8
 
 #######################################################################
 #                               borders                               #
@@ -86,8 +86,8 @@ bindsym $mod+Shift+E    exec /home/jam/.dots/i3/scripts/i3-exit
 
 bindsym                 XF86KbdBrightnessUp exec sudo /usr/local/bin/keyboard-backlight up
 bindsym                 XF86KbdBrightnessDown exec sudo /usr/local/bin/keyboard-backlight down
-bindsym                 XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
-bindsym                 XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
+bindsym                 XF86MonBrightnessUp exec --no-startup-id sudo /home/jam/.dots/bin/intel_bl_up.sh
+bindsym                 XF86MonBrightnessDown exec --no-startup-id sudo /home/jam/.dots/bin/intel_bl_down.sh
 
 #######################################################################
 #                           audio bindings                            #
@@ -225,7 +225,7 @@ exec --no-startup-id "dunst &"
 exec --no-startup-id "udiskie --tray &"  
 exec --no-startup-id i3-msg 'workspace $WS2; exec mate-terminal'
 exec thunderbird
-exec firefox
+exec chromium
 
 #######################################################################
 #                                 bar                                 #
@@ -235,7 +235,7 @@ bar {
     status_command i3blocks
     position top
     #tray_output primary
-    font pango:Fira Sans Mono Medium 6
+    font pango:Fira Sans Mono Medium 12
     separator_symbol "  "
     workspace_buttons yes
     strip_workspace_numbers no
@@ -267,13 +267,13 @@ bar {
 #######################################################################
 
 assign [class="Thunderbird"] $WS4
-assign [class="Firefox"] $WS3
+assign [class="chromium-browser"] $WS3
 
 #######################################################################
 #               specific window settings (use xprop)                  #
 #######################################################################
 
-for_window [class="Firefox"] border none
+for_window [class="chromium-browser"] border none
 for_window [class="Mate-terminal"] border none
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 for_window [class="Thunderbird"] border none

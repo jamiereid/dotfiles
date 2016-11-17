@@ -71,7 +71,7 @@
 ;; set smart-mode-line to powerline
 (setq sml/theme 'powerline)
 
-;; load smart-mode-line
+;; load smart-mode-lines
 (sml/setup)
 
 ;;;;;;;;;;;;;
@@ -140,10 +140,10 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 
 ;; load theme
-(load-theme 'gotham t)
+(load-theme 'badwolf t)
 
 ;; default font
-(set-default-font "Droid Sans Mono-8")
+(set-default-font "Droid Sans Mono-12")
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete ;;
