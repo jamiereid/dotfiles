@@ -1,5 +1,25 @@
 ;; -*- mode: elisp -*-
 
+;;;;;;;;;;;;;;;;;;;;;
+;; safe theme load ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
 ;;;;;;;;;;;;;;
 ;; Packages ;;
 ;;;;;;;;;;;;;;
@@ -16,10 +36,9 @@
 ;; List of packages to ensure is installed
 (setq package-list '(auto-complete
                      counsel
+                     doom-themes
                      flycheck
                      ivy
-                     smart-mode-line
-                     smart-mode-line-powerline-theme
                      swiper))
 
 ;; set up load-paths and autoloads for installed packages so we can configure them
@@ -86,15 +105,11 @@
 ;; but also turn if off for some modes (scratch, orgmode)
 (require 'linum-off)
 
-
 ;;make linum more readable
 (setq linum-format " %3i ")
 
 ;; visual-line-mode
 (global-visual-line-mode 1)
-
-;; ido-mode
-(ido-mode t)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Auto-complete ;;
@@ -111,7 +126,7 @@
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
-;;(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
@@ -164,22 +179,9 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 
 ;; load theme
-(load-theme 'cyberpunk t)
+(require 'doom-themes)
+(load-theme 'doom-one t)
 
-;; mode line theme
-(setq sml/theme 'powerline)
-(sml/setup)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;;;;;;;;;;;;;;
+;; mode line ;;
+;;;;;;;;;;;;;;;
