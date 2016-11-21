@@ -36,7 +36,6 @@
 ;; List of packages to ensure is installed
 (setq package-list '(auto-complete
                      counsel
-                     doom-themes
                      flycheck
                      ivy
                      swiper))
@@ -172,15 +171,14 @@
 ;; theme ;;
 ;;;;;;;;;;;
 
-;; default font
-(set-default-font "Droid Sans Mono-12")
-
 ;; set theme path
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 
 ;; load theme
-(require 'doom-themes)
-(load-theme 'doom-one t)
+(load-theme 'cyberpunk t)
+
+;; default font
+(set-default-font "Droid Sans Mono-12")
 
 ;;;;;;;;;;;;;;;
 ;; mode line ;;
