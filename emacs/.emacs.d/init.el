@@ -186,7 +186,7 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 
 ;; load theme
-(load-theme 'cyberpunk t)
+(load-theme 'badwolf t)
 
 ;; default font
 (set-default-font "Droid Sans Mono-12")
