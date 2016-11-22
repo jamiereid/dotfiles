@@ -37,6 +37,7 @@
 (setq package-list '(auto-complete
                      counsel
                      flycheck
+                     go-mode
                      ivy
                      swiper))
 
@@ -166,6 +167,16 @@
  whitespace-line-column 80
  whitespace-style       '(face lines-tail))
 (add-hook 'prog-mode-hook #'whitespace-mode)
+
+;;;;;;;;;;;;
+;; golang ;;
+;;;;;;;;;;;;
+(require 'go-mode)
+(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'go-mode-hook (lambda ()
+                          (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
+(add-hook 'go-mode-hook (lambda ()
+                          (local-set-key (kbd "C-c i") 'go-goto-imports)))
 
 ;;;;;;;;;;;
 ;; theme ;;
