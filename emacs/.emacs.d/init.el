@@ -43,6 +43,7 @@
                      go-mode
                      go-autocomplete
                      ivy
+                     neotree
                      swiper))
 
 ;; set up load-paths and autoloads for installed packages so we can configure them
@@ -189,6 +190,13 @@
 
 (with-eval-after-load 'go-mode
    (require 'go-autocomplete))
+
+;;;;;;;;;;;;;
+;; neotree ;;
+;;;;;;;;;;;;;
+
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
 
 ;;;;;;;;;;;
 ;; theme ;;
