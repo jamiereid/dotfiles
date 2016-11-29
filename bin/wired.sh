@@ -1,11 +1,13 @@
+#!/bin/bash
+
 COLGOOD="#2E9D54"
 COLBAD="#cc6666"
 COLDEGRADED="#81a2be"
 
-INTPRESENT="$(ifconfig | grep enp)"
+INTPRESENT="$(ip link | grep enp)"
 
 if [[ -n "$INTPRESENT" ]]; then
-    INT="$(ifconfig | grep enp | awk -F: '{print $1}')"
+    INT="$(ip link | grep enp | awk -F: '{print $2}' | tr -d ' ')"
     CARRIER="$(cat /sys/class/net/$INT/carrier)"
     if [[ "$CARRIER" -eq 0 ]]; then
         RET=" down"

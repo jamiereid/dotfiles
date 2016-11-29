@@ -1,17 +1,19 @@
+#!/bin/bash
+
 COLGOOD="#2E9D54"
 COLBAD="#cc6666"
 COLDEGRADED="#81a2be"
 
-IWPRESENT="$(ifconfig | grep wlp)"
+IWPRESENT="$(ip link | grep wlp)"
 
 if [[ -n "$IWPRESENT" ]]; then
-    INT="$(ifconfig | grep wlp | awk -F: '{print $1}')"
-    SSID="$(iwgetid -r)"
+    INT="$(ip link | grep wlp | awk -F: '{print $2}' | tr -d ' ')"
+    SSID="$(/sbin/iwgetid -r)"
     if [[ -z "$SSID" ]]; then
         RET=" down"
 		RETCOLOR=$COLBAD
     else
-        SIGNAL="$(iwconfig $INT | sed -n 's/.*Link Quality=\([0-9][0-9]*\/[0-9][0-9]*\).*/\1/p')"
+        SIGNAL="$(/sbin/iwconfig $INT | sed -n 's/.*Link Quality=\([0-9][0-9]*\/[0-9][0-9]*\).*/\1/p')"
         IP="$(ip addr show $INT | grep "inet " | awk '{print $2}')"
         RET=" $SIGNAL at $SSID ($IP)"
 		RETCOLOR=$COLGOOD
