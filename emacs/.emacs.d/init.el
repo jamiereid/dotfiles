@@ -209,7 +209,7 @@
 (load-theme 'badwolf t)
 
 ;; default font
-(set-default-font "Droid Sans Mono-12")
+(set-default-font "Noto Mono-12")
 
 ;;;;;;;;;;;;;;;
 ;; mode line ;;
