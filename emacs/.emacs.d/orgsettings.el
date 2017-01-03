@@ -7,8 +7,7 @@
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 (require 'org)
 
-;;(setq org-dir "~/org/")
-;;(setq org-directory org-dir)
+(setq org-directory "~/org/")
 (setq org-agenda-files (quote ("~/org")))
 
 ;; Standard key bindings
@@ -39,17 +38,50 @@
               ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
 
-(setq org-default-notes-file "~/org/refile.org")
+(setq org-default-notes-file (concat (file-name-as-directory org-directory) "refile.org"))
 
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file "~/org/refile.org")
+      (quote (("t" "todo" entry (file (concat
+                                       (file-name-as-directory org-directory)
+                                       "refile.org"))
                "* TODO %?\n%U\n%a\n")
-              ("n" "note" entry (file "~/org/refile.org")
+              ("n" "note" entry (file (concat
+                                       (file-name-as-directory org-directory)
+                                       "refile.org"))
                "* %? :NOTE:\n%U\n%a\n")
-              ("j" "journal" entry (file+datetree "~/org/journal.org")
+              ("j" "journal" entry (file+datetree (concat
+                                                   (file-name-as-directory org-directory)
+                                                   "journal.org"))
                "* %?\n%U\n")
-              ("m" "meeting" entry (file "~/org/refile.org")
+              ("m" "meeting" entry (file (concat
+                                          (file-name-as-directory org-directory)
+                                          "refile.org"))
                "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("b" "media" checkitem (file "~/org/refile.org")
+              ("b" "media" checkitem (file (concat
+                                            (file-name-as-directory org-directory)
+                                            "refile.org"))
                "[ ] %?"))))
 
+;; Refile settings
+; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                 (org-agenda-files :maxlevel . 9))))
+
+; Use full outline paths for refile targets
+(setq org-refile-use-outline-path t)
+
+; Targets complete directly with IDO
+(setq org-outline-path-complete-in-steps nil)
+
+; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+
+(setq org-indirect-buffer-display 'current-window)
+
+;;;; Refile settings
+; Exclude DONE state tasks from refile targets
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
+(setq org-refile-target-verify-function 'bh/verify-refile-target)

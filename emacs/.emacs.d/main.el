@@ -88,8 +88,8 @@
 
 ;; highlight pairs of parenthesis
 (show-paren-mode 1)
-(set-face-background 'show-paren-match-face "#aaaaaa")
-(set-face-attribute 'show-paren-match-face nil 
+(set-face-background 'show-paren-match "#aaaaaa")
+(set-face-attribute 'show-paren-match nil 
         :weight 'bold :underline nil :overline nil :slant 'normal)
 
 ;; automagically add closing paren/bracket/brace/etc
