@@ -97,11 +97,7 @@
 
 ;; Agenda Settings
 (setq org-agenda-custom-commands
-<<<<<<< HEAD
-      '(("c" "Simple agenda view"
-=======
       '(("d" "Daily agenda and all TODOs"
->>>>>>> 3698923... Org-Mode updates
          ((tags "PRIORITY=\"A\""
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-overriding-header "High-priority unfinished tasks:")))
