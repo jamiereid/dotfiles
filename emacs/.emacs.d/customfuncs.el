@@ -19,8 +19,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
     (if (string= (org-entry-get nil "STYLE") "habit")
         subtree-end
       nil)))
-<<<<<<< HEAD
-=======
 
 (defun air-pop-to-org-agenda (&optional split)
   "Visit the org agenda, in the current window or a SPLIT."
@@ -28,4 +26,3 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   (org-agenda nil "d")
   (when (not split)
     (delete-other-windows)))
->>>>>>> 3698923... Org-Mode updates
