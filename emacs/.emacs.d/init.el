@@ -18,5 +18,6 @@
       "Load a file in current user's configuration directory"
         (load-file (expand-file-name file user-init-dir)))
 
+(load-user-file "customfuncs.el")
 (load-user-file "main.el")
 (load-user-file "orgsettings.el")

@@ -7,6 +7,9 @@
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 (require 'org)
 
+; Load modules
+(setq org-modules (quote (org-habit)))
+
 (setq org-directory "~/org/")
 (setq org-agenda-files (quote ("~/org")))
 
@@ -15,28 +18,19 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-
 ;; Custom Key Bindings
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
 
 ;; Todo
-(setq org-log-done 'time)
+(setq org-log-done (quote time))
+(setq org-log-redeadline (quote time))
+(setq org-log-reschedule (quote time))
+
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
-(setq org-use-fast-todo-selection t)
-(setq org-treat-S-cursor-todo-selection-as-state-change nil)
-
-(setq org-todo-state-tags-triggers
-      (quote (("CANCELLED" ("CANCELLED" . t))
-              ("WAITING" ("WAITING" . t))
-              ("HOLD" ("WAITING") ("HOLD" . t))
-              (done ("WAITING") ("HOLD"))
-              ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-
+      (quote ((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))))
+;;(setq org-use-fast-todo-selection t)
+;;(setq org-treat-S-cursor-todo-selection-as-state-change nil)
 
 (setq org-default-notes-file (concat (file-name-as-directory org-directory) "refile.org"))
 
@@ -62,6 +56,12 @@
                                             "refile.org"))
                "[ ] %?"))))
 
+; Automatically place a blank line before a new heading or plain test list item
+(setq org-blank-before-new-entry (quote ((heading) (plain-list-item))))
+
+; Force mark all child tasks as done before parent can be]
+(setq org-enforce-todo-dependencies t)
+
 ;; Refile settings
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
@@ -78,10 +78,30 @@
 
 (setq org-indirect-buffer-display 'current-window)
 
-;;;; Refile settings
 ; Exclude DONE state tasks from refile targets
-(defun bh/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets"
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-
 (setq org-refile-target-verify-function 'bh/verify-refile-target)
+
+;; Archive settings
+(setq org-agenda-text-search-extra-files '(agenda-archives))
+
+;; Agenda Settings
+(setq org-agenda-custom-commands
+      '(("c" "Simple agenda view"
+         ((tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
+          (agenda "" ((org-agenda-ndays 1)))
+          (alltodo ""
+                   ((org-agenda-skip-function
+                     '(or (air-org-skip-subtree-if-habit)
+                          (air-org-skip-subtree-if-priority ?A)
+                          (org-agenda-skip-if nil '(scheduled deadline))))
+                    (org-agenda-overriding-header "ALL normal priority tasks:"))))
+         ((org-agenda-compact-blocks t)))))
+
+;; Habit settings
+; position the habit graph on the agenda to the right of the default
+(setq org-habit-graph-column 50)
+
+(provide 'orgsettings)
+;;; orgsettings.el ends here
