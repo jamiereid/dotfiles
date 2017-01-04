@@ -21,6 +21,7 @@
 ;; Custom Key Bindings
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-ct" 'air-pop-to-org-agenda)
 
 ;; Todo
 (setq org-log-done (quote time))
@@ -54,7 +55,17 @@
               ("b" "media" checkitem (file (concat
                                             (file-name-as-directory org-directory)
                                             "refile.org"))
-               "[ ] %?"))))
+               "[ ] %?")
+              ("h" "Habit" entry (file (concat
+                                        (file-name-as-directory org-directory)
+                                        "refile.org"))
+               "* TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:END:\n"))))
+
+; Automatically place a blank line before a new heading or plain test list item
+(setq org-blank-before-new-entry (quote ((heading) (plain-list-item))))
+
+; Force mark all child tasks as done before parent can be]
+(setq org-enforce-todo-dependencies t)
 
 ; Automatically place a blank line before a new heading or plain test list item
 (setq org-blank-before-new-entry (quote ((heading) (plain-list-item))))
@@ -86,7 +97,11 @@
 
 ;; Agenda Settings
 (setq org-agenda-custom-commands
+<<<<<<< HEAD
       '(("c" "Simple agenda view"
+=======
+      '(("d" "Daily agenda and all TODOs"
+>>>>>>> 3698923... Org-Mode updates
          ((tags "PRIORITY=\"A\""
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-overriding-header "High-priority unfinished tasks:")))
