@@ -96,8 +96,8 @@ syntax enable
 
 set background=dark
 
-let base16colorspace=256
-colorscheme base16-default-dark
+"let base16colorspace=256
+colorscheme zenburn
 
 " Set extra options when running in GUI mode
 if has("gui_running")
