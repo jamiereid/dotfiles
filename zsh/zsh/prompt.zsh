@@ -4,7 +4,7 @@ setopt prompt_subst
 # colored path
 
 function p_colored_path {
-  local slash="%F{blue}/%f"
+  local slash="%F{cyan}/%f"
   echo "${${PWD/#$HOME/~}//\//$slash}"
 }
 
@@ -17,9 +17,9 @@ zstyle ':vcs_info:*' enable git svn
 
 function p_vcs {
     if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-        zstyle ':vcs_info:*' formats ' %F{blue}[%f%b%c%u%B%F{green}%F{blue}]%f'
+        zstyle ':vcs_info:*' formats ' %F{cyan}(%f%b%c%u%F{cyan})%f'
     } else {
-        zstyle ':vcs_info:*' formats ' %F{blue}[%f%b%c%u%B%F{red}●%F{green}%F{blue}]%f'
+        zstyle ':vcs_info:*' formats ' %F{cyan}(%f%b%c%u%F{red}●%F{green}%F{cyan})%f'
     }
     vcs_info
     echo $vcs_info_msg_0_
@@ -42,5 +42,5 @@ function p_remote {
 }
 
 PROMPT='
-%F{blue}%n%f$(p_remote) $(p_colored_path)$(p_envs)$(p_vcs)
-%(?.%F{blue}.%F{red})»%f '
+%F{cyan}%n%f$(p_remote) $(p_colored_path)$(p_envs)$(p_vcs)
+%(?.%F{cyan}.%F{red})»%f '
