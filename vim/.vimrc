@@ -96,13 +96,8 @@ syntax enable
 
 set background=dark
 
-"let putty=$PUTTY
-
-"if putty != '1'
-"  let base16colorspace=256
-"endif
-"colorscheme base16-default
-colorscheme gotham
+let base16colorspace=256
+colorscheme base16-default-dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")

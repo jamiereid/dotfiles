@@ -4,15 +4,25 @@ setopt prompt_subst
 # colored path
 
 function p_colored_path {
-  local slash="%F{cyan}/%f"
+  local slash="%F{blue}/%f"
   echo "${${PWD/#$HOME/~}//\//$slash}"
 }
 
 # git info
+zstyle ':vcs_info:*' stagedstr '%F{green}●'
+zstyle ':vcs_info:*' unstagedstr '%F{yellow}●'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
+zstyle ':vcs_info:*' enable git svn
 
 function p_vcs {
-  vcs_info
-  echo $vcs_info_msg_0_
+    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+        zstyle ':vcs_info:*' formats ' %F{blue}[%f%b%c%u%B%F{green}%F{blue}]%f'
+    } else {
+        zstyle ':vcs_info:*' formats ' %F{blue}[%f%b%c%u%B%F{red}●%F{green}%F{blue}]%f'
+    }
+    vcs_info
+    echo $vcs_info_msg_0_
 }
 
 # environments:
@@ -28,9 +38,9 @@ function p_envs {
 }
 
 function p_remote {
-  [[ -n $SSH_CLIENT ]] && echo "%F{grey}@%m%f"
+  [[ -n $SSH_CLIENT ]] && echo "%F{8}@%m%f"
 }
 
 PROMPT='
-%(?.%F{green}.%F{red})λ%f %F{cyan}%n%f$(p_remote):$(p_colored_path)$(p_envs)$(p_vcs)
-%(?.%F{cyan}.%F{red})»%f '
+%F{blue}%n%f$(p_remote) $(p_colored_path)$(p_envs)$(p_vcs)
+%(?.%F{blue}.%F{red})»%f '

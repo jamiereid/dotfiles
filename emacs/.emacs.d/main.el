@@ -206,7 +206,7 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 
 ;; load theme
-(load-theme 'badwolf t)
+(load-theme 'base16-theme t)
 
 ;; default font
 (set-default-font "Noto Mono-12")
