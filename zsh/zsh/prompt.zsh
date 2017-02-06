@@ -17,9 +17,9 @@ zstyle ':vcs_info:*' enable git svn
 
 function p_vcs {
     if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-        zstyle ':vcs_info:*' formats ' %F{cyan}(%b%c%u%F{cyan})%f'
+        zstyle ':vcs_info:*' formats ' %F{cyan}(%f%b%c%u%F{cyan})%f'
     } else {
-        zstyle ':vcs_info:*' formats ' %F{cyan}(%b%c%u%F{red}●%F{green}%F{cyan})%f'
+        zstyle ':vcs_info:*' formats ' %F{cyan}(%f%b%c%u%F{red}●%F{green}%F{cyan})%f'
     }
     vcs_info
     echo $vcs_info_msg_0_
