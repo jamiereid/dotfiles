@@ -46,6 +46,7 @@ antigen apply
 sources=(
   'hub'
   'path'
+  'env'
   'zenburn-shell'
   'vcsinfo'
   'prompt'

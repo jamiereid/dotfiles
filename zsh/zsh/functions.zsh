@@ -21,18 +21,6 @@ function label() {
   print -Pn "\e]2;$1\a"
 }
 
-# print colors
-# $ clist 16
-function clist(){
-  x=`tput op`
-  y=`printf %76s`
-  for i in {0..$1}
-  do
-    o=00$i
-    echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x
-  done
-}
-
 # print numerical permissions before each item in ls
 function lsp() {
   command ls -lh --time-style '+%m/%d/%y %I:%M %p' --color=always $@ |\
@@ -69,69 +57,10 @@ function ip() {
   fi
 }
 
-# open alias for xdg-open
-# it ignores stdout and stderr
-# pass-through for os x
-
-function open() {
-  emulate -LR zsh
-
-  # linux
-  if (( $+commands[xdg-open] )); then
-    xdg-open $* > /dev/null 2>&1
-  # mac
-  elif (( $+commands[open] )); then
-    open $*
-  fi
-}
-
 # go to the dotfiles directory
-
 function go_dots() {
   emulate -LR zsh
   cd $DOTSPATH
-}
-
-# edit the dotfiles
-
-function edit_dots() {
-  emulate -LR zsh
-
-  # this might need customization
-  # but I don't want to use $EDITOR cause I prefer gvim
-  gvim --cmd "cd $DOTSPATH"
-}
-
-# update the dotfiles
-function get_dots() {
-  emulate -LR zsh
-
-  pushd $DOTSPATH > /dev/null
-
-  pre=$(git log -1 HEAD --pretty=format:%h)
-
-  msg_info "checking for updates since $pre"
-
-  if git pull > /dev/null 2>&1; then
-    post=$(git log -1 HEAD --pretty=format:%h)
-
-    if [[ "$pre" == "$post" ]]; then
-      msg_info "no updates available"
-    else
-      msg_info "updated to $post\n"
-      git log --oneline --format='  %C(green)+%Creset %C(bold)%h%Creset %s' $pre..HEAD
-    fi
-  else
-    msg_fail "there was an error with updating"
-  fi
-
-  # msg_info "updating vim plugins"
-  # vim +PluginInstall +qall
-
-  popd > /dev/null
-
-  msg_info "reloading zsh"
-  exec zsh
 }
 
 # deploy the dotfiles
@@ -258,17 +187,40 @@ function dots() {
   echo ''
 
   case "$1" in
-    get )
-      get_dots;;
     put )
       put_dots;;
-    edit )
-      edit_dots;;
     go )
       go_dots;;
     * )
-      msg_user "use the 'get' or 'put' commands"
+      msg_user "use the 'put' or 'go' commands"
       echo ''
       ;;
   esac
+}
+
+
+# helper function to extract any file type (http://git.sysphere.org/dotfiles/tree/zshrc)
+function extract () {
+    if [[ -f "$1" ]]; then
+        case "$1" in
+            *.tbz2 | *.tar.bz2) tar -xvjf  "$1"     ;;
+            *.txz | *.tar.xz)   tar -xvJf  "$1"     ;;
+            *.tgz | *.tar.gz)   tar -xvzf  "$1"     ;;
+            *.tar | *.cbt)      tar -xvf   "$1"     ;;
+            *.zip | *.cbz)      unzip      "$1"     ;;
+            *.rar | *.cbr)      unrar x    "$1"     ;;
+            *.arj)              unarj x    "$1"     ;;
+            *.ace)              unace x    "$1"     ;;
+            *.bz2)              bunzip2    "$1"     ;;
+            *.xz)               unxz       "$1"     ;;
+            *.gz)               gunzip     "$1"     ;;
+            *.7z)               7z x       "$1"     ;;
+            *.Z)                uncompress "$1"     ;;
+            *.gpg)       gpg2 -d "$1" | tar -xvzf - ;;
+            *) echo "Error: failed to extract $1" ;;
+        esac
+    else
+        echo "Error: $1 is not a valid file for extraction"
+    fi
+    
 }
