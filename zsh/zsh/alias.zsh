@@ -46,8 +46,6 @@ if (( $+commands[thefuck] )); then
 	eval $(thefuck --alias)
 fi
 
-alias e="emacs"
-alias vim="emacs" # that muscle memory!
 alias vi="vim"
 alias ls="ls -lh --color=auto"
 alias ll="ls -la"
