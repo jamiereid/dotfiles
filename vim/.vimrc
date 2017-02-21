@@ -88,6 +88,9 @@ set cursorline
 set splitbelow
 set splitright
 
+" always show hideen files in nerdtree
+let NERDTreeShowHidden = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

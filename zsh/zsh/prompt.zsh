@@ -1,6 +1,16 @@
 # prompt
 setopt prompt_subst
 
+# mode-aware arrow
+
+function p_arrow {
+  if [[ $KEYMAP = "vicmd" ]]; then
+    echo "%F{magenta}»%f"
+  else
+    echo "%F{cyan}»%f"
+  fi
+}
+
 # colored path
 
 function p_colored_path {
@@ -9,21 +19,12 @@ function p_colored_path {
 }
 
 # git info
-zstyle ':vcs_info:*' stagedstr '%F{green}●'
-zstyle ':vcs_info:*' unstagedstr '%F{yellow}●'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
-zstyle ':vcs_info:*' enable git svn
 
 function p_vcs {
-    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-        zstyle ':vcs_info:*' formats ' %F{cyan}(%f%b%c%u%F{cyan})%f'
-    } else {
-        zstyle ':vcs_info:*' formats ' %F{cyan}(%f%b%c%u%F{red}●%F{green}%F{cyan})%f'
-    }
-    vcs_info
-    echo $vcs_info_msg_0_
+  vcs_info
+  echo $vcs_info_msg_0_
 }
+
 
 # environments:
 #  - ssh
@@ -31,16 +32,26 @@ function p_vcs {
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+function p_hostname {
+  [[ -n $SSH_CLIENT || -n $SHOW_HOSTNAME_IN_PROMPT ]] && echo " %F{cyan}@%f %U%m%u"
+}
+
 function p_envs {
   local envs
   [[ -n $VIRTUAL_ENV ]] && envs+="P"
-  [[ -n $envs ]] && echo " %F{blue}[%f$envs%F{blue}]%f"
+  [[ -n $envs ]] && echo " %F{green}[%f$envs%F{green}]%f"
 }
 
-function p_remote {
-  [[ -n $SSH_CLIENT ]] && echo "%F{8}@%m%f"
+function p_exit_code {
+  echo "%(?..%B%F{red}!%f%b )"
 }
 
 PROMPT='
-%F{cyan}%n%f$(p_remote) $(p_colored_path)$(p_envs)$(p_vcs)
-%(?.%F{cyan}.%F{red})»%f '
+%F{blue}λ%f $(p_colored_path)$(p_hostname)$(p_envs)$(p_vcs)
+$(p_exit_code)$(p_arrow) '
+
+function p_continuation {
+  echo "%1(_.%_.contd)"
+}
+
+PS2='$(p_continuation) $(p_arrow) '
