@@ -53,7 +53,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -80,11 +80,13 @@ set t_vb=
 set tm=500
 
 " Turn on line numbers
-set number
+set relativenumber
 
 " Highlight current line
 set cursorline
 
+set splitbelow
+set splitright
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -202,7 +204,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -217,6 +219,7 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
+cmap w!! %!sudo tee > /dev/null %
 
 """"""""""""""""""""""""""""""
 " => Status line
@@ -224,11 +227,68 @@ set viminfo^=%
 " Always show the status line
 set laststatus=2
 
-" Don't send buffer information to command line
+" hide buffers in the status line
 let g:bufferline_echo = 0
 
+" hide default mode indicator
+set noshowmode
+
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+
+let g:airline_theme='base16_eighties'
+
+" Powerline fonts
+let g:airline_powerline_fonts = 1
+
+" Smarter tab line
+let g:airline#extensions#tabline#enabled = 1
+
+" branch should be used
+
+
+" short mode text
+let g:airline_mode_map = {
+     \ '__' : '-',
+     \ 'n'  : 'N',
+     \ 'i'  : 'I',
+     \ 'R'  : 'R',
+     \ 'c'  : 'C',
+     \ 'v'  : 'V',
+     \ 'V'  : 'V',
+     \ '' : 'V',
+     \ 's'  : 'S',
+     \ 'S'  : 'S',
+     \ '' : 'S',
+     \ }
+
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+
+let g:airline#extensions#default#section_truncate_width = {
+  \ 'x': 60,
+  \ 'y': 60
+  \ }
+
+function! AirLineBlaenk()
+  function! Modified()
+    return &modified ? " +" : ''
+  endfunction
+
+  call airline#parts#define_raw('filename', '%<%f')
+  call airline#parts#define_function('modified', 'Modified')
+
+  let g:airline_section_b = airline#section#create_left(['filename'])
+  let g:airline_section_c = airline#section#create([''])
+  let g:airline_section_gutter = airline#section#create(['modified', '%='])
+  let g:airline_section_x = airline#section#create_right([''])
+  let g:airline_section_y = airline#section#create_right(['%c'])
+  let g:airline_section_z = airline#section#create(['branch'])
+endfunction
+
+call AirLineBlaenk()
+autocmd Vimenter * call AirLineBlaenk()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -239,14 +299,16 @@ map 0 ^
 " Toggle NERDTree
 map <leader>d :NERDTreeToggle<CR>
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+" NumberToggle
+nnoremap <C-n> :call NumberToggle()<cr>
+
+""""""""""""""""""""""""
+" => Auto mode changes
+""""""""""""""""""""""""
+:au FocusLost * :set norelativenumber | set number
+:au FocusGained * :set nonumber | set relativenumber
+autocmd InsertEnter * :set norelativenumber | set number
+autocmd InsertLeave * :set nonumber | set relativenumber
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -262,6 +324,15 @@ map <leader>pp :setlocal paste!<cr>
 
 " If NERDTree is the only window left open, close vim
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
+"""""""""""""""""""""
+" => syntastic
+"""""""""""""""""""""
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -322,3 +393,21 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+" toggle between number and relativenumber modes
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc

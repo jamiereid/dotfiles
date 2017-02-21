@@ -5,8 +5,29 @@
 	path = vim/.vim/bundle/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
 [submodule "vim/.vim/bundle/vim-fugitive"]
-	path = vim/.vim/bundle/vim-fugitive
+	path = vim/.vim/bundle/01vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/.vim/bundle/vim-airline"]
 	path = vim/.vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/.vim/bundle/vim-airline-themes"]
+	path = vim/.vim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "vim/.vim/bundle/vim-surround"]
+	path = vim/.vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/.vim/bundle/command-t"]
+	path = vim/.vim/bundle/command-t
+	url = https://github.com/wincent/command-t.git
+[submodule "vim/.vim/bundle/vim-commentary"]
+	path = vim/.vim/bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "vim/.vim/bundle/vim-easymotion"]
+	path = vim/.vim/bundle/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion.git
+[submodule "vim/.vim/bundle/vim-jdaddy"]
+	path = vim/.vim/bundle/vim-jdaddy
+	url = https://github.com/tpope/vim-jdaddy.git
+[submodule "vim/.vim/bundle/vim-syntastic"]
+	path = vim/.vim/bundle/vim-syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
