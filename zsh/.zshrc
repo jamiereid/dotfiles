@@ -47,7 +47,7 @@ sources=(
   'hub'
   'path'
   'env'
-  'zenburn-shell'
+  'base16-eighties-shell'
   'vcsinfo'
   'prompt'
   'completions'
