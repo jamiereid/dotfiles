@@ -224,6 +224,9 @@ set viminfo^=%
 
 cmap w!! %!sudo tee > /dev/null %
 
+" Bind Tab in Normal mode to fold toggle
+nmap <Tab> za
+
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
