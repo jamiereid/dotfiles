@@ -59,3 +59,6 @@ alias ping="ping -c 5"
 alias more="less"
 alias calc="bc -l <<<"
 alias spell="aspell -a <<< "
+
+alias ppxml="xmllint --format -"
+alias ppjson=""
