@@ -5,16 +5,16 @@ urxvt*loginShell:       true
 urxvt*inheritPixmap:    true
 urxvt*tintColor:        white
 urxvt*transparent:      true
-urxvt*shading:          40
+urxvt*shading:          30
 urxvt*background:       Black
 urxvt*foreground:       White
 urxvt*scrollBar:        false
 urxvt*scrollBar_right:  true
 urxvt*transpscrollbar:  true
 urxvt*saveLines:        50000
-urxvt*font:             xft:droid sans mono:pixelsize=12
+urxvt*font:             xft:DejaVu Sans Mono for Powerline:pixelsize=16
 urxvt.perl-ext-common:  default,matcher
-urxvt.urlLauncher:      google-chrome
+urxvt.urlLauncher:      chromium
 urxvt.matcher.button:   2
 urxvt.matcher.pattern.1:\bwww\.[\w-]\.[\w./?&@#-]*[\w/-]
 
@@ -25,15 +25,15 @@ urxvt256c*loginShell:       true
 urxvt256c*inheritPixmap:    true
 urxvt256c*tintColor:        white
 urxvt256c*transparent:      true
-urxvt256c*shading:          40
+urxvt256c*shading:          30
 urxvt256c*background:       Black
 urxvt256c*foreground:       White
 urxvt256c*scrollBar:        false
 urxvt256c*scrollBar_right:  true
 urxvt256c*transpscrollbar:  true
 urxvt256c*saveLines:        50000
-urxvt256c*font:             xft:droid sans mono:pixelsize=12
+urxvt256c*font:             xft:DejaVu Sans Mono for Powerline:pixelsize=16
 urxvt256c.perl-ext-common:  default,matcher
-urxvt256c.urlLauncher:      google-chrome
+urxvt256c.urlLauncher:      chromium
 urxvt256c.matcher.button:   2
 urxvt256c.matcher.pattern.1:\bwww\.[\w-]\.[\w./?&@#-]*[\w/-]

@@ -44,10 +44,10 @@ workspace_layout        default
 #client.urgent           $red $red $background $red
 
 #                        BORDER      BACKGROUND  TEXT    INDICATOR
-client.focused           #c476d8     #c476d8     #c476d8 #c476d8
-client.focused_inactive  #777ad0     #777ad0     #777ad0 #777ad0
-client.unfocused         #2b5b84     #2b5b84     #2b5b84 #2b5b84
-client.urgent            #d33682     #d33682     #fdf6e3 #dc322f
+client.focused           #6699cc     #6699cc     #2d2d2d #6699cc
+client.focused_inactive  #6699cc     #6699cc     #2d2d2d #6699cc
+client.unfocused         #2d2d2d     #2d2d2d     #747369 #2d2d2d
+client.urgent            #f99157     #f99157     #2d2d2d #f99157
 
 #######################################################################
 #                                font                                 #
@@ -68,8 +68,8 @@ new_window              pixel $bordersize
 #                         launcher & terminal                         #
 #######################################################################
 
-bindsym                 $mod+space exec kupfer 
-bindsym                 $mod+Return exec mate-terminal 
+bindsym                 $mod+space exec synapse 
+bindsym                 $mod+Return exec urxvt 
 
 #######################################################################
 #                             i3 bindings                             #
@@ -220,11 +220,14 @@ bindsym                 $mod+r mode "resize"
 
 exec --no-startup-id "/home/jam/.dots/bin/random_wall" 
 exec --no-startup-id "/home/jam/.dots/bin/autolock.sh"
-exec --no-startup-id "xcompmgr -n"
-exec --no-startup-id "nm-applet &"
+exec --no-startup-id "compton -b "
+exec --no-startup-id "wicd-client --tray &"
+exec --no-startup-id "blueman-applet &"
 exec --no-startup-id "dunst &"
 exec --no-startup-id "udiskie --tray &"  
-exec --no-startup-id i3-msg 'workspace $WS2; exec mate-terminal'
+exec --no-startup-id "owncloud &"
+exec --no-startup-id i3-msg 'workspace $WS2; exec urxvt'
+exec --no-startup-id /usr/lib/polkit-kde/polkit-kde-authentication-agent-1
 #exec thunderbird
 exec chromium
 
@@ -253,13 +256,13 @@ bar {
 #        urgent_workspace   $background $background $red
 
         separator #2b5b84
-        background #0a0f14
+        background #2d2d2d
         statusline #268bd2
         #                  BORDER     BACKGROUND TEXT
-        active_workspace   #777ad0    #777ad0    #fdf6e3
-        focused_workspace  #c476d8    #c476d8    #fefefe
-        inactive_workspace #2b5b84    #2b5b84    #fefefe
-        urgent_workspace   #d33682    #d33682    #fdf6e3
+        active_workspace   #6699cc    #6699cc    #2d2d2d
+        focused_workspace  #6699cc    #6699cc    #2d2d2d
+        inactive_workspace #2d2d2d    #2d2d2d    #747369
+        urgent_workspace   #f99157    #f99157    #e8e6df
     }
 }
 
@@ -275,7 +278,7 @@ assign [class="chromium"] $WS3
 #######################################################################
 
 for_window [class="chromium"] border none
-for_window [class="Mate-terminal"] border none
+for_window [class="urxvt"] border none
 for_window [class="I3-exit" instance="i3-exit"] floating enable
 for_window [class="Thunderbird"] border none
 for_window [class="libreoffice"] border none

@@ -12,7 +12,6 @@
     editor = vim
     pager = less -+$LESS -FRX
 
-
 [alias]
     co = checkout
     cl = clone
@@ -24,7 +23,6 @@
     sm = submodule
     st = status
     up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
-
 
 [color]
     ui = true
@@ -44,3 +42,12 @@
 [grep]
     extendRegexp = true
     lineNumber = true
+
+[url "https://aur.archlinux.org/"]
+    insteadOf = "aur:"
+
+[url "https://github.com/"]
+    insteadOf = "gh:"
+
+[url "git@github.com:"]
+    pushInsteadOf = "gh:"
