@@ -68,7 +68,7 @@ new_window              pixel $bordersize
 #                         launcher & terminal                         #
 #######################################################################
 
-bindsym                 $mod+space exec synapse 
+bindsym                 $mod+space exec rofi -show run -terminal xterm -font 'Droid Sans 16' -lines 3 -eh 2 -width 100 -padding 100 -opacity "95" -bw 0 -bc "$black" -bg "$black" -fg "$darkgrey" -hlbg "$black" -hlfg "$white" 
 bindsym                 $mod+Return exec urxvt 
 
 #######################################################################
@@ -221,13 +221,13 @@ bindsym                 $mod+r mode "resize"
 exec --no-startup-id "/home/jam/.dots/bin/random_wall" 
 exec --no-startup-id "/home/jam/.dots/bin/autolock.sh"
 exec --no-startup-id "compton -b "
-exec --no-startup-id "wicd-client --tray &"
+#exec --no-startup-id "wicd-client --tray &"
 exec --no-startup-id "blueman-applet &"
 exec --no-startup-id "dunst &"
 exec --no-startup-id "udiskie --tray &"  
 exec --no-startup-id "owncloud &"
 exec --no-startup-id i3-msg 'workspace $WS2; exec urxvt'
-exec --no-startup-id /usr/lib/polkit-kde/polkit-kde-authentication-agent-1
+exec --no-startup-id lxsession 
 #exec thunderbird
 exec chromium
 
