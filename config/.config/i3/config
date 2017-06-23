@@ -7,41 +7,17 @@ set $myres       8
 
 set $bordersize  0 
 
-#set $background  #1d2021
-#set $foreground  #ebdbb2
-#set $black       #282828
-#set $darkgrey    #928374
-#set $darkred     #cc241d
-#set $red         #fb4934
-#set $darkgreen   #98971a
-#set $green       #b8bb26
-#set $darkyellow  #d79921
-#set $yellow      #fabd2f
-#set $darkblue    #458588
-#set $blue        #83a598
-#set $darkmagenta #b16286
-#set $magenta     #d3869b
-#set $darkcyan    #689d6a
-#set $cyan        #8ec07c
-#set $lightgrey   #a89984
-#set $white       #ebdbb2
-
 #######################################################################
 #                           random settings                           #
 #######################################################################
 
-#focus_follows_mouse     no
-popup_during_fullscreen smart
-workspace_layout        default
+popup_during_fullscreen         smart
+workspace_layout                default
+workspace_auto_back_and_forth   yes
 
 #######################################################################
 #                               colors                                #
 #######################################################################
-
-#client.focused          $foreground $foreground $background $foreground
-#client.focused_inactive $darkgrey $darkgrey $foreground $darkgrey
-#client.unfocused        $darkgrey $darkgrey $foreground $darkgrey
-#client.urgent           $red $red $background $red
 
 #                        BORDER      BACKGROUND  TEXT    INDICATOR
 client.focused           #6699cc     #6699cc     #2d2d2d #6699cc
@@ -53,7 +29,6 @@ client.urgent            #f99157     #f99157     #2d2d2d #f99157
 #                                font                                 #
 #######################################################################
 
-#font                    pango:Fira Mono Medium 10
 font                    pango:Noto Mono, FontAwesome 12
 
 #######################################################################
@@ -68,125 +43,98 @@ new_window              pixel $bordersize
 #                         launcher & terminal                         #
 #######################################################################
 
-bindsym                 $mod+space exec rofi -show run -terminal xterm -font 'Droid Sans 16' -lines 3 -eh 2 -width 100 -padding 100 -opacity "95" -bw 0 -bc "$black" -bg "$black" -fg "$darkgrey" -hlbg "$black" -hlfg "$white" 
-bindsym                 $mod+Return exec xfce4-terminal 
+bindsym $mod+space      exec rofi -show run -font 'Noto Sans 12'
+bindsym $mod+Return     exec xfce4-terminal 
 
 #######################################################################
 #                             i3 bindings                             #
 #######################################################################
 
-bindsym                 $mod+Shift+c reload
-bindsym                 $mod+Shift+r restart
-bindsym                 $mod+Shift+q kill
-bindsym $mod+Shift+E    exec /home/jam/.dots/i3/scripts/i3-exit
-
-#######################################################################
-#                      backlight bindings                             #
-#######################################################################
-
-bindsym                 XF86KbdBrightnessUp exec sudo /usr/local/bin/keyboard-backlight up
-bindsym                 XF86KbdBrightnessDown exec sudo /usr/local/bin/keyboard-backlight down
-bindsym                 XF86MonBrightnessUp exec --no-startup-id sudo /home/jam/.dots/bin/intel_bl_up.sh
-bindsym                 XF86MonBrightnessDown exec --no-startup-id sudo /home/jam/.dots/bin/intel_bl_down.sh
-
-#######################################################################
-#                           audio bindings                            #
-#######################################################################
-
-bindsym                 XF86AudioMute exec "pulseaudio-ctl mute"
-bindsym                 XF86AudioLowerVolume exec "pulseaudio-ctl down"
-bindsym                 XF86AudioRaiseVolume exec "pulseaudio-ctl up"
-bindsym                 XF86Display exec "~/.bin/display.sh"
-
-bindsym                 $mod+bracketleft exec "playerctl previous"
-bindsym                 $mod+bracketright exec "playerctl next"
-bindsym                 $mod+backslash exec "playerctl play-pause"
-
-#######################################################################
-#                          display bindings                           #
-#######################################################################
-
-bindsym                 $mod+shift+d exec "~/.dots/bin/display.sh"
-#bindsym                 $mod+l exec "xautolock -locknow"
-bindsym                 $mod+l exec "~/.dots/bin/lock.sh
+bindsym $mod+Shift+c    reload
+bindsym $mod+Shift+r    restart
+bindsym $mod+Shift+q    kill
+bindsym $mod+Shift+E    exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #######################################################################
 #                           focus bindings                            #
 #######################################################################
 
-bindsym                 $mod+Left focus left
-bindsym                 $mod+Down focus down
-bindsym                 $mod+Up focus up
-bindsym                 $mod+Right focus right
+bindsym $mod+Left       focus left
+bindsym $mod+Down       focus down
+bindsym $mod+Up         focus up
+bindsym $mod+Right      focus right
 
-bindsym                 $mod+Shift+Tab workspace prev
-bindsym                 $mod+Tab workspace next
+bindsym $mod+Shift+Tab  workspace prev
+bindsym $mod+Tab        workspace next
 
 #######################################################################
 #                             workspaces                              #
 #######################################################################
 
-set $WS1 1 
-set $WS2 2 
-set $WS3 3 
-set $WS4 4 
-set $WS5 5 
-set $WS6 6 
+set     $ws1            I
+set     $ws2            II
+set     $ws3            III
+set     $ws4            IV
+set     $ws5            V
+set     $ws6            VI
+set     $ws7            VII
+set     $ws8            VIII
+set     $ws9            IX
+set     $ws0            X
 
-bindsym                 $mod+1 workspace $WS1
-bindsym                 $mod+2 workspace $WS2
-bindsym                 $mod+3 workspace $WS3
-bindsym                 $mod+4 workspace $WS4
-bindsym                 $mod+5 workspace $WS5
-bindsym                 $mod+6 workspace $WS6
-bindsym                 $mod+7 workspace 7
-bindsym                 $mod+8 workspace 8
-bindsym                 $mod+9 workspace 9
-bindsym                 $mod+0 workspace 10 
+bindsym $mod+1          workspace $ws1
+bindsym $mod+2          workspace $ws2
+bindsym $mod+3          workspace $ws3
+bindsym $mod+4          workspace $ws4
+bindsym $mod+5          workspace $ws5
+bindsym $mod+6          workspace $ws6
+bindsym $mod+7          workspace $ws7
+bindsym $mod+8          workspace $ws8
+bindsym $mod+9          workspace $ws9
+bindsym $mod+0          workspace $ws0
 
-bindsym                 $mod+Shift+1 move container to workspace $WS1
-bindsym                 $mod+Shift+2 move container to workspace $WS2
-bindsym                 $mod+Shift+3 move container to workspace $WS3
-bindsym                 $mod+Shift+4 move container to workspace $WS4
-bindsym                 $mod+Shift+5 move container to workspace $WS5
-bindsym                 $mod+Shift+6 move container to workspace $WS6
-bindsym                 $mod+Shift+7 move container to workspace 7
-bindsym                 $mod+Shift+8 move container to workspace 8
-bindsym                 $mod+Shift+9 move container to workspace 9
-bindsym                 $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws0
 
 #######################################################################
 #                          movement bindings                          #
 #######################################################################
 
-bindsym                 $mod+Shift+h move left
-bindsym                 $mod+Shift+j move down
-bindsym                 $mod+Shift+k move up
-bindsym                 $mod+Shift+l move right
+bindsym $mod+Shift+h        move left
+bindsym $mod+Shift+j        move down
+bindsym $mod+Shift+k        move up
+bindsym $mod+Shift+l        move right
 
-bindsym                 $mod+Shift+Left move left
-bindsym                 $mod+Shift+Down move down
-bindsym                 $mod+Shift+Up move up
-bindsym                 $mod+Shift+Right move right
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+Right    move right
 
 #######################################################################
 #                           layout bindings                           #
 #######################################################################
 
-bindsym                 $mod+s layout stacking
-bindsym                 $mod+w layout tabbed
-bindsym                 $mod+e layout toggle split
-bindsym                 $mod+f fullscreen
+bindsym $mod+s              layout stacking
+bindsym $mod+w              layout tabbed
+bindsym $mod+e              layout toggle split
+bindsym $mod+f              fullscreen
 
-bindsym                 $mod+h split h
-bindsym                 $mod+v split v
+bindsym $mod+h              split h
+bindsym $mod+v              split v
 
-bindsym                 $mod+Shift+s floating toggle
-#bindsym                 $mod+s focus mode_toggle
-floating_modifier       $mod
+bindsym $mod+Shift+s        floating toggle
+floating_modifier           $mod
 
-bindsym                 $mod+Shift+minus move scratchpad
-bindsym                 $mod+minus scratchpad show
+bindsym $mod+Shift+minus    move scratchpad
+bindsym $mod+minus          scratchpad show
 
 #######################################################################
 #                           custom bindings                           #
@@ -194,6 +142,8 @@ bindsym                 $mod+minus scratchpad show
 
 bindsym $mod+t          exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 bindsym $mod+b          border toggle
+bindsym $mod+l          exec "~/.dots/bin/lock.sh"
+bindsym Print           exec scrot '%y-%m-%d_$wx$h_scrot.png' -s 'mv $f ~/screenshots/'
 
 #######################################################################
 #                                modes                                #
@@ -219,42 +169,27 @@ bindsym                 $mod+r mode "resize"
 #                               startup                               #
 #######################################################################
 
+exec --no-startup-id "/usr/bin/compton --config ~/.config/compton.conf"
 exec --no-startup-id "/home/jam/.dots/bin/random_wall" 
-#exec --no-startup-id "/home/jam/.dots/bin/autolock.sh"
-exec --no-startup-id "compton -b "
-#exec --no-startup-id "wicd-client --tray &"
 exec --no-startup-id "blueman-applet &"
 exec --no-startup-id "dunst &"
 exec --no-startup-id "udiskie --tray &"  
-#exec --no-startup-id "owncloud &"
-exec --no-startup-id i3-msg 'workspace $WS2; exec urxvt'
-exec --no-startup-id lxsession 
-#exec thunderbird
-#exec chromium
 
 #######################################################################
 #                                 bar                                 #
 #######################################################################
 
 bar {
-    status_command i3blocks
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
     position top
     #tray_output primary
-    font pango:Noto Mono 12
+    font pango:Noto Mono 9
     separator_symbol "  "
     workspace_buttons yes
     strip_workspace_numbers no
     binding_mode_indicator yes
-#
+    
     colors {
-#        background $background
-#        statusline $foreground
-#        separator $darkgrey
-#
-#        focused_workspace  $background $background $foreground
-#        active_workspace   $background $background $foreground
-#        inactive_workspace $background $background $darkgrey
-#        urgent_workspace   $background $background $red
 
         separator #2b5b84
         background #2d2d2d
@@ -271,15 +206,6 @@ bar {
 #                         window assignments                          #
 #######################################################################
 
-assign [class="Thunderbird"] $WS4
-assign [class="chromium"] $WS3
-
 #######################################################################
 #               specific window settings (use xprop)                  #
 #######################################################################
-
-for_window [class="chromium"] border none
-for_window [class="urxvt"] border none
-for_window [class="I3-exit" instance="i3-exit"] floating enable
-for_window [class="Thunderbird"] border none
-for_window [class="libreoffice"] border none
