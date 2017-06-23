@@ -10,3 +10,8 @@ emacs/.emacs.d/.python-environments/
 emacs/.emacs.d/bookmarks
 
 vim/.vim/bundle/
+
+config/.config/*
+!config/.config/rofi
+!config/.config/i3
+!config/.config/compton.conf
