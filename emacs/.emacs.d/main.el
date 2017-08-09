@@ -209,7 +209,7 @@
 (load-theme 'zenburn t)
 
 ;; default font
-(set-default-font "Noto Mono-12")
+(set-default-font "Noto Mono-8")
 
 ;;;;;;;;;;;;;;;
 ;; mode line ;;
