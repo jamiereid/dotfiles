@@ -8,7 +8,7 @@
 (require 'org)
 
 ; Load modules
-(setq org-modules (quote (org-habit)))
+;(setq org-modules (quote (org-habit)))
 
 (setq org-directory "~/org/")
 (setq org-agenda-files (quote ("~/org")))
@@ -29,37 +29,33 @@
 (setq org-log-reschedule (quote time))
 
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))))
+      (quote ((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))))
 ;;(setq org-use-fast-todo-selection t)
 ;;(setq org-treat-S-cursor-todo-selection-as-state-change nil)
 
 (setq org-default-notes-file (concat (file-name-as-directory org-directory) "refile.org"))
 
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file (concat
-                                       (file-name-as-directory org-directory)
-                                       "refile.org"))
+      (quote (("t" "TODO"
+               entry (file+datetree (concat
+                                     (file-name-as-directory org-directory)
+                                     "journal.org"))
                "* TODO %?\n%U\n%a\n")
-              ("n" "note" entry (file (concat
-                                       (file-name-as-directory org-directory)
-                                       "refile.org"))
-               "* %? :NOTE:\n%U\n%a\n")
-              ("j" "journal" entry (file+datetree (concat
-                                                   (file-name-as-directory org-directory)
-                                                   "journal.org"))
+              ("n" "Note"
+               entry (file+datetree (concat
+                                     (file-name-as-directory org-directory)
+                                     "journal.org"))
+               "- %? :NOTE:\n%U\n%a\n")
+              ("e" "Event"
+               entry (file+datetree (concat
+                                     (file-name-as-directory org-directory)
+                                     "journal.org"))
                "* %?\n%U\n")
-              ("m" "meeting" entry (file (concat
-                                          (file-name-as-directory org-directory)
-                                          "refile.org"))
-               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("b" "media" checkitem (file (concat
-                                            (file-name-as-directory org-directory)
-                                            "refile.org"))
-               "[ ] %?")
-              ("h" "Habit" entry (file (concat
-                                        (file-name-as-directory org-directory)
-                                        "refile.org"))
-               "* TODO %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:END:\n"))))
+              ("m" "Meeting"
+               entry (file+datetree (concat
+                                     (file-name-as-directory org-directory)
+                                     "journal.org"))
+               "* %? :MEETING:\n%U\n"))))
 
 ; Automatically place a blank line before a new heading or plain test list item
 (setq org-blank-before-new-entry (quote ((heading) (plain-list-item))))
