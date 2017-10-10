@@ -8,6 +8,8 @@ emacs/.emacs.d/elpa/
 emacs/.emacs.d/recentf
 emacs/.emacs.d/.python-environments/
 emacs/.emacs.d/bookmarks
+emacs/.emacs.d/auto-save-list/
+emacs/.emacs.d/network-security.data
 
 vim/.vim/bundle/
 
