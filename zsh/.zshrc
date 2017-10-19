@@ -47,7 +47,7 @@ sources=(
   'hub'
   'path'
   'env'
-  'base16-eighties-shell'
+  'molokai-shell'
   'vcsinfo'
   'prompt'
   'completions'
