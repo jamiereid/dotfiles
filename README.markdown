@@ -17,6 +17,25 @@ cd .dotfiles
 This will symlink the appropriate files in `.dotfiles` to your home directory.
 Everything is configured and tweaked within `~/.dotfiles`.
 
+#### additional installs
+
+##### fzf
+From [junegunn's github page](https://github.com/junegunn/fzf#installation)
+
+```sh
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
+##### ag (the_silver_surfer)
+[The Silver Surfer](https://geoff.greer.fm/ag/)
+
+```sh
+  apt-get install silversearcher-ag
+  pacman -Syyu the_silver_searcher
+  brew install the_silver_searcher
+```
+
 #### zsh
 
 You'll want to have zsh installed and setup for your user. Install it, then run the following command.

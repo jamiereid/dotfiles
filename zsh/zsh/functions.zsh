@@ -224,3 +224,7 @@ function extract () {
     fi
     
 }
+
+_has() {
+    return $( whence $1 >/dev/null )
+}
