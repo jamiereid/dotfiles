@@ -3,7 +3,7 @@ if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/completion.zsh
 fi
 if [ -e ~/.fzf ]; then
-  _append_to_path ~/.fzf/bin
+  path+=(~/.fzf/bin)
   source ~/.fzf/shell/key-bindings.zsh
   source ~/.fzf/shell/completion.zsh
 fi

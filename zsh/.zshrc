@@ -57,6 +57,7 @@ sources=(
   'alias'
   'linux'
   'gtags'
+  'fzf'
   'keychain'
 )
 
