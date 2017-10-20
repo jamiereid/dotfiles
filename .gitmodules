@@ -55,3 +55,9 @@
 [submodule "vim/.vim/bundle/ale"]
 	path = vim/.vim/bundle/ale
 	url = https://github.com/w0rp/ale
+[submodule "vim/.vim/bundle/taskpaper.vim"]
+	path = vim/.vim/bundle/taskpaper.vim
+	url = https://github.com/davidoc/taskpaper.vim
+[submodule "vim/.vim/bundle/vim-tasks"]
+	path = vim/.vim/bundle/vim-tasks
+	url = https://github.com/irrationalistic/vim-tasks

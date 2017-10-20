@@ -11,7 +11,7 @@ emacs/.emacs.d/bookmarks
 emacs/.emacs.d/auto-save-list/
 emacs/.emacs.d/network-security.data
 
-vim/.vim/bundle/
+vim/.vim/bundle
 
 config/.config/*
 !config/.config/rofi

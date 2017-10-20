@@ -22,7 +22,10 @@
     rh = reset --hard
     sm = submodule
     st = status
+	statis = status
     up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
+	unstage = reset HEAD --
+	last = log -1 HEAD
 
 [color]
     ui = true
