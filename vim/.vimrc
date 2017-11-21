@@ -375,10 +375,11 @@ au BufNewFile,BufRead /etc/apache*/* setf apache
 au BufNewFile,BufRead /tmp/crontab* setf crontab
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
-au BufNewFile,BufRead *.py set tabstop=4
-                         \ set softtabstop=4
-                         \ set shiftwidth=4
-                         \ set textwidth=120
+au BufNewFile,BufRead *.py
+                         \ set tabstop=4
+                         \ softtabstop=4
+                         \ shiftwidth=4
+                         \ textwidth=120
                          \ expandtab
                          \ autoindent
                          \ fileformat=unix
