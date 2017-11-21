@@ -85,6 +85,9 @@ function! ProseMode()
 endfunction
 command! ProseMode call ProseMode()
 
+" If NERDTree is the only window left open, close vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -142,7 +145,7 @@ set showmatch                         " Hilight matching braces/parens/etc.
 set sidescrolloff=3                   " Keep cursor away from this many chars left/right
 set smartcase                         " Lets you search for ALL CAPS
 set suffixes+=.pyc                    " Ignore these files when tab-completing
-set textwidth=100                     " 100 is the new 80
+set textwidth=120                     " 120 is the new 100
 "set thesaurus+=~/.vim/mthes10/mthesaur.txt
 set notitle                           " Don't set the title of the Vim window
 set wildmenu                          " Show possible completions on command line
