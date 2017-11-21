@@ -375,7 +375,13 @@ au BufNewFile,BufRead /etc/apache*/* setf apache
 au BufNewFile,BufRead /tmp/crontab* setf crontab
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal nolist nonumber
 au BufNewFile,BufRead Makefile setlocal nolist
-
+au BufNewFile,BufRead *.py set tabstop=4
+                         \ set softtabstop=4
+                         \ set shiftwidth=4
+                         \ set textwidth=120
+                         \ expandtab
+                         \ autoindent
+                         \ fileformat=unix
 au FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
 au Filetype gitcommit setlocal tw=80
 au FileType gitcommit setlocal nolist ts=4 sts=4 sw=4 noet

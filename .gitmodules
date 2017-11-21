@@ -64,3 +64,9 @@
 [submodule "vim/.vim/bundle/vim-easymotion"]
 	path = vim/.vim/bundle/vim-easymotion
 	url = https://github.com/easymotion/vim-easymotion
+[submodule "vim/.vim/bundle/vimcompletesme"]
+	path = vim/.vim/bundle/vimcompletesme
+	url = https://github.com/ajh17/VimCompletesMe.git
+[submodule "vim/.vim/bundle/vim-jedi"]
+	path = vim/.vim/bundle/vim-jedi
+	url = https://github.com/davidhalter/jedi-vim.git
