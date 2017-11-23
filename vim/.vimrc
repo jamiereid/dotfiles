@@ -11,6 +11,9 @@ nmap \q :nohlsearch<CR>
 
 "" Other bindings
 
+" Run last command again in tmux 0:1.1
+nmap \r :!tmux send-keys -t 0:1.1 C-p C-j <CR><CR>
+
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
