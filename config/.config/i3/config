@@ -43,7 +43,7 @@ new_window              pixel $bordersize
 #                         launcher & terminal                         #
 #######################################################################
 
-bindsym $mod+space      exec rofi -show run -font 'Noto Sans 12'
+bindsym $mod+space      exec rofi -show run -font 'Noto Sans 12' -theme 'glue_pro_blue'
 bindsym $mod+Return     exec xfce4-terminal 
 
 #######################################################################
