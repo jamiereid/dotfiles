@@ -209,7 +209,7 @@
 (load-theme 'zenburn t)
 
 ;; default font
-(set-default-font "Noto Mono-8")
+(set-default-font "Essential PragmataPro-12")
 
 ;;;;;;;;;;;;;;;
 ;; mode line ;;
