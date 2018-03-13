@@ -4,39 +4,57 @@
 #+DATE:   2018 Mar 11
 #+TAGS:   emacs
 
-* Stuff to move to other file
-;; Package init and installation
-(require 'package)
+* Custom Variables
+Set up =user-emacs-directory= that we use in other places.
+#+BEGIN_SRC emacs-lisp
+(defconst user-init-dir
+            (cond ((boundp 'user-emacs-directory)
+                            user-emacs-directory)
+                          ((boundp 'user-init-directory)
+                                    user-init-directory)
+                                  (t "~/.emacs.d/")))
+#+END_SRC
+* Load Path
+I have some custom lisp functions I like to use. The follow line makes sure my =~/.emacs.d/lisp= directory is part of the load path.
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path (concat user-emacs-directory "lisp/"))
+#+END_SRC
 
-;; Repos to use for packages
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("org" . "http://orgmode.org/elpa/")))
+Add the theme directory store in my dotfiles to the load path.
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+#+END_SRC
+* Custom Functions
+#+BEGIN_SRC emacs-lisp
+(defun air-org-skip-subtree-if-priority (priority)
+  "Skip an agenda subtree if it has a priority of PRIORITY.
 
-* Package List
-;; List of packages to ensure is installed
-(setq package-list '(auto-complete
-                     counsel
-                     flycheck
-                     go-mode
-                     go-autocomplete
-                     ivy
-                     neotree
-                     swiper))
+PRIORITY may be one of the characters ?A, ?B, or ?C."
+  (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+        (pri-value (* 1000 (- org-lowest-priority priority)))
+        (pri-current (org-get-priority (thing-at-point 'line t))))
+    (if (= pri-value pri-current)
+        subtree-end
+      nil)))
 
-;; set up load-paths and autoloads for installed packages so we can configure them
-(package-initialize)
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets."
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
-;; fetch available packages
-(or
-    (file-exists-p package-user-dir)
-    (package-refresh-contents))
+(defun air-org-skip-subtree-if-habit ()
+  "Skip an agenda entry if it has a STYLE property equal to \"habit\"."
+  (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+    (if (string= (org-entry-get nil "STYLE") "habit")
+        subtree-end
+      nil)))
 
-;; install missing packages
-(dolist (package package-list)
-    (unless (package-installed-p package)
-        (package-install package)))
+(defun air-pop-to-org-agenda (&optional split)
+  "Visit the org agenda, in the current window or a SPLIT."
+  (interactive "P")
+  (org-agenda nil "d")
+  (when (not split)
+    (delete-other-windows)))
+#+END_SRC
 	
 * General
 ** Dropings
@@ -47,13 +65,6 @@ Emacs likes to leave it's droppings (backup and working files) in the working di
     `((",*" . ,"~/.emacs-tmp/")))
 (setq auto-save-file-name-transforms
     `((".*" ,"~/.emacs-tmp/" t)))
-#+END_SRC
-
-** Load Path
-I have some custom lisp functions I like to use. The follow line makes sure my =~/.emacs.d/lisp= directory is part of the load path.
-
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path (concat user-emacs-directory "lisp/"))
 #+END_SRC
 
 ** Interface tidy up
@@ -106,6 +117,15 @@ Visual Line Mode turns on word-wrapping and rebinds C-a, C-e, and C-k to command
 (global-visual-line-mode 1)
 #+END_SRC
 
+Theme settings
+#+BEGIN_SRC emacs-lisp
+;; load theme
+(load-theme 'zenburn t)
+
+;; default font
+(set-default-font "Essential PragmataPro-12")
+#+END_SRC
+
 ** ><><><><><><
 Spaces are the One and Only Way. =setq-default= is used to allow overriding using a local buffer variable.
 #+BEGIN_SRC emacs-lisp
@@ -122,8 +142,27 @@ Reload files if changed on disk but not in the buffer.
 (global-auto-revert-mode 1)
 #+END_SRC
 
+** Some key(re)bindings
+Buffer-menu
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+#+END_SRC
+
+The following keybinding allows me to indent regions of code without having to first mark it.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c i") 'indent-region)
+#+END_SRC
+
+Set up some nice keybindings for changing the size of windows.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x <up>") 'shrink-window)
+(global-set-key (kbd "C-x <down>") 'enlarge-window)
+(global-set-key (kbd "C-x <left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-x <right>") 'enlarge-window-horizontally)
+#+END_SRC
+
 * Packages
-** ivy, counsel, and swiper
+** ivy
 =ivy-use-virtual-buffers= adds recent files and bookmarks to the =ivy-switch-buffer=.
 =ivy-count-format= displays the current and total number in the collection in the prompt.
 #+BEGIN_SRC emacs-lisp
@@ -133,60 +172,44 @@ Reload files if changed on disk but not in the buffer.
   :config (progn
             (ivy-mode 1)
             (setq ivy-use-virtual-buffers t
-                  ivy-count-format "%d/%d ")
-            (counsel-mode 1))
+                  ivy-count-format "%d/%d "))
   :bind
-  ("M-x" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
-  ("<f1> f" . counsel-describe-function)
-  ("<f1> v" . counsel-describe-variable)
-  ("C-c k" . counsel-ag)
-  ("C-c C-r" . ivy-resume)
-  ("C-s" . swiper))
+  (("C-c C-r" . ivy-resume)))
 #+END_SRC
-
-* Some key(re)bindings
-Buffer-menu
+** counsel
 #+BEGIN_SRC emacs-lisp
-(global-set-key "\C-x\C-b" 'buffer-menu)
+(use-package counsel
+  :ensure t
+  :bind
+  (("M-x" . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("<f1> f" . counsel-describe-function)
+   ("<f1> v" . counsel-describe-variable)
+   ("C-c k" . counsel-ag)))
 #+END_SRC
-
-
+** swiper
 #+BEGIN_SRC emacs-lisp
-;; indent regions more easily
-(global-set-key "\C-ci" 'indent-region)
-
-;; resize windows
-(global-set-key (kbd "C-x <up>") 'shrink-window)
-(global-set-key (kbd "C-x <down>") 'enlarge-window)
-(global-set-key (kbd "C-x <left>") 'shrink-window-horizontally)
-(global-set-key (kbd "C-x <right>") 'enlarge-window-horizontally)
-
-;;;;;;;;;;;;
-;; syntax ;;
-;;;;;;;;;;;;
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(setq-default
- whitespace-line-column 80
- whitespace-style       '(face lines-tail))
-(add-hook 'prog-mode-hook #'whitespace-mode)
-
-;;;;;;;;;;;
-;; theme ;;
-;;;;;;;;;;;
-
-;; set theme path
-(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-
-;; load theme
-(load-theme 'zenburn t)
-
-;; default font
-(set-default-font "Essential PragmataPro-12")
-
-;;;;;;;;;;;;;;
-;; org-mode ;;
-;;;;;;;;;;;;;;
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper))
+  :config
+  (progn
+    (setq ivy-initial-inputs-alist nil
+          ivy-use-virtual-buffers t
+          ivy-re-builders-alist
+          '((t . ivy--regex-fuzzy)))
+    (ivy-mode 1)))
+#+END_SRC
+** org mode
+I need to come in here and tidy this up. For now, it's just brute forced.
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :ensure t
+  :init (setq org-src-fontify-natively t     ; pretty code blocks
+              org-confirm-babel-evaluate nil ; just run the code (probably safe)
+              org-src-tab-acts-natively t
+))
+#+END_SRC
 
 (setq debug-on-error t)
 
@@ -296,41 +319,148 @@ Buffer-menu
 ; position the habit graph on the agenda to the right of the default
 (setq org-habit-graph-column 50)
 
-(provide 'orgsettings)
-;;; orgsettings.el ends here
-(defun air-org-skip-subtree-if-priority (priority)
-  "Skip an agenda subtree if it has a priority of PRIORITY.
-
-PRIORITY may be one of the characters ?A, ?B, or ?C."
-  (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-        (pri-value (* 1000 (- org-lowest-priority priority)))
-        (pri-current (org-get-priority (thing-at-point 'line t))))
-    (if (= pri-value pri-current)
-        subtree-end
-      nil)))
-
-(defun bh/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets."
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-
-(defun air-org-skip-subtree-if-habit ()
-  "Skip an agenda entry if it has a STYLE property equal to \"habit\"."
-  (let ((subtree-end (save-excursion (org-end-of-subtree t))))
-    (if (string= (org-entry-get nil "STYLE") "habit")
-        subtree-end
-      nil)))
-
-(defun air-pop-to-org-agenda (&optional split)
-  "Visit the org agenda, in the current window or a SPLIT."
-  (interactive "P")
-  (org-agenda nil "d")
-  (when (not split)
-    (delete-other-windows)))
+** org bullets
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :commands (org-bullets-mode)
+  :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+** flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+END_SRC
+** company mode
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :defer t
+  :diminish (company-mode . "CPY")
+  :init (global-company-mode)
+  :config
+  (progn
+    (setq company-tooltip-limit 10
+          company-idle-delay 0.2
+          company-echo-delay 0
+          company-minimum-prefix-length 3
+          company-require-match nil
+          company-selection-wrap-around t
+          company-tooltip-align-annotations t
+          company-tooltip-flip-when-above t
+          company-transformers '(company-sort-by-occurrence))) ; weight by frequency
+  :bind
+  (:map company-active-map
+    ("M-n" . nil)
+    ("M-p" . nil)
+    ("C-n" . company-select-next)
+    ("C-p" . company-select-previous)
+    ("TAB" . company-complete-common-or-cycle)
+    ("<tab>" . company-complete-common-or-cycle)
+    ("S-TAB" . company-select-previous)
+    ("<backtab>" . company-select-previous)))
+#+END_SRC
+** expand-region
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :ensure t
+  :bind
+  ("C-=" . er/expand-region))
+#+END_SRC
+** rainbow mode
+=rainbow-mode= displays hexadecimal colors with the color they represent as their background.
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-mode
+  :ensure t
+  :diminish (rainbow-mode . "")
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+#+END_SRC
+** json
+#+BEGIN_SRC emacs-lisp
+(use-package json-mode
+  :mode "\\.json\\'"
+  :ensure t)
+#+END_SRC
+** web
+#+BEGIN_SRC emacs-lisp
+(use-package web-mode
+  :ensure t
+  :mode ("\\.html\\'"
+         "\\.css\\'"
+         "\\.php\\'")
+  :config
+  (progn
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-enable-auto-quoting nil)))
 #+END_SRC
 
-* Do I still want this stuff?
+* Theming
+** Helper functions
 #+BEGIN_SRC emacs-lisp
+(defun org-src-color-blocks-light ()
+  "Colors the block headers and footers to make them stand out more for lighter themes"
+  (interactive)
+  (custom-set-faces
+   '(org-block-begin-line
+    ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF"))))
+   '(org-block-background
+     ((t (:background "#FFFFEA"))))
+   '(org-block
+     ((t (:background "#FFFFEA"))))
+   '(org-block-end-line
+     ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF"))))))
+
+(defun org-src-color-blocks-dark ()
+  "Colors the block headers and footers to make them stand out more for dark themes"
+  (interactive)
+  (custom-set-faces
+   '(org-block-begin-line
+     ((t (:foreground "#008ED1" :background "#002E41"))))
+   '(org-block-background
+     ((t (:background "#000000"))))
+   '(org-block
+     ((t (:background "#000000"))))
+   '(org-block-end-line
+     ((t (:foreground "#008ED1" :background "#002E41"))))))
+#+END_SRC
+
+#+RESULTS:
+: org-src-color-blocks-dark
+
+[[https://github.com/howardabrams/dot-files/blob/1939b04e8081c70cf5b22250cb806ec1a23f19fa/emacs-client.org][need to look at this closer]]
+#+BEGIN_SRC
+(deftheme ha/org-theme "Sub-theme to beautify org mode")
+#+END_SRC
+
+#+BEGIN_SRC
+(custom-theme-set-faces 'ha/org-theme
+                            `(org-agenda-structure ((t (:inherit default :height 2.0 :underline nil))))
+                            `(org-verbatim ((t (:inherit 'fixed-pitched :foreground "#aef"))))
+                            `(org-table ((t (:inherit 'fixed-pitched))))
+                            `(org-block ((t (:inherit 'fixed-pitched))))
+                            `(org-block-background ((t (:inherit 'fixed-pitched))))
+                            `(org-block-begin-line ((t (:inherit 'fixed-pitched))))
+                            `(org-block-end-line ((t (:inherit 'fixed-pitched))))
+                            `(org-level-8 ((t (,@headline ,@ha/variable-font-tuple))))
+                            `(org-level-7 ((t (,@headline ,@ha/variable-font-tuple))))
+                            `(org-level-6 ((t (,@headline ,@ha/variable-font-tuple))))
+                            `(org-level-5 ((t (,@headline ,@ha/variable-font-tuple))))
+                            `(org-level-4 ((t (,@headline ,@ha/variable-font-tuple
+                                                          :height 1.1))))
+                            `(org-level-3 ((t (,@headline ,@ha/variable-font-tuple
+                                                          :height 1.1))))
+                            `(org-level-2 ((t (,@headline ,@ha/variable-font-tuple
+                                                          :height 1.1))))
+                            `(org-level-1 ((t (,@headline ,@ha/variable-font-tuple
+                                                          :height 2.1))))
+                            `(org-document-title ((t (,@headline ,@ha/variable-font-tuple :height 1.5 :underline nil)))))
+#+END_SRC
+* Do I still want this stuff?
+
 ;; show which function the pointer is in
+
 (which-function-mode 1)
 ;;;;;;;;;;;;
 ;; golang ;;
@@ -349,4 +479,12 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 (with-eval-after-load 'go-mode
    (require 'go-autocomplete))
-#+END_SRC
+
+;;;;;;;;;;;;
+;; syntax ;;
+;;;;;;;;;;;;
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq-default
+ whitespace-line-column 80
+ whitespace-style       '(face lines-tail))
+(add-hook 'prog-mode-hook #'whitespace-mode)

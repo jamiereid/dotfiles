@@ -1,23 +1,44 @@
+(require 'package)
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+;; Repos to use for packages
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")))
+
+;; List of packages to ensure is installed
+(setq package-list '(org
+                     use-package))
+
+;; set up load-paths and autoloads for installed packages so we can configure them
 (package-initialize)
 
-(defconst user-init-dir
-            (cond ((boundp 'user-emacs-directory)
-                            user-emacs-directory)
-                          ((boundp 'user-init-directory)
-                                    user-init-directory)
-                                  (t "~/.emacs.d/")))
+;; fetch available packages
+(or
+    (file-exists-p package-user-dir)
+    (package-refresh-contents))
 
+;; install missing packages
+(dolist (package package-list)
+    (unless (package-installed-p package)
+        (package-install package)))
 
-(defun load-user-file (file)
-    (interactive "f")
-      "Load a file in current user's configuration directory"
-        (load-file (expand-file-name file user-init-dir)))
-
-(load-user-file "customfuncs.el")
-(load-user-file "main.el")
-(load-user-file "orgsettings.el")
+(require 'use-package)
+(require 'org)
+(org-babel-load-file
+  (expand-file-name "settings.org"
+                    user-emacs-directory))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (org-bullets counsel use-package ivy flycheck expand-region company))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

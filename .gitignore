@@ -10,6 +10,7 @@ emacs/.emacs.d/.python-environments/
 emacs/.emacs.d/bookmarks
 emacs/.emacs.d/auto-save-list/
 emacs/.emacs.d/network-security.data
+emacs/.emacs.d/settings.el
 
 vim/.vim/bundle
 
