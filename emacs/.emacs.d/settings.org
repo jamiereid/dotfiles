@@ -85,72 +85,74 @@ Highlight the matching paren (or other character) for the one under the cursor.
         :weight 'bold :underline nil :overline nil :slant 'normal)
 #+END_SRC
 
-
+It can sometimes be useful to see the current column number in the mode line.
 #+BEGIN_SRC emacs-lisp
-;; show column numbers in status bar
 (column-number-mode 1)
+#+END_SRC
 
-;; turn linum-mode on globally
+I almost always want line numbers, so let's turn that on (and make it a little more readable) for every buffer...
+#+BEGIN_SRC emacs-lisp
 (global-linum-mode t)
-
-;; but also turn if off for some modes (scratch, orgmode)
-(require 'linum-off)
-
-;;make linum more readable
 (setq linum-format " %3i ")
+#+END_SRC
 
-;; visual-line-mode
+...and then use a [[file:lisp/linum-off.el][custom bit of lisp]] from [[https://github.com/mattfidler/linum-off][Matt Fidler's github]] to turn it off for some buffers and modes (eg. =*scratch*= buffers and org-mode). We could customise these modes using the =linum-disabled-modes-list= variable, but the defaults are good.
+#+BEGIN_SRC emacs-lisp
+(require 'linum-off)
+#+END_SRC
+
+Visual Line Mode turns on word-wrapping and rebinds C-a, C-e, and C-k to commands that operate on visual lines instead of logical ones.
+#+BEGIN_SRC emacs-lisp
 (global-visual-line-mode 1)
 #+END_SRC
 
 ** ><><><><><><
+Spaces are the One and Only Way. =setq-default= is used to allow overriding using a local buffer variable.
 #+BEGIN_SRC emacs-lisp
-;; always indent using spaces
 (setq-default indent-tabs-mode nil)
+#+END_SRC
 
-;; automagically add closing paren/bracket/brace/etc
+Magically insert a closing delimiter when an opening one is inserted.
+#+BEGIN_SRC emacs-lisp
 (electric-pair-mode 1)
+#+END_SRC
 
-;; reload files if changed on disk but not in buffer
+Reload files if changed on disk but not in the buffer.
+#+BEGIN_SRC emacs-lisp
 (global-auto-revert-mode 1)
 #+END_SRC
 
-** Autocomplete
+* Packages
+** ivy, counsel, and swiper
+=ivy-use-virtual-buffers= adds recent files and bookmarks to the =ivy-switch-buffer=.
+=ivy-count-format= displays the current and total number in the collection in the prompt.
 #+BEGIN_SRC emacs-lisp
-(ac-config-default)
+(use-package ivy
+  :ensure t
+  :diminish ivy-mode
+  :config (progn
+            (ivy-mode 1)
+            (setq ivy-use-virtual-buffers t
+                  ivy-count-format "%d/%d ")
+            (counsel-mode 1))
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  ("<f1> f" . counsel-describe-function)
+  ("<f1> v" . counsel-describe-variable)
+  ("C-c k" . counsel-ag)
+  ("C-c C-r" . ivy-resume)
+  ("C-s" . swiper))
 #+END_SRC
 
-* ivy, counsel, and swiper
+* Some key(re)bindings
+Buffer-menu
 #+BEGIN_SRC emacs-lisp
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-load-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-
-;;;;;;;;;;;;;;;;;
-;; keybindings ;;
-;;;;;;;;;;;;;;;;;
-
-;; other-window is M-o
-(global-set-key "\M-o" 'other-window)
-
-;; redefine C-x C-b to buffer-menu
 (global-set-key "\C-x\C-b" 'buffer-menu)
+#+END_SRC
 
+
+#+BEGIN_SRC emacs-lisp
 ;; indent regions more easily
 (global-set-key "\C-ci" 'indent-region)
 
@@ -169,31 +171,6 @@ Highlight the matching paren (or other character) for the one under the cursor.
  whitespace-style       '(face lines-tail))
 (add-hook 'prog-mode-hook #'whitespace-mode)
 
-;;;;;;;;;;;;
-;; golang ;;
-;;;;;;;;;;;;
-(require 'go-mode)
-(add-hook 'before-save-hook 'gofmt-before-save)
-(add-hook 'go-mode-hook (lambda ()
-                          (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
-(add-hook 'go-mode-hook (lambda ()
-                          (local-set-key (kbd "C-c i") 'go-goto-imports)))
-
-;; The following expects `go get -u github.com/nsf/gocode` to have been run
-(defun auto-complete-for-go ()
-  (auto-complete-mode 1))
-(add-hook 'go-mode-hook 'auto-complete-for-go)
-
-(with-eval-after-load 'go-mode
-   (require 'go-autocomplete))
-
-;;;;;;;;;;;;;
-;; neotree ;;
-;;;;;;;;;;;;;
-
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
-
 ;;;;;;;;;;;
 ;; theme ;;
 ;;;;;;;;;;;
@@ -207,9 +184,6 @@ Highlight the matching paren (or other character) for the one under the cursor.
 ;; default font
 (set-default-font "Essential PragmataPro-12")
 
-;;;;;;;;;;;;;;;
-;; mode line ;;
-;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;
 ;; org-mode ;;
 ;;;;;;;;;;;;;;
@@ -358,4 +332,21 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 #+BEGIN_SRC emacs-lisp
 ;; show which function the pointer is in
 (which-function-mode 1)
+;;;;;;;;;;;;
+;; golang ;;
+;;;;;;;;;;;;
+(require 'go-mode)
+(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'go-mode-hook (lambda ()
+                          (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
+(add-hook 'go-mode-hook (lambda ()
+                          (local-set-key (kbd "C-c i") 'go-goto-imports)))
+
+;; The following expects `go get -u github.com/nsf/gocode` to have been run
+(defun auto-complete-for-go ()
+  (auto-complete-mode 1))
+(add-hook 'go-mode-hook 'auto-complete-for-go)
+
+(with-eval-after-load 'go-mode
+   (require 'go-autocomplete))
 #+END_SRC
