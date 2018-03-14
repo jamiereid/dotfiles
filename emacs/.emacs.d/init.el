@@ -33,12 +33,25 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+ '(custom-safe-themes
+   (quote
+    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (org-bullets counsel use-package ivy flycheck expand-region company))))
+    (diminish org-bullets counsel use-package ivy flycheck expand-region company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(mode-line ((t (:background "blue4" :foreground "gray90"))))
+ '(mode-line-buffer-id ((t (:foreground "#f0dfaf" :weight ultra-bold))))
+ '(mode-line-inactive ((t (:background "#404045" :foreground "gray60"))))
+ '(org-block ((t (:background "#333333"))))
+ '(org-block-background ((t (:background "#333333"))))
+ '(org-block-begin-line ((t (:foreground "#6f6f6f" :background "#1e2320"))) t)
+ '(org-block-end-line ((t (:foreground "#6f6f6f" :background "#1e2320"))) t)
+ '(show-paren-match ((t (:background "default" :foreground "#ecbcbc" :weight ultra-bold))))
+ '(show-paren-mismatch ((t (:background "default" :foreground "#9fafaf" :weight ultra-bold))))
+ '(which-func ((t (:foreground "orange")))))

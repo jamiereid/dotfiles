@@ -14,6 +14,7 @@ Set up =user-emacs-directory= that we use in other places.
                                     user-init-directory)
                                   (t "~/.emacs.d/")))
 #+END_SRC
+
 * Load Path
 I have some custom lisp functions I like to use. The follow line makes sure my =~/.emacs.d/lisp= directory is part of the load path.
 #+BEGIN_SRC emacs-lisp
@@ -24,6 +25,7 @@ Add the theme directory store in my dotfiles to the load path.
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 #+END_SRC
+
 * Custom Functions
 #+BEGIN_SRC emacs-lisp
 (defun air-org-skip-subtree-if-priority (priority)
@@ -164,7 +166,7 @@ Set up some nice keybindings for changing the size of windows.
 #+BEGIN_SRC emacs-lisp
 (use-package ivy
   :ensure t
-  :diminish ivy-mode
+  :diminish t
   :config (progn
             (ivy-mode 1)
             (setq ivy-use-virtual-buffers t
@@ -172,10 +174,12 @@ Set up some nice keybindings for changing the size of windows.
   :bind
   (("C-c C-r" . ivy-resume)))
 #+END_SRC
+
 ** counsel
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
   :ensure t
+  :diminish counsel
   :bind
   (("M-x" . counsel-M-x)
    ("C-x C-f" . counsel-find-file)
@@ -183,6 +187,7 @@ Set up some nice keybindings for changing the size of windows.
    ("<f1> v" . counsel-describe-variable)
    ("C-c k" . counsel-ag)))
 #+END_SRC
+
 ** swiper
 #+BEGIN_SRC emacs-lisp
 (use-package swiper
@@ -196,6 +201,7 @@ Set up some nice keybindings for changing the size of windows.
           '((t . ivy--regex-fuzzy)))
     (ivy-mode 1)))
 #+END_SRC
+
 ** org mode
 I need to come in here and tidy this up. For now, it's just brute forced.
 #+BEGIN_SRC emacs-lisp
@@ -322,18 +328,21 @@ I need to come in here and tidy this up. For now, it's just brute forced.
   :commands (org-bullets-mode)
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
+
 ** flycheck
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :ensure t
+  :diminish t
   :init (global-flycheck-mode))
 #+END_SRC
+
 ** company mode
 #+BEGIN_SRC emacs-lisp
 (use-package company
   :ensure t
   :defer t
-  :diminish (company-mode . "CPY")
+  :diminish company-mode
   :init (global-company-mode)
   :config
   (progn
@@ -357,6 +366,7 @@ I need to come in here and tidy this up. For now, it's just brute forced.
     ("S-TAB" . company-select-previous)
     ("<backtab>" . company-select-previous)))
 #+END_SRC
+
 ** expand-region
 #+BEGIN_SRC emacs-lisp
 (use-package expand-region
@@ -364,6 +374,7 @@ I need to come in here and tidy this up. For now, it's just brute forced.
   :bind
   ("C-=" . er/expand-region))
 #+END_SRC
+
 ** rainbow mode
 =rainbow-mode= displays hexadecimal colors with the color they represent as their background.
 #+BEGIN_SRC emacs-lisp
@@ -373,12 +384,14 @@ I need to come in here and tidy this up. For now, it's just brute forced.
   :config
   (add-hook 'prog-mode-hook 'rainbow-mode))
 #+END_SRC
+
 ** json
 #+BEGIN_SRC emacs-lisp
 (use-package json-mode
   :mode "\\.json\\'"
   :ensure t)
 #+END_SRC
+
 ** web
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
@@ -392,6 +405,17 @@ I need to come in here and tidy this up. For now, it's just brute forced.
     (setq web-mode-enable-auto-quoting nil)))
 #+END_SRC
 
+** PDF Tools
+[[https://github.com/politza/pdf-tools][PDF Tools]] makes a huge improvement on the built-in [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Document-View.html][doc-view-mode]]; the only drawback is the =pdf-tools-install= (which has to be executed before the package can be used) takes a couple of /seconds/ to execute. Instead of running it at init-time, we'll run it whenever a PDF is opened. Note that it's only slow on the first run!
+
+#+BEGIN_SRC emacs-lisp
+(use-package pdf-tools
+  :ensure t
+  :config 
+  (progn
+    (add-hook 'pdf-tools-enabled-hook 'auto-revert-mode)
+    (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-tools-install))))
+#+END_SRC
 * Theming
 *Heavily* borrowed from Howard's [[https://github.com/howardabrams/dot-files/blob/1939b04e8081c70cf5b22250cb806ec1a23f19fa/emacs-client.org][emacs-client.org]] file, which borrowed from jonnay's [[https://github.com/jonnay/org-beautify-theme/blob/26f5ce5769d8d1848f331c6076b7b6ad1a162f08/org-beautify-theme.org][org-beautify-theme]].
 
@@ -448,13 +472,13 @@ The color themes don’t know about the org-mode source code blocks, so we need 
   (interactive)
   (custom-set-faces
    '(org-block-begin-line
-     ((t (:foreground "#008ED1" :background "#002E41"))))
+     ((t (:foreground "#6f6f6f" :background "#1e2320"))))
    '(org-block-background
-     ((t (:background "#000000"))))
+     ((t (:background "#333333"))))
    '(org-block
-     ((t (:background "#000000"))))
+     ((t (:background "#333333"))))
    '(org-block-end-line
-     ((t (:foreground "#008ED1" :background "#002E41"))))))
+     ((t (:foreground "#6f6f6f" :background "#1e2320"))))))
 #+END_SRC
 
 The whole point of +stealing+ /borrowing/ Howard's settings are for the pretty headers in his [[https://www.youtube.com/watch?v=dljNabciEGg][Literate Devops]] video.
@@ -480,13 +504,13 @@ Chances are I'm going to set up =powerline= at some point, so continuing to foll
 
     (when jr/fixed-font-family
       (set-frame-font jr/fixed-font-family)
-      (set-face-attribute 'default nil :font jr/fixed-font-family :height 120) ;1/10pt; so 100 is 10pt
+      (set-face-attribute 'default nil :font jr/fixed-font-family :height 120) ; 90=12pt 100=13pt 120=14pt
       (set-face-font 'default jr/fixed-font-family))
 
     ;; Noticeable?
     ;; (set-face-attribute 'region nil :background "#ffff50" :foreground "black")
     ;; Subtle?
-    (set-face-attribute 'region nil :background "#0000bb" :foreground 'unspecified)
+    (set-face-attribute 'region nil :background "#9fafaf" :foreground 'unspecified)
 
     (custom-theme-set-faces 'jr/org-theme
                             `(org-agenda-structure ((t (:inherit default :height 2.0 :underline nil))))
@@ -501,13 +525,13 @@ Chances are I'm going to set up =powerline= at some point, so continuing to foll
                             `(org-level-6 ((t (,@headline ,@jr/variable-font-tuple))))
                             `(org-level-5 ((t (,@headline ,@jr/variable-font-tuple))))
                             `(org-level-4 ((t (,@headline ,@jr/variable-font-tuple
-                                                          :height 1.1))))
+                                                          :height 1.01))))
                             `(org-level-3 ((t (,@headline ,@jr/variable-font-tuple
-                                                          :height 1.1))))
+                                                          :height 1.01))))
                             `(org-level-2 ((t (,@headline ,@jr/variable-font-tuple
-                                                          :height 1.1))))
+                                                          :height 1.01))))
                             `(org-level-1 ((t (,@headline ,@jr/variable-font-tuple
-                                                          :height 2.1))))
+                                                          :height 1.1))))
                             `(org-document-title ((t (,@headline ,@jr/variable-font-tuple :height 1.5 :underline nil)))))))
 #+END_SRC
 
@@ -518,10 +542,10 @@ Now let's apply all this.
 (custom-set-faces
  '(mode-line           ((t (:background "blue4"   :foreground "gray90"))))
  '(mode-line-inactive  ((t (:background "#404045" :foreground "gray60"))))
- '(mode-line-buffer-id ((t (                      :foreground "gold1"   :weight ultra-bold))))
+ '(mode-line-buffer-id ((t (                      :foreground "#f0dfaf"   :weight ultra-bold))))
  '(which-func          ((t (                      :foreground "orange"))))
- '(show-paren-match    ((t (:background "default" :foreground "#afa"    :weight ultra-bold))))
- '(show-paren-mismatch ((t (:background "default" :foreground "#cc6666" :weight ultra-bold)))))
+ '(show-paren-match    ((t (:background "default" :foreground "#ecbcbc"    :weight ultra-bold))))
+ '(show-paren-mismatch ((t (:background "default" :foreground "#9fafaf" :weight ultra-bold)))))
 
 (set-face-attribute 'region nil :background "#00a")
 #+END_SRC
@@ -529,8 +553,8 @@ Now let's apply all this.
 * Do I still want this stuff?
 
 ;; show which function the pointer is in
-
 (which-function-mode 1)
+
 ;;;;;;;;;;;;
 ;; golang ;;
 ;;;;;;;;;;;;
@@ -548,12 +572,3 @@ Now let's apply all this.
 
 (with-eval-after-load 'go-mode
    (require 'go-autocomplete))
-
-;;;;;;;;;;;;
-;; syntax ;;
-;;;;;;;;;;;;
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(setq-default
- whitespace-line-column 80
- whitespace-style       '(face lines-tail))
-(add-hook 'prog-mode-hook #'whitespace-mode)
