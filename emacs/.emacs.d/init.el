@@ -8,6 +8,7 @@
 
 ;; List of packages to ensure is installed
 (setq package-list '(org
+                     diminish
                      use-package))
 
 ;; set up load-paths and autoloads for installed packages so we can configure them
@@ -39,7 +40,8 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (diminish org-bullets counsel use-package ivy flycheck expand-region company))))
+    (org-pdfview web-mode use-package rainbow-mode pdf-tools org-bullets json-mode flycheck expand-region diminish counsel company color-theme-zenburn)))
+ '(pdf-tools-handle-upgrades nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

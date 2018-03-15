@@ -209,8 +209,11 @@ I need to come in here and tidy this up. For now, it's just brute forced.
   :ensure t
   :init (setq org-src-fontify-natively t     ; pretty code blocks
               org-confirm-babel-evaluate nil ; just run the code (probably safe)
-              org-src-tab-acts-natively t
-))
+              org-src-tab-acts-natively t)
+  :config
+    (progn
+      (use-package org-pdfview
+        :ensure t)))
 #+END_SRC
 
 (setq debug-on-error t)
@@ -411,11 +414,20 @@ I need to come in here and tidy this up. For now, it's just brute forced.
 #+BEGIN_SRC emacs-lisp
 (use-package pdf-tools
   :ensure t
+  :mode ("\\.pdf\\'" . pdf-tools-install)
   :config 
   (progn
+    (if (eq system-type 'darwin)
+        (progn
+          (custom-set-variables
+            '(pdf-tools-handle-upgrades nil))
+          (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")))
     (add-hook 'pdf-tools-enabled-hook 'auto-revert-mode)
-    (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-tools-install))))
+    (add-to-list 'org-file-apps
+      '("\\.pdf\\'" . (lambda (file link)
+                              (org-pdfview-open link))))))
 #+END_SRC
+
 * Theming
 *Heavily* borrowed from Howard's [[https://github.com/howardabrams/dot-files/blob/1939b04e8081c70cf5b22250cb806ec1a23f19fa/emacs-client.org][emacs-client.org]] file, which borrowed from jonnay's [[https://github.com/jonnay/org-beautify-theme/blob/26f5ce5769d8d1848f331c6076b7b6ad1a162f08/org-beautify-theme.org][org-beautify-theme]].
 
@@ -525,13 +537,13 @@ Chances are I'm going to set up =powerline= at some point, so continuing to foll
                             `(org-level-6 ((t (,@headline ,@jr/variable-font-tuple))))
                             `(org-level-5 ((t (,@headline ,@jr/variable-font-tuple))))
                             `(org-level-4 ((t (,@headline ,@jr/variable-font-tuple
-                                                          :height 1.01))))
-                            `(org-level-3 ((t (,@headline ,@jr/variable-font-tuple
-                                                          :height 1.01))))
-                            `(org-level-2 ((t (,@headline ,@jr/variable-font-tuple
-                                                          :height 1.01))))
-                            `(org-level-1 ((t (,@headline ,@jr/variable-font-tuple
                                                           :height 1.1))))
+                            `(org-level-3 ((t (,@headline ,@jr/variable-font-tuple
+                                                          :height 1.1))))
+                            `(org-level-2 ((t (,@headline ,@jr/variable-font-tuple
+                                                          :height 1.1))))
+                            `(org-level-1 ((t (,@headline ,@jr/variable-font-tuple
+                                                          :height 1.5))))
                             `(org-document-title ((t (,@headline ,@jr/variable-font-tuple :height 1.5 :underline nil)))))))
 #+END_SRC
 
