@@ -213,7 +213,17 @@ I need to come in here and tidy this up. For now, it's just brute forced.
   :config
     (progn
       (use-package org-pdfview
-        :ensure t)))
+        :ensure t)
+      (org-babel-do-load-languages 'org-babel-load-languages
+                                   '((shell      . t)
+                                     (ditaa      . t)
+                                     (emacs-lisp . t))))
+      (setq org-ditaa-jar-path "/usr/bin/ditaa"))
+#+END_SRC
+
+Sometimes you might need to delete the org byte compiled files after changing the =org-babel-do-load-languages= var.
+#+BEGIN_SRC sh
+rm ~/.emacs.d/elpa/org-<date>/*.elc
 #+END_SRC
 
 (setq debug-on-error t)
