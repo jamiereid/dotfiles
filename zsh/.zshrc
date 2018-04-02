@@ -47,7 +47,7 @@ sources=(
   'hub'
   'path'
   'env'
-  'zenburn-shell'
+  'molokai-shell'
   'vcsinfo'
   'prompt'
   'completions'
