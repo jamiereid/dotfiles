@@ -438,6 +438,12 @@ rm ~/.emacs.d/elpa/org-<date>/*.elc
                               (org-pdfview-open link))))))
 #+END_SRC
 
+** ios-config-mode
+#+BEGIN_SRC emacs-lisp
+(require 'ios-config-mode)
+(require 'cisco-router-mode)
+#+END_SRC
+
 * Theming
 *Heavily* borrowed from Howard's [[https://github.com/howardabrams/dot-files/blob/1939b04e8081c70cf5b22250cb806ec1a23f19fa/emacs-client.org][emacs-client.org]] file, which borrowed from jonnay's [[https://github.com/jonnay/org-beautify-theme/blob/26f5ce5769d8d1848f331c6076b7b6ad1a162f08/org-beautify-theme.org][org-beautify-theme]].
 
@@ -470,7 +476,7 @@ Pull in and use the [[http://www.nongnu.org/color-theme/][color-theme]] project.
 (use-package color-theme
   :ensure t
   :init (require 'color-theme)
-  :config (use-package color-theme-zenburn
+  :config (use-package color-theme-molokai
            :ensure t))
 #+END_SRC
 
@@ -559,7 +565,7 @@ Chances are I'm going to set up =powerline= at some point, so continuing to foll
 
 Now let's apply all this.
 #+BEGIN_SRC emacs-lisp
-(jr/change-theme 'color-theme-zenburn 'org-src-color-blocks-dark)
+(jr/change-theme 'color-theme-molokai 'org-src-color-blocks-dark)
 
 (custom-set-faces
  '(mode-line           ((t (:background "blue4"   :foreground "gray90"))))

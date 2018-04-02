@@ -29,3 +29,23 @@
 (org-babel-load-file
   (expand-file-name "settings.org"
                     user-emacs-directory))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (color-theme-molokai web-mode use-package rainbow-mode org-pdfview org-bullets json-mode flycheck expand-region diminish counsel company color-theme-zenburn)))
+ '(pdf-tools-handle-upgrades nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(mode-line ((t (:background "blue4" :foreground "gray90"))))
+ '(mode-line-buffer-id ((t (:foreground "#f0dfaf" :weight ultra-bold))))
+ '(mode-line-inactive ((t (:background "#404045" :foreground "gray60"))))
+ '(show-paren-match ((t (:background "default" :foreground "#ecbcbc" :weight ultra-bold))))
+ '(show-paren-mismatch ((t (:background "default" :foreground "#9fafaf" :weight ultra-bold))))
+ '(which-func ((t (:foreground "orange")))))
