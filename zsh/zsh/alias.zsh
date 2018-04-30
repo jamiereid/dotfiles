@@ -1,5 +1,5 @@
 # tmux
-alias tmux="tmux a || tmux -2"
+alias tmux="tm"
 
 # ag
 alias agq="ag -Q"
