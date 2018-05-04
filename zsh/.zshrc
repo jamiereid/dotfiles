@@ -47,7 +47,7 @@ sources=(
   'hub'
   'path'
   'env'
-  'molokai-shell'
+  'gruvbox-shell'
   'vcsinfo'
   'prompt'
   'completions'
