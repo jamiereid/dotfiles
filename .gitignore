@@ -12,7 +12,7 @@ emacs/.emacs.d/auto-save-list/
 emacs/.emacs.d/network-security.data
 emacs/.emacs.d/settings.el
 
-vim/.vim/bundle
+vim/.vim/plugged
 
 config/.config/*
 !config/.config/rofi

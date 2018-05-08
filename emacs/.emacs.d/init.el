@@ -36,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (color-theme-molokai web-mode use-package rainbow-mode org-pdfview org-bullets json-mode flycheck expand-region diminish counsel company color-theme-zenburn)))
+    (powershell jedi s elpy web-mode use-package rainbow-mode pandoc-mode org-pdfview org-bullets markdown-mode json-mode flycheck expand-region exec-path-from-shell diminish counsel company color-theme-zenburn color-theme-monokai color-theme-molokai)))
  '(pdf-tools-handle-upgrades nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

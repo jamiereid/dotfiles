@@ -444,6 +444,63 @@ rm ~/.emacs.d/elpa/org-<date>/*.elc
 (require 'cisco-router-mode)
 #+END_SRC
 
+** markdown
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc"))
+#+END_SRC
+
+** exec-path-from-shell
+#+BEGIN_SRC emacs-lisp
+(use-package exec-path-from-shell
+  :ensure t
+  :config 
+    (exec-path-from-shell-initialize))
+#+END_SRC
+
+** pandoc
+#+BEGIN_SRC emacs-lisp
+(use-package pandoc-mode
+  :ensure t
+  :bind ("C-c t P" . pandoc-mode)
+  :config (progn
+            (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
+            (add-hook 'markdown-mode-hook 'pandoc-mode)))
+#+END_SRC
+
+** Elpy Mode
+If you don't want to configure anything yourself (or can't decide what you want), [[https://github.com/jorgenschaefer/elpy][Elpy]] combines many helpful packages for working with Python and sets everything up for you.
+
+#+BEGIN_SRC sh
+pip install jedi  # lightweight autocompletion
+# flake8 for code checks
+pip install flake8
+# and importmagic for automatic imports
+pip install importmagic
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package elpy
+    :ensure t
+    :defer 2
+    :config
+    (progn
+      ;; Use Flycheck instead of Flymake
+      (when (require 'flycheck nil t)
+        (remove-hook 'elpy-modules 'elpy-module-flymake)
+        (remove-hook 'elpy-modules 'elpy-module-yasnippet)
+        (remove-hook 'elpy-mode-hook 'elpy-module-highlight-indentation)
+        (add-hook 'elpy-mode-hook 'flycheck-mode))
+      (elpy-enable)
+      ;; jedi is great
+      (setq elpy-rpc-backend "jedi")))
+#+END_SRC
+
 * Theming
 *Heavily* borrowed from Howard's [[https://github.com/howardabrams/dot-files/blob/1939b04e8081c70cf5b22250cb806ec1a23f19fa/emacs-client.org][emacs-client.org]] file, which borrowed from jonnay's [[https://github.com/jonnay/org-beautify-theme/blob/26f5ce5769d8d1848f331c6076b7b6ad1a162f08/org-beautify-theme.org][org-beautify-theme]].
 
@@ -476,7 +533,7 @@ Pull in and use the [[http://www.nongnu.org/color-theme/][color-theme]] project.
 (use-package color-theme
   :ensure t
   :init (require 'color-theme)
-  :config (use-package color-theme-molokai
+  :config (use-package color-theme-zenburn
            :ensure t))
 #+END_SRC
 
@@ -565,7 +622,7 @@ Chances are I'm going to set up =powerline= at some point, so continuing to foll
 
 Now let's apply all this.
 #+BEGIN_SRC emacs-lisp
-(jr/change-theme 'color-theme-molokai 'org-src-color-blocks-dark)
+(jr/change-theme 'color-theme-zenburn 'org-src-color-blocks-dark)
 
 (custom-set-faces
  '(mode-line           ((t (:background "blue4"   :foreground "gray90"))))
