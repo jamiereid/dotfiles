@@ -1,5 +1,9 @@
 .DS_Store
 
+__pycache__/
+*.py[cod]
+*$py.class
+
 zsh/zsh/antigen/
 zsh/zsh/cache/
 
