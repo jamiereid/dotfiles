@@ -22,3 +22,4 @@ config/.config/*
 !config/.config/rofi
 !config/.config/i3
 !config/.config/compton.conf
+!config/.config/karabiner/assets/complex_modifications/personal-karabiner.json
