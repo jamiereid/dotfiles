@@ -1,0 +1,38 @@
+{
+    "title": "Personal Rules (jam)",
+    "rules": [
+        {
+            "description": "Map Shift+Insert to Cmd+V.",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "insert",
+                        "modifiers": {
+                            "mandatory": ["shift"]
+                        }
+                    },
+                    "to": [
+                        {"key_code": "v",
+                         "modifiers": ["left_command"]}
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Change caps_lock to control if pressed with other keys, to escape if pressed alone.",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "caps_lock",
+                        "modifiers": {"optional": ["any"]}
+                    },
+                    "to": [{"key_code": "left_control"}],
+                    "to_if_alone": [{"key_code": "escape"}]
+                }
+            ]
+        }
+    ]
+}
+
