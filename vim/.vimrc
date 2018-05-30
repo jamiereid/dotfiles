@@ -11,6 +11,7 @@ Plug 'haya14busa/incsearch.vim'       " Improved incremental searching
 Plug 'sirver/UltiSnips'               " Predefined snippits of files
 Plug 'Valloric/YouCompleteMe'         " Completion Engine
 Plug 'ervandew/supertab'              " SuperTab!
+Plug 'freitass/todo.txt-vim'          " todo.txt
 call plug#end()
 
 "" fzf
