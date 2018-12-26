@@ -13,6 +13,7 @@ fi
 path+=(~/bin)
 path+=($DOTSPATH/bin)
 path+=($GOPATH/bin)
+path+=($HOME/.cargo/bin)
 
 # prune paths that don't exist
 path=($^path(N))
