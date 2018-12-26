@@ -1,39 +1,41 @@
-/*************************
- * urxvt                 *
- *************************/
-urxvt*loginShell:       true
-urxvt*inheritPixmap:    true
-urxvt*tintColor:        white
-urxvt*transparent:      true
-urxvt*shading:          30
-urxvt*background:       Black
-urxvt*foreground:       White
-urxvt*scrollBar:        false
-urxvt*scrollBar_right:  true
-urxvt*transpscrollbar:  true
-urxvt*saveLines:        50000
-urxvt*font:             xft:DejaVu Sans Mono for Powerline:pixelsize=16
-urxvt.perl-ext-common:  default,matcher
-urxvt.urlLauncher:      chromium
-urxvt.matcher.button:   2
-urxvt.matcher.pattern.1:\bwww\.[\w-]\.[\w./?&@#-]*[\w/-]
+URxvt.foreground:       White
+URxvt.background:       Black
+!URxvt.depth:            32
+!URxvt.background:       rgba:0000/0000/0200/c800
+URxvt.font:             xft:Liberation Mono:pixelsize=16
+URxvt.scrollBar:        false
+URxvt.saveLines:        65535
+URxvt.perl-ext-common:  keyboard-select,url-select,clipboard
+URxvt.keysym.M-Escape:  perl:keyboard-select:activate
+URxvt.keysym.M-s:       perl:keyboard-select:search
+URxvt.keysym.M-u:       perl:url-select:select_next
+URxvt.keysym.M-c:       perl:clipboard:copy
+URxvt.keysym.M-v:       perl:clipboard:paste
+URxvt.keysym.M-C-v:     perl:clipboard:paste_escaped
 
-/*************************
- * urxvt256c             *
- *************************/
-urxvt256c*loginShell:       true
-urxvt256c*inheritPixmap:    true
-urxvt256c*tintColor:        white
-urxvt256c*transparent:      true
-urxvt256c*shading:          30
-urxvt256c*background:       Black
-urxvt256c*foreground:       White
-urxvt256c*scrollBar:        false
-urxvt256c*scrollBar_right:  true
-urxvt256c*transpscrollbar:  true
-urxvt256c*saveLines:        50000
-urxvt256c*font:             xft:DejaVu Sans Mono for Powerline:pixelsize=16
-urxvt256c.perl-ext-common:  default,matcher
-urxvt256c.urlLauncher:      chromium
-urxvt256c.matcher.button:   2
-urxvt256c.matcher.pattern.1:\bwww\.[\w-]\.[\w./?&@#-]*[\w/-]
+URxvt.background: #1d2021
+URxvt.foreground: #ebdbb2
+! Black + DarkGrey
+URxvt.color0:  #282828
+URxvt.color8:  #928374
+! DarkRed + Red
+URxvt.color1:  #cc241d
+URxvt.color9:  #fb4934
+! DarkGreen + Green
+URxvt.color2:  #98971a
+URxvt.color10: #b8bb26
+! DarkYellow + Yellow
+URxvt.color3:  #d79921
+URxvt.color11: #fabd2f
+! DarkBlue + Blue
+URxvt.color4:  #458588
+URxvt.color12: #83a598
+! DarkMagenta + Magenta
+URxvt.color5:  #b16286
+URxvt.color13: #d3869b
+! DarkCyan + Cyan
+URxvt.color6:  #689d6a
+URxvt.color14: #8ec07c
+! LightGrey + White
+URxvt.color7:  #a89984
+URxvt.color15: #ebdbb2
