@@ -353,6 +353,11 @@
                             ("\\(?:^\\|\\s-\\)\\(@Note\\)"                                                    1 '(:foreground "#AEAEAE") prepend)
                             ("\\(?:^\\|\\s-\\)\\(@\\(Broken\\|BROKEN\\|Hack\\|Bug\\)\\!*\\)"                  1 '(:foreground "#AA0000") prepend)))))
 
+;;; font ligatures
+;(set-language-environment "UTF-8")
+;(set-default-coding-systems 'utf-8)
+;(load-user-file "ligatures.el")
+
 ;;;;
 ;;;; local overrides if exists (~/.emacs.d/local-overrides.el)
 ;;;;
