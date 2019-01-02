@@ -358,6 +358,11 @@
 ;(set-default-coding-systems 'utf-8)
 ;(load-user-file "ligatures.el")
 
+;;; scratch buffer
+;(setq initial-major-mode 'org-mode)
+(setq initial-scratch-message ";; walrus\n\n\n")
+
+
 ;;;;
 ;;;; local overrides if exists (~/.emacs.d/local-overrides.el)
 ;;;;
