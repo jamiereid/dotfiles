@@ -7,7 +7,7 @@ set $down    j
 set $up      k
 set $right   l
 set $term    urxvt256c-ml
-set $menu    rofi -show run -font 'Noto Sans 12' -theme 'glue_pro_blue'
+set $menu    rofi -show run -display-run "» " -font 'Liberation Mono 12' -theme 'glue_pro_blue'
 
 ### Colours
 #                        BORDER      BACKGROUND  TEXT    INDICATOR   CHILD BORDER
@@ -19,7 +19,7 @@ client.urgent            #f99157     #f99157     #2d2d2d #f99157     #f99157
 ### Output configuration
 output eDP-1 scale 2
 
-output * bg /usr/share/backgrounds/f29/default/normalish/f29.png fill
+output * bg ~/Pictures/752747.jpg fill
 
 exec xrdb ~/.Xresources
 
@@ -182,10 +182,10 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
+    position bottom
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     font pango:Liberation Mono 9
-    separator_symbol "  "
+    separator_symbol " "
 
     colors {
 

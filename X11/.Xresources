@@ -1,11 +1,11 @@
-URxvt.foreground:       White
-URxvt.background:       Black
-!URxvt.depth:            32
-!URxvt.background:       rgba:0000/0000/0200/c800
-URxvt.font:             xft:Liberation Mono:pixelsize=16
+!URxvt.foreground:       White
+!URxvt.background:       Black
+URxvt.depth:            32
+URxvt.background:       rgba:0000/0000/0200/dd00
+URxvt.font:             xft:Liberation Mono:pixelsize=12
 URxvt.scrollBar:        false
 URxvt.saveLines:        65535
-URxvt.perl-ext-common:  keyboard-select,url-select,clipboard
+URxvt.perl-ext-common:  keyboard-select,url-select,clipboard,selection-to-clipboard
 URxvt.keysym.M-Escape:  perl:keyboard-select:activate
 URxvt.keysym.M-s:       perl:keyboard-select:search
 URxvt.keysym.M-u:       perl:url-select:select_next
@@ -13,7 +13,7 @@ URxvt.keysym.M-c:       perl:clipboard:copy
 URxvt.keysym.M-v:       perl:clipboard:paste
 URxvt.keysym.M-C-v:     perl:clipboard:paste_escaped
 
-URxvt.background: #1d2021
+!URxvt.background: #1d2021
 URxvt.foreground: #ebdbb2
 ! Black + DarkGrey
 URxvt.color0:  #282828

@@ -29,7 +29,7 @@ client.urgent            #f99157     #f99157     #2d2d2d #f99157
 #                                font                                 #
 #######################################################################
 
-font                    pango:Noto Mono, FontAwesome 12
+font                    pango:Noto Mono, FontAwesome 8
 
 #######################################################################
 #                               borders                               #
@@ -43,8 +43,8 @@ new_window              pixel $bordersize
 #                         launcher & terminal                         #
 #######################################################################
 
-bindsym $mod+space      exec rofi -show run -font 'Noto Sans 12' -theme 'glue_pro_blue'
-bindsym $mod+Return     exec xfce4-terminal 
+bindsym $mod+space      exec rofi -show run -p "run: " -font 'Noto Sans 18' -theme 'glue_pro_blue'
+bindsym $mod+Return     exec gnome-terminal 
 
 #######################################################################
 #                             i3 bindings                             #
@@ -171,7 +171,7 @@ bindsym                 $mod+r mode "resize"
 
 exec --no-startup-id "/usr/bin/compton --config ~/.config/compton.conf"
 exec --no-startup-id "/home/jam/.dots/bin/random_wall" 
-exec --no-startup-id "blueman-applet &"
+#exec --no-startup-id "blueman-applet &"
 exec --no-startup-id "dunst &"
 exec --no-startup-id "udiskie --tray &"  
 exec --no-startup-id "volumeicon &"
@@ -184,7 +184,7 @@ bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     position top
     #tray_output primary
-    font pango:Noto Mono 9
+    font pango:Noto Mono 6
     separator_symbol "  "
     workspace_buttons yes
     strip_workspace_numbers no
