@@ -30,7 +30,6 @@ fi
 if [[ "${VALUE}" ]]; then
   echo "${VALUE}"
   echo "${VALUE}"
-  echo ""
 fi
 
 if [[ "${PERC_SPACE}" -gt "${URGENT_VALUE}" ]]; then

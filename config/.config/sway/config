@@ -10,11 +10,27 @@ set $term    urxvt256c-ml
 set $menu    rofi -show run -display-run "» " -font 'Liberation Mono 12' -theme 'glue_pro_blue'
 
 ### Colours
+# Blue
 #                        BORDER      BACKGROUND  TEXT    INDICATOR   CHILD BORDER
-client.focused           #6699cc     #6699cc     #2d2d2d #6699cc     #6699cc
-client.focused_inactive  #6699cc     #6699cc     #2d2d2d #6699cc     #6699cc
-client.unfocused         #2d2d2d     #2d2d2d     #747369 #2d2d2d     #2d2d2d
-client.urgent            #f99157     #f99157     #2d2d2d #f99157     #f99157
+#client.focused           #6699cc     #6699cc     #2d2d2d #6699cc     #6699cc
+#client.focused_inactive  #6699cc     #6699cc     #2d2d2d #6699cc     #6699cc
+#client.unfocused         #2d2d2d     #2d2d2d     #747369 #2d2d2d     #2d2d2d
+#client.urgent            #f99157     #f99157     #2d2d2d #f99157     #f99157
+
+# JMacs
+#                        BORDER      BACKGROUND  TEXT    INDICATOR   CHILD BORDER
+#client.focused           #c7ac85     #c7ac85     #072627 #c7ac85     #c7ac85
+#client.focused_inactive  #aeaeae     #aeaeae     #072627 #aeaeae     #aeaeae
+#client.unfocused         #072627     #072627     #aeaeae #072627     #072627
+#client.urgent            #cc7700     #cc7700     #072627 #cc7700     #cc7700
+
+# gruvbox
+#                        BORDER      BACKGROUND  TEXT    INDICATOR   CHILD BORDER
+client.focused           #a89984     #a89984     #282828 #a89984     #a89984
+client.focused_inactive  #a89984     #a89984     #282828 #a89984     #a89984
+client.unfocused         #1d2021     #282828     #a89984 #282828     #282828
+client.urgent            #d79921     #d79921     #282828 #d79921     #d79921
+
 
 ### Output configuration
 output eDP-1 scale 2
@@ -189,14 +205,14 @@ bar {
 
     colors {
 
-        separator  #2b5b84
-        background #2d2d2d
-        statusline #268bd2
+        separator  #928374
+        background #282828
+        statusline #928374
         #                  BORDER     BACKGROUND TEXT
-        active_workspace   #6699cc    #6699cc    #2d2d2d
-        focused_workspace  #6699cc    #6699cc    #2d2d2d
-        inactive_workspace #2d2d2d    #2d2d2d    #747369
-        urgent_workspace   #f99157    #f99157    #e8e6df
+        active_workspace   #928374    #928374    #282828
+        focused_workspace  #928374    #928374    #282828
+        inactive_workspace #282828    #282828    #928374
+        urgent_workspace   #d79921    #d79921    #282828
     }
 }
 

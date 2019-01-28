@@ -21,5 +21,4 @@ fi
 if [[ "${checkLock}" == "on" ]]; then
   echo "on"
   echo "on"
-  echo ""
 fi

@@ -1,6 +1,8 @@
-COLGOOD="#2E9D54"
-COLBAD="#cc6666"
-COLDEGRADED="#81a2be"
+#!/bin/bash
+
+COLGOOD="#98971a"
+COLBAD="#d79921"
+COLDEGRADED="#458588"
 
 BAT=$(upower -e | grep BAT)
 STATE=$(upower -i $BAT | grep state | awk '{print $2}')

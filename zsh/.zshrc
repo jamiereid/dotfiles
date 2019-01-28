@@ -58,6 +58,7 @@ sources=(
   'linux'
   'gtags'
   'fzf'
+  'virtualenvwrapper'
   'keychain'
 )
 

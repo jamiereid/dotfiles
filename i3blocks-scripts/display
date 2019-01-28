@@ -30,7 +30,6 @@ if [[ "$activeDisplays" =~ "${hdmiName}" && "$activeDisplays" =~ "${vgaName}" ]]
   fi
   echo "VGA1 & HDMI"
   echo "VGA1 & HDMI"
-  echo ""
 # External, HDMI
 elif [[ "$activeDisplays" =~ "${hdmiName}" ]]; then
   if [[ "${change}" = "yes" ]]; then
@@ -40,7 +39,6 @@ elif [[ "$activeDisplays" =~ "${hdmiName}" ]]; then
   fi
   echo "HDMI"
   echo "HDMI"
-  echo ""
 # External, VGA
 elif [[ "$activeDisplays" =~ "${vgaName}" ]]; then
   if [[ "${change}" = "yes" ]]; then
@@ -50,7 +48,6 @@ elif [[ "$activeDisplays" =~ "${vgaName}" ]]; then
   fi
   echo "VGA"
   echo "VGA"
-  echo
 # Only one internal
 elif [[ "$activeDisplays" =~ "${edpName}" ]]; then
   if [[ "${change}" = "yes" ]]; then
@@ -60,7 +57,6 @@ elif [[ "$activeDisplays" =~ "${edpName}" ]]; then
   fi
   echo "eDP"
   echo "eDP"
-  echo ""
 fi
 
 if [[ "${change}" = "yes" ]]; then
