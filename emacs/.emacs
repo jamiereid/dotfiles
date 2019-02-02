@@ -325,6 +325,9 @@
 
 ;; gradient from default fore to back
 ;; #C7AC85, #B39E7B, #A09172, #8D8368, #7A765F, #676956, #535B4C, #404E43, #2D4039, #1A3330, #072627
+;; #60D952, #57C74D, #4EB549, #45A345, #3C9140, #337F3C, #2A6D38, #215B33, #18492F, #0F372B, #072627
+;; #9370DB, #8568C9, #7761B7, #6959A5, #5B5293, #4D4B81, #3F436F, #313C5D, #23344B, #152D39, #072627
+;; #CC7700, #B86E03, #A46607, #905E0B, #7D560F, #694E13, #554617, #423E1B, #2E361F, #1A2E23, #072627
 
 (set-face-attribute 'default                          nil :foreground "#c7ac85"    :background "#072627")
 (set-face-attribute 'cursor                           nil                          :background "#91EC93")
@@ -344,6 +347,11 @@
 (set-face-attribute 'fringe                           nil                          :background "#072627")
 (set-face-attribute 'region                           nil                          :background "#5E5E5E")
 
+;; git-gutter-fringe
+(set-face-attribute 'git-gutter-fr:modified           nil :foreground "#3F436F")
+(set-face-attribute 'git-gutter-fr:added              nil :foreground "#2A6D38")
+(set-face-attribute 'git-gutter-fr:deleted            nil :foreground "#905E0B")
+
 ;; todo-mode
 (set-face-attribute 'todo-heading-face                nil :foreground "#FFFFFF")
 (set-face-attribute 'todo-subheading-face             nil :foreground "#C3C7B5")
@@ -351,7 +359,7 @@
 (set-face-attribute 'todo-de_emphasize-face           nil :foreground "#535b4c")
 (set-face-attribute 'todo-plus-face                   nil :foreground "#60D952")
 (set-face-attribute 'todo-at-face                     nil :foreground "#52C3A8")
-(set-face-attribute 'todo-bang-face                   nil :foreground "#CC0000")
+(set-face-attribute 'todo-bang-face                   nil :foreground "#CC7700")
 (set-face-attribute 'todo-pound-face                  nil :foreground "#9370DB")
 
 (with-eval-after-load 'highlight-numbers
@@ -400,7 +408,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "3f44e2d33b9deb2da947523e2169031d3707eec0426e78c7b8a646ef773a2077" default)))
+    ("2a9039b093df61e4517302f40ebaf2d3e95215cb2f9684c8c1a446659ee226b9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "3f44e2d33b9deb2da947523e2169031d3707eec0426e78c7b8a646ef773a2077" default)))
  '(package-selected-packages
    (quote
     (doom-themes doom-modeline all-the-icons projectile neotree org-bullets racer flycheck-rust cargo rust-mode git-gutter-fringe magit org-pdfview zenburn-theme csharp-mode gruvbox-theme use-package diminish))))
