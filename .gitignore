@@ -17,7 +17,9 @@ emacs/.emacs.d/network-security.data
 emacs/.emacs.d/settings.el
 emacs/.emacs.d/projectile-bookmarks.eld
 emacs/.emacs.d/projectile.cache
-
+emacs/.emacs.d/eshell/
+emacs/.emacs.d/local-overrides.el
+        
 vim/.vim/plugged
 
 config/.config/*

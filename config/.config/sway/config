@@ -35,7 +35,8 @@ client.urgent            #d79921     #d79921     #282828 #d79921     #d79921
 ### Output configuration
 output eDP-1 scale 2
 
-output * bg ~/Pictures/752747.jpg fill
+# change with symlink
+output * bg ~/Pictures/current_wallpaper.jpg fill
 
 exec xrdb ~/.Xresources
 

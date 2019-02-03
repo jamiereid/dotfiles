@@ -219,6 +219,17 @@
   :config
   (global-set-key [f7] 'neotree-toggle))
 
+(use-package spaceline
+  :ensure t
+  :config
+  (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))))
+
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (spaceline-helm-mode 1)
+  (spaceline-emacs-theme))
+
 ;;;;
 ;;;; csharp
 ;;;;
