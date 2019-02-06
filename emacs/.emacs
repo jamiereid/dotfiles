@@ -313,6 +313,7 @@
 ;(load-user-file "orgmode.el")
 (load-user-file "golang.el")
 ;(load-user-file "rustlang.el")
+(load-user-file "notmuch.el")
 
 ;;;;
 ;;;; Custom lisp loads
@@ -333,6 +334,8 @@
 (set-face-attribute 'default t :font "Liberation Mono 8")
 (fringe-mode        '(15 . 0))  ; set fringe sizes
 
+
+(add-to-list 'default-frame-alist '(tty-color-mode . -1)) ; don't use colours in terminal mode
 
 ;; gradient from default fore to back
 ;; #C7AC85, #B39E7B, #A09172, #8D8368, #7A765F, #676956, #535B4C, #404E43, #2D4039, #1A3330, #072627
