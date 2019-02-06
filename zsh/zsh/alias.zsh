@@ -47,6 +47,12 @@ if (( $+commands[thefuck] )); then
 fi
 
 alias vi="vim"
+if (( $+commands[nvim] )); then
+	alias vi="nvim"
+	alias vim="nvim"
+fi
+
+
 alias ls="ls -lh --color=auto"
 alias ll="ls -la"
 alias grep="grep --color=always"
