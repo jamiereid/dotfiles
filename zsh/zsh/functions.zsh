@@ -228,3 +228,8 @@ function extract () {
 _has() {
     return $( whence $1 >/dev/null )
 }
+
+# get windows remote hostname by reading the cert
+function rdphostname () {
+    echo '\n' | openssl s_client -host $1 -port 3389 2> /dev/null | grep 'subject=' | sed s/subject=\\/CN\=//g
+}

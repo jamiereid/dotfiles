@@ -1,13 +1,14 @@
 " vim-plug
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('c:/Code/dotfiles/config/.config/nvim/plugged') " @Todo: set this var based on OS
 Plug 'morhetz/gruvbox'           " theme
 Plug 'itchyny/lightline.vim'     " statusline plugin
 Plug 'airblade/vim-gitgutter'    " show git status near linum
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'        " (c)hange(s)urround etc
 Plug 'haya14busa/incsearch.vim'  " better incremental searching 
 Plug 'lilydjwg/colorizer'        " color hex codes and color names
+Plug 'ctrlpvim/ctrlp.vim'        " fuzzy file find
 call plug#end()
 
 "" Theme
@@ -24,8 +25,8 @@ let g:lightline = {}
 let g:lightline.colorscheme='gruvbox'
 
 "" NERDTree
-map <F8> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"map <F8> :NERDTreeToggle<CR>
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "" Searching
 " haya14busa/incsearch.vim
@@ -42,7 +43,8 @@ set expandtab              " Use spaces instead of tabs
 set smarttab               " be smart when using tabs ;)
 set shiftwidth=4           " 1 tab == 4 spaces
 set tabstop=4              " 1 tab == 4 spaces
-"set colorcolumn=80         " set a marker at 80 columns
+"set colorcolumn=80        " set a marker at 80 columns
+set clipboard+=unnamedplus " use system clipboard
 
 set number relativenumber  " show relative numbers, except for current line
 set textwidth=80           " set width to 80 columns
@@ -56,8 +58,7 @@ set linebreak              " break long lines by word, not chars
 set guifont=Liberation\ Mono:h9
 
 "" Key(re)bindings
-
-nmap ; :buffers<CR>
+nnoremap ; :buffers<CR>:buffer<space>
 
 " move between windows
 map <C-j> <C-W>j 
@@ -78,6 +79,8 @@ map k gk
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
+" @Cleanup: should this be in it's own file? A plugin?
+" @Todo: have this autoload somehow for all 'programming-mode' files
 
 "@Todo @Incomplete @Cleanup @Factor @Robustness @Hardcoded
 "@Note
