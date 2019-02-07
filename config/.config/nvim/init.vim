@@ -39,6 +39,7 @@ set updatetime=100         " Make vim's updatetime faster (default is 4000 (4sec
 
 "" Options
 syntax on                  " turn on syntax highlighting
+set cursorline             " highlight the current line the cursor is on
 set expandtab              " Use spaces instead of tabs
 set smarttab               " be smart when using tabs ;)
 set shiftwidth=4           " 1 tab == 4 spaces
