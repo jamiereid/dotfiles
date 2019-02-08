@@ -3,8 +3,8 @@ call plug#begin('c:/Code/dotfiles/config/.config/nvim/plugged') " @Todo: set thi
 Plug 'morhetz/gruvbox'           " theme
 Plug 'itchyny/lightline.vim'     " statusline plugin
 Plug 'airblade/vim-gitgutter'    " show git status near linum
-"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-"Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'        " (c)hange(s)urround etc
 Plug 'haya14busa/incsearch.vim'  " better incremental searching 
 Plug 'lilydjwg/colorizer'        " color hex codes and color names
@@ -25,8 +25,8 @@ let g:lightline = {}
 let g:lightline.colorscheme='gruvbox'
 
 "" NERDTree
-"map <F8> :NERDTreeToggle<CR>
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <F8> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "" Searching
 " haya14busa/incsearch.vim
