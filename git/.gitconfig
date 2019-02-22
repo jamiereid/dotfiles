@@ -1,0 +1,43 @@
+[user]
+    name = Jamie Reid
+    email = jamie@jre.id.au
+
+[core]
+    editor = vim
+    pager = less -+$LESS -FRX
+
+[alias]
+    co = checkout
+    cl = clone
+    df = diff
+    br = branch
+    lg = log --graph --oneline --format='%C(green)%h%C(auto)%d%Creset %C(magenta)%aN%Creset %s %C(yellow)%cr%Creset'
+    rs = reset
+    rh = reset --hard
+    sm = submodule
+    st = status
+    up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
+    unstage = reset HEAD --
+    last = log -1 HEAD
+
+[color]
+    ui = true
+    diff = auto
+    grep = auto
+    branch = auto
+
+[diff]
+    tool = vimdiff
+
+[grep]
+    extendRegexp = true
+    lineNumber = true
+
+[url "https://aur.archlinux.org/"]
+    insteadOf = "aur:"
+
+[url "https://github.com/"]
+    insteadOf = "gh:"
+
+[url "git@github.com:"]
+    pushInsteadOf = "gh:"

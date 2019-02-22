@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: orgheader
+# key: <oh
+# --
+#+TITLE:  ${1:title}
+#+AUTHOR: Jamie Reid
+#+EMAIL:  jamie.reid@act.gov.au
+#+DATE:   `(format-time-string "%a %d %b %Y %H:%M %Z" (current-time))`
+#+TAGS:   ${2:keywords}
+#+SNOW:   ${3:case_number}
+
+* Notes
+$0
