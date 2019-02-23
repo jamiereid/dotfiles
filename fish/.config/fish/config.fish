@@ -1,5 +1,6 @@
 abbr -a g git
-abbr -a gc 'git checkout'
+abbr -a gco 'git checkout'
+abbr -a gc 'git commit'
 abbr -a ga 'git add'
 abbr -a gs 'git status'
 complete --command g --wraps git
@@ -14,6 +15,13 @@ if command -v exa > /dev/null
     abbr -a ll 'exa -la'
 else
     abbr -a ll 'ls -la'
+end
+
+if command -v nvim > /dev/null
+    abbr -a vi 'nvim'
+    abbr -a vim 'nvim'
+else
+    abbr -a vi 'vim'
 end
 
 # this is nice, and will come in handy, just need to fill out cases
