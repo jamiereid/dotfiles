@@ -66,10 +66,11 @@ if !has('gui_running')
 endif
 
 let base16colorspace=256
+set background=dark
 colorscheme base16-atelier-dune
+hi Normal ctermbg=NONE
 
 "" itchyny/lightline.vim
-set noshowmode                         " lightline handles showing the mode
 let g:lightline = {
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
@@ -108,10 +109,127 @@ map <C-l> <C-W>l
 map j gj
 map k gk
 
+" language server protocol
+let g:LanguageClient_settingsPath = "~/.config/nvim/lang-server-settings.json"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['env', 'CARGO_TARGET_DIR=~/cargo-target/rls', 'rls'],
+    \ }
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" racer + rust
+" https://github.com/rust-lang/rust.vim/issues/192
+let g:rustfmt_command = "rustfmt"
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+let g:rust_clip_command = 'xclip -selection clipboard'
+"let g:racer_cmd = "/usr/bin/racer"
+"let g:racer_experimental_completer = 1
+let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
+
+" Completion
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+" tab to select
+" and don't hijack my enter key
+inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
+inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+
+" Golang
+let g:go_play_open_browser = 0
+let g:go_fmt_fail_silently = 1
+let g:go_fmt_command = "goimports"
+let g:go_bin_path = expand("~/dev/go/bin")
+
+" =============================================================================
+" # Editor settings
+" =============================================================================
+filetype plugin indent on
+set autoindent            " missing comment
+set timeoutlen=300        " http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
+set updatetime=100        " Make vim's updatetime faster (default is 4000 (4secs)) (git-gutter)
+set encoding=utf-8        " missing comment
+set scrolloff=2           " missing comment
+set noshowmode            " lightline handles showing the mode
+set cursorline            " highlight the current line the cursor is on
+set hidden                " missing comment
+set nowrap                " missing comment
+set nojoinspaces          " missing comment
+set number relativenumber " show relative numbers, except for current line
+set textwidth=80          " set width to 80 columns
+
+"let g:sneak#s_next = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_frontmatter = 1
+
+" Sane splits
+set splitright
+set splitbelow
+
+" Permanent undo
+set undodir=~/.vimdid
+set undofile
+
+" Decent wildmenu
+"set wildmenu
+"set wildmode=list:longest
+"set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+
+" Tab settings
+"set softtabstop=8
+set shiftwidth=4           " 1 tab == 4 spaces
+set tabstop=4              " 1 tab == 4 spaces
+"set noexpandtab
+set expandtab              " Use spaces instead of tabs
+set smarttab               " be smart when using tabs ;)
+
+" Show some special characters
+set list                   " show whitespace as special chars - see listchars
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+
+" Get syntax
+syntax on
+
+" Wrapping options
+set formatoptions=tc " wrap text and comments using textwidth
+set formatoptions+=r " continue comments when pressing ENTER in I mode
+set formatoptions+=q " enable formatting of comments with gq
+set formatoptions+=n " detect lists for formatting
+set formatoptions+=b " auto-wrap in insert mode, and do not wrap old long lines
+
+" Proper search
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+
+" Search results centered please
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" @Todo: above here is Jon's edit config - what do I want to keep?
+" @Todo: Below here is my old config - what do I want to keep?
+"" Options
+set clipboard+=unnamedplus " use system clipboard
+
+set directory-=.           " don't store temp files in cwd
+set linebreak              " break long lines by word, not chars
 
 
 
-" up to 'language server protocol' in jon's config
+
+
+
+
+
+
 
 
 "" NERDTree
@@ -124,26 +242,6 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-"" vim-gitgutter
-set updatetime=100         " Make vim's updatetime faster (default is 4000 (4secs))
-
-"" Options
-syntax on                  " turn on syntax highlighting
-set cursorline             " highlight the current line the cursor is on
-set expandtab              " Use spaces instead of tabs
-set smarttab               " be smart when using tabs ;)
-set shiftwidth=4           " 1 tab == 4 spaces
-set tabstop=4              " 1 tab == 4 spaces
-"set colorcolumn=80        " set a marker at 80 columns
-set clipboard+=unnamedplus " use system clipboard
-
-set number relativenumber  " show relative numbers, except for current line
-set textwidth=80           " set width to 80 columns
-set encoding=utf8          " default to utf8
-set directory-=.           " don't store temp files in cwd
-set list                   " show whitespace as special chars - see listchars
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
-set linebreak              " break long lines by word, not chars
 
 
 
