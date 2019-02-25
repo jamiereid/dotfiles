@@ -1,6 +1,6 @@
 abbr -a g git
 abbr -a gco 'git checkout'
-abbr -a gc 'git commit'
+abbr -a gc 'git commit -m "'
 abbr -a ga 'git add'
 abbr -a gs 'git status'
 complete --command g --wraps git
