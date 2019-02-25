@@ -90,25 +90,6 @@ let g:ale_rust_cargo_use_check = 1
 let g:ale_rust_cargo_check_all_targets = 1
 let g:ale_virtualtext_cursor = 0
 
-"" Key(re)bindings
-map <C-p> :Files<CR>
-nmap <leader>; :Buffers<CR>
-nmap <leader>w :w<CR>
-
-" move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Folding shortcuts
-" nnoremap <space> za
-" vnoremap <space> zf
-
-" Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
-
 " language server protocol
 let g:LanguageClient_settingsPath = "~/.config/nvim/lang-server-settings.json"
 let g:LanguageClient_serverCommands = {
@@ -148,18 +129,19 @@ let g:go_bin_path = expand("~/dev/go/bin")
 " # Editor settings
 " =============================================================================
 filetype plugin indent on
-set autoindent            " missing comment
+set autoindent
 set timeoutlen=300        " http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
 set updatetime=100        " Make vim's updatetime faster (default is 4000 (4secs)) (git-gutter)
-set encoding=utf-8        " missing comment
-set scrolloff=2           " missing comment
+set encoding=utf-8        " default to utf-8 encoding
+set scrolloff=2           " always make sure that lines are visible above and below the cursor (such as when searching)
 set noshowmode            " lightline handles showing the mode
 set cursorline            " highlight the current line the cursor is on
-set hidden                " missing comment
-set nowrap                " missing comment
-set nojoinspaces          " missing comment
+set hidden                " hide buffers instead of closing them (such as when switching to a new file with unsaved changes in current buffer)
+set nowrap                " don't visually wrap lines (require horizontal scrolling)
+set nojoinspaces          " when joining lines (J), use only one space between.
 set number relativenumber " show relative numbers, except for current line
 set textwidth=80          " set width to 80 columns
+set linebreak             " break long lines by word, not chars
 
 "let g:sneak#s_next = 1
 let g:vim_markdown_new_list_item_indent = 0
@@ -174,10 +156,10 @@ set splitbelow
 set undodir=~/.vimdid
 set undofile
 
-" Decent wildmenu
-"set wildmenu
-"set wildmode=list:longest
-"set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+" Decent wildmenu (:e autocompletion for example)
+set wildmenu
+set wildmode=list:longest
+set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Tab settings
 "set softtabstop=8
@@ -214,27 +196,113 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
-" @Todo: above here is Jon's edit config - what do I want to keep?
-" @Todo: Below here is my old config - what do I want to keep?
-"" Options
-set clipboard+=unnamedplus " use system clipboard
+set guioptions-=T               " Remove toolba
+set vb t_vb=                    " No more beeps
+set backspace=2                 " Backspace over newlines
+set nofoldenable                " disable folding
+set ruler                       " Where am I?
+set ttyfast                     " make scrolling faster https://github.com/vim/vim/issues/1735#issuecomment-383353563
+set lazyredraw                  " buffer screen updates instead of redrawing all the time
+set synmaxcol=500
+set laststatus=2                " always display the statusline
+set diffopt+=iwhite             " No whitespace in vimdiff
+" Make diffing better: https://vimways.org/2018/the-power-of-diff/
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
+set showcmd                     " Show (partial) command in status line.
+set mouse=a                     " Enable mouse usage (all modes) in terminals
+set shortmess+=c                " don't give |ins-completion-menu| messages.
 
-set directory-=.           " don't store temp files in cwd
-set linebreak              " break long lines by word, not chars
+
+" =============================================================================
+" # Keyboard shortcuts
+" =============================================================================
+map <C-p> :Files<CR>
+nmap <leader>; :Buffers<CR>
+nmap <leader>w :w<CR>
+
+" move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Folding shortcuts
+" nnoremap <space> za
+" vnoremap <space> zf
+
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+" ; as :
+nnoremap ; :
+
+" Ctrl+c and Ctrl+j as Esc
+inoremap <C-j> <Esc>
+vnoremap <C-j> <Esc>
+inoremap <C-c> <Esc>
+vnoremap <C-c> <Esc>
+
+" Suspend with Ctrl+f
+"inoremap <C-f> :sus<cr>
+"vnoremap <C-f> :sus<cr>
+"nnoremap <C-f> :sus<cr>
+
+" Jump to start and end of line using the home row keys
+map H ^
+map L $
+
+" Neat X clipboard integration
+" ,p will paste clipboard into buffer
+" ,c will copy entire buffer into clipboard
+"noremap <leader>p :read !xsel --clipboard --output<cr>
+"noremap <leader>c :w !xsel -ib<cr><cr>
+
+" <leader>s for Rg search
+"noremap <leader>s :Rg
+let g:fzf_layout = { 'down': '~20%' }
+"command! -bang -nargs=* Rg
+"  \ call fzf#vim#grep(
+"  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+"  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"  \   <bang>0)
+
+function! s:list_cmd()
+  let base = fnamemodify(expand('%'), ':h:.:S')
+  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow | proximity-sort %s', expand('%'))
+endfunction
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
+  \                               'options': '--tiebreak=index'}, <bang>0)
 
 
+" Open new file adjacent to current file
+nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
+" No arrow keys --- force yourself to use the home row
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
+" Left and right can switch buffers
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
 
+" <leader><leader> toggles between buffers
+nnoremap <leader><leader> <c-^>
 
+" <leader>= reformats current tange
+nnoremap <leader>= :'<,'>RustFmtRange<cr>
 
-
-
-
-
-"" NERDTree
-map <F8> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" I can type :help on my own, thanks.
+map <F1> <Esc>
+imap <F1> <Esc>
 
 "" Searching
 " haya14busa/incsearch.vim
@@ -242,19 +310,22 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+" =============================================================================
+" # Autocommands
+" =============================================================================
 
+" Prevent accidental writes to buffers that shouldn't be edited
+autocmd BufRead *.orig set readonly
+autocmd BufRead *.pacnew set readonly
 
+" Leave paste mode when leaving insert mode
+autocmd InsertLeave * set nopaste
 
-
-
-
-
-
-
-
-
-
-
+" Jump to last edit position on opening file
+if has("autocmd")
+  " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
+  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 
 "" custom highlighting rules
