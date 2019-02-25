@@ -37,7 +37,7 @@ end
 #end
 
 # fix rustup not adding path for fish (https://github.com/rust-lang/rustup.rs/issues/478)
-set PATH $HOME/.cargo/bin $PATH
+set PATH $HOME/.cargo/bin $HOME/bin $PATH
 
 function remote_alacritty
     # https://gist.github.com/costis/5135502
