@@ -1,7 +1,10 @@
 fish/.config/fish/fishd.1c1b0d066ea1
+fish/.config/fish/fish_variables
 nvim/.config/nvim/.netrwhist
 nvim/.config/nvim/plugged/
 fish/.config/fish/functions/fish_user_key_bindings.fish
 bin/bin/clogin
+bin/bin/ctlogin
+bin/bin/exercism
 fish/.config/fish/functions/fzf_key_bindings.fish
 

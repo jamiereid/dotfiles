@@ -1,3 +1,6 @@
+# fix rustup not adding path for fish (https://github.com/rust-lang/rustup.rs/issues/478)
+set PATH $HOME/.cargo/bin $HOME/bin $PATH
+
 abbr -a g git
 abbr -a gco 'git checkout'
 abbr -a gc 'git commit -m "'
@@ -36,9 +39,6 @@ end
 #    end
 #end
 
-# fix rustup not adding path for fish (https://github.com/rust-lang/rustup.rs/issues/478)
-set PATH $HOME/.cargo/bin $HOME/bin $PATH
-
 function remote_alacritty
     # https://gist.github.com/costis/5135502
     set fn (mktemp)
@@ -51,8 +51,21 @@ end
 # Fish git prompt
 set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showdirtystate 'yes'
-set __fish_git_prompt_showstashstate ''
-set __fish_git_prompt_showupstream 'none'
+set __fish_git_prompt_showstashstate 'yes'
+set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_color_upstream_ahead green
+set __fish_git_prompt_color_downstream_behind red
+
+set __fish_git_prompt_char_dirtystate '+'
+set __fish_git_prompt_char_stagedstate '●'
+set __fish_git_prompt_char_untrackedfiles '…'
+set __fish_git_prompt_char_stashstate '$'
+set __fish_git_prompt_char_upstream_ahead '↑'
+set __fish_git_prompt_char_upstream_behind '↓'
+set __fish_git_prompt_char_upstream_equal ''
+set __fish_git_prompt_char_cleanstate ''
+set __fish_git_prompt_char_invalidstate 'X'
+
 set -g fish_prompt_pwd_dir_length 3
 
 # colored man output
@@ -65,6 +78,11 @@ setenv LESS_TERMCAP_so \e'[38;5;246m'    # begin standout-mode - info box
 setenv LESS_TERMCAP_ue \e'[0m'           # end underline
 setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
+function sudo-commandline -d "Insert sudo at the beginning of the command line"
+    set -l cmdline (commandline)
+    commandline -r -- "sudo $cmdline"
+end
+
 # Thanks https://swsnr.de/blog/2018/10/05/sudo-fish/
 function fish_user_key_bindings
     fish_default_key_bindings
@@ -73,96 +91,86 @@ function fish_user_key_bindings
     bind \es sudo-commandline
 end
 
-function sudo-commandline -d "Insert sudo at the beginning of the command line"
-    set -l cmdline (commandline)
-    commandline -r -- "sudo $cmdline"
-end
+eval (python -m virtualfish)
 
-#function fish_prompt
-#	set_color brblack
-#	echo -n "["(date "+%H:%M")"] "
-#	set_color blue
-#	echo -n (hostname)
-#	if [ $PWD != $HOME ]
-#		set_color brblack
-#		echo -n ':'
-#		set_color yellow
-#		echo -n (basename $PWD)
-#	end
-#	set_color green
-#	printf '%s ' (__fish_git_prompt)
-#	set_color red
-#	echo -n '| '
-#	set_color normal
-#end
+function is_status_okay
+    [ $status = 0 ]
+end
 
 function fish_prompt
-  set_color white
-  echo -n "["(date "+%H:%M")"] "
-  set_color yellow
-  echo -n (whoami)
-  set_color normal
-  echo -n '@'
+  echo
   set_color blue
-  echo -n (hostname)" "
+  echo -n 'λ '
+
   set_color green
   echo -n (prompt_pwd)
+
   set_color brown
   printf '%s ' (__fish_git_prompt)
-  set_color red
-  if [ (whoami) = "root" ]
-    echo -n '# '
-  else
-    echo -n '$ '
+
+  if set -q SSH_TTY
+    set_color yellow
+    echo -n (whoami)
+    set_color normal
+    echo -n '@'
+    set_color blue
+    echo -n (hostname)" "
   end
+
+  echo
+  if is_status_okay
+      set_color green
+  else
+      set_color red
+  end
+  echo -n "» "
   set_color normal
 end
 
+function fish_right_prompt
+  if set -q VIRTUAL_ENV
+    echo -n -s (set_color blue) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
+  end
+  set_color white
+  echo -n "["(date "+%H:%M")"] "
+end
+
+
 function fish_greeting
-	echo
-	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
-	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
-	echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
-	echo -e " \\e[1mDisk usage:\\e[0m"
-	echo
-	echo -ne (\
-		df -l -h | grep -E 'dev/(xvda|sd|mapper)' | \
-		awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}' | \
-		sed -e 's/^\(.*\([8][5-9]\|[9][0-9]\)%.*\)$/\\\\e[0;31m\1\\\\e[0m/' -e 's/^\(.*\([7][5-9]\|[8][0-4]\)%.*\)$/\\\\e[0;33m\1\\\\e[0m/' | \
-		paste -sd ''\
-	)
-	echo
+  echo
+  echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
+  echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
+  echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
+  echo -e " \\e[1mNetwork:\\e[0m"
+  echo
+  # http://tdt.rocks/linux_network_interface_naming.html
+  echo -ne (\
+    ip addr show up scope global | \
+      grep -E ': <|inet' | \
+      sed \
+        -e 's/^[[:digit:]]\+: //' \
+        -e 's/: <.*//' \
+        -e 's/.*inet[[:digit:]]* //' \
+        -e 's/\/.*//'| \
+      awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
+      sort | \
+      column -t -R1 | \
+      # public addresses are underlined for visibility \
+      sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
+      # private addresses are not \
+      sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
+      # unknown interfaces are cyan \
+      sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
+      # ethernet interfaces are normal \
+      sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
+      # wireless interfaces are purple \
+      sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
+      # wwan interfaces are yellow \
+      sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
+      sed 's/$/\\\e[0m/' | \
+      sed 's/^/\t/' \
+    )
+  echo
 
-	echo -e " \\e[1mNetwork:\\e[0m"
-	echo
-	# http://tdt.rocks/linux_network_interface_naming.html
-	echo -ne (\
-		ip addr show up scope global | \
-			grep -E ': <|inet' | \
-			sed \
-				-e 's/^[[:digit:]]\+: //' \
-				-e 's/: <.*//' \
-				-e 's/.*inet[[:digit:]]* //' \
-				-e 's/\/.*//'| \
-			awk 'BEGIN {i=""} /\.|:/ {print i" "$0"\\\n"; next} // {i = $0}' | \
-			sort | \
-			column -t -R1 | \
-			# public addresses are underlined for visibility \
-			sed 's/ \([^ ]\+\)$/ \\\e[4m\1/' | \
-			# private addresses are not \
-			sed 's/m\(\(10\.\|172\.\(1[6-9]\|2[0-9]\|3[01]\)\|192\.168\.\).*\)/m\\\e[24m\1/' | \
-			# unknown interfaces are cyan \
-			sed 's/^\( *[^ ]\+\)/\\\e[36m\1/' | \
-			# ethernet interfaces are normal \
-			sed 's/\(\(en\|em\|eth\)[^ ]* .*\)/\\\e[39m\1/' | \
-			# wireless interfaces are purple \
-			sed 's/\(wl[^ ]* .*\)/\\\e[35m\1/' | \
-			# wwan interfaces are yellow \
-			sed 's/\(ww[^ ]* .*\).*/\\\e[33m\1/' | \
-			sed 's/$/\\\e[0m/' | \
-			sed 's/^/\t/' \
-		)
-	echo
-
-	set_color normal
+  set_color normal
 end

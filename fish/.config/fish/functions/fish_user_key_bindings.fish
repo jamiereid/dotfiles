@@ -5,3 +5,5 @@ function fish_user_key_bindings
     # Prepend sudo to the command line with M-s
     bind \es sudo-commandline
 end
+
+fzf_key_bindings
