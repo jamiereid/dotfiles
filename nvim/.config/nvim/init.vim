@@ -93,7 +93,7 @@ let g:ale_virtualtext_cursor = 0
 " language server protocol
 let g:LanguageClient_settingsPath = "~/.config/nvim/lang-server-settings.json"
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['env', 'CARGO_TARGET_DIR=~/cargo-target/rls', 'rls'],
+    \ 'rust': ['env', 'CARGO_TARGET_DIR=/home/jam/cargo-target/rls', 'rls'],
     \ }
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
@@ -201,14 +201,16 @@ set vb t_vb=                    " No more beeps
 set backspace=2                 " Backspace over newlines
 set nofoldenable                " disable folding
 set ruler                       " Where am I?
-set ttyfast                     " make scrolling faster https://github.com/vim/vim/issues/1735#issuecomment-383353563
-set lazyredraw                  " buffer screen updates instead of redrawing all the time
+" https://github.com/vim/vim/issues/1735#issuecomment-383353563
+set ttyfast                     " make scrolling faster 
+set lazyredraw                  " buffer screen updates instead of redrawing
 set synmaxcol=500
 set laststatus=2                " always display the statusline
 set diffopt+=iwhite             " No whitespace in vimdiff
 " Make diffing better: https://vimways.org/2018/the-power-of-diff/
 set diffopt+=algorithm:patience
 set diffopt+=indent-heuristic
+set colorcolumn=80              " and give me a colored column
 set showcmd                     " Show (partial) command in status line.
 set mouse=a                     " Enable mouse usage (all modes) in terminals
 set shortmess+=c                " don't give |ins-completion-menu| messages.
@@ -330,8 +332,8 @@ endif
 
 "" custom highlighting rules
 "match ErrorMsg '\%>80v.\+'
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
 
 " @Cleanup: should this be in it's own file? A plugin?
 " @Todo: have this autoload somehow for all 'programming-mode' files
@@ -343,7 +345,11 @@ match OverLength /\%81v.\+/
 highlight TagOrange guifg=#cc7700
 highlight TagGrey   guifg=#aeaeae
 highlight TagRed    guifg=#aa0000
+augroup myHighlights
+    autocmd!
+    autocmd syntax match TagOrange /\v[@]<(Todo|Incomplete|Cleanup|Factor|Robustness|Hardcoded)/ containedin=.*Comment,vimCommentTitle
+    autocmd syntax match TagGrey   /\v[@]<(Note)/ containedin=.*Comment,vimCommentTitle
+    autocmd syntax match TagRed    /\v[@]<(Broken|BROKEN|Hack|Bug)/ containedin=.*Comment,vimCommentTitle
+augroup end
 
-syntax match TagOrange /\v[@]<(Todo|Incomplete|Cleanup|Factor|Robustness|Hardcoded)/ containedin=.*Comment
-syntax match TagGrey   /\v[@]<(Note)/ containedin=.*Comment
-syntax match TagRed    /\v[@]<(Broken|BROKEN|Hack|Bug)/ containedin=.*Comment
+highlight link myHighlights Todo
