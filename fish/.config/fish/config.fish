@@ -100,13 +100,7 @@ end
 function fish_prompt
   echo
   set_color blue
-  echo -n 'λ '
-
-  set_color green
   echo -n (prompt_pwd)
-
-  set_color brown
-  printf '%s ' (__fish_git_prompt)
 
   if set -q SSH_TTY
     set_color yellow
@@ -117,22 +111,23 @@ function fish_prompt
     echo -n (hostname)" "
   end
 
-  echo
   if is_status_okay
       set_color green
   else
       set_color red
   end
-  echo -n "» "
+  echo -n " » "
   set_color normal
 end
 
 function fish_right_prompt
+  set_color brown
+  printf '%s ' (__fish_git_prompt)
+
   if set -q VIRTUAL_ENV
+    echo -n " in "
     echo -n -s (set_color blue) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
   end
-  set_color white
-  echo -n "["(date "+%H:%M")"] "
 end
 
 
