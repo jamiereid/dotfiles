@@ -39,6 +39,12 @@ end
 #    end
 #end
 
+if command -v ct > /dev/null
+    function ssh
+        /usr/bin/ssh $argv | ct
+    end
+end
+
 function remote_alacritty
     # https://gist.github.com/costis/5135502
     set fn (mktemp)
