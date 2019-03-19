@@ -7,4 +7,10 @@ bin/bin/clogin
 bin/bin/ctlogin
 bin/bin/exercism
 fish/.config/fish/functions/fzf_key_bindings.fish
+emacs/.emacs.d/elpa/
+emacs/.emacs.d/eshell/
+emacs/.emacs.d/local-overrides.el
+emacs/.emacs.d/network-security.data
+emacs/.emacs.d/projectile-bookmarks.eld
+emacs/.emacs.d/recentf
 
