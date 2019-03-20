@@ -52,6 +52,9 @@ Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'             " text alignment
 Plug 'plasticboy/vim-markdown'
 
+" Snippets!
+Plug 'SirVer/ultisnips'              " text snippet engine
+
 call plug#end()
 
 if has('nvim')
@@ -124,6 +127,11 @@ let g:go_play_open_browser = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
 let g:go_bin_path = expand("~/dev/go/bin")
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " =============================================================================
 " # Editor settings
