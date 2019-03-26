@@ -68,10 +68,11 @@ if !has('gui_running')
     set termguicolors
 endif
 
-let base16colorspace=256
+"let base16colorspace=256
 set background=dark
-colorscheme base16-atelier-dune
-hi Normal ctermbg=NONE
+"colorscheme base16-atelier-dune
+colorscheme jmacs_two
+"hi Normal ctermbg=NONE
 
 "" itchyny/lightline.vim
 let g:lightline = {
