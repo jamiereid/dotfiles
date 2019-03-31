@@ -71,7 +71,7 @@ endif
 "let base16colorspace=256
 set background=dark
 "colorscheme base16-atelier-dune
-colorscheme jmacs_two
+colorscheme naysayer
 "hi Normal ctermbg=NONE
 
 "" itchyny/lightline.vim
