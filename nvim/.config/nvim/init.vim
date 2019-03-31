@@ -362,3 +362,23 @@ augroup myHighlights
 augroup end
 
 highlight link myHighlights Todo
+
+
+"" MyTodo overrides
+hi todoHeading      guifg=#FFFFFF
+hi todoSubHeading   guifg=#C3C7B5
+hi todoSubTask      guifg=#676956
+hi todoDeemphasize  guifg=#535B4c
+hi todoPlus         guifg=#60D952
+hi todoAt           guifg=#52C3A8
+hi todoBang         guifg=#CC7700
+hi todoPound        guifg=#9370DB
+
+hi def link deemphasizeMatch  todoDeemphasize
+hi def link headingMatch      todoHeading
+hi def link subHeadingMatch   todoSubHeading
+hi def link subTaskMatch      todoSubTask
+hi def link plusMatch         todoPlus
+hi def link atMatch           todoAt
+hi def link bangMatch         todoBang
+hi def link poundMatch        todoPound
