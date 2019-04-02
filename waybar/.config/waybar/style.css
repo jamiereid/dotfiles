@@ -1,15 +1,15 @@
 * {
     border:        none;
     border-radius: 0;
-    font-family:   Sans;
-    font-size:     15px;
+    font-family:   Liberation Mono;
+    font-size:     13px;
     box-shadow:    none;
     text-shadow:   none;
 }
 
-window {
-    color:      rgba(217, 216, 216, 1);
-    background: rgba(35, 31, 32, 0.85);
+window#waybar {
+    color:      white;
+    background: transparent;
 }
 
 #workspaces {
@@ -18,22 +18,26 @@ window {
 
 #workspaces button {
     padding:    0 5px;
-    color:      rgba(217, 216, 216, 0.4);
+    color:      white;
+    background: transparent;
+    border-top: 2px solid transparent;
 }
 
 #workspaces button.visible {
-    color:      rgba(217, 216, 216, 1);
+    color:      white;
+    border-top: 2px solid #a6a28c;
 }
 
 #workspaces button.focused {
-    color:      rgba(0, 157, 220, 1);
+    color:      white;
+    border-top: 2px solid #60ac39;
 }
 
 #workspaces button.urgent {
-    color:      rgba(238, 46, 36, 1);
+    color:      #d73737;
 }
 
-#mode, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight {
+#mode, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #tray {
     margin:     0px 16px 0px 0px;
     min-width:  25px;
 }
@@ -43,13 +47,13 @@ window {
 }
 
 #battery.warning {
-   color:       rgba(255, 210, 4, 1);
+   color:       #ae9513;
 }
 
 #battery.critical {
-    color:      rgba(238, 46, 36, 1);
+    color:      #d73737;
 }
 
 #battery.charging {
-    color:      rgba(217, 216, 216, 1);
+    color:      #a6a28c;
 }

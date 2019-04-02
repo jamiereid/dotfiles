@@ -5,7 +5,7 @@
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["backlight", "pulseaudio", "network", "idle_inhibitor", "battery", "clock"],
+    "modules-right": ["backlight", "pulseaudio", "network", "idle_inhibitor", "battery", "clock", "tray"],
     "sway/mode": {
         "format": " {}"
     },
