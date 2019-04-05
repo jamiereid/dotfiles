@@ -17,7 +17,8 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu_path | dmenu | xargs swaymsg exec
+#set $menu dmenu_path | dmenu | xargs swaymsg exec
+set $menu j4-dmenu-desktop --dmenu="rofi -dmenu -p 'run' -font 'Liberation Mono 10' -theme 'glue_pro_blue'" | xargs swaymsg exec
 
 ### Output configuration
 #
@@ -34,41 +35,30 @@ output * bg ~/Pictures/HTEhOYx.jpg fill
 output eDP-1 scale 2
 
 ### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+         timeout 300 '~/bin/lock' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep '~/bin/lock'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
 # Ducky external keyboard
 input 1241:661:USB-HID_Keyboard {
     xkb_options caps:escape
 }
 
-#Laptop inbuilt keyboard
+# Laptop inbuilt keyboard
 input 1:1:AT_Translated_Set_2_keyboard {
     xkb_options caps:escape
+}
+
+# Trackpad
+input 1739:30383:DELL07E6:00_06CB:76AF_Touchpad {
+    natural_scroll enabled
 }
 
 ### Key bindings
@@ -82,7 +72,7 @@ input 1:1:AT_Translated_Set_2_keyboard {
     bindsym $mod+Shift+q kill
 
     # start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+space exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -186,7 +176,7 @@ input 1:1:AT_Translated_Set_2_keyboard {
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    #bindsym $mod+space focus mode_toggle
 
     # move focus to the parent container
     bindsym $mod+a focus parent
