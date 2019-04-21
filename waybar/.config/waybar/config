@@ -1,11 +1,11 @@
 {
     "layer": "bottom",
-    "position": "top",
+    "position": "bottom",
     "height": 30,
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["backlight", "pulseaudio", "network", "battery", "clock", "tray"],
+    "modules-right": ["backlight", "pulseaudio", "idle_inhibitor", "network", "battery", "clock", "tray"],
     "sway/mode": {
         "format": "{}"
     },
@@ -64,5 +64,13 @@
         "format-icons": ["", ""],
         "on-scroll-down": "light -A 1",
         "on-scroll-up": "light -U 1"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": false
     }
 }

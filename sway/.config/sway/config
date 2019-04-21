@@ -25,7 +25,8 @@ set $menu rofi -show run -p 'run: ' -font 'Liberation Mono 10' -theme 'glue_pro_
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Pictures/HTEhOYx.jpg fill
+#output * bg ~/Pictures/HTEhOYx.jpg fill
+output * bg ~/Pictures/pYd0NCY.jpg fill
 
 #
 # Example configuration:
@@ -93,7 +94,7 @@ input 1739:30383:DELL07E6:00_06CB:76AF_Touchpad {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     # no border or title bar on new windows by default
-    new_window none
+    default_border none
 
     exec mako --anchor top-right
 
@@ -217,6 +218,11 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+#
+# Window Overrides:
+#
+for_window [title="TelegramDesktop"] floating enable
 
 #
 # Status Bar:
