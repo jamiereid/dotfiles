@@ -1,0 +1,19 @@
+defaults
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.config/msmtp/msmtp.log
+
+account personal
+host smtp.fastmail.com
+port 587
+from jamie@jre.id.au
+user jamiereid@fastmail.com.au
+passwordeval "pass email-personal"
+
+account default
+host smtp.fastmail.com
+port 587
+from jamie@jre.id.au
+user jamiereid@fastmail.com.au
+passwordeval "pass email-personal"

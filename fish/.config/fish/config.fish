@@ -27,6 +27,10 @@ else
     abbr -a vi 'vim'
 end
 
+if command -v neomutt > /dev/null
+    abbr -a mutt neomutt
+end
+
 # this is nice, and will come in handy, just need to fill out cases
 #function ssh
 #    switch $argv[1]

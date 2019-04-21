@@ -41,3 +41,6 @@
 
 [url "git@github.com:"]
     pushInsteadOf = "gh:"
+
+[sendemail]
+    smtpserver = /usr/bin/msmtp
