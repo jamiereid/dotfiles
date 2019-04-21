@@ -53,7 +53,7 @@ Plug 'godlygeek/tabular'             " text alignment
 Plug 'plasticboy/vim-markdown'
 
 " Snippets!
-Plug 'SirVer/ultisnips'              " text snippet engine
+"Plug 'SirVer/ultisnips'              " text snippet engine
 
 call plug#end()
 
@@ -69,7 +69,7 @@ if !has('gui_running')
 endif
 
 "let base16colorspace=256
-set background=dark
+"set background=dark
 "colorscheme base16-atelier-dune
 colorscheme naysayer
 "hi Normal ctermbg=NONE
@@ -130,9 +130,9 @@ let g:go_fmt_command = "goimports"
 let g:go_bin_path = expand("~/dev/go/bin")
 
 " Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " =============================================================================
 " # Editor settings
