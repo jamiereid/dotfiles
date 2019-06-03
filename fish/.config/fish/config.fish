@@ -43,11 +43,11 @@ end
 #    end
 #end
 
-if command -v ct > /dev/null
-    function ssh
-        /usr/bin/ssh $argv | ct
-    end
-end
+#if command -v ct > /dev/null
+#    function ssh
+#        /usr/bin/ssh $argv | ct
+#    end
+#end
 
 function remote_alacritty
     # https://gist.github.com/costis/5135502
@@ -107,9 +107,13 @@ function is_status_okay
     [ $status = 0 ]
 end
 
+# https://fishshell.com/docs/current/index.html#variables-color
+set fish_color_command purple
+set fish_color_param blue
+
 function fish_prompt
   echo
-  set_color blue
+  #set_color black -b purple
   echo -n (prompt_pwd)
 
   if set -q SSH_TTY
@@ -122,7 +126,7 @@ function fish_prompt
   end
 
   if is_status_okay
-      set_color green
+      set_color normal
   else
       set_color red
   end
