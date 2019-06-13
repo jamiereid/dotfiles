@@ -108,17 +108,17 @@ function is_status_okay
 end
 
 # https://fishshell.com/docs/current/index.html#variables-color
-set fish_color_command purple
-set fish_color_param blue
+#set fish_color_command purple
+#set fish_color_param blue
 
 function fish_prompt
   echo
-  #set_color black -b purple
+  set_color blue
   echo -n (prompt_pwd)
 
   if set -q SSH_TTY
     set_color yellow
-    echo -n (whoami)
+    echo -n " "(whoami)
     set_color normal
     echo -n '@'
     set_color blue
@@ -126,7 +126,7 @@ function fish_prompt
   end
 
   if is_status_okay
-      set_color normal
+      set_color green
   else
       set_color red
   end
