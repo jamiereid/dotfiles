@@ -62,7 +62,8 @@ end
 set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate 'yes'
-set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_showupstream 'verbose name'
+set __fish_git_prompt_describe_style 'branch'
 set __fish_git_prompt_color_upstream_ahead green
 set __fish_git_prompt_color_downstream_behind red
 
@@ -112,17 +113,21 @@ end
 #set fish_color_param blue
 
 function fish_prompt
-  echo
-  set_color blue
-  echo -n (prompt_pwd)
-
   if set -q SSH_TTY
     set_color yellow
-    echo -n " "(whoami)
-    set_color normal
-    echo -n '@'
+    echo -n "@"(hostname)":"
+  end
+
+  set_color white
+  echo -n (prompt_pwd)
+
+  set_color brown
+  printf '%s' (__fish_git_prompt ':%s')
+
+  if set -q VIRTUAL_ENV
     set_color blue
-    echo -n (hostname)" "
+    echo -n ":"(basename "$VIRTUAL_ENV")
+    set_color normal
   end
 
   if is_status_okay
@@ -131,19 +136,11 @@ function fish_prompt
       set_color red
   end
   echo -n " » "
-  set_color normal
+  #
 end
 
 function fish_right_prompt
-  set_color brown
-  printf '%s ' (__fish_git_prompt)
-
-  if set -q VIRTUAL_ENV
-    echo -n " in "
-    echo -n -s (set_color blue) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
-  end
 end
-
 
 function fish_greeting
   echo
