@@ -12,13 +12,13 @@ call plug#begin()
 
 " VIM enhancements
 "Plug 'justinmk/vim-sneak'           " not loaded yet, but a possible replacement for EasyMotion
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'            " (c)hange(s)urround etc
 Plug 'haya14busa/incsearch.vim'      " better incremental searching 
 
 " GUI enhancements
-Plug 'chriskempson/base16-vim'       " theme
+"Plug 'chriskempson/base16-vim'       " theme
 Plug 'itchyny/lightline.vim'         " statusline plugin
 Plug 'airblade/vim-gitgutter'        " show git status near linum
 Plug 'lilydjwg/colorizer'            " color hex codes and color names
@@ -53,7 +53,7 @@ Plug 'godlygeek/tabular'             " text alignment
 Plug 'plasticboy/vim-markdown'
 
 " Snippets!
-"Plug 'SirVer/ultisnips'              " text snippet engine
+Plug 'SirVer/ultisnips'              " text snippet engine
 
 call plug#end()
 
@@ -128,12 +128,12 @@ inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"
 let g:go_play_open_browser = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
-let g:go_bin_path = expand("~/dev/go/bin")
+let g:go_bin_path = expand("~/go/bin")
 
 " Ultisnips
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " =============================================================================
 " # Editor settings
@@ -175,7 +175,7 @@ set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp
 "set softtabstop=8
 set shiftwidth=4           " 1 tab == 4 spaces
 set tabstop=4              " 1 tab == 4 spaces
-"set noexpandtab
+"set noexpandtabaccounts reactivated and details send to Dom via internal email.
 set expandtab              " Use spaces instead of tabs
 set smarttab               " be smart when using tabs ;)
 
@@ -339,6 +339,11 @@ if has("autocmd")
   au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+" autoload mytodo for specific files
+autocmd BufNewFile,BufRead todo.txt set ft=mytodo
+
+" markdown settings
+autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=2
 
 "" custom highlighting rules
 "match ErrorMsg '\%>80v.\+'

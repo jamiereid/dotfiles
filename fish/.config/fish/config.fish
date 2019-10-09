@@ -8,6 +8,9 @@ abbr -a ga 'git add'
 abbr -a gs 'git status'
 complete --command g --wraps git
 
+abbr -a s 'ssh -l jreid'
+abbr -a rs 'ssh -l root'
+
 # auto load tmux
 if status --is-interactive
     tmux ^ /dev/null; and exec true

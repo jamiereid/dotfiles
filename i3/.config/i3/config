@@ -44,7 +44,7 @@ new_window              pixel $bordersize
 #######################################################################
 
 bindsym $mod+space      exec dmenu_run
-bindsym $mod+Return     exec alacritty
+bindsym $mod+Return     exec xfce4-terminal
 
 #######################################################################
 #                             i3 bindings                             #
