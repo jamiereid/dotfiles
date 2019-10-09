@@ -1,4 +1,4 @@
-" Fish doesn't play all that well with others
+"Fish doesn't play all that well with others
 set shell=/bin/bash
 let mapleader = "\<Space>"
 
@@ -43,6 +43,7 @@ Plug 'roxma/nvim-yarp'               " helper plugin for ncm2
 Plug 'ncm2/ncm2-bufword'             " words from current buffer
 Plug 'ncm2/ncm2-tmux'                " words from other tmux panes
 Plug 'ncm2/ncm2-path'                " path completion
+Plug 'ncm2/ncm2-ultisnips'           " work with ultisnips
 
 " Syntactic language support
 Plug 'cespare/vim-toml'
@@ -121,8 +122,8 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 " tab to select
 " and don't hijack my enter key
-inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
-inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+"inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
+"inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Golang
 let g:go_play_open_browser = 0
@@ -154,9 +155,15 @@ set textwidth=80          " set width to 80 columns
 set linebreak             " break long lines by word, not chars
 
 "let g:sneak#s_next = 1
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 1
+let g:vim_markdown_auto_insert_bullets = 1
 let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_new_list_item_indent = 2  " default is 4
+let g:vim_markdown_folding_level = 6
+"let g:vim_markdown_override_foldtext = 0
+"let g:vim_markdown_folding_style_pythonic = 1
+nnoremap <leader>mt :TableFormat<CR>
+nnoremap <leader>mh :Toc<CR>
 
 " Sane splits
 set splitright
@@ -225,6 +232,9 @@ set showcmd                     " Show (partial) command in status line.
 set mouse=a                     " Enable mouse usage (all modes) in terminals
 set shortmess+=c                " don't give |ins-completion-menu| messages.
 
+if executable('ag')
+    set grepprg=ag\ --nocolor\ --noheading\ 
+endif
 
 " =============================================================================
 " # Keyboard shortcuts
@@ -240,8 +250,8 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Folding shortcuts
-" nnoremap <space> za
-" vnoremap <space> zf
+nnoremap <space>f za
+vnoremap <space>f zf
 
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
@@ -322,6 +332,19 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+"" toggle line numbers
+nnoremap <leader>l :set number! relativenumber!<CR>
+
+"" no highlights
+nnoremap <leader>hl :nohl<CR>
+
+"" pull out TODOs
+""" Needs work, this is very much aimed purely at the way I do meeting notes atm
+command! -bar -nargs=1 FindTODOsIn silent grep \^TODO <q-args> | redraw! | cw
+nnoremap <leader>tt :FindTODOsIn %:p<CR>
+nnoremap <leader>ta :FindTODOsIn %:p:h<CR>
+autocmd FileType qf wincmd L
+
 " =============================================================================
 " # Autocommands
 " =============================================================================
@@ -343,7 +366,7 @@ endif
 autocmd BufNewFile,BufRead todo.txt set ft=mytodo
 
 " markdown settings
-autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=2
+autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=2 textwidth=0 colorcolumn=0
 
 "" custom highlighting rules
 "match ErrorMsg '\%>80v.\+'
