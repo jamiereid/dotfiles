@@ -16,6 +16,7 @@ call plug#begin()
 "Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'            " (c)hange(s)urround etc
 Plug 'haya14busa/incsearch.vim'      " better incremental searching 
+Plug 'junegunn/vim-easy-align'
 
 " GUI enhancements
 "Plug 'chriskempson/base16-vim'       " theme
@@ -164,6 +165,7 @@ let g:vim_markdown_folding_level = 6
 "let g:vim_markdown_folding_style_pythonic = 1
 nnoremap <leader>mt :TableFormat<CR>
 nnoremap <leader>mh :Toc<CR>
+nnoremap <leader>pp :set paste<CR>
 
 " Sane splits
 set splitright
@@ -345,6 +347,12 @@ nnoremap <leader>tt :FindTODOsIn %:p<CR>
 nnoremap <leader>ta :FindTODOsIn %:p:h<CR>
 autocmd FileType qf wincmd L
 
+"Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " =============================================================================
 " # Autocommands
 " =============================================================================
@@ -383,6 +391,7 @@ autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=2 textwidth=0 colorcolu
 highlight TagOrange guifg=#cc7700
 highlight TagGrey   guifg=#aeaeae
 highlight TagRed    guifg=#aa0000
+highlight TagGreen  guifg=#60d952
 augroup myHighlights
     autocmd!
     autocmd syntax match TagOrange /\v[@]<(Todo|Incomplete|Cleanup|Factor|Robustness|Hardcoded)/ containedin=.*Comment,vimCommentTitle
@@ -392,6 +401,13 @@ augroup end
 
 highlight link myHighlights Todo
 
+"" markdown additional highlights
+augroup ft_markdown
+    autocmd!
+    autocmd Syntax markdown syn match TagOrange /^TODO/ containedin=ALL
+    autocmd Syntax markdown syn match TagGrey   /\v^(QUESTION|DECISION)/ containedin=ALL
+    autocmd Syntax markdown syn match TagGreen  /^DONE/ containedin=ALL
+augroup end
 
 "" MyTodo overrides
 hi todoHeading      guifg=#FFFFFF
