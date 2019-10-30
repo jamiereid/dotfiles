@@ -42,5 +42,8 @@
 [url "git@github.com:"]
     pushInsteadOf = "gh:"
 
+[url "git@ssh.dev.azure.com:v3/ACTGovernment/NCS/"]
+    insteadOf = "work:"
+
 [sendemail]
     smtpserver = /usr/bin/msmtp
