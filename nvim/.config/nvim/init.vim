@@ -53,6 +53,7 @@ Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'             " text alignment
 Plug 'plasticboy/vim-markdown'
+Plug 'momota/cisco.vim'
 
 " Snippets!
 Plug 'SirVer/ultisnips'              " text snippet engine
