@@ -1,6 +1,8 @@
 # fix rustup not adding path for fish (https://github.com/rust-lang/rustup.rs/issues/478)
 set PATH $HOME/.cargo/bin $HOME/bin $PATH
 
+cd $HOME
+
 abbr -a g git
 abbr -a gco 'git checkout'
 abbr -a gc 'git commit -m "'
@@ -13,7 +15,7 @@ abbr -a rs 'ssh -l root'
 
 # auto load tmux
 if status --is-interactive
-    tmux ^ /dev/null; and exec true
+    tmux new-session -A -s main 2> /dev/null; and exec true
 end
 
 if command -v exa > /dev/null
