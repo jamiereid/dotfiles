@@ -1,0 +1,9 @@
+#!/bin/bash
+git diff --cached --diff-filter=AM `git status -s | grep -v git/.githooks/pre-commit | cut -b4-` | grep -q nocheckin
+if [ $? -eq 0 ]
+then 
+  echo nocheckin comment detected
+  exit 1
+fi
+
+
