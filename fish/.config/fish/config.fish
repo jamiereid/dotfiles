@@ -14,7 +14,7 @@ abbr -a s 'ssh -l jreid'
 abbr -a rs 'ssh -l root'
 
 # auto load tmux
-if status --is-interactive
+if status --is-interactive; and not string match -q "tmux*" $TERM
     tmux new-session -A -s main 2> /dev/null; and exec true
 end
 
