@@ -1,0 +1,10 @@
+#!/bin/sh
+while true
+do
+    time=$(date +"%A %Y-%m-%d %I:%M %p")
+    time="$time $(date -u +"(%H:%M UTC)")"
+
+    printf "%s" "${time}"
+    printf "\n"
+    sleep 10
+done

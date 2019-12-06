@@ -13,8 +13,8 @@ complete --command g --wraps git
 abbr -a s 'ssh -l jreid'
 abbr -a rs 'ssh -l root'
 
-# auto load tmux
-if status --is-interactive; and not string match -q "tmux*" $TERM
+# auto load tmux unless we're tty1
+if status --is-interactive; and not string match -q "tmux*" $TERM; and not string match -eq "/dev/tty1" (tty)
     tmux new-session -A -s main 2> /dev/null; and exec true
 end
 
