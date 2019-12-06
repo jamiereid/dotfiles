@@ -47,6 +47,9 @@
 [url "git@ssh.dev.azure.com:v3/ACTGovernment/NCS/"]
     insteadOf = "work:"
 
+[url "git@git.sr.ht:~"]
+    insteadOf = "srht:"
+
 [sendemail]
     smtpserver = /usr/bin/msmtp
 [difftool "sourcetree"]

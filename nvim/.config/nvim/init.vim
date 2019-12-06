@@ -54,6 +54,8 @@ Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'             " text alignment
 Plug 'plasticboy/vim-markdown'
 Plug 'momota/cisco.vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'lepture/vim-velocity'
 
 " Snippets!
 Plug 'SirVer/ultisnips'              " text snippet engine
@@ -306,6 +308,8 @@ command! -bang -nargs=? -complete=dir Files
 
 " Open new file adjacent to current file
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+" new buffer that is not a file
+nnoremap <leader>n :enew<CR>i;; walrus<cr><cr><esc>
 
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
@@ -376,6 +380,7 @@ autocmd BufNewFile,BufRead todo.txt set ft=mytodo
 
 " markdown settings
 autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=2 textwidth=0 colorcolumn=0
+nnoremap <leader>wt :setlocal textwidth=80 colorcolumn=80<CR>
 
 "" custom highlighting rules
 "match ErrorMsg '\%>80v.\+'
