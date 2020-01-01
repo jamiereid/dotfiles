@@ -25,7 +25,7 @@ set $menu rofi -show run -p 'run: ' -font 'Liberation Mono 10' -theme 'glue_pro_
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/pics/20264606661_0a536f86b0_o.jpg fill
+output * bg ~/pics/9PPysSw.jpg fill
 
 #
 # Example configuration:
@@ -50,6 +50,10 @@ exec swayidle -w \
 ### Input configuration
 # Ducky external keyboard
 input 1241:661:USB-HID_Keyboard {
+    xkb_options caps:escape
+}
+
+input 1133:49977:Logitech_Pro_Gaming_Keyboard {
     xkb_options caps:escape
 }
 
@@ -102,8 +106,8 @@ input 1739:30383:DELL07E6:00_06CB:76AF_Touchpad {
     ## Screenshots via grim and slurp
     ##
 
-    bindsym $mod+Print exec /usr/bin/grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-    bindsym $mod+Shift+Print exec /usr/bin/grim -g "$(/usr/bin/slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+    bindsym $mod+Print exec /usr/bin/grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/pics/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+    bindsym $mod+Shift+Print exec /usr/bin/grim -g "$(/usr/bin/slurp)" ~/pics/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 
 
 #
