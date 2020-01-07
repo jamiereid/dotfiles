@@ -12,6 +12,8 @@ set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow'
 set -gx FZF_CTRL_T_COMMAND 'fd --type file --follow'
 set -gx FZF_DEFAULT_OPTS '--height 20%'
 
+set fish_greeting
+
 # auto load tmux unless we're already in tmux, or on tty1
 if status --is-interactive; \
 and not string match -q "tmux*" $TERM; \
@@ -101,14 +103,6 @@ function fish_prompt
   echo -n " » "
 end
 
-function fish_greeting
-  echo
-  echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
-  echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
-  echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
-  echo
-  set_color normal
-end
 
 if test -e ~/.config/fish/(hostname).fish
     source ~/.config/fish/(hostname).fish
