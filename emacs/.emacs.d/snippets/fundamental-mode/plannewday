@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: newday
-# key: <nd
-# --
-
-= `(downcase (format-time-string "%a %b %d" (current-time)))` ===================================
