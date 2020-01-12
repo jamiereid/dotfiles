@@ -25,8 +25,7 @@ set $menu rofi -show run -p 'run: ' -font 'Liberation Mono 10' -theme 'glue_pro_
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#output * bg ~/Pictures/HTEhOYx.jpg fill
-output * bg ~/Pictures/pYd0NCY.jpg fill
+output * bg ~/pics/9PPysSw.jpg fill
 
 #
 # Example configuration:
@@ -35,6 +34,7 @@ output * bg ~/Pictures/pYd0NCY.jpg fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 output eDP-1 scale 2
+output DP-1 pos 0 0 res 3440 1440
 
 ### Idle configuration
 exec swayidle -w \
@@ -50,6 +50,10 @@ exec swayidle -w \
 ### Input configuration
 # Ducky external keyboard
 input 1241:661:USB-HID_Keyboard {
+    xkb_options caps:escape
+}
+
+input 1133:49977:Logitech_Pro_Gaming_Keyboard {
     xkb_options caps:escape
 }
 
@@ -102,8 +106,8 @@ input 1739:30383:DELL07E6:00_06CB:76AF_Touchpad {
     ## Screenshots via grim and slurp
     ##
 
-    bindsym $mod+Print exec /usr/bin/grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-    bindsym $mod+Shift+Print exec /usr/bin/grim -g "$(/usr/bin/slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+    bindsym $mod+Print exec /usr/bin/grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/pics/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+    bindsym $mod+Shift+Print exec /usr/bin/grim -g "$(/usr/bin/slurp)" ~/pics/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 
 
 #
@@ -228,8 +232,29 @@ for_window [title="TelegramDesktop"] floating enable
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+
+set $blue #285577
+set $gray #282828
+set $red  #900000
+
 bar {
-    swaybar_command waybar
+    #swaybar_command waybar
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command custom_statusbar
+
+    colors {
+        background #1F1F1F
+        inactive_workspace $gray $gray #888888
+        active_workspace $gray $gray #ffffff
+        urgent_workspace $red $red #ffffff
+        focused_workspace $blue $blue #ffffff
+        urgent_workspace $red $red #ffffff
+    }
 }
+
+seat seat0 hide_cursor 5000
 
 include /etc/sway/config.d/*
