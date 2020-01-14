@@ -314,7 +314,7 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " toggle line numbers
-nnoremap <leader>l :set number! relativenumber!<CR>
+nnoremap <leader>l :set number! relativenumber!<CR>:GitGutterBufferToggle<CR>
 
 " pull out TODOs
 "" Needs work, this is very much aimed purely at the way I do meeting notes atm
@@ -355,7 +355,7 @@ autocmd BufNewFile,BufRead todo.txt set ft=mytodo
 autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=2 textwidth=0 colorcolumn=0
 
 " Follow Rust code style rules
-au Filetype rust source ~/.config/nvim/scripts/spacetab.vim
+"au Filetype rust source ~/.config/nvim/scripts/spacetab.vim
 au Filetype rust set colorcolumn=100
 
 " Custom @Tag highlights
