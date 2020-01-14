@@ -25,7 +25,7 @@ set $menu rofi -show run -p 'run: ' -font 'Liberation Mono 10' -theme 'glue_pro_
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/pics/9PPysSw.jpg fill
+output * bg `wallpaper` fill
 
 #
 # Example configuration:
