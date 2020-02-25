@@ -3,7 +3,7 @@
 	email = jamie@jre.id.au
 
 [core]
-    editor = vim
+    editor = nvim
     pager = less -+$LESS -FRX
     hooksPath = ~/.githooks
     excludesfile = /Users/jam/.gitignore_global
