@@ -104,6 +104,6 @@ function fish_prompt
 end
 
 
-if test -e ~/.config/fish/(hostname).fish
-    source ~/.config/fish/(hostname).fish
+if test -e ~/.config/fish/(uname -n).fish
+    source ~/.config/fish/(uname -n).fish
 end
