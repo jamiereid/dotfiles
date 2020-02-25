@@ -3,8 +3,12 @@ while true
 do
     time=$(date +"%A %Y-%m-%d %I:%M %p")
     time="$time $(date -u +"(%H:%M UTC)")"
+    batstatus=$(cat /sys/class/power_supply/BAT0/status)
 
-    printf "%s" "${time}"
-    printf "\n"
-    sleep 10
+    if [ "$batstatus" = "Discharging" ]; then
+        printf "%s ⋯ %s\n" "${time}" "$(batpct)"
+    else
+        printf "%s\n" "${time}"
+    fi
+    sleep 60
 done

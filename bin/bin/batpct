@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+with open("/sys/class/power_supply/BAT0/charge_full") as f:
+    full = float(f.read())
+with open("/sys/class/power_supply/BAT0/charge_now") as f:
+    now = float(f.read())
+print(str(int(now / full * 100)) + "%")
