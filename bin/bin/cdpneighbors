@@ -1,0 +1,185 @@
+#!/usr/bin/perl -w
+
+#########################################
+#
+#  cdpneighbors.pl - Interrogate device for CDP neighbors
+#  v0.1 11/01/2013
+#
+#  To Do:
+#
+#  Changelog:
+#  2013/01/11 10:27 jrr - creation
+#  2013/01/14 16:00 jrr - added generate and sorting
+#
+#########################################
+
+######################################################################## imports
+
+use warnings;
+use strict;
+use Getopt::Long;
+use Net::SNMP;
+use Text::ASCIITable;
+
+########################################################## globals and constants
+
+use constant SNMP_VERSION         => '2';
+use constant OID_CDPCACHEDEVICEID => '.1.3.6.1.4.1.9.9.23.1.2.1.1.6';
+use constant OID_IFDESCR          => '.1.3.6.1.2.1.2.2.1.2';
+
+################################################################ other variables
+
+my ($opt_host,$opt_SNMPcommunity);
+my $opt_help      = 0;
+my $opt_csv       = 0;
+my $opt_generate  = 0;
+my $opt_sort      = 'i';
+my %cdpCache;
+my %ifIndex;
+
+########################################################################### main
+
+## get options from the cli
+GetOptions  (   'h=s'         => \$opt_host,
+                'c=s'         => \$opt_SNMPcommunity,
+                'x'           => \$opt_csv,
+                'help|?'      => \$opt_help,            # $opt_help will be 1|0
+                's=s'         => \$opt_sort,
+                'g'           => \$opt_generate,
+            );
+
+
+## check options and preceed accordingly
+usage() if (!defined($opt_host) || !defined($opt_SNMPcommunity) || $opt_help == 1);
+
+## fix sort
+if ( lc($opt_sort) ne 'i' && lc($opt_sort) ne 'n' )
+{
+
+  # print "opt_sort is $opt_sort ... fixing\n";
+  $opt_sort = 'i';
+}
+
+## open SNMP connection
+my ($SNMPconn, $SNMPerr) = Net::SNMP->session(  -hostname  => $opt_host,
+                                                -version   => &SNMP_VERSION,
+                                                -community => $opt_SNMPcommunity,
+                                             );
+
+if (!defined $SNMPconn)
+{
+  printf "ERROR: %s.\n", $SNMPerr;
+  exit(1);
+}
+
+my $result = $SNMPconn->get_table(-baseoid => &OID_CDPCACHEDEVICEID);
+
+foreach my $key (keys %{$result})
+{
+  my $key2 = $key;
+  $key2 =~ s/${\(OID_CDPCACHEDEVICEID)}\.//g;   # http://www.perlmonks.org/?node_id=104059
+  my $key3 = (split(/\./,$key2))[0];
+  $cdpCache{$key3} = $result->{$key}
+}
+
+$result = $SNMPconn->get_table(-baseoid => &OID_IFDESCR);
+
+$SNMPconn->close();
+
+foreach my $key (keys %{$result})
+{
+  my $key2 = $key;
+  $key2 =~ s/${\(OID_IFDESCR)}\.//g;   # http://www.perlmonks.org/?node_id=104059
+  my $key3 = (split(/\./,$key2))[0];
+  $ifIndex{$key3} = $result->{$key}
+}
+  
+if (lc($opt_sort) eq 'n')    # sort by neighbors
+{
+  #print "sorting by n\n";
+  if ($opt_csv)
+  {  #output as csv
+    #print "opt_sort is $opt_sort \n";
+    foreach my $key (sort { $cdpCache{$a} cmp $cdpCache{$b} } keys %cdpCache)
+    {
+      print $ifIndex{$key} . "," . $cdpCache{$key} . "\n";
+    }
+    exit(0) if !$opt_generate;
+  }
+  else # pretty table
+  {
+    my $t = Text::ASCIITable->new( { headingText => $opt_host });
+
+    $t->setCols('Interface','Neighbor');
+    my @sorted = sort { $cdpCache{$a} cmp $cdpCache{$b} } keys %cdpCache;
+    # print "opt_sort is $opt_sort \n";
+    foreach my $key (@sorted)
+    {
+      $t->addRow($ifIndex{$key},$cdpCache{$key});
+    }
+    print $t;
+    exit(0) if !$opt_generate;
+  }
+}
+else     #sort by interface
+{
+  #print "sorting by i\n";
+  if ($opt_csv)
+  {  #output as csv
+    foreach my $key (sort keys %cdpCache)
+    {
+      print $ifIndex{$key} . "," . $cdpCache{$key} . "\n";
+    }
+    exit(0) if !$opt_generate;
+  }
+  else # pretty table
+  {
+    my $t = Text::ASCIITable->new( { headingText => $opt_host });
+
+    $t->setCols('Interface','Neighbor');
+    foreach my $key (sort keys %cdpCache)
+    {
+      $t->addRow($ifIndex{$key},$cdpCache{$key});
+    }
+    print $t;
+    exit(0) if !$opt_generate;
+  }
+}
+
+## GENERATE CONFIG
+if ($opt_generate)
+{
+  print "\n\n! Start config\n";
+  print "conf t\n";
+  foreach my $key (sort keys %ifIndex)
+  {
+    if (exists $cdpCache{$key})
+    {
+      print "  int " . $ifIndex{$key} . "\n";
+      print "    desc " . (split(/\./,$cdpCache{$key}))[0] . "\n";
+    }
+  }
+  print "! End config\n\n";
+  exit(0);
+}
+
+
+########################################################################### subs
+
+sub usage
+{
+  print STDERR <<EOM;
+
+Usage: cdpneighbors.pl [OPTION]...
+Interrogate device through SNMP for it's CDP neighbors.
+
+    -h                The hostname or IP address to query.
+    -c                SNMP Community string.
+    -x                Display as CSV.
+    -s [i|n]          Sort by [i]nterface (default) or [n]eighbor.
+    -g                Generate config to update interface descriptions.
+    --help            Show this information.
+
+EOM
+  exit(0);
+}
