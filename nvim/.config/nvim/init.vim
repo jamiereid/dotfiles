@@ -26,7 +26,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
-"Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'             " text alignment
 Plug 'plasticboy/vim-markdown'
@@ -163,7 +163,7 @@ let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/
 let g:go_play_open_browser = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
-let g:go_bin_path = expand("~/dev/go/bin")
+"let g:go_bin_path = expand("~/dev/go/bin")
 
 "" vim-markdown settings
 let g:vim_markdown_new_list_item_indent = 1
