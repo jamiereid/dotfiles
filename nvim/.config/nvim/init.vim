@@ -352,7 +352,7 @@ endif
 autocmd BufNewFile,BufRead todo.txt set ft=mytodo
 
 " markdown settings
-autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=2 textwidth=0 colorcolumn=0
+autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0
 
 " Follow Rust code style rules
 "au Filetype rust source ~/.config/nvim/scripts/spacetab.vim
