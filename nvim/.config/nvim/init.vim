@@ -37,6 +37,8 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 " Snippets!
 " Plug 'SirVer/ultisnips'              " text snippet engine
 
+Plug 'chriskempson/base16-vim'        " base16 themes
+
 call plug#end()
 
 
@@ -51,7 +53,12 @@ if !has('gui_running')
     set t_Co=256
     set termguicolors
 endif
-colorscheme naysayer
+" colorscheme naysayer
+set background=dark
+"colorscheme base16-gruvbox-dark-hard
+colorscheme base16-atelier-dune
+hi Normal ctermbg=NONE
+
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
