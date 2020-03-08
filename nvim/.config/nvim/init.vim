@@ -53,11 +53,11 @@ if !has('gui_running')
     set t_Co=256
     set termguicolors
 endif
-" colorscheme naysayer
-set background=dark
+colorscheme naysayer
+"set background=dark
 "colorscheme base16-gruvbox-dark-hard
-colorscheme base16-atelier-dune
-hi Normal ctermbg=NONE
+"colorscheme base16-atelier-dune
+"hi Normal ctermbg=NONE
 
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
