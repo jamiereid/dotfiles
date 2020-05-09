@@ -79,27 +79,23 @@ end
 
 function fish_prompt
   if set -q SSH_TTY
-    set_color yellow
+    set_color purple
     echo -n "@"(hostname)":"
   end
 
-  set_color white
+  set_color black
   echo -n (prompt_pwd)
 
-  set_color brown
+  set_color blue
   printf '%s' (__fish_git_prompt ':%s')
 
   if set -q VIRTUAL_ENV
-    set_color blue
+    set_color green
     echo -n ":"(basename "$VIRTUAL_ENV")
     set_color normal
   end
 
-  if is_status_okay
-      set_color green
-  else
-      set_color red
-  end
+  set_color --bold black
   echo -n " » "
 end
 
