@@ -53,7 +53,9 @@ if !has('gui_running')
     set t_Co=256
     set termguicolors
 endif
-colorscheme naysayer
+set background=light
+colorscheme acme " https://github.com/plan9-for-vimspace/acme-colors
+"colorscheme naysayer
 "set background=dark
 "colorscheme base16-gruvbox-dark-hard
 "colorscheme base16-atelier-dune
@@ -100,6 +102,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \ },
+      \ 'colorscheme': 'solarized',
 \ }
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
@@ -237,13 +240,18 @@ set diffopt+=iwhite       " No whitespace in vimdiff
 " Make diffing better: https://vimways.org/2018/the-power-of-diff/
 set diffopt+=algorithm:patience
 set diffopt+=indent-heuristic
-set colorcolumn=80        " and give me a colored column
+"set colorcolumn=80        " and give me a colored column
 set showcmd               " Show (partial) command in status line.
 set mouse=a               " Enable mouse usage (all modes) in terminals
 set cmdheight=2           " better display for messages #coc wants this
 set shortmess+=c          " don't give |ins-completion-menu| messages. #coc wants this
 set signcolumn=yes        " always show signcolumn (where gitgutter is too) #coc wants this
 
+"" color column stuff
+" acme theme
+highlight ColorColumn ctermbg=230, guibg=#ffffca
+" warning line at 80, danger at 120+
+let &colorcolumn="80,".join(range(120,999),",")
 
 """ Keybindings
 map <C-p> :Files<CR>
@@ -394,14 +402,14 @@ augroup ft_markdown
 augroup end
 
 "" MyTodo overrides
-hi todoHeading      guifg=#FFFFFF
-hi todoSubHeading   guifg=#C3C7B5
+hi todoHeading      gui=bold
+hi todoSubHeading   gui=bold
 hi todoSubTask      guifg=#676956
-hi todoDeemphasize  guifg=#535B4c
-hi todoPlus         guifg=#60D952
-hi todoAt           guifg=#52C3A8
-hi todoBang         guifg=#CC7700
-hi todoPound        guifg=#9370DB
+hi todoDeemphasize  guifg=gray gui=italic
+hi todoPlus         guifg=green
+hi todoAt           guifg=blue
+hi todoBang         guifg=red
+hi todoPound        guifg=purple
 
 hi def link deemphasizeMatch  todoDeemphasize
 hi def link headingMatch      todoHeading
