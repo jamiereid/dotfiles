@@ -17,7 +17,8 @@ set fish_greeting
 # auto load tmux unless we're already in tmux, or on tty1
 if status --is-interactive; \
 and not string match -q "tmux*" $TERM; \
-and not string match -eq "/dev/tty1" (tty)
+and not string match -eq "/dev/tty1" (tty); \
+or set -q WSLENV
     tmux new-session -A -s main 2> /dev/null; and exec true
 end
 
