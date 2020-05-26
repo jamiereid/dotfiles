@@ -1,12 +1,12 @@
 # fix rustup not adding path for fish (https://github.com/rust-lang/rustup.rs/issues/478)
 
 # hack for wsl?
-cd $HOME
+#cd $HOME
 
 set -gx EDITOR vim
 set -gx LANG en_US.UTF-8
 set -gx GOPATH ~/.local/share/go/
-set -gx PATH ~/bin ~/.cargo/bin $GOPATH/bin $PATH
+set -gx PATH ~/.local/bin ~/.cargo/bin $GOPATH/bin $PATH
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow'
 set -gx FZF_CTRL_T_COMMAND 'fd --type file --follow'
