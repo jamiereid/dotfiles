@@ -253,6 +253,14 @@ highlight ColorColumn ctermbg=230, guibg=#ffffca
 " warning line at 80, danger at 120+
 let &colorcolumn="80,".join(range(120,999),",")
 
+"" git-gutter
+highlight clear SignColumn
+highlight GitGutterAdd    guifg=#11ab00
+highlight GitGutterChange guifg=#9854ff
+highlight GitGutterDelete guifg=#ff4053
+
+
+
 """ Keybindings
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
