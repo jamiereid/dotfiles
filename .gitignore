@@ -4,10 +4,10 @@ fish/.config/fish/fish_variables
 nvim/.config/nvim/.netrwhist
 nvim/.config/nvim/plugged/
 fish/.config/fish/functions/fish_user_key_bindings.fish
-bin/bin/clogin
-bin/bin/ctlogin
-bin/bin/tlogin
-bin/bin/exercism
+bin/.local/bin/clogin
+bin/.local/bin/ctlogin
+bin/.local/bin/tlogin
+bin/.local/bin/exercism
 fish/.config/fish/functions/fzf_key_bindings.fish
 xfce4/.config/xfce4/terminal/accels.scm
 

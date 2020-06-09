@@ -1,8 +1,5 @@
 # fix rustup not adding path for fish (https://github.com/rust-lang/rustup.rs/issues/478)
 
-# hack for wsl?
-#cd $HOME
-
 set -gx EDITOR vim
 set -gx LANG en_US.UTF-8
 set -gx GOPATH ~/.local/share/go/
