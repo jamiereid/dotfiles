@@ -1,0 +1,11 @@
+#!/bin/sh
+
+url="$1"
+
+if [ -z "$2" ]; then
+    file=${url##*/}
+else
+    file="$2"
+fi
+
+curl "$url" -Lo "$file"
