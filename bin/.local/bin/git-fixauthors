@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#read -p 'Email address to replace (OLDEMAIL): ' OLDEMAIL
+#read -p 'Author Name: ' NEWNAME
+#read -p 'Email address to use (NEWEMAIL): ' NEWEMAIL
+
+git filter-branch --env-filter '
+WRONG_EMAIL="jamie@jre.id.au"
+NEW_NAME="Jamie Reid"
+NEW_EMAIL="jamie.reid@act.gov.au"
+
+if [ "$GIT_COMMITTER_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$NEW_NAME"
+    export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$NEW_NAME"
+    export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+fi
+' --tag-name-filter cat -- --branches --tags
