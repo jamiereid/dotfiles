@@ -33,6 +33,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'momota/cisco.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 "Plug 'lepture/vim-velocity'
+Plug 'ekalinin/Dockerfile.vim'
 
 " Snippets!
 " Plug 'SirVer/ultisnips'              " text snippet engine
