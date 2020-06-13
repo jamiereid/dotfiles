@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 git diff --cached --diff-filter=AM `git status -s | grep -v git/.githooks/pre-commit | cut -b4-` | grep -q nocheckin
 if [ $? -eq 0 ]
 then 
