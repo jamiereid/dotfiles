@@ -54,14 +54,16 @@ if !has('gui_running')
     set t_Co=256
     set termguicolors
 endif
-set background=light
-colorscheme acme " https://github.com/plan9-for-vimspace/acme-colors
-"colorscheme naysayer
-"set background=dark
+
+"set background=light
+"colorscheme acme " https://github.com/plan9-for-vimspace/acme-colors
+
 "colorscheme base16-gruvbox-dark-hard
 "colorscheme base16-atelier-dune
 "hi Normal ctermbg=NONE
 
+set background=dark
+colorscheme naysayer
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
@@ -99,11 +101,11 @@ let g:sneak#s_next = 1        " enable 'clever-s' (s to move to next match)
 " @TODO: maybe a customscheme?
 " https://github.com/itchyny/lightline.vim/tree/master/autoload/lightline/colorscheme
 """" Add %{FugitiveStatusline()} to 'statusline' to get an indicator with the current branch in your statusline.
+""""  acme colors want \ 'colorscheme': 'solarized',
 let g:lightline = {
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \ },
-      \ 'colorscheme': 'solarized',
 \ }
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
@@ -250,7 +252,8 @@ set signcolumn=yes        " always show signcolumn (where gitgutter is too) #coc
 
 "" color column stuff
 " acme theme
-highlight ColorColumn ctermbg=230, guibg=#ffffca
+"highlight ColorColumn ctermbg=230, guibg=#ffffca
+
 " warning line at 80, danger at 120+
 let &colorcolumn="80,".join(range(120,999),",")
 
@@ -411,14 +414,25 @@ augroup ft_markdown
 augroup end
 
 "" MyTodo overrides
-hi todoHeading      gui=bold
-hi todoSubHeading   gui=bold
+" acme theme
+"hi todoHeading      gui=bold
+"hi todoSubHeading   gui=bold
+"hi todoSubTask      guifg=#676956
+"hi todoDeemphasize  guifg=gray gui=italic
+"hi todoPlus         guifg=green
+"hi todoAt           guifg=blue
+"hi todoBang         guifg=red
+"hi todoPound        guifg=purple
+
+" naysayer theme
+hi todoHeading      guifg=#FFFFFF
+hi todoSubHeading   guifg=#C3C7B5
 hi todoSubTask      guifg=#676956
-hi todoDeemphasize  guifg=gray gui=italic
-hi todoPlus         guifg=green
-hi todoAt           guifg=blue
-hi todoBang         guifg=red
-hi todoPound        guifg=purple
+hi todoDeemphasize  guifg=#545B4C
+hi todoPlus         guifg=#60D952
+hi todoAt           guifg=#52C3A8
+hi todoBang         guifg=#CC7700
+hi todoPound        guifg=#9370DB
 
 hi def link deemphasizeMatch  todoDeemphasize
 hi def link headingMatch      todoHeading

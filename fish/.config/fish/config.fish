@@ -75,28 +75,55 @@ function is_status_okay
     [ $status = 0 ]
 end
 
+## ACME theme
+#function fish_prompt
+#  if set -q SSH_TTY
+#    set_color purple
+#    echo -n "@"(hostname)":"
+#  end
+#
+#  set_color black
+#  echo -n (prompt_pwd)
+#
+#  set_color blue
+#  printf '%s' (__fish_git_prompt ':%s')
+#
+#  if set -q VIRTUAL_ENV
+#    set_color green
+#    echo -n ":"(basename "$VIRTUAL_ENV")
+#    set_color normal
+#  end
+#
+#  set_color --bold black
+#  echo -n " » "
+#end
+
+## dark theme
 function fish_prompt
   if set -q SSH_TTY
-    set_color purple
+    set_color yellow
     echo -n "@"(hostname)":"
   end
 
-  set_color black
+  set_color white
   echo -n (prompt_pwd)
 
-  set_color blue
+  set_color brown
   printf '%s' (__fish_git_prompt ':%s')
 
   if set -q VIRTUAL_ENV
-    set_color green
+    set_color blue
     echo -n ":"(basename "$VIRTUAL_ENV")
     set_color normal
   end
 
-  set_color --bold black
+  if is_status_okay
+      set_color green
+  else
+      set_color red
+  end
   echo -n " » "
 end
-
 
 if test -e ~/.config/fish/(uname -n).fish
     source ~/.config/fish/(uname -n).fish
