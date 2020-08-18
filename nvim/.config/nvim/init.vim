@@ -1,8 +1,8 @@
-set shell=/bin/bash           " Fish doesn't play all that well with others
-let mapleader = "\<Space>"
-
 set nocompatible              " To be sure it's done, force nocompatible mode
 filetype off                  " turn file type detection off while plugins load
+
+set shell=/bin/bash           " Fish doesn't play all that well with others
+let mapleader = "\<Space>"
 
 """ Plugins
 call plug#begin()             " get ready to define some plugins using plug.vim
@@ -10,69 +10,116 @@ call plug#begin()             " get ready to define some plugins using plug.vim
 
 Plug 'ciaranm/securemodelines'       " make sure modelines can't do bad stuff
 Plug 'editorconfig/editorconfig-vim' " load .editorconfig if it exists
-Plug 'justinmk/vim-sneak'            " jump around easily and more!
-Plug 'itchyny/lightline.vim'         " statusline/tabline
 Plug 'machakann/vim-highlightedyank' " make the yanked region apparent!
 Plug 'andymass/vim-matchup'          " extended '%' and match highlighting
 Plug 'tpope/vim-surround'            " (c)hange(s)urround etc
-Plug 'airblade/vim-gitgutter'        " show git status near linum
-Plug 'junegunn/vim-easy-align'       " alignment plugin
 Plug 'tpope/vim-fugitive'            " Git!
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'              " fzf <3 vim
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
-Plug 'godlygeek/tabular'             " text alignment
 Plug 'plasticboy/vim-markdown'
 Plug 'momota/cisco.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
-"Plug 'lepture/vim-velocity'
 Plug 'ekalinin/Dockerfile.vim'
-
-" Snippets!
-" Plug 'SirVer/ultisnips'              " text snippet engine
-
-Plug 'chriskempson/base16-vim'        " base16 themes
 
 call plug#end()
 
+""" Editor settings
+filetype plugin indent on
+set autoindent
+set timeoutlen=300        " http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
+set updatetime=100        " Make vim's updatetime faster (default is 4000 (4secs)) (git-gutter)
+set encoding=utf-8        " default to utf-8 encoding
+set scrolloff=3           " always make sure that lines are visible above and below the cursor (such as when searching)
+set sidescroll=3
+set noshowmode            " lightline handles showing the mode
+set hidden                " hide buffers instead of closing them (such as when switching to a new file with unsaved changes in current buffer)
+set nowrap                " don't visually wrap lines (require horizontal scrolling)
+set nojoinspaces          " when joining lines (J), use only one space between.
+set number                " show line nums
+set textwidth=80          " set width to 80 columns
+set linebreak             " break long lines by word, not chars
+set undodir=~/.vimdid     " Permanent undo
+set undofile
+set splitright
+set splitbelow
+set wildmode
+set wildmode=list:longest
+set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+set shiftwidth=4          " 1 tab == 4 spaces
+set tabstop=4             " 1 tab == 4 spaces
+set softtabstop=4         " make backspace work with expandtab
+set expandtab             " Use spaces instead of tabs
+set smarttab              " be smart when using tabs ;)
+set list                  " show whitespace as special chars - see listchars
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set formatoptions=tc      " wrap text and comments using textwidth
+set formatoptions+=r      " continue comments when pressing ENTER in I mode
+set formatoptions+=q      " enable formatting of comments with gq
+set formatoptions+=n      " detect lists for formatting
+set formatoptions+=b      " auto-wrap in insert mode, and do not wrap old long lines
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+set guioptions-=T         " Remove toolbar
+set vb t_vb=              " No more beeps
+set backspace=2           " Backspace over newlines
+set nofoldenable          " disable folding
+set ruler                 " Where am I?
+" https://github.com/vim/vim/issues/1735#issuecomment-383353563
+set ttyfast               " make scrolling faster 
+set lazyredraw            " buffer screen updates instead of redrawing
+set synmaxcol=500
+set laststatus=2          " always display the statusline
+set diffopt+=iwhite       " No whitespace in vimdiff
+" Make diffing better: https://vimways.org/2018/the-power-of-diff/
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
+"set colorcolumn=80        " and give me a colored column
+set showcmd               " Show (partial) command in status line.
+set mouse=a               " Enable mouse usage (all modes) in terminals
+set cmdheight=2           " better display for messages #coc wants this
+set shortmess+=c          " don't give |ins-completion-menu| messages. #coc wants this
+set signcolumn=yes        " always show signcolumn (where gitgutter is too) #coc wants this
 
-if has('nvim')
-    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-    "set inccommand=nosplit
-    "noremap <C-q> :confirm qall<CR>
-end
+syntax on
+nnoremap \\ :noh<cr>
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> " Trim trailing spaces
+nnoremap Q <nop>
 
-" Theme
-if !has('gui_running')
-    set t_Co=256
-    set termguicolors
-endif
+colorscheme ron
+highlight Search ctermbg=12
+highlight NonText ctermfg=darkgrey
+highlight SpecialKey ctermfg=darkgrey
+highlight clear SignColumn
+highlight Comment cterm=bold ctermfg=none
+highlight StatusLine cterm=none ctermbg=none ctermfg=darkgrey
+highlight StatusLineNC cterm=none ctermbg=none ctermfg=darkgrey
+highlight Title cterm=none ctermfg=darkgrey
+highlight TabLineFill cterm=none
+highlight TabLine cterm=none ctermfg=darkgrey ctermbg=none
+highlight ColorColumn ctermbg=darkgrey guibg=lightgrey
+highlight jsParensError ctermbg=NONE
+highlight Todo ctermbg=NONE ctermfg=red cterm=bold
+highlight PreProc ctermfg=grey
+highlight String ctermfg=darkblue cterm=italic
+highlight Type ctermfg=darkblue
+highlight lineNr ctermfg=grey cterm=italic
+highlight cIncluded ctermfg=NONE cterm=bold
+highlight pythonInclude ctermfg=blue
+highlight pythonConditional ctermfg=darkcyan
+highlight pythonBuiltin ctermfg=darkcyan
+highlight Pmenu ctermbg=white ctermfg=black
+highlight PmenuSel ctermbg=darkcyan ctermfg=black
 
-set background=light
-colorscheme acme " https://github.com/plan9-for-vimspace/acme-colors
-
-"colorscheme base16-gruvbox-dark-hard
-"colorscheme base16-atelier-dune
-"hi Normal ctermbg=NONE
-
-"set background=dark
-"colorscheme naysayer
-
-" from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-endif
-if executable('rg')
-    set grepprg=rg\ --no-heading\ --vimgrep
-    set grepformat=%f:%l:%c:%m
-endif
+" warning line at 80, danger at 120+
+let &colorcolumn="80,".join(range(120,999),",")
 
 "" securemodelines settings
 let g:secure_modelines_allowed_items = [
@@ -92,25 +139,6 @@ let g:secure_modelines_allowed_items = [
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*'] " play nice
                                                                     " with fugitive
                                                                     " and scp
-
-"" vim-sneak settings
-let g:sneak#label = 1         " label-mode for a minimalist alt to EasyMotion
-let g:sneak#s_next = 1        " enable 'clever-s' (s to move to next match)
-
-"" lineline settings
-" @TODO: maybe a customscheme?
-" https://github.com/itchyny/lightline.vim/tree/master/autoload/lightline/colorscheme
-"""" Add %{FugitiveStatusline()} to 'statusline' to get an indicator with the current branch in your statusline.
-""""  acme colors want \ 'colorscheme': 'solarized',
-let g:lightline = {
-      \ 'component_function': {
-      \   'filename': 'LightlineFilename',
-      \   'colorscheme': 'solarized',
-      \ },
-\ }
-function! LightlineFilename()
-  return expand('%:t') !=# '' ? @% : '[No Name]'
-endfunction
 
 "" fzf settings
 let g:fzf_layout = { 'down': '~20%' }
@@ -190,82 +218,6 @@ let g:vim_markdown_folding_level = 6
 nnoremap <leader>mt :TableFormat<CR>
 nnoremap <leader>mh :Toc<CR>
 
-
-""" Editor settings
-filetype plugin indent on
-syntax on
-set autoindent
-set timeoutlen=300        " http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
-set updatetime=100        " Make vim's updatetime faster (default is 4000 (4secs)) (git-gutter)
-set encoding=utf-8        " default to utf-8 encoding
-set scrolloff=2           " always make sure that lines are visible above and below the cursor (such as when searching)
-set noshowmode            " lightline handles showing the mode
-set cursorline            " highlight the current line the cursor is on
-set hidden                " hide buffers instead of closing them (such as when switching to a new file with unsaved changes in current buffer)
-set nowrap                " don't visually wrap lines (require horizontal scrolling)
-set nojoinspaces          " when joining lines (J), use only one space between.
-set number relativenumber " show relative numbers, except for current line
-set textwidth=80          " set width to 80 columns
-set linebreak             " break long lines by word, not chars
-set undodir=~/.vimdid     " Permanent undo
-set undofile
-set splitright
-set splitbelow
-set wildmode
-set wildmode=list:longest
-set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
-set shiftwidth=4          " 1 tab == 4 spaces
-set tabstop=4             " 1 tab == 4 spaces
-set softtabstop=4         " make backspace work with expandtab
-set expandtab             " Use spaces instead of tabs
-set smarttab              " be smart when using tabs ;)
-set list                  " show whitespace as special chars - see listchars
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
-set formatoptions=tc      " wrap text and comments using textwidth
-set formatoptions+=r      " continue comments when pressing ENTER in I mode
-set formatoptions+=q      " enable formatting of comments with gq
-set formatoptions+=n      " detect lists for formatting
-set formatoptions+=b      " auto-wrap in insert mode, and do not wrap old long lines
-set incsearch
-set ignorecase
-set smartcase
-set gdefault
-set guioptions-=T         " Remove toolbar
-set vb t_vb=              " No more beeps
-set backspace=2           " Backspace over newlines
-set nofoldenable          " disable folding
-set ruler                 " Where am I?
-" https://github.com/vim/vim/issues/1735#issuecomment-383353563
-set ttyfast               " make scrolling faster 
-set lazyredraw            " buffer screen updates instead of redrawing
-set synmaxcol=500
-set laststatus=2          " always display the statusline
-set diffopt+=iwhite       " No whitespace in vimdiff
-" Make diffing better: https://vimways.org/2018/the-power-of-diff/
-set diffopt+=algorithm:patience
-set diffopt+=indent-heuristic
-"set colorcolumn=80        " and give me a colored column
-set showcmd               " Show (partial) command in status line.
-set mouse=a               " Enable mouse usage (all modes) in terminals
-set cmdheight=2           " better display for messages #coc wants this
-set shortmess+=c          " don't give |ins-completion-menu| messages. #coc wants this
-set signcolumn=yes        " always show signcolumn (where gitgutter is too) #coc wants this
-
-"" color column stuff
-" acme theme
-highlight ColorColumn ctermbg=230, guibg=#ffffca
-
-" warning line at 80, danger at 120+
-let &colorcolumn="80,".join(range(120,999),",")
-
-"" git-gutter
-highlight clear SignColumn
-highlight GitGutterAdd    guifg=#11ab00
-highlight GitGutterChange guifg=#9854ff
-highlight GitGutterDelete guifg=#ff4053
-
-
-
 """ Keybindings
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
@@ -302,12 +254,6 @@ map k gk
 map H ^
 map L $
 
-" <Leader>h to stop searching
-vnoremap <leader>h :nohlsearch<cr>
-nnoremap <leader>h :nohlsearch<cr>
-
-" Open new file adjacent to current file
-nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " new buffer that is not a file
 nnoremap <leader>n :enew<CR>i;; walrus<cr><cr><esc>
 
@@ -334,9 +280,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" <leader>= reformats current tange
-nnoremap <leader>= :'<,'>RustFmtRange<cr>
-
 " I can type :help on my own, thanks.
 map <F1> <Esc>
 imap <F1> <Esc>
@@ -353,13 +296,6 @@ autocmd FileType qf wincmd L
 
 " text width stuff
 nnoremap <leader>wt :setlocal textwidth=80 colorcolumn=80<CR>
-
-"Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
 
 
 """ Autocommands
