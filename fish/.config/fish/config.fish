@@ -27,6 +27,7 @@ abbr -a gs 'git status'
 abbr -a gc 'git commit -m'
 abbr -a gco 'git checkout'
 abbr -a ga 'git add -p'
+abbr -a httpserver 'python -m http.server 8000'
 
 if command -v yay > /dev/null
     abbr -a p 'yay'
