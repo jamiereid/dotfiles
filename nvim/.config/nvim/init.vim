@@ -16,7 +16,7 @@ Plug 'tpope/vim-surround'            " (c)hange(s)urround etc
 Plug 'tpope/vim-fugitive'            " Git!
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'              " fzf <3 vim
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
@@ -51,13 +51,13 @@ set splitbelow
 set wildmode
 set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
-set shiftwidth=4          " 1 tab == 4 spaces
-set tabstop=4             " 1 tab == 4 spaces
-set softtabstop=4         " make backspace work with expandtab
-set expandtab             " Use spaces instead of tabs
-set smarttab              " be smart when using tabs ;)
+set shiftwidth=8          " 1 tab == 8 spaces
+set tabstop=8             " 1 tab == 8 spaces
+"set softtabstop=8         " make backspace work with expandtab
+"set expandtab             " Use spaces instead of tabs
+"set smarttab              " be smart when using tabs ;)
 set list                  " show whitespace as special chars - see listchars
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set listchars=tab:▸\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set formatoptions=tc      " wrap text and comments using textwidth
 set formatoptions+=r      " continue comments when pressing ENTER in I mode
 set formatoptions+=q      " enable formatting of comments with gq
@@ -84,14 +84,39 @@ set diffopt+=indent-heuristic
 "set colorcolumn=80        " and give me a colored column
 set showcmd               " Show (partial) command in status line.
 set mouse=a               " Enable mouse usage (all modes) in terminals
-set cmdheight=2           " better display for messages #coc wants this
-set shortmess+=c          " don't give |ins-completion-menu| messages. #coc wants this
-set signcolumn=yes        " always show signcolumn (where gitgutter is too) #coc wants this
+"set cmdheight=2           " better display for messages #coc wants this
+"set shortmess+=c          " don't give |ins-completion-menu| messages. #coc wants this
+"set signcolumn=yes        " always show signcolumn (where gitgutter is too) #coc wants this
+
+
+autocmd FileType python setlocal et ts=4 sw=4
+autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
+autocmd FileType text setlocal tw=80
+autocmd FileType mail setlocal noautoindent
+autocmd FileType scss setlocal et ts=2 sw=2
+autocmd FileType yaml setlocal et ts=2 sw=2
+autocmd FileType html setlocal et ts=2 sw=2
+autocmd FileType sh setlocal noet ts=4 sw=4
+autocmd Filetype rust setlocal colorcolumn=100
+autocmd BufNewFile,BufRead todo.txt set ft=mytodo
+autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
+" Prevent accidental writes to buffers that shouldn't be edited
+autocmd BufRead *.orig set readonly
+autocmd BufRead *.pacnew set readonly
+" Leave paste mode when leaving insert mode
+autocmd InsertLeave * set nopaste
+" Jump to last edit position on opening file
+if has("autocmd")
+  " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
+  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 
 syntax on
 nnoremap \\ :noh<cr>
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> " Trim trailing spaces
 nnoremap Q <nop>
+"nmap <leader>l :set list!<CR>
 
 colorscheme ron
 highlight Search ctermbg=12
@@ -162,11 +187,11 @@ command! -bang -nargs=? -complete=dir Files
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -174,22 +199,22 @@ function! s:check_back_space() abort
 endfunction
 
 " use <c-.> to trigger completion.
-inoremap <silent><expr> <c-.> coc#refresh()
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+"inoremap <silent><expr> <c-.> coc#refresh()
+"" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+"" Coc only does snippet and additional edit on confirm.
+"" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"" Or use `complete_info` if your vim support it, like:
+"inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"
+"" Use K to show documentation in preview window
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
+"function! s:show_documentation()
+"  if (index(['vim','help'], &filetype) >= 0)
+"    execute 'h '.expand('<cword>')
+"  else
+"    call CocAction('doHover')
+"  endif
+"endfunction
 
 "" racer + rust
 " https://github.com/rust-lang/rust.vim/issues/192
@@ -266,26 +291,30 @@ nnoremap <down> <nop>
 "inoremap <right> <nop>
 
 " Left and right can switch buffers
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
+"nnoremap <left> :bp<CR>
+"nnoremap <right> :bn<CR>
+nnoremap <left> :tabp<CR>
+nnoremap <right> :tabn<CR>
 
 " <leader><leader> toggles between buffers
 nnoremap <leader><leader> <c-^>
 
 " 'Smart' navigation
-nmap <silent> E <Plug>(coc-diagnostic-prev)
-nmap <silent> W <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> E <Plug>(coc-diagnostic-prev)
+"nmap <silent> W <Plug>(coc-diagnostic-next)
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 
 " I can type :help on my own, thanks.
 map <F1> <Esc>
 imap <F1> <Esc>
 
 " toggle line numbers
-nnoremap <leader>l :set number! relativenumber!<CR>:GitGutterBufferToggle<CR>
+nnoremap <leader>l :set number!<CR>
+"relativenumber!<CR>
+":GitGutterBufferToggle<CR>
 
 " pull out TODOs
 "" Needs work, this is very much aimed purely at the way I do meeting notes atm
@@ -298,29 +327,6 @@ autocmd FileType qf wincmd L
 nnoremap <leader>wt :setlocal textwidth=80 colorcolumn=80<CR>
 
 
-""" Autocommands
-" Prevent accidental writes to buffers that shouldn't be edited
-autocmd BufRead *.orig set readonly
-autocmd BufRead *.pacnew set readonly
-
-" Leave paste mode when leaving insert mode
-autocmd InsertLeave * set nopaste
-
-" Jump to last edit position on opening file
-if has("autocmd")
-  " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
-  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
-" autoload mytodo for specific files
-autocmd BufNewFile,BufRead todo.txt set ft=mytodo
-
-" markdown settings
-autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
-
-" Follow Rust code style rules
-"au Filetype rust source ~/.config/nvim/scripts/spacetab.vim
-au Filetype rust set colorcolumn=100
 
 " Custom @Tag highlights
 " @Cleanup: should this be in it's own file? A plugin?
@@ -351,15 +357,14 @@ augroup ft_markdown
 augroup end
 
 "" MyTodo overrides
-" acme theme
-hi todoHeading      gui=bold
-hi todoSubHeading   gui=bold
-hi todoSubTask      guifg=#676956
-hi todoDeemphasize  guifg=gray gui=italic
-hi todoPlus         guifg=green
-hi todoAt           guifg=blue
-hi todoBang         guifg=red
-hi todoPound        guifg=purple
+hi todoHeading      ctermfg=white guifg=white cterm=bold gui=bold
+hi todoSubHeading   cterm=bold gui=bold
+hi todoSubTask      ctermfg=yellow guifg=yellow
+hi todoDeemphasize  ctermfg=darkgray guifg=darkgray cterm=italic gui=italic
+hi todoPlus         ctermfg=green guifg=green
+hi todoAt           ctermfg=blue guifg=blue
+hi todoBang         ctermfg=red guifg=red
+hi todoPound        ctermfg=magenta guifg=purple
 
 " naysayer theme
 "hi todoHeading      guifg=#FFFFFF
