@@ -40,9 +40,25 @@ else
 end
 
 set -g fish_prompt_pwd_dir_length 3
+set __fish_git_prompt_showuntrackedfiles 'yes'
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showstashstate 'yes'
+set __fish_git_prompt_showupstream 'verbose name'
+set __fish_git_prompt_describe_style 'branch'
+set __fish_git_prompt_color_upstream_ahead green
+set __fish_git_prompt_color_downstream_behind red
+set __fish_git_prompt_char_dirtystate '+'
+set __fish_git_prompt_char_stagedstate '●'
+set __fish_git_prompt_char_untrackedfiles '…'
+set __fish_git_prompt_char_stashstate '$'
+set __fish_git_prompt_char_upstream_ahead '↑'
+set __fish_git_prompt_char_upstream_behind '↓'
+set __fish_git_prompt_char_upstream_equal ''
+set __fish_git_prompt_char_cleanstate ''
+set __fish_git_prompt_char_invalidstate 'X'
 
 function fish_prompt
-  printf '%s %s $ ' (uname -n) (prompt_pwd)
+  printf '%s %s %s$ ' (uname -n) (prompt_pwd) (__fish_git_prompt '[%s] ')
 end
 
 if test -e ~/.config/fish/(uname -n).fish
