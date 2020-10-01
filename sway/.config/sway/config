@@ -38,10 +38,10 @@ output eDP-1 scale 2 pos 0 0 res 3440 1440
 
 ### Idle configuration
 exec swayidle -w \
-         timeout 300 '~/bin/lock' \
+         timeout 300 '~/.local/bin/lock' \
          timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep '~/bin/lock'
+         before-sleep '~/.local/bin/lock'
 
 exec mako
 #
@@ -102,7 +102,7 @@ input 1739:30383:DELL07E6:00_06CB:76AF_Touchpad {
 
     bindsym $mod+Shift+b border none
 
-    bindsym $mod+Alt+Shift+l exec ~/bin/lock
+    bindsym $mod+Alt+Shift+l exec ~/.local/bin/lock
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
