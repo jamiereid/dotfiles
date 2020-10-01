@@ -1,7 +1,7 @@
 #!/bin/sh
 while true
 do
-    time=$(date +"%A %Y-%m-%d %I:%M %p")
+    time=$(date +"%A %Y-%m-%d %H:%M")
     time="$time $(date -u +"(%H:%M UTC)")"
     batstatus=$(cat /sys/class/power_supply/BAT0/status)
 
