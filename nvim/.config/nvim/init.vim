@@ -23,11 +23,37 @@ Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
 Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
 Plug 'momota/cisco.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
+
+autocmd FileType python setlocal et ts=4 sw=4
+autocmd FileType mytodo setlocal et ts=2 sw=2 colorcolumn=
+autocmd FileType markdown setlocal tw=80 et ts=2 sw=2 colorcolumn=
+autocmd FileType text setlocal tw=80 colorcolumn=
+autocmd FileType mail setlocal noautoindent
+autocmd FileType scss setlocal et ts=2 sw=2
+autocmd FileType yaml setlocal et ts=2 sw=2
+autocmd FileType html setlocal et ts=2 sw=2
+autocmd FileType js setlocal et ts=2 sw=2
+autocmd FileType sh setlocal noet ts=4 sw=4
+autocmd Filetype rust setlocal colorcolumn=100
+autocmd BufNewFile,BufRead todo.txt set ft=mytodo
+autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
+" Prevent accidental writes to buffers that shouldn't be edited
+autocmd BufRead *.orig set readonly
+autocmd BufRead *.pacnew set readonly
+" Leave paste mode when leaving insert mode
+autocmd InsertLeave * set nopaste
+" Jump to last edit position on opening file
+if has("autocmd")
+  " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
+  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 """ Editor settings
 filetype plugin indent on
@@ -89,27 +115,6 @@ set mouse=a               " Enable mouse usage (all modes) in terminals
 "set signcolumn=yes        " always show signcolumn (where gitgutter is too) #coc wants this
 
 
-autocmd FileType python setlocal et ts=4 sw=4
-autocmd FileType markdown setlocal tw=80 et ts=2 sw=2
-autocmd FileType text setlocal tw=80
-autocmd FileType mail setlocal noautoindent
-autocmd FileType scss setlocal et ts=2 sw=2
-autocmd FileType yaml setlocal et ts=2 sw=2
-autocmd FileType html setlocal et ts=2 sw=2
-autocmd FileType sh setlocal noet ts=4 sw=4
-autocmd Filetype rust setlocal colorcolumn=100
-autocmd BufNewFile,BufRead todo.txt set ft=mytodo
-autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
-" Prevent accidental writes to buffers that shouldn't be edited
-autocmd BufRead *.orig set readonly
-autocmd BufRead *.pacnew set readonly
-" Leave paste mode when leaving insert mode
-autocmd InsertLeave * set nopaste
-" Jump to last edit position on opening file
-if has("autocmd")
-  " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
-  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
 
 
 syntax on
@@ -142,6 +147,7 @@ highlight pythonConditional ctermfg=darkcyan
 highlight pythonBuiltin ctermfg=darkcyan
 highlight Pmenu ctermbg=white ctermfg=black
 highlight PmenuSel ctermbg=darkcyan ctermfg=black
+highlight SpellBad cterm=underline ctermfg=red
 
 " warning line at 80, danger at 120+
 let &colorcolumn="80,".join(range(120,999),",")
@@ -182,6 +188,11 @@ endfunction
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
+
+" use ag if it's around
+if executable('ag')
+	set grepprg=ag\ --nogroup\ --nocolor
+endif
 
 "" coc.nvim settings
 
@@ -291,13 +302,13 @@ nnoremap <down> <nop>
 "inoremap <right> <nop>
 
 " Left and right can switch buffers
-"nnoremap <left> :bp<CR>
-"nnoremap <right> :bn<CR>
-nnoremap <left> :tabp<CR>
-nnoremap <right> :tabn<CR>
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
+nnoremap <c-left> :tabp<CR>
+nnoremap <c-right> :tabn<CR>
 
 " <leader><leader> toggles between buffers
-nnoremap <leader><leader> <c-^>
+"nnoremap <leader><leader> <c-^>
 
 " 'Smart' navigation
 "nmap <silent> E <Plug>(coc-diagnostic-prev)
@@ -318,6 +329,8 @@ nnoremap <leader>l :set number!<CR>
 
 " pull out TODOs
 "" Needs work, this is very much aimed purely at the way I do meeting notes atm
+""    this fails on default grepprg because of /dev/null... I've just always
+""    installed `ag` to get around this :S
 command! -bar -nargs=1 FindTODOsIn silent grep \^TODO <q-args> | redraw! | cw
 nnoremap <leader>tt :FindTODOsIn %:p<CR>
 nnoremap <leader>ta :FindTODOsIn %:p:h<CR>
@@ -325,8 +338,6 @@ autocmd FileType qf wincmd L
 
 " text width stuff
 nnoremap <leader>wt :setlocal textwidth=80 colorcolumn=80<CR>
-
-
 
 " Custom @Tag highlights
 " @Cleanup: should this be in it's own file? A plugin?
