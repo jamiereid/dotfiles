@@ -147,6 +147,7 @@ highlight pythonConditional ctermfg=darkcyan
 highlight pythonBuiltin ctermfg=darkcyan
 highlight Pmenu ctermbg=white ctermfg=black
 highlight PmenuSel ctermbg=darkcyan ctermfg=black
+highlight clear SpellBad
 highlight SpellBad cterm=underline ctermfg=red
 
 " warning line at 80, danger at 120+
@@ -291,7 +292,7 @@ map H ^
 map L $
 
 " new buffer that is not a file
-nnoremap <leader>n :enew<CR>i;; walrus<cr><cr><esc>
+nnoremap <leader>N :enew<CR>i;; walrus<cr><cr><esc>
 
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
@@ -338,6 +339,14 @@ autocmd FileType qf wincmd L
 
 " text width stuff
 nnoremap <leader>wt :setlocal textwidth=80 colorcolumn=80<CR>
+
+"" Notes
+" Generate ctags
+nnoremap <leader>nt :!ctags -R . <CR>:redraw!<CR>
+
+" Go to index of notes and set working directory
+nnoremap <leader>ni :e $NOTES_DIR/index.md<CR>:cd $NOTES_DIR<CR>
+
 
 " Custom @Tag highlights
 " @Cleanup: should this be in it's own file? A plugin?
