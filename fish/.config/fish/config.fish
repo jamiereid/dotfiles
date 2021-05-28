@@ -4,7 +4,10 @@ set -gx EDITOR vim
 set -gx LANG en_US.UTF-8
 
 set -gx GOPATH ~/.local/share/go/
+set -gx GOBIN ~/.local/share/go/bin
 set -gx PATH ~/.local/bin ~/.cargo/bin $GOPATH/bin $PATH
+
+set -gx NOTES_DIR ~/n
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow'
 set -gx FZF_CTRL_T_COMMAND 'fd --type file --follow'
@@ -23,6 +26,8 @@ end
 abbr -a gs 'git status'
 abbr -a gc 'git commit -m'
 abbr -a ga 'git add -p'
+abbr -a gl 'git lg'
+abbr -a gd 'git diff'
 abbr -a httpserver 'python -m http.server 8000'
 
 if command -v exa > /dev/null
