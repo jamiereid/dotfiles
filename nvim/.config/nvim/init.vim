@@ -28,6 +28,7 @@ Plug 'momota/cisco.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'sevko/vim-nand2tetris-syntax'
 
 call plug#end()
 
