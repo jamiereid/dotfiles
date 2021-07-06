@@ -123,32 +123,35 @@ nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> 
 nnoremap Q <nop>
 "nmap <leader>l :set list!<CR>
 
-colorscheme ron
-highlight Search ctermbg=12
-highlight NonText ctermfg=darkgrey
-highlight SpecialKey ctermfg=darkgrey
-highlight clear SignColumn
-highlight Comment cterm=bold ctermfg=none
-highlight StatusLine cterm=none ctermbg=none ctermfg=darkgrey
-highlight StatusLineNC cterm=none ctermbg=none ctermfg=darkgrey
-highlight Title cterm=none ctermfg=darkgrey
-highlight TabLineFill cterm=none
-highlight TabLine cterm=none ctermfg=darkgrey ctermbg=none
-highlight ColorColumn ctermbg=darkgrey guibg=lightgrey
-highlight jsParensError ctermbg=NONE
-highlight Todo ctermbg=NONE ctermfg=red cterm=bold
-highlight PreProc ctermfg=grey
-highlight String ctermfg=darkblue cterm=italic
-highlight Type ctermfg=darkblue
-highlight lineNr ctermfg=grey cterm=italic
-highlight cIncluded ctermfg=NONE cterm=bold
-highlight pythonInclude ctermfg=blue
-highlight pythonConditional ctermfg=darkcyan
-highlight pythonBuiltin ctermfg=darkcyan
-highlight Pmenu ctermbg=white ctermfg=black
-highlight PmenuSel ctermbg=darkcyan ctermfg=black
-highlight clear SpellBad
-highlight SpellBad cterm=underline ctermfg=red
+set termguicolors
+colorscheme naysayer
+"colorscheme acme
+"colorscheme ron
+"highlight Search ctermbg=12
+"highlight NonText ctermfg=darkgrey
+"highlight SpecialKey ctermfg=darkgrey
+"highlight clear SignColumn
+"highlight Comment cterm=bold ctermfg=none
+"highlight StatusLine cterm=none ctermbg=none ctermfg=darkgrey
+"highlight StatusLineNC cterm=none ctermbg=none ctermfg=darkgrey
+"highlight Title cterm=none ctermfg=darkgrey
+"highlight TabLineFill cterm=none
+"highlight TabLine cterm=none ctermfg=darkgrey ctermbg=none
+"highlight ColorColumn ctermbg=darkgrey guibg=lightgrey
+"highlight jsParensError ctermbg=NONE
+"highlight Todo ctermbg=NONE ctermfg=red cterm=bold
+"highlight PreProc ctermfg=grey
+"highlight String ctermfg=darkblue cterm=italic
+"highlight Type ctermfg=darkblue
+"highlight lineNr ctermfg=grey cterm=italic
+"highlight cIncluded ctermfg=NONE cterm=bold
+"highlight pythonInclude ctermfg=blue
+"highlight pythonConditional ctermfg=darkcyan
+"highlight pythonBuiltin ctermfg=darkcyan
+"highlight Pmenu ctermbg=white ctermfg=black
+"highlight PmenuSel ctermbg=darkcyan ctermfg=black
+"highlight clear SpellBad
+"highlight SpellBad cterm=underline ctermfg=red
 
 " warning line at 80, danger at 120+
 let &colorcolumn="80,".join(range(120,999),",")
@@ -377,24 +380,24 @@ augroup ft_markdown
 augroup end
 
 "" MyTodo overrides
-hi todoHeading      ctermfg=white guifg=white cterm=bold gui=bold
-hi todoSubHeading   cterm=bold gui=bold
-hi todoSubTask      ctermfg=yellow guifg=yellow
-hi todoDeemphasize  ctermfg=darkgray guifg=darkgray cterm=italic gui=italic
-hi todoPlus         ctermfg=green guifg=green
-hi todoAt           ctermfg=blue guifg=blue
-hi todoBang         ctermfg=red guifg=red
-hi todoPound        ctermfg=magenta guifg=purple
+"hi todoHeading      ctermfg=white guifg=white cterm=bold gui=bold
+"hi todoSubHeading   cterm=bold gui=bold
+"hi todoSubTask      ctermfg=yellow guifg=yellow
+"hi todoDeemphasize  ctermfg=darkgray guifg=darkgray cterm=italic gui=italic
+"hi todoPlus         ctermfg=green guifg=green
+"hi todoAt           ctermfg=blue guifg=blue
+"hi todoBang         ctermfg=red guifg=red
+"hi todoPound        ctermfg=magenta guifg=purple
 
 " naysayer theme
-"hi todoHeading      guifg=#FFFFFF
-"hi todoSubHeading   guifg=#C3C7B5
-"hi todoSubTask      guifg=#676956
-"hi todoDeemphasize  guifg=#545B4C
-"hi todoPlus         guifg=#60D952
-"hi todoAt           guifg=#52C3A8
-"hi todoBang         guifg=#CC7700
-"hi todoPound        guifg=#9370DB
+hi todoHeading      guifg=#FFFFFF
+hi todoSubHeading   guifg=#C3C7B5
+hi todoSubTask      guifg=#676956
+hi todoDeemphasize  guifg=#545B4C
+hi todoPlus         guifg=#60D952
+hi todoAt           guifg=#52C3A8
+hi todoBang         guifg=#CC7700
+hi todoPound        guifg=#9370DB
 
 hi def link deemphasizeMatch  todoDeemphasize
 hi def link headingMatch      todoHeading
