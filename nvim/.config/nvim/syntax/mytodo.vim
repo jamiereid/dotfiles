@@ -16,10 +16,11 @@ syn match deemphasizeMatch   '\~.*'
 syn match headingMatch       '^[[:alnum:]].*::'
 syn match subHeadingMatch    '  [[:alnum:]].*::'
 syn match subTaskMatch       ' ->.*'
-syn match plusMatch          '\m+\w*'
-syn match atMatch            '\m@\w*'
-syn match bangMatch          '\m!\w*'
-syn match poundMatch         '\m#\w*'
+syn match plusMatch          '\m+[a-zA-Z0-9_-]*'
+syn match atMatch            '\m@[a-zA-Z0-9_-]*'
+syn match bangMatch          '\m![a-zA-Z0-9_-]*'
+syn match poundMatch         '\m#[a-zA-Z0-9_-]*'
+syn match percentMatch       '\m%[a-zA-Z0-9_-]*'
 
 " Regions
 
@@ -34,6 +35,8 @@ hi mytodoPlus         guifg=#008B00 guibg=NONE guisp=NONE gui=bold ctermfg=NONE 
 hi mytodoAt           guifg=#551A8B guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
 hi mytodoBang         guifg=#8B0000 guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
 hi mytodoPound        guifg=#00CDCD guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
+hi mytodoPercent      guifg=#EC00FF guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
+
 
 hi def link deemphasizeMatch  mytodoDeemphasize
 hi def link headingMatch      mytodoteading
@@ -43,3 +46,4 @@ hi def link plusMatch         mytodoPlus
 hi def link atMatch           mytodoAt
 hi def link bangMatch         mytodoBang
 hi def link poundMatch        mytodoPound
+hi def link percentMatch      mytodoPercent

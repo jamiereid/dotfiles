@@ -42,7 +42,7 @@ autocmd FileType html setlocal et ts=2 sw=2
 autocmd FileType js setlocal et ts=2 sw=2
 autocmd FileType sh setlocal noet ts=4 sw=4
 autocmd Filetype rust setlocal colorcolumn=100
-autocmd BufNewFile,BufRead todo.txt set ft=mytodo
+autocmd BufNewFile,BufRead todo.txt set ft=mytodo spell textwidth=0 colorcolumn=0
 autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
 " Prevent accidental writes to buffers that shouldn't be edited
 autocmd BufRead *.orig set readonly
