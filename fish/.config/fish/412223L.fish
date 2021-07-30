@@ -8,3 +8,5 @@ doas ~/.local/bin/dnsfix
 
 #abbr -a doxfx mono /opt/docfx-git/docfx.exe
 abbr -a t setsid xfce4-terminal
+
+set __fish_prompt_lastchar '::'
