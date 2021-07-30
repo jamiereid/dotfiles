@@ -253,9 +253,9 @@ let g:vim_markdown_new_list_item_indent = 1
 let g:vim_markdown_auto_insert_bullets = 1
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_new_list_item_indent = 2  " default is 4
-let g:vim_markdown_folding_level = 6
+let g:vim_markdown_folding_level = 1
 "let g:vim_markdown_override_foldtext = 0
-"let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_style_pythonic = 1
 nnoremap <leader>mt :TableFormat<CR>
 nnoremap <leader>mh :Toc<CR>
 
