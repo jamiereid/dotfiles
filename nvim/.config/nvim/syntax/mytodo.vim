@@ -21,6 +21,7 @@ syn match atMatch            '\m@[a-zA-Z0-9_-]*'
 syn match bangMatch          '\m![a-zA-Z0-9_-]*'
 syn match poundMatch         '\m#[a-zA-Z0-9_-]*'
 syn match percentMatch       '\m%[a-zA-Z0-9_-]*'
+syn match dollarMatch        '\m$[a-zA-Z0-9_-]*'
 
 " Regions
 
@@ -36,6 +37,7 @@ hi mytodoAt           guifg=#551A8B guibg=NONE guisp=NONE gui=bold ctermfg=NONE 
 hi mytodoBang         guifg=#8B0000 guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
 hi mytodoPound        guifg=#00CDCD guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
 hi mytodoPercent      guifg=#EC00FF guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
+hi mytodoDollar       guifg=#EC00FF guibg=NONE guisp=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=NONE
 
 
 hi def link deemphasizeMatch  mytodoDeemphasize
@@ -47,3 +49,4 @@ hi def link atMatch           mytodoAt
 hi def link bangMatch         mytodoBang
 hi def link poundMatch        mytodoPound
 hi def link percentMatch      mytodoPercent
+hi def link dollarMatch       mytodoDollar
