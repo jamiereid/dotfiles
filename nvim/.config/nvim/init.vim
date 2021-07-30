@@ -32,17 +32,22 @@ Plug 'sevko/vim-nand2tetris-syntax'
 
 call plug#end()
 
-autocmd FileType python setlocal et ts=4 sw=4
-autocmd FileType mytodo setlocal et ts=2 sw=2 colorcolumn=
+autocmd FileType python   setlocal et   ts=4 sw=4
+autocmd FileType mytodo   setlocal et   ts=2 sw=2 colorcolumn=
+autocmd FileType scss     setlocal et   ts=2 sw=2
+autocmd FileType yaml     setlocal et   ts=2 sw=2
+autocmd FileType html     setlocal et   ts=2 sw=2
+autocmd FileType js       setlocal et   ts=2 sw=2
+autocmd FileType c        setlocal et   ts=4 sw=4
+autocmd FileType cpp      setlocal et   ts=4 sw=4
+autocmd FileType h        setlocal et   ts=4 sw=4
+autocmd FileType hpp      setlocal et   ts=4 sw=4
+autocmd FileType sh       setlocal noet ts=4 sw=4
+autocmd Filetype rust     setlocal colorcolumn=100
+autocmd FileType mail     setlocal noautoindent
+autocmd FileType text     setlocal tw=80 colorcolumn=
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2 colorcolumn=
-autocmd FileType text setlocal tw=80 colorcolumn=
-autocmd FileType mail setlocal noautoindent
-autocmd FileType scss setlocal et ts=2 sw=2
-autocmd FileType yaml setlocal et ts=2 sw=2
-autocmd FileType html setlocal et ts=2 sw=2
-autocmd FileType js setlocal et ts=2 sw=2
-autocmd FileType sh setlocal noet ts=4 sw=4
-autocmd Filetype rust setlocal colorcolumn=100
+
 autocmd BufNewFile,BufRead todo.txt set ft=mytodo spell textwidth=0 colorcolumn=0
 autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
 " Prevent accidental writes to buffers that shouldn't be edited
