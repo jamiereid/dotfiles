@@ -11,7 +11,7 @@ endif
 set t_Co=256
 let g:colors_name = "naysayer"
 
-"hi IncSearch -- no settings --
+hi IncSearch guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 "hi WildMenu -- no settings --
 "hi SignColumn -- no settings --
 "hi TabLineSel -- no settings --
@@ -21,7 +21,7 @@ let g:colors_name = "naysayer"
 "hi Ignore -- no settings --
 hi Normal guifg=#d7af87 guibg=#072627 guisp=#072627 gui=NONE ctermfg=180 ctermbg=23 cterm=NONE
 "hi CTagsImport -- no settings --
-"hi Search -- no settings --
+hi Search guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 "hi CTagsGlobalVariable -- no settings --
 "hi SpellRare -- no settings --
 "hi EnumerationValue -- no settings --
@@ -84,7 +84,8 @@ hi CursorColumn guifg=NONE guibg=#202020 guisp=#202020 gui=NONE ctermfg=NONE cte
 hi Define guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi Function guifg=#d7af87 guibg=NONE guisp=NONE gui=NONE ctermfg=187 ctermbg=NONE cterm=NONE
 hi PreProc guifg=#faffffff guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
-hi Visual guifg=#faf4c6 guibg=#3c414c guisp=#3c414c gui=NONE ctermfg=230 ctermbg=239 cterm=NONE
+"hi Visual guifg=#faf4c6 guibg=#3c414c guisp=#3c414c gui=NONE ctermfg=230 ctermbg=239 cterm=NONE
+hi Visual guifg=#b4eeb5 guibg=#000080 guisp=#000080 gui=NONE ctermfg=230 ctermbg=239 cterm=NONE
 hi VertSplit guifg=#aeaeae guibg=#072627 guisp=#072627 gui=NONE ctermfg=145 ctermbg=23 cterm=NONE
 hi Exception guifg=#aa0000 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Keyword guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=15 ctermbg=NONE cterm=NONE
