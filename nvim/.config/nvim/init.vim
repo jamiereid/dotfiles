@@ -30,6 +30,8 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'sevko/vim-nand2tetris-syntax'
 
+Plug 'tikhomirov/vim-glsl'
+
 call plug#end()
 
 autocmd FileType python   setlocal et   ts=4 sw=4
@@ -47,6 +49,7 @@ autocmd Filetype rust     setlocal colorcolumn=100
 autocmd FileType mail     setlocal noautoindent
 autocmd FileType text     setlocal tw=80 colorcolumn=
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2 colorcolumn=
+autocmd FileType glsl     setlocal et   ts=4 sw=4
 
 autocmd BufNewFile,BufRead todo.txt set ft=mytodo spell textwidth=0 colorcolumn=0
 autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
