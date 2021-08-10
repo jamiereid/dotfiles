@@ -62,6 +62,8 @@ set __fish_git_prompt_char_upstream_equal ''
 set __fish_git_prompt_char_cleanstate ''
 set __fish_git_prompt_char_invalidstate 'X'
 
+source ~/.config/fish/naysayer-theme.fish
+
 set __fish_prompt_lastchar '$'
 
 if test -e ~/.config/fish/(uname -n).fish
@@ -69,5 +71,5 @@ if test -e ~/.config/fish/(uname -n).fish
 end
 
 function fish_prompt
-  printf '%s %s %s%s ' (uname -n) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
+    printf '%s %s %s%s ' (uname -n) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
 end

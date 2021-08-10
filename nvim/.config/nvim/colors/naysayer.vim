@@ -83,7 +83,7 @@ hi CursorLineNr guifg=#A09172 guibg=#072627 guisp=#072627 gui=NONE ctermfg=240 c
 hi CursorColumn guifg=NONE guibg=#202020 guisp=#202020 gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
 hi Define guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi Function guifg=#d7af87 guibg=NONE guisp=NONE gui=NONE ctermfg=187 ctermbg=NONE cterm=NONE
-hi PreProc guifg=#faffffff guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
+hi PreProc guifg=#faffff guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 "hi Visual guifg=#faf4c6 guibg=#3c414c guisp=#3c414c gui=NONE ctermfg=230 ctermbg=239 cterm=NONE
 hi Visual guifg=#b4eeb5 guibg=#000080 guisp=#000080 gui=NONE ctermfg=230 ctermbg=239 cterm=NONE
 hi VertSplit guifg=#aeaeae guibg=#072627 guisp=#072627 gui=NONE ctermfg=145 ctermbg=23 cterm=NONE

@@ -44,6 +44,7 @@ autocmd FileType c        setlocal et   ts=4 sw=4
 autocmd FileType cpp      setlocal et   ts=4 sw=4
 autocmd FileType h        setlocal et   ts=4 sw=4
 autocmd FileType hpp      setlocal et   ts=4 sw=4
+autocmd FileType go       setlocal noet ts=4 sw=4
 autocmd FileType sh       setlocal noet ts=4 sw=4
 autocmd Filetype rust     setlocal colorcolumn=100
 autocmd FileType mail     setlocal noautoindent
