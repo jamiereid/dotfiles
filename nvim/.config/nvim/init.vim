@@ -50,7 +50,7 @@ autocmd FileType hpp      setlocal et   ts=4 sw=4
 autocmd FileType go       setlocal noet ts=4 sw=4
 autocmd FileType sh       setlocal noet ts=4 sw=4
 autocmd Filetype rust     setlocal colorcolumn=100
-autocmd FileType mail     setlocal noautoindent
+autocmd FileType mail     setlocal tw=80 noautoindent
 autocmd FileType text     setlocal tw=80 colorcolumn=
 autocmd FileType markdown setlocal tw=80 et ts=2 sw=2 colorcolumn=
 autocmd FileType glsl     setlocal et   ts=4 sw=4
@@ -81,7 +81,7 @@ set hidden                " hide buffers instead of closing them (such as when s
 set nowrap                " don't visually wrap lines (require horizontal scrolling)
 set nojoinspaces          " when joining lines (J), use only one space between.
 set number                " show line nums
-set textwidth=80          " set width to 80 columns
+set textwidth=120         " set width to 80 columns
 set linebreak             " break long lines by word, not chars
 set undodir=~/.vimdid     " Permanent undo
 set undofile
@@ -90,8 +90,8 @@ set splitbelow
 set wildmode
 set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
-set shiftwidth=8          " 1 tab == 8 spaces
-set tabstop=8             " 1 tab == 8 spaces
+set shiftwidth=4          " 1 tab == 8 spaces
+set tabstop=4             " 1 tab == 8 spaces
 "set softtabstop=8         " make backspace work with expandtab
 "set expandtab             " Use spaces instead of tabs
 "set smarttab              " be smart when using tabs ;)
