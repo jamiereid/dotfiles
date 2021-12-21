@@ -417,6 +417,8 @@ nnoremap <leader>nt :!ctags -R . <CR>:redraw!<CR>
 " Go to index of notes and set working directory
 nnoremap <leader>ni :e $NOTES_DIR/index.md<CR>:cd $NOTES_DIR<CR>
 
+" in visual mode only, remap C-r to replace selection
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Custom @Tag highlights
 " @Cleanup: should this be in it's own file? A plugin?
