@@ -29,11 +29,14 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'easymotion/vim-easymotion'
 
-Plug 'sevko/vim-nand2tetris-syntax'
-Plug 'tikhomirov/vim-glsl'
+"Plug 'sevko/vim-nand2tetris-syntax'
+"Plug 'tikhomirov/vim-glsl'
 
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+"Plug 'kyazdani42/nvim-web-devicons'
+"Plug 'kyazdani42/nvim-tree.lua'
+
+"Plug 'vim-syntastic/syntastic'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -244,15 +247,12 @@ endfunction
 "  endif
 "endfunction
 
-"" racer + rust
-" https://github.com/rust-lang/rust.vim/issues/192
+"" rust
 let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 let g:rust_clip_command = 'xclip -selection clipboard'
-"let g:racer_cmd = "/usr/bin/racer"
-"let g:racer_experimental_completer = 1
-let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
+"let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 
 "" Golang
 let g:go_play_open_browser = 0
@@ -273,56 +273,77 @@ nnoremap <leader>mh :Toc<CR>
 
 "" nvim-tree settings
 "let g:nvim_tree_width = 40 "30 by default, can be width_in_columns or 'width_in_percent%'
-let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
-let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+"let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+"let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+"let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
 "let g:nvim_tree_follow_update_path = 1 "0 by default, will update the path of the current dir if the file is not inside the tree. Default is 0
-let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+"let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 "let g:nvim_tree_hide_dotfiles = 1 "0 by default, this option hides files and folders starting with a dot `.`
 "let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
-let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
-let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
-let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
+"let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
+"let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
+"let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
 " default will show icon by default if no icon is provided
 " default shows no icon by default
-let g:nvim_tree_icons = {
-    \ 'default': '',
-    \ 'symlink': '',
-    \ 'git': {
-    \   'unstaged': "✗",
-    \   'staged': "✓",
-    \   'unmerged': "",
-    \   'renamed': "➜",
-    \   'untracked': "★",
-    \   'deleted': "",
-    \   'ignored': "◌"
-    \   },
-    \ 'folder': {
-    \   'arrow_open': "",
-    \   'arrow_closed': "",
-    \   'default': "",
-    \   'open': "",
-    \   'empty': "",
-    \   'empty_open': "",
-    \   'symlink': "",
-    \   'symlink_open': "",
-    \   },
-    \   'lsp': {
-    \     'hint': "",
-    \     'info': "",
-    \     'warning': "",
-    \     'error': "",
-    \   }
-    \ }
+"let g:nvim_tree_icons = {
+"    \ 'default': '',
+"    \ 'symlink': '',
+"    \ 'git': {
+"    \   'unstaged': "✗",
+"    \   'staged': "✓",
+"    \   'unmerged': "",
+"    \   'renamed': "➜",
+"    \   'untracked': "★",
+"    \   'deleted': "",
+"    \   'ignored': "◌"
+"    \   },
+"    \ 'folder': {
+"    \   'arrow_open': "",
+"    \   'arrow_closed': "",
+"    \   'default': "",
+"    \   'open': "",
+"    \   'empty': "",
+"    \   'empty_open': "",
+"    \   'symlink': "",
+"    \   'symlink_open': "",
+"    \   },
+"    \   'lsp': {
+"    \     'hint': "",
+"    \     'info': "",
+"    \     'warning': "",
+"    \     'error': "",
+"    \   }
+"    \ }
 
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
+"nnoremap <C-n> :NvimTreeToggle<CR>
+"nnoremap <leader>r :NvimTreeRefresh<CR>
 "nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
 " a list of groups can be found at `:help nvim_tree_highlight`
-highlight NvimTreeFolderIcon guibg=blue
+"highlight NvimTreeFolderIcon guibg=blue
 
+" Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+" ALE
+set completeopt=menu,menuone,preview,noselect,noinsert
+let g:ale_completion_enabled = 1
+nnoremap <C-LeftMouse> :ALEGoToDefinition<CR>
+let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
+let g:ale_linters = {
+\  'rust': ['analyzer'],
+\}
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 """ Keybindings
