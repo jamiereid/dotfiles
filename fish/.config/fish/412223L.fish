@@ -4,9 +4,9 @@ set -gx LIBGL_ALWAYS_INDIRECT 1
 
 # hack for wsl?
 cd $HOME
-doas ~/.local/bin/dnsfix
+#doas ~/.local/bin/dnsfix
 
 #abbr -a doxfx mono /opt/docfx-git/docfx.exe
-abbr -a t setsid xfce4-terminal
+#abbr -a t setsid xfce4-terminal
 
 set __fish_prompt_lastchar '::'
