@@ -3,65 +3,68 @@
 	email = jamie@jre.id.au
 
 [core]
-    editor = nvim
-    pager = less -+$LESS -FRX
-    hooksPath = ~/.githooks
-    excludesfile = /Users/jam/.gitignore_global
+	editor = nvim
+	pager = less -+$LESS -FRX
+	hooksPath = ~/.githooks
+	excludesfile = /Users/jam/.gitignore_global
 
 [alias]
-    co = checkout
-    cl = clone
-    df = diff
-    br = branch
-    lg = log --graph --oneline --format='%C(green)%h%C(auto)%d%Creset %C(magenta)%aN%Creset %s %C(yellow)%cr%Creset'
-    rs = reset
-    rh = reset --hard
-    sm = submodule
-    st = status
-    up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
-    unstage = reset HEAD --
-    last = log -1 HEAD
-    wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+	co = checkout
+	cl = clone
+	df = diff
+	br = branch
+	lg = log --graph --oneline --format='%C(green)%h%C(auto)%d%Creset %C(magenta)%aN%Creset %s %C(yellow)%cr%Creset'
+	rs = reset
+	rh = reset --hard
+	sm = submodule
+	st = status
+	up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 
 [color]
-    ui = true
-    diff = auto
-    grep = auto
-    branch = auto
+	ui = true
+	diff = auto
+	grep = auto
+	branch = auto
 
 [diff]
-    tool = vimdiff
+	tool = vimdiff
 
 [grep]
-    extendRegexp = true
-    lineNumber = true
+	extendRegexp = true
+	lineNumber = true
 
 [url "https://aur.archlinux.org/"]
-    insteadOf = "aur:"
+	insteadOf = "aur:"
 
 [url "https://github.com/"]
-    insteadOf = "gh:"
+	insteadOf = "gh:"
 
 [url "git@github.com:"]
-    pushInsteadOf = "gh:"
+	pushInsteadOf = "gh:"
 
 [url "git@ssh.dev.azure.com:v3/ACTGovernment/NCS/"]
-    insteadOf = "work:"
+	insteadOf = "work:"
 
 [url "git@git.sr.ht:~"]
-    insteadOf = "srht:"
+	insteadOf = "srht:"
 
 [sendemail]
-    smtpserver = /usr/bin/msmtp
+	smtpserver = /usr/bin/msmtp
 
 [filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 
 [init]
 	defaultBranch = main
 
 [includeIf "gitdir:~/p/work/"]
 	path = ~/.gitconfig-workemail
+
+[commit]
+	template = ~/.gitmessage
