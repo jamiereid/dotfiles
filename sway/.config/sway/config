@@ -9,10 +9,11 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term alacritty
-font pango:Liberation Mono 9, DejaVu Sans Mono 9
+#font pango:Liberation Mono 9, DejaVu Sans Mono 9
+font pango:Iosevka 9
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu rofi -show run -p 'run: ' -font 'Liberation Mono 10' -theme 'glue_pro_blue' -monitor `sway_current_monitor` | xargs swaymsg exec
+set $menu rofi -show run -p 'run: ' -font 'Iosevka 10' -theme 'glue_pro_blue' -monitor `sway_current_monitor` | xargs swaymsg exec
 set $lock_script $HOME/.local/bin/lock
 set $sleep $lock_script && sleep 3 && systemctl suspend
 set $laptop_screen 'eDP-1'
