@@ -1,5 +1,6 @@
 require('core')
--- require('packages')
+require('packages')
+require('packages-config')
 -- require('autocmds')
 require('keymap')
 vim.cmd('source ~/.config/nvim/to_migrate.vim')

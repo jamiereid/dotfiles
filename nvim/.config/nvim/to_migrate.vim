@@ -1,45 +1,3 @@
-set nocompatible              " To be sure it's done, force nocompatible mode
-filetype off                  " turn file type detection off while plugins load
-
-set shell=/bin/bash           " Fish doesn't play all that well with others
-let mapleader = "\<Space>"
-
-""" Plugins
-"call plug#begin()             " get ready to define some plugins using plug.vim
-"                              " (in autoload directory)
-"
-"Plug 'ciaranm/securemodelines'       " make sure modelines can't do bad stuff
-"Plug 'editorconfig/editorconfig-vim' " load .editorconfig if it exists
-"Plug 'machakann/vim-highlightedyank' " make the yanked region apparent!
-"Plug 'andymass/vim-matchup'          " extended '%' and match highlighting
-"Plug 'tpope/vim-surround'            " (c)hange(s)urround etc
-"Plug 'tpope/vim-fugitive'            " Git!
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'              " fzf <3 vim
-""Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'cespare/vim-toml'
-"Plug 'stephpy/vim-yaml'
-"Plug 'rust-lang/rust.vim'
-"Plug 'fatih/vim-go'
-"Plug 'dag/vim-fish'
-"Plug 'plasticboy/vim-markdown'
-"Plug 'godlygeek/tabular'
-"Plug 'momota/cisco.vim'
-"Plug 'Glench/Vim-Jinja2-Syntax'
-"Plug 'ekalinin/Dockerfile.vim'
-"Plug 'easymotion/vim-easymotion'
-"
-""Plug 'sevko/vim-nand2tetris-syntax'
-""Plug 'tikhomirov/vim-glsl'
-"
-"Plug 'kyazdani42/nvim-web-devicons'
-"Plug 'kyazdani42/nvim-tree.lua'
-"
-""Plug 'vim-syntastic/syntastic'
-"Plug 'dense-analysis/ale'
-"
-"call plug#end()
-
 autocmd FileType python   setlocal et   ts=4 sw=4
 autocmd FileType mytodo   setlocal et   ts=2 sw=2 colorcolumn=
 autocmd FileType scss     setlocal et   ts=2 sw=2
@@ -71,48 +29,6 @@ if has("autocmd")
   au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-""" Editor settings
-
-" warnin line at 80, danger at 120+
-let &colorcolumn="80,".join(range(120,999),",")
-
-"" securemodelines settings
-let g:secure_modelines_allowed_items = [
-                \ "textwidth",   "tw",
-                \ "softtabstop", "sts",
-                \ "tabstop",     "ts",
-                \ "shiftwidth",  "sw",
-                \ "expandtab",   "et",   "noexpandtab", "noet",
-                \ "filetype",    "ft",
-                \ "foldmethod",  "fdm",
-                \ "readonly",    "ro",   "noreadonly", "noro",
-                \ "rightleft",   "rl",   "norightleft", "norl",
-                \ "colorcolumn"
-                \ ]
-
-"" editorconfig-vim settings
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*'] " play nice
-                                                                    " with fugitive
-                                                                    " and scp
-
-"" fzf settings
-let g:fzf_layout = { 'down': '~20%' }
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-function! s:list_cmd()
-  let base = fnamemodify(expand('%'), ':h:.:S')
-  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow | proximity-sort %s', shellescape(expand('%')))
-endfunction
-
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
-  \                               'options': '--tiebreak=index'}, <bang>0)
-
 " use ag if it's around
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
@@ -128,10 +44,10 @@ endif
 "      \ coc#refresh()
 "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+""function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
 " use <c-.> to trigger completion.
 "inoremap <silent><expr> <c-.> coc#refresh() 
@@ -151,81 +67,7 @@ endfunction
 "  endif
 "endfunction
 
-"" rust
-let g:rustfmt_autosave = 1
-let g:rustfmt_emit_files = 1
-let g:rustfmt_fail_silently = 0
-let g:rust_clip_command = 'xclip -selection clipboard'
-"let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 
-"" Golang
-let g:go_play_open_browser = 0
-let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "goimports"
-"let g:go_bin_path = expand("~/dev/go/bin")
-
-"" vim-markdown settings
-let g:vim_markdown_new_list_item_indent = 1
-let g:vim_markdown_auto_insert_bullets = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_new_list_item_indent = 2  " default is 4
-let g:vim_markdown_folding_level = 1
-"let g:vim_markdown_override_foldtext = 0
-let g:vim_markdown_folding_style_pythonic = 1
-nnoremap <leader>mt :TableFormat<CR>
-nnoremap <leader>mh :Toc<CR>
-
-"" nvim-tree settings
-"let g:nvim_tree_width = 40 "30 by default, can be width_in_columns or 'width_in_percent%'
-"let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-"let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
-"let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
-"let g:nvim_tree_follow_update_path = 1 "0 by default, will update the path of the current dir if the file is not inside the tree. Default is 0
-"let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
-"let g:nvim_tree_hide_dotfiles = 1 "0 by default, this option hides files and folders starting with a dot `.`
-"let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
-"let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
-"let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
-"let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
-" default will show icon by default if no icon is provided
-" default shows no icon by default
-"let g:nvim_tree_icons = {
-"    \ 'default': '',
-"    \ 'symlink': '',
-"    \ 'git': {
-"    \   'unstaged': "✗",
-"    \   'staged': "✓",
-"    \   'unmerged': "",
-"    \   'renamed': "➜",
-"    \   'untracked': "★",
-"    \   'deleted': "",
-"    \   'ignored': "◌"
-"    \   },
-"    \ 'folder': {
-"    \   'arrow_open': "",
-"    \   'arrow_closed': "",
-"    \   'default': "",
-"    \   'open': "",
-"    \   'empty': "",
-"    \   'empty_open': "",
-"    \   'symlink': "",
-"    \   'symlink_open': "",
-"    \   },
-"    \   'lsp': {
-"    \     'hint': "",
-"    \     'info': "",
-"    \     'warning': "",
-"    \     'error': "",
-"    \   }
-"    \ }
-
-nnoremap <C-n> :NvimTreeToggle<CR>
-"nnoremap <leader>r :NvimTreeRefresh<CR>
-"nnoremap <leader>n :NvimTreeFindFile<CR>
-" NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
-
-" a list of groups can be found at `:help nvim_tree_highlight`
-"highlight NvimTreeFolderIcon guibg=blue
 
 " Syntastic
 "set statusline+=%#warningmsg#
@@ -236,15 +78,6 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
-
-" ALE
-set completeopt=menu,menuone,preview,noselect,noinsert
-let g:ale_completion_enabled = 1
-nnoremap <C-LeftMouse> :ALEGoToDefinition<CR>
-let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
-let g:ale_linters = {
-\  'rust': ['analyzer'],
-\}
 
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" : "\<TAB>"
