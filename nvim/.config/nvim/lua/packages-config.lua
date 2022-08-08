@@ -28,6 +28,18 @@ vim.g["sneak#label"] = 1
 --nnoremap <leader>mt :TableFormat<CR>
 --nnoremap <leader>mh :Toc<CR>
 
+-- lsp
+local signs = {
+  { name = "DiagnosticSignError", text = "✘" },
+  { name = "DiagnosticSignWarn", text = "!!" },
+  { name = "DiagnosticSignHint", text = "☀" },
+  { name = "DiagnosticSignInfo", text = " i"},
+}
+
+for _, sign in ipairs(signs) do
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+
 -- rust
 vim.g.rustfmt_autosave = 1
 --vim.g.rustfmt_emit_files = 1
@@ -42,3 +54,6 @@ end
 require('lspconfig')['pyright'].setup{
 	on_attach = python_custom_attach
 }
+
+-- colorizer
+require('colorizer').setup()

@@ -13,7 +13,7 @@ let g:colors_name = "naysayer"
 
 hi IncSearch guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 "hi WildMenu -- no settings --
-"hi SignColumn -- no settings --
+hi SignColumn ctermbg=23 guibg=#072627
 "hi TabLineSel -- no settings --
 "hi CTagsMember -- no settings --
 "hi CTagsGlobalConstant -- no settings --
@@ -107,3 +107,6 @@ hi pythonexception guifg=#f00000 guibg=NONE guisp=NONE gui=NONE ctermfg=196 cter
 hi pythonbuiltinfunction guifg=#009000 guibg=NONE guisp=NONE gui=NONE ctermfg=28 ctermbg=NONE cterm=NONE
 hi pythonoperator guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi pythonexclass guifg=#009000 guibg=NONE guisp=NONE gui=NONE ctermfg=28 ctermbg=NONE cterm=NONE
+hi DiagnosticVirtualTextWarn guifg=#7D560F
+hi DiagnosticVirtualTextError guifg=#8B0000
+hi DiagnosticVirtualTextHint guifg=#9CA8A9

@@ -7,6 +7,7 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-surround'             -- (c)hange(s)urround etc
 	use 'justinmk/vim-sneak'             -- jump to a location specified by two chars
 	use 'airblade/vim-rooter'            -- change vim's pwd to the project root when opening file
+	use 'norcalli/nvim-colorizer.lua'    -- high-performance color highlighter
 
 	-- lsp support
 	use 'neovim/nvim-lspconfig'
