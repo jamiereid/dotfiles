@@ -34,3 +34,11 @@ vim.g.rustfmt_autosave = 1
 --vim.g.rustfmt_fail_silently = 0
 --vim.g.rust_clip_command = 'xclip -selection clipboard'
 require('rust-config')
+
+-- python
+local python_custom_attach = function(client)
+	print("LSP started.");
+end
+require('lspconfig')['pyright'].setup{
+	on_attach = python_custom_attach
+}
