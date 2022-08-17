@@ -1,5 +1,10 @@
 # fix rustup not adding path for fish (https://github.com/rust-lang/rustup.rs/issues/478)
 
+# check if brew is installed, if so, we need to do some extra things before we continue
+if test -e /opt/homebrew/bin/brew
+  eval (/opt/homebrew/bin/brew shellenv)
+end
+
 set -gx EDITOR vim
 set -gx LANG en_US.UTF-8
 

@@ -21,10 +21,10 @@ font:
   normal:
     family: Iosevka
   bold:
-    family: monospace
+    family: Iosevka
   italic:
-    family: monospace
-  size: 11.0
+    family: Iosevka
+  size: 18.0
 
   offset:
     x: 0
