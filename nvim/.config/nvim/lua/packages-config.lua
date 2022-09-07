@@ -31,7 +31,7 @@ vim.g["sneak#label"] = 1
 -- lsp
 local signs = {
   { name = "DiagnosticSignError", text = "✘" },
-  { name = "DiagnosticSignWarn", text = "!!" },
+  { name = "DiagnosticSignWarn", text = " !" },
   { name = "DiagnosticSignHint", text = "☀" },
   { name = "DiagnosticSignInfo", text = " i"},
 }
@@ -51,9 +51,38 @@ require('rust-config')
 local python_custom_attach = function(client)
 	print("LSP started.");
 end
-require('lspconfig')['pyright'].setup{
-	on_attach = python_custom_attach
+--require('lspconfig')['pyright'].setup{
+--	on_attach = python_custom_attach
+--}
+
+require('lspconfig')['pylsp'].setup{
+	settings = {
+		pylsp = {
+			configurationSources = {'flake8', 'mypy'},
+			plugins = {
+				pycodestyle = {enabled = false},
+				mccabe      = {enabled = false},
+				pyflakes    = {enabled = false},
+				flake8      = {enabled = true},
+				mypy        = {enabled = true},
+			}
+		}
+	},
+	on_attach = python_custom_attach,
 }
 
 -- colorizer
 require('colorizer').setup()
+
+-- vimwiki
+vim.g.vimwiki_list = { { path = '~/n', syntax = 'markdown', ext = '.md' } }
+vim.g.vimwiki_global_ext = 0
+
+-- telescope-file-browser
+require("telescope").load_extension "file_browser"
+vim.api.nvim_set_keymap(
+  "n",
+  "<space>fb",
+  ":Telescope file_browser<enter>",
+  { noremap = true }
+)
