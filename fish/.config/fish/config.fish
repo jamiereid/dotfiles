@@ -53,6 +53,10 @@ if command -v drill > /dev/null
     abbr -a dig 'drill'
 end
 
+if command -v bat > /dev/null
+    abbr -a cat 'bat'
+end
+
 set -g fish_prompt_pwd_dir_length 3
 set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showdirtystate 'yes'
