@@ -1,6 +1,7 @@
 aerc/.config/aerc/accounts.conf
 fish/.config/fish/fishd.1c1b0d066ea1
 fish/.config/fish/fish_variables
+fish/.config/fish/local.fish
 nvim/.config/nvim/.netrwhist
 nvim/.config/nvim/plugged/
 nvim/.config/nvim/spell/

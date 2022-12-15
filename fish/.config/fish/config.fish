@@ -20,12 +20,12 @@ set -gx FZF_DEFAULT_OPTS '--height 20%'
 
 set fish_greeting
 
-# auto load tmux unless we're already in tmux, or on tty1
+# auto load tmux unless we're already in tmux, on tty1, or in vscode
 if status --is-interactive; \
 and not string match -q "tmux*" $TERM; \
 and not string match -eq "/dev/tty1" (tty); \
-or set -q WSLENV
-    tmux new-session -A -s main 2> /dev/null; and exec true
+and not string length -q $VSCODE_GIT_ASKPASS_NODE
+	tmux new-session -A -s main 2> /dev/null; and exec true
 end
 
 abbr -a gs 'git status'
@@ -55,6 +55,10 @@ end
 
 if command -v bat > /dev/null
     abbr -a cat 'bat'
+end
+
+if command -v rg > /dev/null
+    abbr -a grep 'rg'
 end
 
 set -g fish_prompt_pwd_dir_length 3
@@ -105,6 +109,10 @@ set __fish_prompt_lastchar '$'
 
 if test -e ~/.config/fish/(uname -n).fish
     source ~/.config/fish/(uname -n).fish
+end
+
+if test -e ~/.config/fish/local.fish
+    source ~/.config/fish/local.fish
 end
 
 function fish_prompt

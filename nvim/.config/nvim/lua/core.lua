@@ -29,6 +29,9 @@ vim.opt.tabstop       = 4                   -- 1 tab == 4 spaces
 vim.opt.list          = true                -- show whitespace as special chars - see listchars
 vim.opt.listchars     = {tab = "» " , extends = '›', precedes = '‹', nbsp = '·', trail = '·'}
 
+vim.opt.conceallevel  = 2
+vim.opt.concealcursor = 'nc'
+
 vim.opt.formatoptions = 'tc'       -- wrap text and comments using textwidth
 vim.opt.formatoptions:append('r')  -- continue comments when pressing ENTER in I mode
 vim.opt.formatoptions:append('q')  -- enable formatting of comments with gq

@@ -38,4 +38,9 @@ return require('packer').startup(function(use)
 	use 'Glench/Vim-Jinja2-Syntax'
 
 	use 'vimwiki/vimwiki'
+
+	--- org-mode
+	use 'nvim-treesitter/nvim-treesitter'
+	use 'nvim-orgmode/orgmode'
+	use 'akinsho/org-bullets.nvim'
 end)
