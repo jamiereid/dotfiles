@@ -37,10 +37,15 @@ return require('packer').startup(function(use)
 	use 'rust-lang/rust.vim'
 	use 'Glench/Vim-Jinja2-Syntax'
 
-	use 'vimwiki/vimwiki'
+	--use 'vimwiki/vimwiki'
 
 	--- org-mode
 	use 'nvim-treesitter/nvim-treesitter'
-	use 'nvim-orgmode/orgmode'
-	use 'akinsho/org-bullets.nvim'
+	--use 'nvim-orgmode/orgmode'
+	--use 'akinsho/org-bullets.nvim'
+	
+	--- wiki
+	use 'lervag/wiki.vim'
+	use 'habamax/vim-asciidoctor'
+	use 'itchyny/calendar.vim'
 end)

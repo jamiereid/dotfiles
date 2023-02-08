@@ -75,8 +75,8 @@ require('lspconfig')['pylsp'].setup{
 require('colorizer').setup()
 
 -- vimwiki
-vim.g.vimwiki_list = { { path = '~/n', syntax = 'markdown', ext = '.md' } }
-vim.g.vimwiki_global_ext = 0
+--vim.g.vimwiki_list = { { path = '~/n', syntax = 'markdown', ext = '.md' } }
+--vim.g.vimwiki_global_ext = 0
 
 -- telescope-file-browser
 require("telescope").load_extension "file_browser"
