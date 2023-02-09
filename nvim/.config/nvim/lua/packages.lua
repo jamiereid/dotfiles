@@ -23,8 +23,8 @@ return require('packer').startup(function(use)
 	use 'ray-x/lsp_signature.nvim'
 
 	--  because nvim-cmp _requires_ snippets
-	use {'hrsh7th/cmp-vsnip', branch = 'main'}
-	use 'hrsh7th/vim-vsnip'
+	--use {'hrsh7th/cmp-vsnip', branch = 'main'}
+	--use 'hrsh7th/vim-vsnip'
 
 	-- syntax
 	use 'cespare/vim-toml'
@@ -48,4 +48,7 @@ return require('packer').startup(function(use)
 	use 'lervag/wiki.vim'
 	use 'habamax/vim-asciidoctor'
 	use 'itchyny/calendar.vim'
+
+	use 'dcampos/nvim-snippy'
+	use 'dcampos/cmp-snippy'
 end)

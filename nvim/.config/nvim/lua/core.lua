@@ -68,3 +68,8 @@ vim.opt.colorcolumn = '80'  -- @TODO revisit this, there is likely a better way
 for x=120,999 do
 	vim.opt.colorcolumn:append(tostring(x))
 end
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "help",
+	command = "wincmd L"
+})
