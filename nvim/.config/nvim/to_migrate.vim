@@ -19,6 +19,7 @@ autocmd FileType glsl     setlocal et   ts=4 sw=4
 autocmd BufNewFile,BufRead todo.txt set ft=mytodo spell textwidth=0 colorcolumn=0
 autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
 autocmd BufNewFile,BufRead todo.md set ft=mytodo
+autocmd BufNewFile,BufRead *.todo set ft=mytodo
 
 " Prevent accidental writes to buffers that shouldn't be edited
 autocmd BufRead *.orig set readonly
