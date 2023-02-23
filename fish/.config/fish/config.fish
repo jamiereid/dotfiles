@@ -107,8 +107,8 @@ end
 
 set __fish_prompt_lastchar '$'
 
-if test -e ~/.config/fish/(uname -n).fish
-    source ~/.config/fish/(uname -n).fish
+if test -e ~/.config/fish/(uname -n|cut -d. -f1).fish
+    source ~/.config/fish/(uname -n|cut -d. -f1).fish
 end
 
 if test -e ~/.config/fish/local.fish
@@ -116,5 +116,5 @@ if test -e ~/.config/fish/local.fish
 end
 
 function fish_prompt
-    printf '%s %s %s%s ' (uname -n) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
+    printf '%s %s %s%s ' (uname -n|cut -d. -f1) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
 end
