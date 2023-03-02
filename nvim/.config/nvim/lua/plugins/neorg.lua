@@ -9,6 +9,35 @@ return {
 					config = {
 						icon_preset = "diamond",
 						folds = true,
+						icons = {
+							todo = {
+								enable = true,
+								recurring = {
+									icon = "",
+								},
+								pending = {
+									icon = "",
+								},
+								uncertain = {
+									icon = "?",
+								},
+								urgent = {
+									icon = "",
+								},
+								on_hold = {
+									icon = "",
+								},
+								cancelled = {
+									icon = "",
+								},
+								undone = {
+									icon = " ",
+								},
+								done = {
+									icon = "✓",
+								},
+							},
+						},
 					},
 				},
 				["core.norg.dirman"] = {

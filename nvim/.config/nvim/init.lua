@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 -- load core defaults (eg. mapleader)
 require("core")
 require("keymap")
+require("globals")
 
 -- load plugins (lazy.vim style)
 require("lazy").setup("plugins")
@@ -23,3 +24,5 @@ require("autocmds")
 
 -- load things we havn't moved to lua yet...
 vim.cmd('source ~/.config/nvim/to_migrate.vim')
+
+require("after")

@@ -4,4 +4,5 @@ return {
 	"dag/vim-fish",
 	"godlygeek/tabular", -- http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 	"momota/cisco.vim",
+	"milisims/nvim-luaref",
 }
