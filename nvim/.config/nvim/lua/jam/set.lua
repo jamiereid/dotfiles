@@ -1,9 +1,5 @@
---
--- core.lua
---
-
-local range = require('lua-range.init')
 HOME = os.getenv("HOME")
+local range = require('lua-range.init')
 
 vim.opt.shell         = '/bin/bash'         -- fish doesn't play well with others
 vim.opt.autoindent    = true
@@ -43,8 +39,6 @@ vim.opt.ignorecase    = true  -- ignore case in search...
 vim.opt.smartcase     = true  -- ...except if pattern has an uppercase
 
 vim.opt.gdefault      = true  -- always /g in substitute
--- vim.opt.guioptions -= 'T'  -- Remove toolbar in win32
--- vim.opt.lazyredraw = true  -- buffer screen updates instead of redrawing
 
 vim.opt.visualbell = true                -- No more beeps
 vim.opt.backspace  = 'indent,eol,start'  -- Backspace over newlines
@@ -68,3 +62,4 @@ vim.opt.colorcolumn = '80'  -- @TODO revisit this, there is likely a better way
 for x=120,999 do
 	vim.opt.colorcolumn:append(tostring(x))
 end
+
