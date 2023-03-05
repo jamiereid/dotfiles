@@ -9,6 +9,8 @@ return {
 				"rust",
 				"help",
 				"python",
+				"bash",
+				"yaml"
 			},
 		},
 		config = function(_, opts)

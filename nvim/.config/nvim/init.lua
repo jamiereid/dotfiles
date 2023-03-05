@@ -11,18 +11,17 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- load core defaults (eg. mapleader)
-require("core")
-require("keymap")
-require("globals")
+require("jam")
+require("core") -- TODO move to jam
+require("globals") -- TODO move to jam
 
 -- load plugins (lazy.vim style)
 require("lazy").setup("plugins")
 
 -- load other things
-require("autocmds")
+require("autocmds") -- TODO move to after/jam
 
 -- load things we havn't moved to lua yet...
 vim.cmd('source ~/.config/nvim/to_migrate.vim')
 
-require("after")
+require("after") -- TODO this should just be dir..

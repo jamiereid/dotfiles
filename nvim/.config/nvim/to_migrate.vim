@@ -19,7 +19,6 @@ autocmd FileType glsl     setlocal et   ts=4 sw=4
 autocmd BufNewFile,BufRead todo.txt set ft=mytodo spell textwidth=0 colorcolumn=0
 autocmd BufNewFile,BufReadPre *.md setlocal conceallevel=0 textwidth=0 colorcolumn=0 spell
 autocmd BufNewFile,BufRead todo.md set ft=mytodo
-autocmd BufNewFile,BufRead todo.norg set ft=mytodo
 autocmd BufNewFile,BufRead *.todo set ft=mytodo
 
 " Prevent accidental writes to buffers that shouldn't be edited
@@ -88,14 +87,10 @@ inoremap <silent><expr> <Tab>
 
 
 """ Keybindings
-map <C-p> :Files<CR>
-nmap <leader>; :Buffers<CR>
 nmap <leader>w :w<CR>
 nnoremap <leader>pp :set paste<CR>
 
 " Search results centered please
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
@@ -106,14 +101,10 @@ nnoremap / /\v
 cnoremap %s/ %sm/
 
 " move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Folding shortcuts
-nnoremap <space>f za
-vnoremap <space>f zf
+"map <C-j> <C-W>j
+"map <C-k> <C-W>k
+"map <C-h> <C-W>h
+"map <C-l> <C-W>l
 
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
