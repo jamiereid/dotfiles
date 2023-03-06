@@ -24,3 +24,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- replace word under cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- move between windows
+vim.keymap.set("n", "<C-j>", function() vim.api.nvim_command('winc j') end)
+vim.keymap.set("n", "<C-k>", function() vim.api.nvim_command('winc k') end)
+vim.keymap.set("n", "<C-h>", function() vim.api.nvim_command('winc h') end)
+vim.keymap.set("n", "<C-l>", function() vim.api.nvim_command('winc l') end)
