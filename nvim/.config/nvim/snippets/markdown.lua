@@ -2,9 +2,7 @@ return {
 	s("meeting", fmt([[
 ### {}
     Time: {}
-    Attendees: [
-	    {}
-    ]
+    Attendees: [ '{}' ]
 
 #### Goals / agenda
      -
@@ -13,7 +11,7 @@ return {
      - {}
 
 #### Action items
-     - [ ] ]],
+     - [ ]  ]],
 	 {
 		 i(1, "meeting title"),
 		 t(os.date("%H:%M")),
@@ -24,9 +22,7 @@ return {
 	s("journal", fmt([[
 ---
 creation: {}
-tags: [
-	daily-note
-]
+tags: [ 'daily-note' ]
 ---
 
 # Daily Log
