@@ -7,4 +7,5 @@ return {
 	"milisims/nvim-luaref",
 	"folke/neodev.nvim",
 	"folke/trouble.nvim",
+	"folke/todo-comments.nvim",
 }

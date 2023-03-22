@@ -181,26 +181,29 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 "@Todo @Incomplete @Cleanup @Factor @Robustness @Hardcoded
 "@Note
 "@Broken @BROKEN @Hack @Bug
-highlight TagOrange guifg=#cc7700
-highlight TagGrey   guifg=#aeaeae
-highlight TagRed    guifg=#aa0000
-highlight TagGreen  guifg=#60d952
-augroup myHighlights
-    autocmd!
-    autocmd syntax match TagOrange /\v[@]<(Todo|Incomplete|Speed|Cleanup|Factor|Robustness|Hardcoded)/ containedin=.*Comment,vimCommentTitle
-    autocmd syntax match TagGrey   /\v[@]<(Note)/ containedin=.*Comment,vimCommentTitle
-    autocmd syntax match TagRed    /\v[@]<(Broken|BROKEN|Hack|Bug)/ containedin=.*Comment,vimCommentTitle
-augroup end
-
-highlight link myHighlights Todo
+"highlight TagOrange guifg=#cc7700
+"highlight TagGrey   guifg=#aeaeae
+"highlight TagRed    guifg=#aa0000
+"highlight TagGreen  guifg=#60d952
+"augroup myHighlights
+"    autocmd!
+"    autocmd syntax match TagOrange /\v[@]<(Todo|Incomplete|Speed|Cleanup|Factor|Robustness|Hardcoded)/ containedin=.*Comment,vimCommentTitle
+"    autocmd syntax match TagGrey   /\v[@]<(Note)/ containedin=.*Comment,vimCommentTitle
+"    autocmd syntax match TagRed    /\v[@]<(Broken|BROKEN|Hack|Bug)/ containedin=.*Comment,vimCommentTitle
+"augroup end
+"
+"highlight link myHighlights Todo
+" TODO move these settings into todo-comments.nvim config
+" NOTE
+" FIX
 
 "" markdown additional highlights
-augroup ft_markdown
-    autocmd!
-    autocmd Syntax markdown syn match TagOrange /^TODO/ containedin=ALL
-    autocmd Syntax markdown syn match TagGrey   /\v^(QUESTION|DECISION)/ containedin=ALL
-    autocmd Syntax markdown syn match TagGreen  /^DONE/ containedin=ALL
-augroup end
+"augroup ft_markdown
+"    autocmd!
+"    autocmd Syntax markdown syn match TagOrange /^TODO/ containedin=ALL
+"    autocmd Syntax markdown syn match TagGrey   /\v^(QUESTION|DECISION)/ containedin=ALL
+"    autocmd Syntax markdown syn match TagGreen  /^DONE/ containedin=ALL
+"augroup end
 
 "" MyTodo overrides
 "hi todoHeading      ctermfg=white guifg=white cterm=bold gui=bold
