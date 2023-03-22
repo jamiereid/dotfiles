@@ -6,4 +6,5 @@ return {
 	"momota/cisco.vim",
 	"milisims/nvim-luaref",
 	"folke/neodev.nvim",
+	"folke/trouble.nvim",
 }

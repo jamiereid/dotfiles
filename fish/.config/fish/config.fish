@@ -33,6 +33,10 @@ abbr -a gc 'git commit -m'
 abbr -a ga 'git add -p'
 abbr -a gl 'git lg'
 abbr -a gd 'git diff'
+abbr -a gw 'git worktree'
+abbr -a gwa 'git worktree add'
+abbr -a gwl 'git worktree list'
+abbr -a gwr 'git worktree remove'
 abbr -a httpserver 'python -m http.server 8000'
 
 if command -v exa > /dev/null

@@ -44,6 +44,8 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+require('lspconfig').ansiblels.setup{}
+
 lsp.setup()
 
 vim.diagnostic.config({
