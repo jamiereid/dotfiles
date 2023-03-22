@@ -48,7 +48,7 @@ vim.opt.ruler      = true                -- Where am I?
 vim.opt.synmaxcol  = 500                 -- stop looking for syntax items after x columns (eg. a looong single line file)
 
 vim.opt.laststatus = 3                   -- use neovim global statusline
-vim.opt.winbar     = '%=%m %f'           -- right side, modifed? filepath
+--vim.opt.winbar     = '%=%m %f'           -- right side, modifed? filepath
 
 vim.opt.diffopt:append('iwhite')              -- No whitespace in vimdiff
 vim.opt.diffopt:append('algorithm:patience')  -- Make diffing better: https://vimways.org/2018/the-power-of-diff/
