@@ -8,4 +8,5 @@ return {
 	"folke/neodev.nvim",
 	"folke/trouble.nvim",
 	"folke/todo-comments.nvim",
+	"terrortylor/nvim-comment",
 }
