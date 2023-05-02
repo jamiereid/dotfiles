@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -eo pipefail
+
+usage() {
+    printf "Wrapper for ip-ipam-lookup.py.\n"
+    printf "Look up an ip address in infoblox ipam\n"
+    printf "Syntax: %s <ip>\n" "$(basename "$0")"
+    exit 1
+}
+
+if [ -z "$1" ]; then
+    usage
+fi
+
+IP="$1"
+pushd ~/p/ncs_scripts.git/master > /dev/null
+pipenv run python ib-ipam-lookup.py "$IP"
+popd > /dev/null

@@ -1,0 +1,3 @@
+#!/bin/sh
+TZ='Australia/Sydney' date
+TZ='UTC' date

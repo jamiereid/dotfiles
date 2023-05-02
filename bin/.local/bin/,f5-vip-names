@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -eo pipefail
+
+usage() {
+	printf "Query a BIG-IP REST API for a list of VIPs present on the device.\n"
+	printf "Syntax: %s <user> <host>\n" "$(basename "$0")"
+	exit 1
+}
+
+if [ -z "$1" ]; then
+	usage
+fi
+
+if [ -z "$2" ]; then
+	usage
+fi
+
+USER="$1"
+HOST="$2"
+
+if [ -z "${TACACS}" ]; then
+	PASSWORD="${TACACS}"
+fi
+
+while [ -z "$PASSWORD" ]; do
+	stty -echo
+	printf "Please enter a password for %s: " "$USER"
+	read -r PASSWORD </dev/tty
+	stty echo
+	printf "\n"
+done
+
+printf "\n"
+curl -ks -u "$USER":"$PASSWORD" https://"$HOST"/mgmt/tm/ltm/virtual | jq -r '.items[] | {name}' | awk '/name/ {gsub(/"/, "", $2); print $2}' | sort -f

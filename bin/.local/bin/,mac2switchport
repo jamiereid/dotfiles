@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -eo pipefail
+
+usage() {
+	printf "Query the Switch Port Mapper webapi of an AKiPS box.\n"
+	printf "Syntax: %s <mac>\n" "$(basename "$0")"
+	exit 1
+}
+
+if [ -z "$1" ]; then
+	usage
+fi
+
+MAC="$1"
+
+
+if [ ! -z "${AKIPS_HOST}" ]; then
+	HOST="${AKIPS_HOST}"
+fi
+
+if [ ! -z "${AKIPS_RO_PASSWORD}" ]; then
+	PASSWORD="${AKIPS_RO_PASSWORD}"
+fi
+
+while [ -z "$HOST" ]; do
+	printf "Please enter a AKiPS host: "
+	read -r HOST </dev/tty
+	printf "\n"
+done
+
+while [ -z "$PASSWORD" ]; do
+	stty -echo
+	printf "Please enter the ro password for %s: " "$HOST"
+	read -r PASSWORD </dev/tty
+	stty echo
+	printf "\n"
+done
+
+if [ -z "$2" ]; then
+	curl -ks "https://"$HOST"/api-spm?password="$PASSWORD";mac="$MAC"" | awk -F, "{print \"MAC:,\" \$1 \"\nVendor:,\" \$2 \"\nSwitch:,\" \$3\"\nSwitch port:,\" \$4\"\nVLAN Name:,\" \$5 \"\nIP:,\" \$6}" | column -t -s ","
+else
+	curl -ks "https://"$HOST"/api-spm?password="$PASSWORD";mac="$MAC""
+fi
+
