@@ -12,6 +12,11 @@ set -gx GOPATH ~/.local/share/go/
 set -gx GOBIN ~/.local/share/go/bin
 set -gx PATH ~/.local/bin ~/.cargo/bin $GOPATH/bin $PATH
 
+
+if command -v bob > /dev/null
+    set -gx PATH ~/.local/share/bob/nvim-bin $PATH
+end
+
 set -gx NOTES_DIR ~/n
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --follow'
@@ -46,6 +51,7 @@ else
     abbr -a ll 'ls -la'
 end
 
+
 if command -v nvim > /dev/null
     abbr -a vi 'nvim'
     abbr -a vim 'nvim'
@@ -57,7 +63,10 @@ if command -v drill > /dev/null
     abbr -a dig 'drill'
 end
 
-if command -v bat > /dev/null
+# Debian packages bat with the binary and manpages renamed to batcat
+if command -v batcat > /dev/null
+    abbr -a cat 'batcat'
+else if command -v bat > /dev/null
     abbr -a cat 'bat'
 end
 
