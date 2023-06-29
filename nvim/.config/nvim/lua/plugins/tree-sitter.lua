@@ -10,7 +10,8 @@ return {
 				"help",
 				"python",
 				"bash",
-				"yaml"
+				"yaml",
+				"javascript"
 			},
 		},
 		config = function(_, opts)

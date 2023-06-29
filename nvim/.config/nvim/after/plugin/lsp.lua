@@ -4,6 +4,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 	'rust_analyzer',
+	'tsserver'
 })
 
 local cmp = require('cmp')
@@ -44,6 +45,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 require('lspconfig').ansiblels.setup{}
+require('lspconfig').tsserver.setup{}
 
 lsp.setup()
 
