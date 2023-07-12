@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -eo pipefail
+
+usage() {
+	printf "Perform a dns lookup for a list of entries against a given server\n"
+	printf "Syntax: %s <file_one_per_line> <dns_server>\n" "$(basename "$0")"
+	exit 1
+}
+
+if [ -z "$1" ]; then
+	usage
+fi
+
+if [ -z "$2" ]; then
+	usage
+fi
+
+DOMAIN_FILE="$1"
+DNS_SERVER="$2"
+
+WAIT_SECONDS_PER_LOOP=1
+for domain in $(cat $DOMAIN_FILE); do
+	ip=$(drill -Q @$DNS_SERVER $domain | tail -n1)
+	if [ -z "$ip" ]; then
+		echo "$domain,No DNS"
+	else
+		echo "$domain,$ip"
+	fi
+	sleep $loop_wait # avoid flooding the server
+done
