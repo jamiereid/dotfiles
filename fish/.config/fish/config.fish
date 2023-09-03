@@ -51,6 +51,12 @@ else
     abbr -a ll 'ls -la'
 end
 
+if command -v zoxide > /dev/null
+	zoxide init fish | source
+	abbr -a cd 'z'
+else
+	printf "%s\n" "zoxide not installed"
+end
 
 if command -v nvim > /dev/null
     abbr -a vi 'nvim'
@@ -72,6 +78,10 @@ end
 
 if command -v rg > /dev/null
     abbr -a grep 'rg'
+end
+
+if command -v rtx > /dev/null
+	rtx activate fish | source
 end
 
 set -g fish_prompt_pwd_dir_length 3
@@ -127,6 +137,8 @@ end
 if test -e ~/.config/fish/local.fish
     source ~/.config/fish/local.fish
 end
+
+
 
 function fish_prompt
     printf '%s %s %s%s ' (uname -n|cut -d. -f1) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
