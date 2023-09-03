@@ -19,11 +19,11 @@ draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: Iosevka
+    family: Iosevka Nerd Font
   bold:
-    family: Iosevka
+    family: Iosevka Nerd Font
   italic:
-    family: Iosevka
+    family: Iosevka Nerd Font
   size: 18.0
 
   offset:
