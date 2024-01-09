@@ -148,7 +148,7 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " toggle line numbers
-nnoremap <leader>l :set number!<CR>
+"nnoremap <leader>l :set number!<CR>
 "relativenumber!<CR>
 ":GitGutterBufferToggle<CR>
 

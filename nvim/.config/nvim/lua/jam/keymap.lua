@@ -30,3 +30,37 @@ vim.keymap.set("n", "<C-j>", function() vim.api.nvim_command('winc j') end)
 vim.keymap.set("n", "<C-k>", function() vim.api.nvim_command('winc k') end)
 vim.keymap.set("n", "<C-h>", function() vim.api.nvim_command('winc h') end)
 vim.keymap.set("n", "<C-l>", function() vim.api.nvim_command('winc l') end)
+
+-- toggle things for "clean" copy (eg with tmux)
+vim.g.diagnostics_active = true
+function _G.toggle_diagnostics()
+  if vim.g.diagnostics_active then
+    vim.g.diagnostics_active = false
+    vim.diagnostic.disable()
+  else
+    vim.g.diagnostics_active = true
+    vim.diagnostic.enable()
+  end
+end
+
+vim.keymap.set("n", "<leader>l", function()
+	if vim.o.number then
+		vim.opt.number = false
+	else
+		vim.opt.number = true
+	end
+
+	if vim.o.relativenumber then
+		vim.opt.relativenumber = false
+	else
+		vim.opt.relativenumber = true
+	end
+
+	if vim.o.signcolumn then
+		vim.o.signcolumn = "no"
+	else
+		vim.o.signcolumn = "yes"
+	end
+
+	toggle_diagnostics()
+end)

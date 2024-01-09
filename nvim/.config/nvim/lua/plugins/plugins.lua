@@ -9,4 +9,5 @@ return {
 	"folke/trouble.nvim",
 	"folke/todo-comments.nvim",
 	"terrortylor/nvim-comment",
+	"NoahTheDuke/vim-just",
 }
