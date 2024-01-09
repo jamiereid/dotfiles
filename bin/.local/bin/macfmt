@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -eo pipefail
+
+usage() {
+    printf "Print out a given mac address in different formats\n"
+    printf "Syntax: %s <mac>\n" "$(basename "$0")"
+    exit 1
+}
+
+if [ -z "$1" ]; then
+    usage
+fi
+
+IN="$1"
+
+# maybe somehow check we got a mac, right now we don't...
+
+IN_CLEAN_LOWER=$(echo "$IN" | tr -cd '[:xdigit:][:space:]' | tr '[:upper:]' '[:lower:]')
+IN_CLEAN_UPPER=$(echo "$IN" | tr -cd '[:xdigit:][:space:]' | tr '[:lower:]' '[:upper:]')
+CISCO=$(echo "$IN_CLEAN_LOWER" | sed 's/\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)/\1.\2.\3/g')
+CISCO_U=$(echo "$IN_CLEAN_UPPER" | sed 's/\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)/\1.\2.\3/g')
+LINUX=$(echo "$IN_CLEAN_LOWER" | sed 's/\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)/\1:\2:\3:\4:\5:\6/g')
+LINUX_U=$(echo "$IN_CLEAN_UPPER" | sed 's/\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)/\1:\2:\3:\4:\5:\6/g')
+HEX_NO_PREFIX=$(echo "$IN" | tr -cd '[:xdigit:][:space:]' | tr '[:upper:]' '[:lower:]')
+HEX_W_PREFIX=$(echo "$HEX_NO_PREFIX" | sed 's/\([[:xdigit:]]\{12\}\)/0x\1/g')
+ENTRASYS=$(echo "$IN_CLEAN_UPPER" | sed 's/\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)/\1-\2-\3-\4-\5-\6/g')
+ENTRASYS_L=$(echo "$IN_CLEAN_LOWER" | sed 's/\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)\([[:xdigit:]]\{2\}\)/\1-\2-\3-\4-\5-\6/g')
+BROADCOM=$(echo "$IN_CLEAN_UPPER" | sed 's/\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)/\1:\2:\3/g')
+BROADCOM_L=$(echo "$IN_CLEAN_LOWER" | sed 's/\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)/\1:\2:\3/g')
+DOTS_U=$(echo "$IN_CLEAN_UPPER" | sed 's/\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)/\1.\2.\3/g')
+DOTS_L=$(echo "$IN_CLEAN_LOWER" | sed 's/\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)\([[:xdigit:]]\{4\}\)/\1.\2.\3/g')
+
+TABLE=$(cat <<ENDOFTABLE
+Cisco:	$CISCO 	$CISCO_U
+Linux:	$LINUX 	$LINUX_U
+Hex:	$HEX_NO_PREFIX	$HEX_W_PREFIX
+Hyphen:	$ENTRASYS_L	$ENTRASYS
+Broadcom:	$BROADCOM	$BROADCOM_L
+Dots:	$DOTS_U	$DOTS_L
+ENDOFTABLE
+)
+
+#printf "Hex no prefix:\t%s\n" "$HEX_NO_PREFIX"
+#printf "Hex with prefix:\t%s\n" "$HEX_W_PREFIX"
+
+printf "$TABLE" | column -t -s"	"
