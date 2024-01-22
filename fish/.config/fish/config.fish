@@ -80,8 +80,8 @@ if command -v rg > /dev/null
     abbr -a grep 'rg'
 end
 
-if command -v rtx > /dev/null
-	rtx activate fish | source
+if command -v mise > /dev/null
+	mise activate fish | source
 end
 
 set -g fish_prompt_pwd_dir_length 3
