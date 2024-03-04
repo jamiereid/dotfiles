@@ -14,6 +14,6 @@ if [ -z "$1" ]; then
 fi
 
 IP="$1"
-pushd ~/src/ncs_scripts.git/master > /dev/null
+pushd ~/src/work/ncs_scripts.git/master > /dev/null
 poetry run python ib-ipam-lookup.py "$IP"
 popd > /dev/null
