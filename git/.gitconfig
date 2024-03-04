@@ -68,7 +68,7 @@
 [init]
 	defaultBranch = main
 
-[includeIf "gitdir:~/p/work/"]
+[includeIf "gitdir:~/src/work/"]
 	path = ~/.gitconfig-workemail
 
 [commit]

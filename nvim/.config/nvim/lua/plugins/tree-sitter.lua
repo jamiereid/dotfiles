@@ -7,7 +7,6 @@ return {
 			ensure_installed = {
 				"lua",
 				"rust",
-				"help",
 				"python",
 				"bash",
 				"yaml",
