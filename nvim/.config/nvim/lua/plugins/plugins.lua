@@ -10,4 +10,5 @@ return {
 	"folke/todo-comments.nvim",
 	"terrortylor/nvim-comment",
 	"NoahTheDuke/vim-just",
+	"stevearc/dressing.nvim",
 }
