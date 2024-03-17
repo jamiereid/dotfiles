@@ -23,8 +23,8 @@
     },
     "battery": {
         "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
+        "format-icons": ["󰂎", "󰁻", "󰁿", "󰂁", "󰁹"],
+        "format-charging": "{capacity}% 󰂄",
         "interval": 30,
         "states": {
             "warning": 25,
@@ -37,9 +37,9 @@
         "format-alt": "{ipaddr}/{cidr} {icon}",
         "format-alt-click": "click-right",
         "format-icons": {
-            "wifi": ["爛", "嵐" ,"蠟"],
-            "ethernet": [""],
-            "disconnected": ["ﰻ"]
+            "wifi": ["󰤟", "󰤢" ,"󰤨"],
+            "ethernet": ["󰈀"],
+            "disconnected": ["󰲛"]
         },
         "on-click": "alacritty -e nmtui",
     "tooltip": false
@@ -48,10 +48,10 @@
         "format": "{icon}",
         "format-alt": "{volume} {icon}",
         "format-alt-click": "click-right",
-        "format-muted": "",
+        "format-muted": "",
         "format-icons": {
-            "phone": ["", "", "", ""],
-            "default": ["", "", "", ""]
+            "phone": ["󰖁", "󰕿", "󰖀", "󰕾"],
+            "default": ["󰖁", "󰕿", "󰖀", "󰕾"]
         },
         "scroll-step": 10,
         "on-click": "pavucontrol",
@@ -61,15 +61,15 @@
         "format": "{icon}",
         "format-alt": "{percent}% {icon}",
         "format-alt-click": "click-right",
-        "format-icons": ["", ""],
+        "format-icons": ["󰌫", "󰌬"],
         "on-scroll-down": "light -A 1",
         "on-scroll-up": "light -U 1"
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "󱚰",
+            "deactivated": "󱚨"
         },
         "tooltip": false
     }
