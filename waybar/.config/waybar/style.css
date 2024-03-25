@@ -38,7 +38,7 @@ window#waybar {
 }
 
 #mode, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #tray {
-    margin:     0px 16px 0px 0px;
+    margin:     0px 10px 0px 0px;
     min-width:  25px;
 }
 

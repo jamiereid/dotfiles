@@ -41,7 +41,7 @@
             "ethernet": ["󰈀"],
             "disconnected": ["󰲛"]
         },
-        "on-click": "alacritty -e nmtui",
+        "on-click": "wezterm -e nmtui",
     "tooltip": false
     },
     "pulseaudio": {
@@ -62,8 +62,8 @@
         "format-alt": "{percent}% {icon}",
         "format-alt-click": "click-right",
         "format-icons": ["󰌫", "󰌬"],
-        "on-scroll-down": "light -A 1",
-        "on-scroll-up": "light -U 1"
+        "on-scroll-down": "light -U 1",
+        "on-scroll-up": "light -A 1"
     },
     "idle_inhibitor": {
         "format": "{icon}",

@@ -8,7 +8,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term wezterm
 #font pango:Liberation Mono 9, DejaVu Sans Mono 9
 font pango:Iosevka Nerd Font 9
 # Your preferred application launcher
@@ -20,7 +20,8 @@ set $laptop_screen 'eDP-1'
 
 ### Output configuration
 #output * bg `wallpaper` fill
-output * bg /home/jam/pics/wallpapers/aircraft_ok_mtk_field_grass_113625_3840x2160.jpg fill
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
+exec_always ~/.local/bin/sway-set-random-wallpaper
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 output $laptop_screen scale 1   pos 0    0 res 3440 1440
@@ -99,7 +100,8 @@ input 1267:12573:FTCS1000:00_04F3:311D_Touchpad {
     default_border none
 
     exec mako --anchor top-right
-	exec onedrive_tray
+    exec sleep 1 && onedrive_tray
+    exec udiskie —smart-tray
 
     ##
     ## Screenshots via grim and slurp
