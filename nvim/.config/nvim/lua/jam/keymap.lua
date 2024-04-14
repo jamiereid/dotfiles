@@ -62,5 +62,11 @@ vim.keymap.set("n", "<leader>l", function()
 		vim.o.signcolumn = "yes"
 	end
 
+	if vim.o.list then
+		vim.o.list = false
+	else
+		vim.o.list = true
+	end
+
 	toggle_diagnostics()
 end)
