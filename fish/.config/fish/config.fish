@@ -45,58 +45,60 @@ abbr -a gwl 'git worktree list'
 abbr -a gwr 'git worktree remove'
 abbr -a httpserver 'python -m http.server 8000'
 
-if command -v exa > /dev/null
-	printf "%s\n" "exa is installed; you should switch to eza"
-end
+if status --is-interactive
+	if command -v exa > /dev/null
+		printf "%s\n" "exa is installed; you should switch to eza"
+	end
 
-if command -v eza > /dev/null
-    abbr -a ls 'eza'
-    abbr -a ll 'eza -la'
-else
-    abbr -a ll 'ls -la'
-	printf "%s\n" "exa not installed"
-end
+	if command -v eza > /dev/null
+		abbr -a ls 'eza'
+		abbr -a ll 'eza -la'
+	else
+		abbr -a ll 'ls -la'
+		printf "%s\n" "exa not installed"
+	end
 
-if command -v zoxide > /dev/null
-	zoxide init fish | source
-	abbr -a cd 'z'
-else
-	printf "%s\n" "zoxide not installed"
-end
+	if command -v zoxide > /dev/null
+		zoxide init fish | source
+		abbr -a cd 'z'
+	else
+		printf "%s\n" "zoxide not installed"
+	end
 
-if command -v nvim > /dev/null
-    abbr -a vi 'nvim'
-    abbr -a vim 'nvim'
-else
-    abbr -a vi 'vim'
-	printf "%s\n" "vim not installed"
-end
+	if command -v nvim > /dev/null
+		abbr -a vi 'nvim'
+		abbr -a vim 'nvim'
+	else
+		abbr -a vi 'vim'
+		printf "%s\n" "vim not installed"
+	end
 
-if command -v drill > /dev/null
-    abbr -a dig 'drill'
-else
-	printf "%s\n" "drill not installed"
-end
+	if command -v drill > /dev/null
+		abbr -a dig 'drill'
+	else
+		printf "%s\n" "drill not installed"
+	end
 
-# Debian packages bat with the binary and manpages renamed to batcat
-if command -v batcat > /dev/null
-    abbr -a cat 'batcat'
-else if command -v bat > /dev/null
-    abbr -a cat 'bat'
-else
-	printf "%s\n" "bat not installed"
-end
+	# Debian packages bat with the binary and manpages renamed to batcat
+	if command -v batcat > /dev/null
+		abbr -a cat 'batcat'
+	else if command -v bat > /dev/null
+		abbr -a cat 'bat'
+	else
+		printf "%s\n" "bat not installed"
+	end
 
-if command -v rg > /dev/null
-    abbr -a grep 'rg'
-else
-	printf "%s\n" "rg not installed"
-end
+	if command -v rg > /dev/null
+		abbr -a grep 'rg'
+	else
+		printf "%s\n" "rg not installed"
+	end
 
-if command -v mise > /dev/null
-	mise activate fish | source
-else
-	printf "%s\n" "mise not installed"
+	if command -v mise > /dev/null
+		mise activate fish | source
+	else
+		printf "%s\n" "mise not installed"
+	end
 end
 
 set -g fish_prompt_pwd_dir_length 3
