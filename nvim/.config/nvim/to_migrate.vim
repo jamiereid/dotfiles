@@ -162,7 +162,6 @@ nnoremap <leader>ta :FindTODOsIn %:p:h<CR>
 autocmd FileType qf wincmd L
 
 " text width stuff
-nnoremap <leader>wt :setlocal textwidth=80 colorcolumn=80<CR>
 
 "" Notes
 " Generate ctags
