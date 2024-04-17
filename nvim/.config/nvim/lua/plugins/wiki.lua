@@ -4,7 +4,7 @@ return {
 		vim.g.wiki_root = "~/n"
 		vim.g.wiki_index_name = "workingbrain"
 
-		vim.g.wiki_filetypes = {"adoc"}
+		vim.g.wiki_filetypes = {"md"}
 
 		vim.g.wiki_journal = {
 			root = vim.g.wiki_root .. "/journal",
