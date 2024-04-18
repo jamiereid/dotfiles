@@ -11,4 +11,5 @@ return {
 	"terrortylor/nvim-comment",
 	"NoahTheDuke/vim-just",
 	"stevearc/dressing.nvim",
+	"folke/zen-mode.nvim",
 }
