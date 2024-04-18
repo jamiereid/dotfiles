@@ -1,6 +1,6 @@
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# Logo ke. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
@@ -18,16 +18,27 @@ set $lock_script $HOME/.local/bin/lock
 set $sleep $lock_script && sleep 3 && systemctl suspend
 set $laptop_screen 'eDP-1'
 
+gaps inner 5
+gaps outer 5
+
+# no border or title bar on new windows by default
+default_border pixel 2
+
+#                        border    background  text
+client.focused           #a6a28c   #a6a28c     #a6a28c
+client.unfocused         #20201d   #20201d     #a6a28c
+
 ### Output configuration
 #output * bg `wallpaper` fill
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
 exec_always ~/.local/bin/sway-set-random-wallpaper
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output $laptop_screen scale 1   pos 0    0 res 3440 1440
-output HDMI-A-1       scale 1.5 pos 0    0
-output DP-1           scale 1.5 pos 2560 0
-#output DP-2         scale 1.5 pos 2560 0
+output $laptop_screen scale 1   pos 0 0      res 3440 1440
+# Large Monitor is 3840x2160
+output HDMI-A-1       scale 1   pos 0 1440
+# top monitor is 3840x2160    NOTE THAT SCALE FACTOR AFFECTS LAYOUT (divide by scale factor)
+output DP-5           scale 1.5   pos 0 0
 
 ### Idle configuration
 exec swayidle -w \
@@ -44,13 +55,14 @@ exec swayidle -w \
 # This is a if/else statement: [ outputs_count == 1 ] && true || false
 bindswitch --reload --locked lid:on exec '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || (notify-send "Clamshell mode" "Laptop screen off" && swaymsg output $laptop_screen disable)'
 bindswitch --reload --locked lid:off output $laptop_screen enable
+exec_always $HOME/.local/bin/sway-lid-reload-fix.sh
 
 
 ### Input configuration
 # Ducky external keyboard
 input 1241:661:USB-HID_Keyboard {
     xkb_options caps:escape
-}
+} 
 
 # Laptop inbuilt keyboard
 input 1:1:AT_Translated_Set_2_keyboard {
@@ -96,10 +108,8 @@ input 1267:12573:FTCS1000:00_04F3:311D_Touchpad {
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-    # no border or title bar on new windows by default
-    default_border none
 
-    exec mako --anchor top-right
+    exec mako --anchor top-center
     exec sleep 1 && onedrive_tray
     exec udiskie —smart-tray
 
@@ -162,6 +172,11 @@ input 1267:12573:FTCS1000:00_04F3:311D_Touchpad {
     bindsym $mod+Shift+0 move container to workspace 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+	bindsym $mod+Control+Shift+Right move workspace to output right
+	bindsym $mod+Control+Shift+Left move workspace to output left
+	bindsym $mod+Control+Shift+Down move workspace to output down
+	bindsym $mod+Control+Shift+Up move workspace to output up
 #
 # Layout stuff:
 #
@@ -240,7 +255,7 @@ set $red  #900000
 
 bar {
     swaybar_command waybar
-    position top
+    position bottom
     font pango:Iosevka Nerd Font
 
     # When the status_command prints a new line to stdout, swaybar updates.

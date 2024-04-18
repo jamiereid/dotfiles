@@ -1,15 +1,16 @@
 sort=-time
 layer=overlay
 background-color=#20201d
-width=400
+width=600
 height=110
 border-size=1
 border-color=#a6a28c
+outer-margin=20,0,0
 text-color=#a6a28c
 max-icon-size=64
 default-timeout=5000
 ignore-timeout=1
-font=monospace 14
+font=Iosevka Nerd Font 14
 
 [urgency=low]
 border-color=#cccccc
