@@ -50,6 +50,10 @@ Group.new("CursorLine", c.fg, c.cursor_line_bg)
 Color.new("cursor_line_nr_fg", "#A09172")
 Group.new("CursorLineNr", c.cursor_line_nr_fg, c.bg)
 Group.new("LineNr", c.subtle, c.bg)
+Color.new("folded_fg", "#A0A8B0")
+Color.new("folded_bg", "#384048")
+Group.new("Folded", c.folded_fg, c.folded_bg, nil, c.folded_bg)
+Group.new("FoldColumn", c.subtle, c.bg)
 Group.new("Comment", c.comment_fg, nil, s.italic)
 Group.new("Keyword", c.white)
 Group.new("@operator", c.fg)
@@ -63,19 +67,25 @@ Group.new("Special", c.special)
 -- status line
 Color.new("slnc_fg", "#5E5E5E")
 Color.new("slnc_bg", "#AEAEAE")
-Group.new("StatusLine", c.bg, c.fg, nil, c.fg)
+Group.new("StatusLine", c.fg, c.bg, nil, c.fg)
 Group.new("StatusLineNC", c.slnc_fg, c.slnc_bg, nil, c.slnc_bg)
 
--- pmenu
-Group.new("PMenu", c.white, c.black, nil, c.black)
-Group.new("PMenuSel", c.white, c.bg, nil, c.bg)
-Group.new("PMenuSbar", nil, c.black, nil, c.black)
-Group.new("PMenuThumb", c.bg, c.bg, nil, c.bg)
+-- pmenu and floats
+Group.new("PMenu", c.fg, c.bg)
+Group.new("PMenuSel", c.bg, c.fg)
+--Group.new("PMenuSbar", nil, c.black, nil, c.black)
+--Group.new("PMenuThumb", c.bg, c.bg, nil, c.bg)
+Group.new("NormalFloat", g.PMenu, g.PMenu)
+Group.new("FloatBorder", g.PMenu, g.PMenu)
 
 --[[
 set t_Co=256
 let g:colors_name = "naysayer"
 
+	SpellBad	word not recognized			|hl-SpellBad|
+	SpellCap	word not capitalised			|hl-SpellCap|
+	SpellRare	rare word				|hl-SpellRare|
+	SpellLocal	wrong spelling for selected region	|hl-SpellLocal|
 hi Boolean guifg=#b1d631 guibg=NONE guisp=NONE gui=NONE ctermfg=149 ctermbg=NONE cterm=NONE
 hi Character guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi ColorColumn guifg=NONE guibg=#0F372B guisp=#0F372B gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
@@ -91,8 +101,6 @@ hi DiagnosticVirtualTextHint guifg=#9CA8A9
 hi DiagnosticVirtualTextWarn guifg=#7D560F
 hi ErrorMsg guifg=#aa0000 guibg=NONE guisp=NONE gui=NONE ctermfg=124 ctermbg=NONE cterm=NONE
 hi Exception guifg=#aa0000 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
-hi Float guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
-hi Folded guifg=#a0a8b0 guibg=#384048 guisp=#384048 gui=NONE ctermfg=103 ctermbg=238 cterm=NONE
 hi Include guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi IncSearch guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 hi Label guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE

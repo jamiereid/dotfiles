@@ -18,6 +18,28 @@ return {
       local cmp = require "cmp"
 
       cmp.setup {
+        window = {
+          completion = cmp.config.window.bordered {
+            border = "rounded",
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+          },
+          documentation = cmp.config.window.bordered {
+            border = "rounded",
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+          },
+        },
+        formatting = {
+          format = lspkind.cmp_format {
+            mode = "symbol_text",
+            menu = {
+              buffer = "[Buffer]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[LuaSnip]",
+              path = "[Path]",
+              nvim_lua = "[Lua]",
+            },
+          },
+        },
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)

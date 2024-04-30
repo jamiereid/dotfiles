@@ -12,6 +12,21 @@ return {
         capabilities = require("cmp_nvim_lsp").default_capabilities()
       end
 
+      local border = {
+        { "╭", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╮", "FloatBorder" },
+        { "│", "FloatBorder" },
+        { "╯", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╰", "FloatBorder" },
+        { "│", "FloatBorder" },
+      }
+      local handlers = {
+        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+        ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+      }
+
       local lspconfig = require "lspconfig"
       local servers = {
         lua_ls = {},
@@ -20,6 +35,7 @@ return {
       for name, config in pairs(servers) do
         config = vim.tbl_deep_extend("force", {}, config, {
           capabilities = capabilities,
+          handlers = handlers,
         })
 
         lspconfig[name].setup(config)
