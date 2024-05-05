@@ -28,3 +28,15 @@ vim.keymap.set("n", "-", ":edit %:h<CR>", { noremap = true })
 -- Treat long lines as break lines (useful when moving around in them)
 vim.keymap.set({ "n", "v", "o" }, "j", "gj")
 vim.keymap.set({ "n", "v", "o" }, "k", "gk")
+
+vim.keymap.set("n", "<CR>", function()
+  if vim.opt.hlsearch:get() then
+    vim.cmd.nohl()
+    return ""
+  else
+    return "<CR>"
+  end
+end, { expr = true })
+
+vim.keymap.set("n", "<left>", ":bp<CR>")
+vim.keymap.set("n", "<right>", ":bn<CR>")

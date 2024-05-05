@@ -2,12 +2,9 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    lazy = false,
     config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = { "c", "lua", "python", "rust" },
-        auto_install = false, -- consider installing `tree-sitter-cli`
-        highlight = { enable = true },
-      }
+      require("jrr.treesitter").setup()
     end,
   },
 }

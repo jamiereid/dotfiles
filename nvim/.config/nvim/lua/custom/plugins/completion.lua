@@ -6,6 +6,7 @@ return {
       "hrsh7th/cmp-nvim-lsp", -- nvim-cmp source for built-in lsp
       "hrsh7th/cmp-path", -- nvim-cmp source for paths
       "hrsh7th/cmp-buffer", -- nvim-cmp source for buffer
+      { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
       "saadparwaiz1/cmp_luasnip", -- source for luasnip snippets
     },
     config = function()

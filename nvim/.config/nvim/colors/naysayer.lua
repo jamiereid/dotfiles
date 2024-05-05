@@ -64,6 +64,11 @@ Group.new("String", c.string)
 Color.new("special", "#C7AB85")
 Group.new("Special", c.special)
 
+Color.new("skfg", "#808080")
+Color.new("skbg", "#343434")
+Group.new("SpecialKey", c.skfg, c.skbg, nil, c.skbg)
+Group.new("NonText", c.subtle, c.bg, nil, c.bg)
+
 -- status line
 Color.new("slnc_fg", "#5E5E5E")
 Color.new("slnc_bg", "#AEAEAE")
@@ -106,7 +111,6 @@ hi IncSearch guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 hi Label guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Macro guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi MatchParen guifg=#d0ffc0 guibg=#202020 guisp=#202020 gui=bold ctermfg=193 ctermbg=234 cterm=bold
-hi NonText guifg=#535b4c guibg=#072627 guisp=#072627 gui=NONE ctermfg=240 ctermbg=23 cterm=NONE
 hi Number guifg=#00cdcd guibg=NONE guisp=NONE gui=NONE ctermfg=44 ctermbg=NONE cterm=NONE
 hi PreCondit guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi PreProc guifg=#faffff guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
@@ -120,7 +124,6 @@ hi Search guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 hi SignColumn ctermbg=23 guibg=#072627
 hi SpecialChar guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi SpecialComment guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
-hi SpecialKey guifg=#808080 guibg=#343434 guisp=#343434 gui=NONE ctermfg=8 ctermbg=236 cterm=NONE
 hi StorageClass guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Structure guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Tag guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE

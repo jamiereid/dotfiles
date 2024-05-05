@@ -2,28 +2,26 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.6",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+      },
+    },
     config = function()
       require("telescope").load_extension "fzf"
-      require("telescope").load_extension "file_browser"
-      --require("telescope").load_extension "harpoon"
+      pcall(require("telescope").load_extension "harpoon") -- in a pcall, as I don't want harpoon listed as a dependency
 
       local builtin = require "telescope.builtin"
-      local extensions = require("telescope").extensions
-      local sorters = require "jrr.telescope.sorters"
-      local nmap = require("jrr.keymap").nmap
 
-      nmap("<leader>fb", extensions.file_browser.file_browser)
-      nmap("<leader>fg", builtin.live_grep)
-      nmap("<leader>fb", builtin.buffers)
-      nmap("<leader>fh", builtin.help_tags)
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep)
+      vim.keymap.set("n", "<leader>fb", builtin.buffers)
+      vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 
-      nmap("<leader>en", sorters.edit_neovim)
+      vim.keymap.set("n", "<leader>en", function()
+        builtin.find_files { cwd = vim.fn.stdpath "config" }
+      end)
     end,
   },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-  },
-  { "nvim-telescope/telescope-file-browser.nvim" },
 }

@@ -24,5 +24,5 @@ opt.undofile = true
 opt.splitright = true
 opt.splitbelow = true
 
-opt.list = true -- show whitespace as special chars - see listchars
 opt.listchars = { tab = "» ", extends = "›", precedes = "‹", nbsp = "·", trail = "·" }
+opt.list = true -- show whitespace as special chars - see listchars
