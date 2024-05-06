@@ -21,14 +21,14 @@ Color.new("magenta", "#C397D8")
 Color.new("cyan", "#70C8Ba")
 Color.new("white", "#FFFFFF")
 
-Color.new("bright-black", "#666666")
-Color.new("bright-red", "#FF3336")
-Color.new("bright-green", "#9EC400")
-Color.new("bright-yellow", "#E7c547")
-Color.new("bright-blue", "#7AA6DA")
-Color.new("bright-magenta", "#B77EE0")
-Color.new("bright-cyan", "#54CED6")
-Color.new("bright-white", "#FFFFFF")
+Color.new("bright_black", "#666666")
+Color.new("bright_red", "#FF3336")
+Color.new("bright_green", "#9EC400")
+Color.new("bright_yellow", "#E7c547")
+Color.new("bright_blue", "#7AA6DA")
+Color.new("bright_magenta", "#B77EE0")
+Color.new("bright_cyan", "#54CED6")
+Color.new("bright_white", "#FFFFFF")
 
 Color.new("fg", "#D7AF87")
 Color.new("bg", "#072627")
@@ -82,6 +82,15 @@ Group.new("PMenuSel", c.bg, c.fg)
 --Group.new("PMenuThumb", c.bg, c.bg, nil, c.bg)
 Group.new("NormalFloat", g.PMenu, g.PMenu)
 Group.new("FloatBorder", g.PMenu, g.PMenu)
+
+-- mytodo
+Group.new("heading", g.Keyword)
+Group.new("tag_plus", c.bright_red)
+Group.new("tag_at", c.bright_red)
+Group.new("tag_bang", c.bright_red)
+Group.new("tag_pound", c.bright_red)
+Group.new("tag_percent", c.bright_red)
+Group.new("tag_dollar", c.bright_red)
 
 --[[
 set t_Co=256

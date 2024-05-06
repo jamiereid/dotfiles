@@ -1,5 +1,9 @@
 local M = {}
 
+M.wiki_change_buffer_to_new_tags = function()
+  vim.cmd "%s/#\\(\\w*\\>\\)/:\\1/"
+end
+
 M.clean_for_tmux_copy = function()
   if vim.o.number then
     vim.opt.number = false
@@ -17,6 +21,12 @@ M.clean_for_tmux_copy = function()
     vim.o.signcolumn = "no"
   else
     vim.o.signcolumn = "yes"
+  end
+
+  if vim.o.foldcolumn then
+    vim.o.foldcolumn = "0"
+  else
+    vim.o.foldcolumn = "1"
   end
 
   if vim.o.list then

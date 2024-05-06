@@ -22,6 +22,9 @@ return {
       vim.keymap.set("n", "<leader>en", function()
         builtin.find_files { cwd = vim.fn.stdpath "config" }
       end)
+      vim.keymap.set("n", "<leader>eo", function()
+        builtin.find_files { cwd = "~/.config/nvim-backup" }
+      end)
     end,
   },
 }

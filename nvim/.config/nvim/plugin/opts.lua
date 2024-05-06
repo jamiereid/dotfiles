@@ -13,6 +13,7 @@ opt.wildoptions = "pum"
 
 opt.relativenumber = true -- Show line numbers
 opt.number = true -- But show the actual number for the line we're on
+opt.scrolloff = 3
 
 opt.termguicolors = true
 

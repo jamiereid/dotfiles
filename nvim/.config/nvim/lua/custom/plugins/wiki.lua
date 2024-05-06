@@ -30,5 +30,7 @@ return {
     vim.keymap.set("n", "<leader>wp", ":WikiPages<cr>")
     vim.keymap.set("n", "<leader>wt", ":WikiTags<cr>")
     vim.keymap.set("n", "<leader>we", ":WikiExport<cr>")
+
+    vim.keymap.set("n", "<leader>wft", require("jrr.functions").wiki_change_buffer_to_new_tags)
   end,
 }

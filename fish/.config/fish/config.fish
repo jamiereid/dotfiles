@@ -30,7 +30,8 @@ if status --is-interactive; \
 and not string match -q "tmux*" $TERM; \
 and not string match -eq "/dev/tty1" (tty); \
 and not string length -q $VSCODE_GIT_ASKPASS_NODE; \
-and not string match -eq "sway" $XDG_SESSION_DESKTOP
+and not string match -eq "sway" $XDG_SESSION_DESKTOP; \
+and not string length -q $NVIM
 	tmux new-session -A -s main 2> /dev/null; and exec true
 end
 

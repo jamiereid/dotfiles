@@ -21,6 +21,15 @@ M.setup = function()
       "typescript",
     },
   }
+
+  local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+  parser_config.mytodo = {
+    install_info = {
+      url = "~/src/tree-sitter-mytodo",
+      files = { "src/parser.c" },
+      requires_generate_from_grammar = false,
+    },
+  }
 end
 
 return M
