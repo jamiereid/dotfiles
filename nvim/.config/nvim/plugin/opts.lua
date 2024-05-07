@@ -18,6 +18,7 @@ opt.scrolloff = 3
 opt.termguicolors = true
 
 opt.laststatus = 3
+opt.winbar = "%=%m %f" -- right side, modifed? filepath
 
 opt.linebreak = true -- break long lines by word, not chars
 opt.undodir = HOME .. "/.vimdid" -- Permanent undo
@@ -27,3 +28,11 @@ opt.splitbelow = true
 
 opt.listchars = { tab = "» ", extends = "›", precedes = "‹", nbsp = "·", trail = "·" }
 opt.list = true -- show whitespace as special chars - see listchars
+
+opt.incsearch = true -- highlight match while typing search patterns
+opt.ignorecase = true -- ignore case in search...
+opt.smartcase = true -- ...except if pattern has an uppercase
+
+-- spell
+opt.spelllang = "en_au"
+opt.spellfile = vim.fn.stdpath "config" .. "spell/en.utf-8.add"

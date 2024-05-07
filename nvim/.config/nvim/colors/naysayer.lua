@@ -47,6 +47,9 @@ Group.new("Normal", c.fg, c.bg)
 Group.new("Cursor", c.fg, c.cursor_bg)
 Color.new("cursor_line_bg", "#0F372B")
 Group.new("CursorLine", c.fg, c.cursor_line_bg)
+Color.new("cursorcolumn", "#202020")
+Group.new("CursorColumn", nil, c.cursorcolumn, nil, c.cursorcolumn)
+Group.new("ColorColumn", nil, c.cursor_line_bg)
 Color.new("cursor_line_nr_fg", "#A09172")
 Group.new("CursorLineNr", c.cursor_line_nr_fg, c.bg)
 Group.new("LineNr", c.subtle, c.bg)
@@ -64,10 +67,41 @@ Group.new("String", c.string)
 Color.new("special", "#C7AB85")
 Group.new("Special", c.special)
 
+Color.new("number", "#00cdcd")
+Group.new("Number", c.number)
+
+Color.new("boolean", "#B1D631")
+Group.new("boolean", c.boolean)
+
+Group.new("Conditional", c.white)
+
+Color.new("matchparen_fg", "#D0FFC0")
+Color.new("matchparen_bg", "#202020")
+Group.new("MatchParen", c.matchparen_fg, c.matchparen_bg, nil, c.matchparen_bg)
+
 Color.new("skfg", "#808080")
 Color.new("skbg", "#343434")
 Group.new("SpecialKey", c.skfg, c.skbg, nil, c.skbg)
 Group.new("NonText", c.subtle, c.bg, nil, c.bg)
+
+Color.new("vplit_fg", "#AEAEAE")
+Group.new("VertSplit", c.vplit_fg, c.bg, nil, c.bg)
+
+Color.new("vis_fg", "#B4EEB5")
+Color.new("vis_bg", "#000080")
+Group.new("Visual", c.vis_fg, c.vis_bg, nil, c.vis_bg)
+
+Color.new("search_bg", "#A23244")
+Color.new("search_fg", "#ED79A0")
+Group.new("Search", c.search_fg, c.search_bg)
+Group.new("IncSearch", g.search, g.search)
+
+Color.new("diag_error", "#8B0000")
+Color.new("diag_hint", "#9CA8A9")
+Color.new("diag_warn", "#7D560F")
+Group.new("DiagnosticVirtualTextError", c.diag_error)
+Group.new("DiagnosticVirtualTextHint", c.diag_hint)
+Group.new("DiagnosticVirtualTextWarn", c.diag_warn)
 
 -- status line
 Color.new("slnc_fg", "#5E5E5E")
@@ -92,35 +126,48 @@ Group.new("tag_pound", c.bright_red)
 Group.new("tag_percent", c.bright_red)
 Group.new("tag_dollar", c.bright_red)
 
+--spell
+Group.new("SpellBad", c.red, nil, s.underline)
+Group.new("SpellCap", c.diag_warn, nil, s.underline)
+Group.new("SpellRare", c.diag_warn)
+Group.new("SpellLocal", c.red, nil, s.underline)
+
 --[[
+
+
+" naysayer theme
+hi todoHeading      guifg=#FFFFFF
+hi todoSubHeading   guifg=#C3C7B5
+hi todoSubTask      guifg=#676956
+hi todoDeemphasize  guifg=#545B4C
+hi todoPlus         guifg=#60D952
+hi todoAt           guifg=#52C3A8
+hi todoBang         guifg=#CC7700
+hi todoPound        guifg=#9370DB
+
+hi def link deemphasizeMatch  todoDeemphasize
+hi def link headingMatch      todoHeading
+hi def link subHeadingMatch   todoSubHeading
+hi def link subTaskMatch      todoSubTask
+hi def link plusMatch         todoPlus
+hi def link atMatch           todoAt
+hi def link bangMatch         todoBang
+hi def link poundMatch        todoPound
+
 set t_Co=256
 let g:colors_name = "naysayer"
 
-	SpellBad	word not recognized			|hl-SpellBad|
-	SpellCap	word not capitalised			|hl-SpellCap|
-	SpellRare	rare word				|hl-SpellRare|
-	SpellLocal	wrong spelling for selected region	|hl-SpellLocal|
-hi Boolean guifg=#b1d631 guibg=NONE guisp=NONE gui=NONE ctermfg=149 ctermbg=NONE cterm=NONE
 hi Character guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
-hi ColorColumn guifg=NONE guibg=#0F372B guisp=#0F372B gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
-hi Conditional guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Constant guifg=#52c3a9 guibg=NONE guisp=NONE gui=NONE ctermfg=79 ctermbg=NONE cterm=NONE
-hi CursorColumn guifg=NONE guibg=#202020 guisp=#202020 gui=NONE ctermfg=NONE ctermbg=234 cterm=NONE
 hi cursorim guifg=#192224 guibg=#536991 guisp=#536991 gui=NONE ctermfg=235 ctermbg=60 cterm=NONE
 hi Debug guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi Define guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi Delimiter guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
-hi DiagnosticVirtualTextError guifg=#8B0000
-hi DiagnosticVirtualTextHint guifg=#9CA8A9
-hi DiagnosticVirtualTextWarn guifg=#7D560F
 hi ErrorMsg guifg=#aa0000 guibg=NONE guisp=NONE gui=NONE ctermfg=124 ctermbg=NONE cterm=NONE
 hi Exception guifg=#aa0000 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Include guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
-hi IncSearch guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 hi Label guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Macro guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
-hi MatchParen guifg=#d0ffc0 guibg=#202020 guisp=#202020 gui=bold ctermfg=193 ctermbg=234 cterm=bold
-hi Number guifg=#00cdcd guibg=NONE guisp=NONE gui=NONE ctermfg=44 ctermbg=NONE cterm=NONE
 hi PreCondit guifg=#faf4c6 guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi PreProc guifg=#faffff guibg=NONE guisp=NONE gui=NONE ctermfg=230 ctermbg=NONE cterm=NONE
 hi pythonbuiltinfunction guifg=#009000 guibg=NONE guisp=NONE gui=NONE ctermfg=28 ctermbg=NONE cterm=NONE
@@ -129,7 +176,6 @@ hi pythonexclass guifg=#009000 guibg=NONE guisp=NONE gui=NONE ctermfg=28 ctermbg
 hi pythonimport guifg=#009000 guibg=NONE guisp=NONE gui=NONE ctermfg=28 ctermbg=NONE cterm=NONE
 hi pythonoperator guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Repeat guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
-hi Search guifg=#A23244 guibg=#ED79A0 guisp=#ED79A0 gui=NONE
 hi SignColumn ctermbg=23 guibg=#072627
 hi SpecialChar guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
 hi SpecialComment guifg=#ff9800 guibg=NONE guisp=NONE gui=NONE ctermfg=208 ctermbg=NONE cterm=NONE
@@ -140,6 +186,4 @@ hi Title guifg=#f6f3e8 guibg=NONE guisp=NONE gui=bold ctermfg=230 ctermbg=NONE c
 hi Todo guifg=#cc7700 guibg=NONE guisp=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
 hi Typedef guifg=#7e8aa2 guibg=NONE guisp=NONE gui=NONE ctermfg=103 ctermbg=NONE cterm=NONE
 hi Type guifg=#ffffff guibg=NONE guisp=NONE gui=NONE ctermfg=187 ctermbg=NONE cterm=NONE
-hi VertSplit guifg=#aeaeae guibg=#072627 guisp=#072627 gui=NONE ctermfg=145 ctermbg=23 cterm=NONE
-hi Visual guifg=#b4eeb5 guibg=#000080 guisp=#000080 gui=NONE ctermfg=230 ctermbg=239 cterm=NONE
 --]]

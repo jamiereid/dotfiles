@@ -111,10 +111,10 @@ return {
         if config == true then
           config = {}
         end
-        config = vim.tbl_deep_extend("force", {}, config, {
+        config = vim.tbl_deep_extend("force", {}, {
           capabilities = capabilities,
           handlers = handlers,
-        })
+        }, config)
 
         lspconfig[name].setup(config)
       end
