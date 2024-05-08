@@ -118,13 +118,22 @@ Group.new("NormalFloat", g.PMenu, g.PMenu)
 Group.new("FloatBorder", g.PMenu, g.PMenu)
 
 -- mytodo
-Group.new("heading", g.Keyword)
-Group.new("tag_plus", c.bright_red)
-Group.new("tag_at", c.bright_red)
-Group.new("tag_bang", c.bright_red)
-Group.new("tag_pound", c.bright_red)
-Group.new("tag_percent", c.bright_red)
-Group.new("tag_dollar", c.bright_red)
+Color.new("todoHeading", "#FFFFFF")
+Color.new("todoSubHeading", "#C3C7B5")
+Color.new("todoSubTask", "#676956")
+Color.new("todoDeemphasize", "#545B4C")
+Color.new("todoPlus", "#60D952")
+Color.new("todoAt", "#52C3A8")
+Color.new("todoBang", "#CC7700")
+Color.new("todoPound", "#9370DB")
+
+Group.new("@heading", c.todoHeading)
+Group.new("@tag_plus", c.todoPlus)
+Group.new("@tag_at", c.todoAt)
+Group.new("@tag_bang", c.todoBang)
+Group.new("@tag_pound", c.todoPound)
+Group.new("@tag_percent", c.todoPound)
+Group.new("@tag_dollar", c.todoPound)
 
 --spell
 Group.new("SpellBad", c.red, nil, s.underline)
@@ -136,14 +145,6 @@ Group.new("SpellLocal", c.red, nil, s.underline)
 
 
 " naysayer theme
-hi todoHeading      guifg=#FFFFFF
-hi todoSubHeading   guifg=#C3C7B5
-hi todoSubTask      guifg=#676956
-hi todoDeemphasize  guifg=#545B4C
-hi todoPlus         guifg=#60D952
-hi todoAt           guifg=#52C3A8
-hi todoBang         guifg=#CC7700
-hi todoPound        guifg=#9370DB
 
 hi def link deemphasizeMatch  todoDeemphasize
 hi def link headingMatch      todoHeading

@@ -2,7 +2,7 @@ local M = {}
 
 M.setup = function()
   require("nvim-treesitter.configs").setup {
-    highlight = { enable = true },
+    highlight = { enable = true, additional_vim_regex_highlighting = false },
     ensure_installed = {
       "bash",
       "c",
@@ -27,7 +27,6 @@ M.setup = function()
     install_info = {
       url = "~/src/tree-sitter-mytodo",
       files = { "src/parser.c" },
-      requires_generate_from_grammar = false,
     },
   }
 end

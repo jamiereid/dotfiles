@@ -54,6 +54,7 @@ if status --is-interactive
 	if command -v eza > /dev/null
 		abbr -a ls 'eza'
 		abbr -a ll 'eza -la'
+		set -gx EZA_COLORS xa=90:oc=90:ur=90:uw=90:ux=90:ue=90:gr=90:gw=90:gx=90:tr=90:tw=90:tx=90:su=90:sf=90:xa=90:sn=90:nb=90:nk=90:nm=90:ng=90:nt=90:sb=90:ub=90:uk=90:um=90:ug=90:ut=90:df=90:ds=90:uu=90:uR=90:un=90:gu=90:gR=90:gn=90:xx=90:da=90:in=90:bl=90
 	else
 		abbr -a ll 'ls -la'
 		printf "%s\n" "exa not installed"
