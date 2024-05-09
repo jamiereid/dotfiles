@@ -35,4 +35,4 @@ opt.smartcase = true -- ...except if pattern has an uppercase
 
 -- spell
 opt.spelllang = "en_au"
-opt.spellfile = vim.fn.stdpath "config" .. "spell/en.utf-8.add"
+opt.spellfile = vim.fn.stdpath "config" .. "/spell/en.utf-8.add"
