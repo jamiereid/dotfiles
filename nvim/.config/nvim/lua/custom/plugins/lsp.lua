@@ -129,6 +129,7 @@ return {
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 
           vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
+          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
         end,
       })
     end,
