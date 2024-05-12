@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if ! command -v clogin.expect &> /dev/null
+then
+    printf "clogin.expect script not on your path\n"
+    exit 1
+fi
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
