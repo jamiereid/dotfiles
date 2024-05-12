@@ -75,8 +75,8 @@ Group.new("boolean", c.boolean)
 
 Group.new("Conditional", c.white)
 
-Color.new("matchparen_fg", "#D0FFC0")
-Color.new("matchparen_bg", "#202020")
+Color.new("matchparen_bg", "#D0FFC0")
+Color.new("matchparen_fg", "#202020")
 Group.new("MatchParen", c.matchparen_fg, c.matchparen_bg, nil, c.matchparen_bg)
 
 Color.new("skfg", "#808080")

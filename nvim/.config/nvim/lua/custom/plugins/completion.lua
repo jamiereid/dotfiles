@@ -8,6 +8,7 @@ return {
       "hrsh7th/cmp-buffer", -- nvim-cmp source for buffer
       { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
       "saadparwaiz1/cmp_luasnip", -- source for luasnip snippets
+      { "MattiasMTS/cmp-dbee", dependencies = { "kndndrj/nvim-dbee" } },
     },
     config = function()
       vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -29,6 +30,7 @@ return {
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
           },
         },
+        ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = lspkind.cmp_format {
             mode = "symbol_text",
@@ -63,6 +65,41 @@ return {
           ),
         },
       }
+
+      -- cmp-dbee
+      require("cmp-dbee").setup()
+      cmp.setup.filetype({ "sql.dbee" }, {
+        sources = {
+          { name = "cmp-dbee" },
+          { name = "buffer" },
+        },
+      })
+
+      -- luasnip
+      local ls = require "luasnip"
+
+      ---@diagnostic disable-next-line: assign-type-mismatch
+      require("luasnip.loaders.from_lua").load { paths = vim.fn.stdpath "config" .. "/snippets" }
+
+      ls.config.set_config {
+        history = false,
+        updateevents = "TextChanged,TextChangedI",
+        enable_autosnippets = true,
+      }
+
+      vim.keymap.set({ "i", "s" }, "<c-k>", function()
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
+      end, { silent = true })
+
+      vim.keymap.set({ "i", "s" }, "<c-j>", function()
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        end
+      end, { silent = true })
+
+      vim.keymap.set("n", "<leader>es", require("luasnip.loaders").edit_snippet_files)
     end,
   },
 }
