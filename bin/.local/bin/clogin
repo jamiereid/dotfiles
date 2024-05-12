@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(cat ~/.ssh/known_hosts | cut -d\  -f 1 | uniq | fzf --border --info=inline --margin=20,20 --padding=1 --bind=enter:replace-query+print-query)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+clogin.expect $selected
