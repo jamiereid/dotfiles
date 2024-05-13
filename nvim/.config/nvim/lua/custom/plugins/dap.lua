@@ -8,6 +8,7 @@ return {
     },
     config = function()
       local dap = require "dap"
+      local ui = require "dapui"
 
       require("dapui").setup()
       require("dap-go").setup()
@@ -18,6 +19,7 @@ return {
 
       -- Eval var under cursor
       vim.keymap.set("n", "<leader>?", function()
+        ---@diagnostic disable-next-line: missing-fields
         require("dapui").eval(nil, { enter = true })
       end)
 
@@ -26,6 +28,19 @@ return {
       vim.keymap.set("n", "<F3>", dap.step_over)
       vim.keymap.set("n", "<F4>", dap.step_out)
       vim.keymap.set("n", "<F5>", dap.step_back)
+
+      dap.listeners.before.attach.dapui_config = function()
+        ui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        ui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        ui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        ui.close()
+      end
     end,
   },
 }

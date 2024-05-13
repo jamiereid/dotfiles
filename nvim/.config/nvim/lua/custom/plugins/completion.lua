@@ -64,6 +64,9 @@ return {
             { "i", "c" }
           ),
         },
+        experimental = {
+          ghost_text = true,
+        },
       }
 
       -- cmp-dbee
