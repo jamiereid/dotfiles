@@ -3,6 +3,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
       "leoluz/nvim-dap-go", -- golang
+      "mfussenegger/nvim-dap-python",
       { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
     },
     config = function()
@@ -10,6 +11,7 @@ return {
 
       require("dapui").setup()
       require("dap-go").setup()
+      require("dap-python").setup()
 
       vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
       vim.keymap.set("n", "<leader>gb", dap.run_to_cursor)
