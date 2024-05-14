@@ -18,6 +18,7 @@ opt.scrolloff = 3
 opt.termguicolors = true
 
 opt.laststatus = 3
+opt.showmode = false
 opt.winbar = "%=%m %f" -- right side, modifed? filepath
 opt.signcolumn = "yes"
 

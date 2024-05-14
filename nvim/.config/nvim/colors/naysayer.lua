@@ -121,6 +121,8 @@ Group.new("PMenuSel", c.bg, c.fg)
 Group.new("NormalFloat", g.PMenu, g.PMenu)
 Group.new("FloatBorder", g.PMenu, g.PMenu)
 
+Group.new("GhostText", c.subtle)
+
 -- mytodo
 Color.new("todoHeading", "#FFFFFF")
 Color.new("todoSubHeading", "#C3C7B5")
