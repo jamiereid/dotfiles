@@ -6,8 +6,8 @@ return {
         lua = { "stylua" },
         typescript = { { "prettierd", "prettier" } },
         javascript = { { "prettierd", "prettier" } },
-        html = { { "prettierd", "prettier" } },
-        htmldjango = { { "prettierd", "prettier" } },
+        -- html = { { "prettierd", "prettier" } },
+        -- htmldjango = { { "prettierd", "prettier" } },
       },
       format_on_save = {
         timeout_ms = 500,

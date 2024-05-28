@@ -74,8 +74,10 @@ Color.new("boolean", "#B1D631")
 Group.new("boolean", c.boolean)
 
 Group.new("Conditional", c.white)
+Group.new("Statement", c.white)
 
 Group.new("@type", c.white)
+Group.new("Type", c.white)
 -- Color.new("type_builtin", "#009000")
 -- Group.new("@type.builtin", c.type_builtin)
 
