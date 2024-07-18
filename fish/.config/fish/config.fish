@@ -121,8 +121,6 @@ set __fish_git_prompt_char_upstream_equal ''
 set __fish_git_prompt_char_cleanstate ''
 set __fish_git_prompt_char_invalidstate 'X'
 
-source ~/.config/fish/naysayer-theme.fish
-
 function bind_bang
     switch (commandline -t)[-1]
         case "!"
@@ -157,8 +155,17 @@ if test -e ~/.config/fish/local.fish
     source ~/.config/fish/local.fish
 end
 
-
+set -g fish_prompt_is_bold false
+if set -q JRR_THEME
+	if test -e ~/.config/fish/"$JRR_THEME"-theme.fish
+		source ~/.config/fish/"$JRR_THEME"-theme.fish
+	end
+end
 
 function fish_prompt
-    printf '%s %s %s%s ' (uname -n|cut -d. -f1) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
+    if $fish_prompt_is_bold
+	    printf '\033[1m%s %s %s%s \033[0m' (uname -n|cut -d. -f1) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
+    else
+	    printf '%s %s %s%s ' (uname -n|cut -d. -f1) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
+    end
 end
