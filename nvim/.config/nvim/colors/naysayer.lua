@@ -125,6 +125,11 @@ Group.new("FloatBorder", g.PMenu, g.PMenu)
 
 Group.new("GhostText", c.subtle)
 
+-- markup
+Group.new("@markup.heading", c.white)
+Group.new("@markup.list.checked", c.green)
+Group.new("@markup.list.unchecked", c.yellow)
+
 -- mytodo
 Color.new("todoHeading", "#FFFFFF")
 Color.new("todoSubHeading", "#C3C7B5")
