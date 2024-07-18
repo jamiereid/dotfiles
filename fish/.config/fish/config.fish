@@ -77,6 +77,9 @@ if status --is-interactive
 
 	if command -v drill > /dev/null
 		abbr -a dig 'drill'
+		function drill-short 
+			drill "$argv" | grep -Ev "^;;|^\$"
+		end
 	else
 		printf "%s\n" "drill not installed"
 	end
