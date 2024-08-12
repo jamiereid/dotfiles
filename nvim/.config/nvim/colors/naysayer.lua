@@ -114,6 +114,8 @@ Color.new("slnc_fg", "#5E5E5E")
 Color.new("slnc_bg", "#AEAEAE")
 Group.new("StatusLine", c.fg, c.bg, nil, c.fg)
 Group.new("StatusLineNC", c.slnc_fg, c.slnc_bg, nil, c.slnc_bg)
+Group.new("WinBar", g.StatusLine, g.StatusLine, nil, g.StatusLine)
+Group.new("WinBarNC", g.StatusLineNC, g.StatusLineNC, nil, g.StatusLineNC)
 
 -- pmenu and floats
 Group.new("PMenu", c.fg, c.bg)

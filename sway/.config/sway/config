@@ -18,8 +18,8 @@ set $lock_script $HOME/.local/bin/lock
 set $sleep $lock_script && sleep 3 && systemctl suspend
 set $laptop_screen 'eDP-1'
 
-gaps inner 5
-gaps outer 5
+# gaps inner 5
+# gaps outer 5
 
 # no border or title bar on new windows by default
 default_border pixel 2
@@ -30,8 +30,9 @@ client.unfocused         #20201d   #20201d     #a6a28c
 
 ### Output configuration
 #output * bg `wallpaper` fill
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
-exec_always ~/.local/bin/sway-set-random-wallpaper
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
+output * bg #091b20 solid_color
+#exec_always ~/.local/bin/sway-set-random-wallpaper
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 output $laptop_screen scale 1   pos 0 0      res 3440 1440
@@ -110,6 +111,7 @@ input 1267:12573:FTCS1000:00_04F3:311D_Touchpad {
 
 
     exec mako --anchor top-center
+    exec nm-applet 
     exec sleep 1 && onedrive_tray
     exec udiskie —smart-tray
 
@@ -243,6 +245,7 @@ bindsym $mod+r mode "resize"
 # Window Overrides:
 #
 for_window [title="TelegramDesktop"] floating enable
+for_window [app_id="nm-openconnect-auth-dialog"] floating enable
 
 #
 # Status Bar:
