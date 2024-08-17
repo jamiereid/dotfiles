@@ -35,6 +35,8 @@ Color.new("dark_greenish", "#006000")
 --
 Group.new("StatusLine", c.white, c.purple_blue)
 Group.new("StatusLineNC", c.black, c.pale_gray_green)
+Group.new("WinBar", c.black, c.bg_yellow)
+Group.new("WinBarNC", c.dark_yellow_green, c.bg_yellow)
 Group.new("VertSplit", c.dark_greenish, c.bg_yellow)
 
 Group.new("Normal", c.black, c.bg_yellow)
