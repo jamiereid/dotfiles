@@ -42,6 +42,7 @@ return {
         htmx = true,
         lua_ls = true,
         pyright = true,
+        tailwindcss = true,
         rust_analyzer = { manual_install = true },
 
         jsonls = {
@@ -102,6 +103,7 @@ return {
         "black",
         "isort",
         "stylua",
+        "tailwindcss-language-server",
       }
 
       --vim.list_extend(ensure_installed, servers_to_install)

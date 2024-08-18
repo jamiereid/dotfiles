@@ -7,6 +7,7 @@ return {
         typescript = { { "prettierd", "prettier" } },
         javascript = { { "prettierd", "prettier" } },
         html = { { "prettierd", "prettier" } },
+        jinja = { { "prettierd", "prettier" } },
         htmldjango = { { "prettierd", "prettier" } },
         python = { "isort", "black" },
       },
