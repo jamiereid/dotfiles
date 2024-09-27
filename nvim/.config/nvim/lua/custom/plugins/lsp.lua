@@ -104,6 +104,8 @@ return {
         "isort",
         "stylua",
         "tailwindcss-language-server",
+        "shellcheck",
+        "shfmt",
       }
 
       --vim.list_extend(ensure_installed, servers_to_install)

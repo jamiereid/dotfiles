@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
-if ! command -v clogin.expect &> /dev/null
-then
-    printf "clogin.expect script not on your path\n"
-    exit 1
+if ! command -v clogin.expect &>/dev/null; then
+	printf "clogin.expect script not on your path\n"
+	exit 1
 fi
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
+if [[ $# -ge 1 ]]; then
+	selected=$1
+	shift
 else
-    selected=$(cat ~/.ssh/known_hosts | cut -d\  -f 1 | uniq | fzf --border --info=inline --margin=20,20 --padding=1 --bind=enter:replace-query+print-query)
+	selected=$(cut -d\  -f 1 ~/.ssh/known_hosts | uniq | fzf --border --info=inline --margin=20,20 --padding=1 --bind=enter:replace-query+print-query)
 fi
 
 if [[ -z $selected ]]; then
-    exit 0
+	exit 0
 fi
 
-clogin.expect $selected
+clogin.expect "$selected" "$@"

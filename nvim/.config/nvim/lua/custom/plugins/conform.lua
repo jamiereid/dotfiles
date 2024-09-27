@@ -10,6 +10,9 @@ return {
         jinja = { { "prettierd", "prettier" } },
         htmldjango = { { "prettierd", "prettier" } },
         python = { "isort", "black" },
+        bash = { "shfmt", "shellcheck" },
+        zsh = { "shfmt", "shellcheck" },
+        sh = { "shfmt", "shellcheck" },
       },
       format_on_save = {
         timeout_ms = 500,

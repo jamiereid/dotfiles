@@ -5,9 +5,9 @@ if test -e /opt/homebrew/bin/brew
   eval (/opt/homebrew/bin/brew shellenv)
 end
 
-set -gx EDITOR vim
 set -gx LANG en_US.UTF-8
 
+set -gx EDITOR vim
 set -gx GOPATH ~/.local/share/go/
 set -gx GOBIN ~/.local/share/go/bin
 set -gx PATH ~/.local/bin ~/.cargo/bin $GOPATH/bin $PATH
@@ -35,16 +35,6 @@ and not string length -q $NVIM
 	tmux new-session -A -s main 2> /dev/null; and exec true
 end
 
-abbr -a gs 'git status'
-abbr -a gc 'git commit -m'
-abbr -a ga 'git add -p'
-abbr -a gl 'git lg'
-abbr -a gd 'git diff'
-abbr -a gw 'git worktree'
-abbr -a gwa 'git worktree add'
-abbr -a gwl 'git worktree list'
-abbr -a gwr 'git worktree remove'
-abbr -a httpserver 'python -m http.server 8000'
 
 if status --is-interactive
 	if command -v exa > /dev/null
@@ -68,6 +58,7 @@ if status --is-interactive
 	end
 
 	if command -v nvim > /dev/null
+		set -gx EDITOR nvim
 		abbr -a vi 'nvim'
 		abbr -a vim 'nvim'
 	else
@@ -104,6 +95,18 @@ if status --is-interactive
 	else
 		printf "%s\n" "mise not installed"
 	end
+
+	abbr -a gs 'git status'
+	abbr -a gc 'git commit -m'
+	abbr -a ga 'git add -p'
+	abbr -a gl 'git lg'
+	abbr -a gd 'git diff'
+	abbr -a gw 'git worktree'
+	abbr -a gwa 'git worktree add'
+	abbr -a gwl 'git worktree list'
+	abbr -a gwr 'git worktree remove'
+	abbr -a httpserver 'python -m http.server 8000'
+	abbr -a ping 'ping -DO'
 end
 
 set -g fish_prompt_pwd_dir_length 3
