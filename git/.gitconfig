@@ -50,6 +50,9 @@
 [url "git@github.com:"]
 	pushInsteadOf = "gh:"
 
+[url "git@github.com:jamiereid/"]
+	insteadOf = "mygh:"
+
 [url "git@ssh.dev.azure.com:v3/ACTGovernment/NCS/"]
 	insteadOf = "work:"
 
