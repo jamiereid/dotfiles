@@ -152,6 +152,7 @@ function fish_user_key_bindings
 end
 
 set __fish_prompt_lastchar '$'
+set -g -x JRR_THEME acme
 
 if test -e ~/.config/fish/(uname -n|cut -d. -f1).fish
     source ~/.config/fish/(uname -n|cut -d. -f1).fish

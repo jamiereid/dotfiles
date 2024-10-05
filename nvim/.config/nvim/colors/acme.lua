@@ -76,6 +76,7 @@ Group.new("SpecialChar", c.black)
 Group.new("Constant", c.black)
 Group.new("Label", c.dark_yellow_green)
 Group.new("PreProc", c.dark_yellow_green)
+Group.new("Delimiter", c.black)
 
 Group.new("@label", nil, nil, s.bold)
 
