@@ -57,7 +57,7 @@ Group.new("SignColumn", c.dark_yellow_green, nil)
 Group.new("MatchParen", c.white, c.dark_greenish)
 
 Group.new("Comment", c.dark_yellow_green, nil, s.italic)
-Group.new("Keyword", c.black)
+Group.new("Keyword", c.black, nil, s.bold)
 Group.new("@operator", c.black)
 Group.new("Identifier", c.black)
 Group.new("Function", c.black)
