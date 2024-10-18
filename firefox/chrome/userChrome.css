@@ -1,0 +1,64 @@
+/* BEGIN Dynamic native tabs
+ * Set window preface value:
+ * Sidebery settings > Help > Preface value
+ * note: value can be an "empty" unicode sign (https://unicode-explorer.com/c/200B)
+ * */
+#main-window #titlebar {
+  overflow: hidden;
+  transition: height 0.3s 0.3s !important;
+}
+/* Default state: Set initial height to enable animation */
+#main-window #titlebar { height: 3em !important; }
+#main-window[uidensity="touch"] #titlebar { height: 3.35em !important; }
+#main-window[uidensity="compact"] #titlebar { height: 2.7em !important; }
+/* Hidden state: Hide native tabs strip */
+#main-window[titlepreface*="​"] #titlebar { height: 0 !important; }
+/* Hidden state: Fix z-index of active pinned tabs */
+#main-window[titlepreface*="​"] #tabbrowser-tabs { z-index: 0 !important; }
+/* END Dynamic native tabs */
+
+/* @-moz-document url(chrome://browser/content/browser.xhtml) { */
+/* 	/* BEGIN hide-tabs-windows.css */ */
+/* 	.tabbrowser-tab { */
+/* 		visibility: collapse !important; */
+/* 	} */
+/**/
+/* 	.titlebar-button { */
+/* 		height: 40px !important; */
+/* 	} */
+/**/
+/* 	#nav-bar { */
+/* 		margin-top: -42px; */
+/* 		margin-right: 140px; */
+/* 		box-shadow: none !important; */
+/* 	} */
+/**/
+/* 	[uidensity="compact"]:root .titlebar-button { */
+/* 		height: 32px !important; */
+/* 	} */
+/**/
+/* 	[uidensity="compact"]:root #nav-bar { */
+/* 		margin-top: -32px; */
+/* 	} */
+/**/
+/* 	#titlebar-spacer { */
+/* 		background-color: var(--chrome-secondary-background-color); */
+/* 	} */
+/**/
+/* 	#titlebar-buttonbox-container { */
+/* 		background-color: var(--chrome-secondary-background-color); */
+/* 	} */
+/**/
+/* 	.titlebar-color { */
+/* 		background-color: var(--toolbar-bgcolor); */
+/* 	} */
+/* 	/* END hide-tabs-windows.css */ */
+/**/
+	/* Remove title section from Tree Style Tabs */
+	#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] > #sidebar-header {
+		visibility: collapse; 
+	}
+	/* Remove title section from  Sideberry */
+	#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] > #sidebar-header {
+		visibility: collapse;  
+	}

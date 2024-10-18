@@ -62,8 +62,8 @@
         "format-alt": "{percent}% {icon}",
         "format-alt-click": "click-right",
         "format-icons": ["󰌫", "󰌬"],
-        "on-scroll-down": "light -U 1",
-        "on-scroll-up": "light -A 1"
+        "on-scroll-down": "brightr -m 1 -e 4 down 10",
+        "on-scroll-up": "brightr -m 1 -e 4 up 10",
     },
     "idle_inhibitor": {
         "format": "{icon}",
