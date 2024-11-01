@@ -2,10 +2,43 @@
     "layer": "bottom",
     "position": "bottom",
     "height": 20,
+    "reload_style_on_change": true,
 
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
+    //"modules-left": ["sway/workspaces", "sway/mode"],
+    //"modules-center": ["sway/window"],
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
     "modules-right": ["backlight", "pulseaudio", "idle_inhibitor", "network", "battery", "clock", "tray"],
+
+    "hyprland/workspaces": {
+	    "on-scroll-up": "hyprctl dispatch workspace r-1",
+	    "on-scroll-down": "hyprctl dispatch workspace r+1",
+	    "on-click": "activate",
+	    "active-only": false,
+	    "all-outputs": false,
+	    "format": "{}",
+	    "format-icons": {
+		    "urgent": "",
+		    "active": "",
+		    "default": ""
+	    },
+//	    "persistent-workspaces": {
+//		    "*": 5
+//	    }
+    },
+    "hyprland/window": {
+	    "rewrite": {
+		    "(.*) — Mozilla Firefox": "$1",
+	    },
+	    "format": "{}",
+	    "separate-outputs": true,
+	    "hide-empty-text": true,
+    },
+    "hyprland/submap": {
+	    "format": " [{}]",
+	    "max-length": 30,
+	    "tooltip": false
+    },
     "sway/mode": {
         "format": "{}"
     },
@@ -22,7 +55,9 @@
         "tooltip": false
     },
     "battery": {
-        "format": "{capacity}% {icon}",
+        "format": "{icon}",
+        "format-alt": "{capacity}% {icon}",
+        "format-alt-click": "click-right",
         "format-icons": ["󰂎", "󰁻", "󰁿", "󰂁", "󰁹"],
         "format-charging": "{capacity}% 󰂄",
         "interval": 30,
@@ -42,7 +77,7 @@
             "disconnected": ["󰲛"]
         },
         "on-click": "wezterm -e nmtui",
-    "tooltip": false
+	    "tooltip": false
     },
     "pulseaudio": {
         "format": "{icon}",

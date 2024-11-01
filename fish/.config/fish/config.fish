@@ -38,7 +38,9 @@ end
 
 if status --is-interactive
 	if command -v exa > /dev/null
-		printf "%s\n" "exa is installed; you should switch to eza"
+		if not test -L (command -v exa)
+			echo "exa is installed; you should switch to eza"
+		end
 	end
 
 	if command -v eza > /dev/null

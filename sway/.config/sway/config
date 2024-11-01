@@ -30,8 +30,8 @@ client.unfocused         #20201d   #20201d     #a6a28c
 ### Output configuration
 #output * bg `wallpaper` fill
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
-output * bg #091b20 solid_color
-#exec_always ~/.local/bin/sway-set-random-wallpaper
+#output * bg #091b20 solid_color
+exec_always ~/.local/bin/sway-set-random-wallpaper
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 set $laptop_screen 'eDP-1'

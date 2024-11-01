@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -eo
+
+usage() {
+	printf "Clone a git repo in an opinionated way to allow use of worktrees\n"
+	printf "Syntax: %s <repo_url>\n" "$(basename "$0")"
+	exit 1
+}
+
+if [ -z "$1" ]; then
+	usage
+fi
+
+REPO="$1"
+
+if [ "${REPO#mygh}" != "$REPO" ]; then
+	REPONAME="${REPO##*:}".git
+else
+	REPONAME="${REPO##*/}".git
+fi
+
+mkdir -p "$REPONAME"/.bare
+git clone --bare "$REPO" "$REPONAME"/.bare
+printf "gitdir: .bare" >"$REPONAME"/.git

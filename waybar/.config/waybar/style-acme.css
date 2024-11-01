@@ -1,0 +1,74 @@
+* {
+    border:        none;
+    border-radius: 0;
+    font-family:   Iosevka Nerd Font;
+    font-size:     14px;
+    box-shadow:    none;
+    text-shadow:   none;
+}
+
+window#waybar {
+    color:      #000000;
+    background: transparent;
+}
+
+#workspaces {
+    margin: 0 5px
+}
+
+#workspaces button {
+    padding:    0 5px;
+    border-radius: 100%;
+}
+
+#workspaces button.visible {
+    background-color: #8888CC;
+}
+
+#workspaces button.focused {
+    color:      #60ac39;
+}
+
+#workspaces button.urgent {
+    color:      #d73737;
+}
+
+#mode, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #tray {
+	margin: 0 10px;
+}
+
+#battery.warning {
+   color:       #ae9513;
+}
+
+#battery.critical {
+    color:      #d73737;
+}
+
+#battery.charging {
+    color:      #60ac39;
+}
+
+window#waybar .modules-left {
+	margin-left: 10px;
+}
+
+window#waybar .modules-right {
+	margin-right: 10px;
+}
+
+window#waybar .modules-center, window#waybar .modules-left, window#waybar .modules-right {
+	margin-bottom: 10px;
+	padding: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 1.0rem;
+	color: #000000;
+	transition: none;
+	background-color: rgba(158, 238, 238, 0.8);
+}
+
+window#waybar.empty .modules-center {
+	padding: 0px;
+	background: transparent;
+}
