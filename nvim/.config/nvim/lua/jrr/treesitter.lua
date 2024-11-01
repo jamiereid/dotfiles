@@ -20,6 +20,7 @@ M.setup = function()
       "tcl",
       "toml",
       "typescript",
+      "jinja2",
     },
     matchup = { -- "andymass/vim-matchup"
       enable = true,

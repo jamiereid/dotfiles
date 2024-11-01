@@ -34,6 +34,15 @@ return {
         ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
       }
 
+      -- detect jinja files (this isn't automatic for jinja)
+      vim.filetype.add {
+        extension = {
+          jinja = "jinja",
+          jinja2 = "jinja",
+          j2 = "jinja",
+        },
+      }
+
       local lspconfig = require "lspconfig"
       local servers = {
         bashls = true,
@@ -41,7 +50,8 @@ return {
         html = true,
         htmx = true,
         lua_ls = true,
-        pyright = true,
+        ruff = true,
+        jinja_lsp = true,
         tailwindcss = true,
         rust_analyzer = { manual_install = true },
 
@@ -97,11 +107,10 @@ return {
         "html-lsp",
         "htmx-lsp",
         "lua-language-server",
-        "pyright",
+        "ruff",
         "json-lsp",
+        "jinja-lsp",
         "yaml-language-server",
-        "black",
-        "isort",
         "stylua",
         "tailwindcss-language-server",
         "shellcheck",
