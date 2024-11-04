@@ -98,6 +98,17 @@ if status --is-interactive
 		printf "%s\n" "mise not installed"
 	end
 
+	if command -v op > /dev/null
+		eval (op completion fish)
+		function oplogin
+			if not op whoami &> /dev/null
+				eval (op signin)
+			else
+				printf "%s\n" "already signed in"
+			end
+		end
+	end
+
 	abbr -a gs 'git status'
 	abbr -a gc 'git commit -m'
 	abbr -a ga 'git add -p'
