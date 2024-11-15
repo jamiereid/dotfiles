@@ -92,6 +92,7 @@ Group.new("NonText", c.subtle, c.bg, nil, c.bg)
 
 Color.new("vplit_fg", "#AEAEAE")
 Group.new("VertSplit", c.vplit_fg, c.bg, nil, c.bg)
+Group.new("WinSeparator", c.vplit_fg, c.bg, nil, c.bg)
 
 Color.new("vis_fg", "#B4EEB5")
 Color.new("vis_bg", "#000080")
@@ -113,7 +114,7 @@ Group.new("DiagnosticVirtualTextWarn", c.diag_warn)
 Color.new("slnc_fg", "#5E5E5E")
 Color.new("slnc_bg", "#AEAEAE")
 Group.new("StatusLine", c.fg, c.bg, nil, c.fg)
-Group.new("StatusLineNC", c.slnc_fg, c.slnc_bg, nil, c.slnc_bg)
+Group.new("StatusLineNC", c.subtle, c.bg, nil, c.bg)
 Group.new("WinBar", g.StatusLine, g.StatusLine, nil, g.StatusLine)
 Group.new("WinBarNC", g.StatusLineNC, g.StatusLineNC, nil, g.StatusLineNC)
 

@@ -40,3 +40,5 @@ end, { expr = true })
 
 vim.keymap.set("n", "<left>", ":bp<CR>")
 vim.keymap.set("n", "<right>", ":bn<CR>")
+
+vim.keymap.set("n", "<leader>h2r", require("jrr.functions").hex2rbg_under_cursor)
