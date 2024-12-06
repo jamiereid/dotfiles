@@ -11,7 +11,17 @@ return {
       local ui = require "dapui"
 
       require("dapui").setup()
-      require("dap-go").setup()
+      require("dap-go").setup {
+        dap_configurations = {
+          {
+            type = "go",
+            name = "Attach remote",
+            mode = "remote",
+            request = "attach",
+          },
+        },
+      }
+
       require("dap-python").setup()
 
       vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)

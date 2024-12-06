@@ -13,6 +13,7 @@ return {
         bash = { "shfmt", "shellcheck" },
         zsh = { "shfmt", "shellcheck" },
         sh = { "shfmt", "shellcheck" },
+        go = { "gofmt", "goimports" },
       },
       format_on_save = {
         timeout_ms = 500,

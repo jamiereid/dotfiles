@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eo
+set -eo pipefail
 
 usage() {
 	printf "Clone a git repo in an opinionated way to allow use of worktrees\n"

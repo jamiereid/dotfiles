@@ -8,6 +8,9 @@ require "jrr.disable_builtin"
 -- Make some things available everywhere
 require "jrr.globals"
 
+-- Custom commands
+require "jrr.commands"
+
 -- Bootstrap folke/lazy.nvim package manager if needed, and ensure it's at the start of the runtime path
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then -- once v0.10 is everywhere, remove vim.loop

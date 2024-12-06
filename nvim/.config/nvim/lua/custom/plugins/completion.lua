@@ -63,6 +63,13 @@ return {
             },
             { "i", "c" }
           ),
+          ["<CR>"] = cmp.mapping(
+            cmp.mapping.confirm {
+              behaviour = cmp.ConfirmBehavior.Insert,
+              select = true,
+            },
+            { "i", "c" }
+          ),
         },
         experimental = {
           ghost_text = { hl_group = "GhostText" },

@@ -54,6 +54,7 @@ return {
         pyright = true,
         jinja_lsp = true,
         tailwindcss = true,
+        gopls = true,
         rust_analyzer = { manual_install = true },
 
         jsonls = {
@@ -117,6 +118,7 @@ return {
         "tailwindcss-language-server",
         "shellcheck",
         "shfmt",
+        "gopls",
       }
 
       --vim.list_extend(ensure_installed, servers_to_install)

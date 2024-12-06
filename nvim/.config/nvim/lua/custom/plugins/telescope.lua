@@ -26,6 +26,8 @@ return {
 
       vim.keymap.set("n", "<leader>gw", builtin.grep_string)
 
+      vim.keymap.set("n", "<leader>gf", builtin.git_files)
+
       vim.keymap.set("n", "<leader>s", extensions.luasnip.luasnip)
 
       vim.keymap.set("n", "<leader>en", function()

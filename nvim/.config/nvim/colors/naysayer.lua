@@ -77,17 +77,18 @@ Group.new("Conditional", c.white)
 Group.new("Statement", c.white)
 
 Group.new("@type", c.white)
+Group.new("@module", c.white)
 Group.new("Type", c.white)
 -- Color.new("type_builtin", "#009000")
 -- Group.new("@type.builtin", c.type_builtin)
+Group.new("@variable.builtin", c.white)
 
 Color.new("matchparen_bg", "#D0FFC0")
 Color.new("matchparen_fg", "#202020")
 Group.new("MatchParen", c.matchparen_fg, c.matchparen_bg, nil, c.matchparen_bg)
 
-Color.new("skfg", "#808080")
-Color.new("skbg", "#343434")
-Group.new("SpecialKey", c.skfg, c.skbg, nil, c.skbg)
+Group.new("Whitespace", c.subtle, c.bg, nil, c.bg) -- set listchars?
+Group.new("SpecialKey", c.subtle, c.bg, nil, c.bg)
 Group.new("NonText", c.subtle, c.bg, nil, c.bg)
 
 Color.new("vplit_fg", "#AEAEAE")
