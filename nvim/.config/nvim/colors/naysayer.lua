@@ -111,6 +111,9 @@ Group.new("DiagnosticVirtualTextError", c.diag_error)
 Group.new("DiagnosticVirtualTextHint", c.diag_hint)
 Group.new("DiagnosticVirtualTextWarn", c.diag_warn)
 
+-- Dap
+Group.new("@DapBreakpoint", g.search, g.search)
+
 -- status line
 Color.new("slnc_fg", "#5E5E5E")
 Color.new("slnc_bg", "#AEAEAE")

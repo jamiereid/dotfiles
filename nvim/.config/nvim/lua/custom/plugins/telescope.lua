@@ -20,7 +20,7 @@ return {
       local builtin = require "telescope.builtin"
       local extensions = require("telescope").extensions
 
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep)
+      vim.keymap.set("n", "<leader>gg", builtin.live_grep)
       vim.keymap.set("n", "<leader>f,", builtin.buffers)
       vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 

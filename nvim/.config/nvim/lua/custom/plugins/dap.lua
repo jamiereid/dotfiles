@@ -39,6 +39,10 @@ return {
       vim.keymap.set("n", "<F4>", dap.step_out)
       vim.keymap.set("n", "<F5>", dap.step_back)
 
+      -- Adding symbols for breakpoints and such
+      vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "@DapBreakpoint", numhl = "" })
+      vim.fn.sign_define("DapStopped", { text = "→", texthl = "", linehl = "", numhl = "" })
+
       dap.listeners.before.attach.dapui_config = function()
         ui.open()
       end
