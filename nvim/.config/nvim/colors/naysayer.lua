@@ -90,6 +90,7 @@ Group.new("MatchParen", c.matchparen_fg, c.matchparen_bg, nil, c.matchparen_bg)
 Group.new("Whitespace", c.subtle, c.bg, nil, c.bg) -- set listchars?
 Group.new("SpecialKey", c.subtle, c.bg, nil, c.bg)
 Group.new("NonText", c.subtle, c.bg, nil, c.bg)
+Group.new("BlinkCmpGhostText", c.subtle, c.bg)
 
 Color.new("vplit_fg", "#AEAEAE")
 Group.new("VertSplit", c.vplit_fg, c.bg, nil, c.bg)
@@ -128,7 +129,10 @@ Group.new("PMenuSel", c.bg, c.fg)
 --Group.new("PMenuSbar", nil, c.black, nil, c.black)
 --Group.new("PMenuThumb", c.bg, c.bg, nil, c.bg)
 Group.new("NormalFloat", g.PMenu, g.PMenu)
-Group.new("FloatBorder", g.PMenu, g.PMenu)
+Group.new("BlinkCmpMenuBorder", c.subtle)
+Group.new("BlinkCmpDocBorder", c.subtle)
+Group.new("BlinkCmpDocSeparator", c.subtle)
+Group.new("BlinkCmpSignatureHelpBorder", c.subtle)
 
 Group.new("GhostText", c.subtle)
 

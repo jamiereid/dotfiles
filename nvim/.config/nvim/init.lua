@@ -1,3 +1,6 @@
+-- temp work around : https://github.com/neovim/neovim/issues/31675
+vim.hl = vim.highlight
+
 -- Set mapleader as the first thing we do
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
@@ -10,6 +13,9 @@ require "jrr.globals"
 
 -- Custom commands
 require "jrr.commands"
+
+-- Menu
+require "jrr.menu"
 
 -- Bootstrap folke/lazy.nvim package manager if needed, and ensure it's at the start of the runtime path
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"

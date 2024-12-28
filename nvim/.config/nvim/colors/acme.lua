@@ -106,6 +106,7 @@ Group.new("PMenuSbar", c.black, c.dark_yellow_green)
 Group.new("PMenuThumb", c.black, c.dark_yellow)
 Group.new("NormalFloat", g.PMenu, g.PMenu)
 Group.new("FloatBorder", g.PMenu, g.PMenu)
+Group.new("BlinkCmpMenuBorder", g.Pmenu, g.Pmenu)
 
 Group.new("@markup.heading", nil, nil, s.bold)
 

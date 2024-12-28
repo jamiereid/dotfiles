@@ -1,119 +1,76 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
+    version = "v0.*",
     dependencies = {
-      "onsails/lspkind.nvim", -- pictograms
-      "hrsh7th/cmp-nvim-lsp", -- nvim-cmp source for built-in lsp
-      "hrsh7th/cmp-path", -- nvim-cmp source for paths
-      "hrsh7th/cmp-buffer", -- nvim-cmp source for buffer
-      {
-        "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp",
-        dependencies = { "rafamadriz/friendly-snippets" },
-      },
-      "saadparwaiz1/cmp_luasnip", -- source for luasnip snippets
-      { "MattiasMTS/cmp-dbee", dependencies = { "kndndrj/nvim-dbee" } },
+      "rafamadriz/friendly-snippets",
+      { "L3MON4D3/LuaSnip", version = "v2.*" },
     },
-    config = function()
-      vim.opt.completeopt = { "menu", "menuone", "noselect" }
-      vim.opt.shortmess:append "c"
+    opts = {
+      keymap = {
+        preset = "default",
+        ["<CR>"] = { "select_and_accept", "fallback" },
+        ["<S-CR>"] = {},
+      },
 
-      local lspkind = require "lspkind"
-      lspkind.init {}
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = "mono",
+      },
 
-      local cmp = require "cmp"
-
-      cmp.setup {
+      -- experimental signature help support
+      signature = {
+        enabled = true,
         window = {
-          completion = cmp.config.window.bordered {
-            border = "rounded",
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-          },
-          documentation = cmp.config.window.bordered {
-            border = "rounded",
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-          },
+          border = "rounded",
         },
-        ---@diagnostic disable-next-line: missing-fields
-        formatting = {
-          format = lspkind.cmp_format {
-            mode = "symbol_text",
-            menu = {
-              buffer = "[Buffer]",
-              nvim_lsp = "[LSP]",
-              luasnip = "[LuaSnip]",
-              path = "[Path]",
-              nvim_lua = "[Lua]",
-            },
-          },
-        },
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        sources = cmp.config.sources {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { { name = "path" }, { name = "buffer", keyword_length = 5 } },
-        },
-        mapping = {
-          ["<C-n>"] = cmp.mapping.select_next_item { behaviour = cmp.SelectBehavior.Insert },
-          ["<C-p>"] = cmp.mapping.select_prev_item { behaviour = cmp.SelectBehavior.Insert },
-          ["<C-y>"] = cmp.mapping(
-            cmp.mapping.confirm {
-              behaviour = cmp.ConfirmBehavior.Insert,
-              select = true,
-            },
-            { "i", "c" }
-          ),
-          ["<CR>"] = cmp.mapping(
-            cmp.mapping.confirm {
-              behaviour = cmp.ConfirmBehavior.Insert,
-              select = true,
-            },
-            { "i", "c" }
-          ),
-        },
-        experimental = {
-          ghost_text = { hl_group = "GhostText" },
-        },
-      }
-
-      -- cmp-dbee
-      require("cmp-dbee").setup()
-      cmp.setup.filetype({ "sql.dbee" }, {
-        sources = {
-          { name = "cmp-dbee" },
-          { name = "buffer" },
-        },
-      })
+      },
 
       -- luasnip
-      local ls = require "luasnip"
+      snippets = {
+        expand = function(snippet)
+          require("luasnip").lsp_expand(snippet)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require("luasnip").jumpable(filter.direction)
+          end
+          return require("luasnip").in_snippet()
+        end,
+        jump = function(direction)
+          require("luasnip").jump(direction)
+        end,
+      },
 
-      ---@diagnostic disable-next-line: assign-type-mismatch
-      require("luasnip.loaders.from_lua").load { paths = vim.fn.stdpath "config" .. "/snippets" }
+      completion = {
+        menu = {
+          border = "rounded",
+          draw = {
+            padding = 2,
+            gap = 2,
+            treesitter = { "lsp" },
+          },
+        },
+        trigger = {
+          show_on_insert_on_trigger_character = false,
+        },
 
-      ls.config.set_config {
-        history = false,
-        updateevents = "TextChanged,TextChangedI",
-        enable_autosnippets = true,
-      }
+        documentation = {
+          window = {
+            border = "rounded",
+          },
+          auto_show = true,
+          auto_show_delay_ms = 500,
+        },
 
-      vim.keymap.set({ "i", "s" }, "<c-k>", function()
-        if ls.expand_or_jumpable() then
-          ls.expand_or_jump()
-        end
-      end, { silent = true })
+        ghost_text = { enabled = true },
+      },
 
-      vim.keymap.set({ "i", "s" }, "<c-j>", function()
-        if ls.jumpable(-1) then
-          ls.jump(-1)
-        end
-      end, { silent = true })
-
-      vim.keymap.set("n", "<leader>es", require("luasnip.loaders").edit_snippet_files)
-    end,
+      sources = {
+        default = { "lsp", "path", "luasnip", "buffer" },
+        cmdline = {},
+      },
+    },
+    opts_extend = { "sources.default" },
   },
 }

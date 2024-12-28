@@ -6,6 +6,7 @@ return {
       "williamboman/mason.nvim",
       --"williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "saghen/blink.cmp",
 
       { "j-hui/fidget.nvim", opts = {} },
 
@@ -15,8 +16,10 @@ return {
       require("neodev").setup()
 
       local capabilities = nil
-      if pcall(require, "cmp_nvim_lsp") then
-        capabilities = require("cmp_nvim_lsp").default_capabilities()
+      --if pcall(require, "cmp_nvim_lsp") then
+      if pcall(require, "blink.cmp") then
+        --capabilities = require("cmp_nvim_lsp").default_capabilities()
+        capabilities = require("blink.cmp").get_lsp_capabilities()
       end
 
       local border = {
