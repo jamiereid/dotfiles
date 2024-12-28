@@ -1,6 +1,6 @@
 {
     "layer": "bottom",
-    "position": "bottom",
+    "position": "top",
     "height": 20,
     "reload_style_on_change": true,
 
