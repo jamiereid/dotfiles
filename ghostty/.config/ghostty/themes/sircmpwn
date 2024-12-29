@@ -1,11 +1,8 @@
 # vim: ft=config
-background = #072627
-foreground = #D7AF87
+background = #333333
+foreground = #D3D0C8
 
-cursor-color = #91EC93
-
-selection-foreground = #B4EEB5
-selection-background = #000080
+cursor-color = #000000
 
 # https://www.ditig.com/publications/256-colors-cheat-sheet
 palette =  0=#000000
@@ -14,10 +11,10 @@ palette =  2=#B9CA4A
 palette =  3=#E6C547
 palette =  4=#7AA6DA
 palette =  5=#C397D8
-palette =  6=#70C8BA
+palette =  6=#70C0BA
 palette =  7=#FFFFFF
 palette =  8=#666666
-palette =  9=#FF3336
+palette =  9=#FF3334
 palette = 10=#9EC400
 palette = 11=#E7C547
 palette = 12=#7AA6DA

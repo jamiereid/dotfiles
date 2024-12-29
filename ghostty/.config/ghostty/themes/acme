@@ -1,0 +1,26 @@
+# vim: ft=config
+background = #FFFFEE
+foreground = #000000
+
+cursor-color = #000000
+
+selection-foreground = #000000
+selection-background = #EAFFFF
+
+# https://www.ditig.com/publications/256-colors-cheat-sheet
+palette =  0=#000000
+palette =  1=#AA0000
+palette =  2=#006000
+palette =  3=#99994C
+palette =  4=#000099
+palette =  5=#8888CC
+palette =  6=#9EEEEE
+palette =  7=#99994C
+palette =  8=#000000
+palette =  9=#AA0000
+palette = 10=#006000
+palette = 11=#99994C
+palette = 12=#000099
+palette = 13=#8888CC
+palette = 14=#9EEEEE
+palette = 15=#99994C
