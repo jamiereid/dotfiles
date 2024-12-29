@@ -1,0 +1,8 @@
+font-family = Iosevka Nerd Font
+theme = naysayer
+
+shell-integration-features = no-cursor
+cursor-style = block
+mouse-hide-while-typing = true
+
+window-decoration = false

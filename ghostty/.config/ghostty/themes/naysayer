@@ -1,0 +1,25 @@
+background = #072627
+foreground = #d7af87
+
+cursor-color = #91ec93
+
+selection-foreground = #000000
+selection-background = #fffacd
+
+# https://www.ditig.com/publications/256-colors-cheat-sheet
+palette =  0=#000000
+palette =  1=#f2777a
+palette =  2=#b9ca4a
+palette =  3=#e6c547
+palette =  4=#7aa6da
+palette =  5=#c397d8
+palette =  6=#70c8ba
+palette =  7=#ffffff
+palette =  8=#666666
+palette =  9=#ff3336
+palette = 10=#9ec400
+palette = 11=#e7c547
+palette = 12=#7aa6da
+palette = 13=#b77ee0
+palette = 14=#54ced6
+palette = 15=#ffffff
