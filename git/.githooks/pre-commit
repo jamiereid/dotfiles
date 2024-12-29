@@ -1,9 +1,21 @@
 #!/bin/sh
-git diff --cached --diff-filter=AM `git status -s | grep -v git/.githooks/pre-commit | cut -b4-` | grep -q nocheckin
-if [ $? -eq 0 ]
-then 
-  echo nocheckin comment detected
-  exit 1
+
+if command -v rg >/dev/null 2>&1; then
+	grep="rg"
+	args="--fixed-strings --with-filename --line-number --no-messages --ignore-case --color=always"
+else
+	grep="grep"
+	args="-r -F -n -I -i --color=always"
 fi
 
-
+files=$(git diff --cached --diff-filter=AM --name-only | $grep -v "git/.githooks/pre-commit")
+if [ -n "$files" ]; then
+	# shellcheck disable=SC2086
+	results=$($grep $args nocheckin $files)
+	status=$?
+	if [ $status -eq 0 ]; then
+		echo "nocheckin comment detected"
+		echo "$results"
+		exit 1
+	fi
+fi
