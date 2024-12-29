@@ -28,8 +28,9 @@ opt.undofile = true
 opt.splitright = true
 opt.splitbelow = true
 
-opt.listchars = { tab = "» ", extends = "›", precedes = "‹", nbsp = "·", trail = "·" }
+opt.listchars = { tab = "» ", extends = "›", precedes = "‹", nbsp = "·", trail = "·", conceal = "." }
 opt.list = true -- show whitespace as special chars - see listchars
+opt.conceallevel = 1
 
 opt.incsearch = true -- highlight match while typing search patterns
 opt.inccommand = "split"
