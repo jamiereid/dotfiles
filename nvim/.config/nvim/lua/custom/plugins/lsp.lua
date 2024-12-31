@@ -139,6 +139,19 @@ return {
         lspconfig[name].setup(config)
       end
 
+      -- jai / jails
+      local configs = require "lspconfig.configs"
+      if not configs.jails then
+        configs.jails = {
+          default_config = {
+            cmd = { "jails", "-jai_path", vim.fs.joinpath(vim.uv.os_homedir(), "jai", "latest") },
+            root_dir = lspconfig.util.root_pattern "first.jai",
+            filetypes = { "jai" },
+          },
+        }
+      end
+      lspconfig.jails.setup {}
+
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function()
           vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"

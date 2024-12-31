@@ -9,3 +9,13 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "help",
   command = "wincmd L",
 })
+
+-- fix jai syntax highlighting; could be a treesitter thing...
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "jai",
+  callback = function()
+    vim.defer_fn(function()
+      vim.cmd "colorscheme naysayer"
+    end, 0)
+  end,
+})

@@ -68,18 +68,22 @@ Group.new("String", c.string)
 Color.new("special", "#C7AB85")
 Group.new("Special", c.special)
 
-Color.new("number", "#00cdcd")
+Color.new("number", "#9BF2DA")
 Group.new("Number", c.number)
 
-Color.new("boolean", "#B1D631")
+--Color.new("boolean", "#B1D631")
+Color.new("boolean", "#86E9CD")
 Group.new("boolean", c.boolean)
 
 Group.new("Conditional", c.white)
 Group.new("Statement", c.white)
 
+Color.new("preproc", "#B9E9B7")
+Group.new("PreProc", c.preproc)
+
 Group.new("@type", c.white)
 Group.new("@module", c.white)
-Group.new("Type", c.white)
+Group.new("Type", c.preproc)
 -- Color.new("type_builtin", "#009000")
 -- Group.new("@type.builtin", c.type_builtin)
 Group.new("@variable.builtin", c.white)
@@ -165,6 +169,19 @@ Group.new("SpellBad", c.red, nil, s.underline)
 Group.new("SpellCap", c.diag_warn, nil, s.underline)
 Group.new("SpellRare", c.diag_warn)
 Group.new("SpellLocal", c.red, nil, s.underline)
+
+Group.new("Structure", c.white)
+--jai
+Color.new("offwhite", "#D6E0E4")
+Group.new("jaiNull", c.number)
+Group.new("jaiClass", c.normal)
+Group.new("jaiConstant", c.normal)
+Group.new("jaiConstantDeclaration", c.normal)
+Group.new("jaiFor", c.white)
+Group.new("jaiIt", c.offwhite)
+Group.new("jaiTypeInfo", c.offwhite)
+Group.new("jaiTemplate", g.PreProc)
+Group.new("jaiTagNote", g.PreProc)
 
 --[[
 

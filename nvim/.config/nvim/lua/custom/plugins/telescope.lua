@@ -1,3 +1,4 @@
+local jrr = require "jrr.telescope"
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -20,18 +21,45 @@ return {
       local builtin = require "telescope.builtin"
       local extensions = require("telescope").extensions
 
-      vim.keymap.set("n", "<leader>gg", builtin.live_grep)
-      vim.keymap.set("n", "<leader>f,", builtin.buffers)
+      vim.keymap.set("n", "<leader>b,", builtin.buffers)
       vim.keymap.set("n", "<leader>fh", builtin.help_tags)
+      vim.keymap.set("n", "<leader>fd", builtin.find_files)
 
-      vim.keymap.set("n", "<leader>gw", builtin.grep_string)
-
-      vim.keymap.set("n", "<leader>gf", builtin.git_files)
-
-      vim.keymap.set("n", "<leader>s", extensions.luasnip.luasnip)
+      vim.keymap.set("n", "<leader>fs", extensions.luasnip.luasnip)
 
       vim.keymap.set("n", "<leader>en", function()
         builtin.find_files { cwd = vim.fn.stdpath "config" }
+      end)
+
+      vim.keymap.set("n", "<leader>ed", function()
+        builtin.find_files { cwd = vim.fs.joinpath(vim.uv.os_homedir(), ".dotfiles"), hidden = true }
+      end)
+
+      vim.keymap.set("n", "<leader>ep", function()
+        builtin.find_files { cwd = vim.fs.joinpath(vim.fn.stdpath "data", "lazy") }
+      end)
+
+      vim.keymap.set("n", "<leader>fg", jrr.live_multigrep)
+
+      vim.keymap.set("n", "<leader>fj", function()
+        jrr.live_multigrep {
+          title = "Jai how_to + modules",
+          dirs = {
+            vim.fs.joinpath(vim.uv.os_homedir(), "jai", "latest", "modules"),
+            vim.fs.joinpath(vim.uv.os_homedir(), "jai", "latest", "how_to"),
+          },
+        }
+      end)
+
+      vim.keymap.set("n", "<leader>fjh", function()
+        jrr.live_multigrep { title = "Jai how_to", cwd = vim.fs.joinpath(vim.uv.os_homedir(), "jai", "latest", "how_to") }
+      end)
+
+      vim.keymap.set("n", "<leader>fjm", function()
+        jrr.live_multigrep {
+          title = "Jai modules",
+          cwd = vim.fs.joinpath(vim.uv.os_homedir(), "jai", "latest", "modules"),
+        }
       end)
     end,
   },
