@@ -5,6 +5,7 @@ return {
       "leoluz/nvim-dap-go", -- golang
       "mfussenegger/nvim-dap-python",
       { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
+      { "julianolf/nvim-dap-lldb" },
     },
     config = function()
       local dap = require "dap"
@@ -26,53 +27,80 @@ return {
 
       -- gdb
       -- https://github.com/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools)
-      dap.adapters.cppdbg = {
-        id = "cppdbg",
-        type = "executable",
-        command = "/home/jrr/dl/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
-      }
+      -- dap.adapters.cppdbg = {
+      --   id = "cppdbg",
+      --   type = "executable",
+      --   command = "/home/jrr/dl/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+      -- }
+      --
+      -- dap.configurations.cpp = {
+      --   {
+      --     name = "Launch file",
+      --     type = "cppdbg",
+      --     request = "launch",
+      --     program = function()
+      --       return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      --     end,
+      --     cwd = "${workspaceFolder}",
+      --     stopAtEntry = true,
+      --     setupCommands = {
+      --       {
+      --         text = "-enable-pretty-printing",
+      --         description = "enable pretty printing",
+      --         ignoreFailures = false,
+      --       },
+      --     },
+      --   },
+      --   {
+      --     name = "Attach to gdbserver :1234",
+      --     type = "cppdbg",
+      --     request = "launch",
+      --     MIMode = "gdb",
+      --     miDebuggerServerAddress = "localhost:1234",
+      --     miDebuggerPath = "/usr/bin/gdb",
+      --     cwd = "${workspaceFolder}",
+      --     program = function()
+      --       return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      --     end,
+      --     setupCommands = {
+      --       {
+      --         text = "-enable-pretty-printing",
+      --         description = "enable pretty printing",
+      --         ignoreFailures = false,
+      --       },
+      --     },
+      --   },
+      -- }
+      --
+      -- dap.configurations.c = dap.configurations.cpp
+      -- dap.configurations.jai = dap.configurations.cpp
 
-      dap.configurations.cpp = {
-        {
-          name = "Launch file",
-          type = "cppdbg",
-          request = "launch",
-          program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-          end,
-          cwd = "${workspaceFolder}",
-          stopAtEntry = true,
-          setupCommands = {
+      local lldbcfg = {
+        configurations = {
+          jai = {
             {
-              text = "-enable-pretty-printing",
-              description = "enable pretty printing",
-              ignoreFailures = false,
+              name = "Launch debugger",
+              type = "lldb",
+              request = "launch",
+              cmd = "${workspaceFolder}",
+              program = function()
+                -- build with debug symbols  @Incomplete - maybe we can do this, we should be able to...
+                --local out = vim.fn.system
+                --if vim.v.shell_error -= 0 then
+                --  vim.notify(out, vim.log.levels.ERROR)
+                --  return nil
+                --end
+                -- Return path to the debuggable program
+                -- return "path/to/executable"
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+              end,
             },
+            initCommands = "command script import ~/src/lldb-jai/jaitype.py",
           },
         },
-        {
-          name = "Attach to gdbserver :1234",
-          type = "cppdbg",
-          request = "launch",
-          MIMode = "gdb",
-          miDebuggerServerAddress = "localhost:1234",
-          miDebuggerPath = "/usr/bin/gdb",
-          cwd = "${workspaceFolder}",
-          program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-          end,
-          setupCommands = {
-            {
-              text = "-enable-pretty-printing",
-              description = "enable pretty printing",
-              ignoreFailures = false,
-            },
-          },
-        },
       }
 
-      dap.configurations.c = dap.configurations.cpp
-      dap.configurations.jai = dap.configurations.cpp
+      require("dap-lldb").setup(lldbcfg)
 
       vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
       vim.keymap.set("n", "<leader>gb", dap.run_to_cursor)

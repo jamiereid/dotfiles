@@ -122,6 +122,7 @@ return {
         "shellcheck",
         "shfmt",
         "gopls",
+        "codelldb", -- dap jai
       }
 
       --vim.list_extend(ensure_installed, servers_to_install)
@@ -145,7 +146,7 @@ return {
         configs.jails = {
           default_config = {
             cmd = { "jails", "-jai_path", vim.fs.joinpath(vim.uv.os_homedir(), "jai", "latest") },
-            root_dir = lspconfig.util.root_pattern "first.jai",
+            root_dir = lspconfig.util.root_pattern("jails.json", "build.jai", "main.jai", "first.jai"),
             filetypes = { "jai" },
           },
         }
