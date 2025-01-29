@@ -14,10 +14,16 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- use system clipboard when yanking
-vim.keymap.set("n", "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>y", [["+y]])
+-- use system clipboard when yanking and pasting
+vim.keymap.set("v", "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>y", [["+y]])
+vim.keymap.set("v", "<leader>y", [["+y]])
+
+vim.keymap.set("n", "<leader>p", [["+p]])
+vim.keymap.set("n", "<leader>P", [["+P]])
+vim.keymap.set("v", "<leader>p", [["+p]])
+vim.keymap.set("v", "<leader>P", [["+P]])
 
 -- toggle "tmux copy mode"
 vim.keymap.set("n", "<leader>l", require("jrr.functions").clean_for_tmux_copy)
@@ -30,15 +36,19 @@ vim.keymap.set({ "n", "v", "o" }, "j", "gj")
 vim.keymap.set({ "n", "v", "o" }, "k", "gk")
 
 vim.keymap.set("n", "<CR>", function()
-  if vim.opt.hlsearch:get() then
-    vim.cmd.nohl()
-    return ""
-  else
-    return "<CR>"
-  end
+	if vim.opt.hlsearch:get() then
+		vim.cmd.nohl()
+		return ""
+	else
+		return "<CR>"
+	end
 end, { expr = true })
 
 vim.keymap.set("n", "<left>", ":bp<CR>")
 vim.keymap.set("n", "<right>", ":bn<CR>")
 
 vim.keymap.set("n", "<leader>h2r", require("jrr.functions").hex2rbg_under_cursor)
+
+-- quick fix
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")

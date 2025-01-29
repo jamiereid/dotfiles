@@ -2,9 +2,9 @@
 --  return
 --end
 
-local colorbuddy = require "colorbuddy"
+local colorbuddy = require("colorbuddy")
 
-colorbuddy.colorscheme "naysayer"
+colorbuddy.colorscheme("naysayer")
 
 local Color = colorbuddy.Color
 local Group = colorbuddy.Group
@@ -35,7 +35,6 @@ Color.new("bg", "#072627")
 Color.new("subtle", "#535B4C")
 
 Color.new("cursor_bg", "#91EC93")
-Color.new("cursor_fg", "#D7Af87")
 Color.new("cursor_border", "#91EC93")
 
 Color.new("selection_fg", "#B4EEB5")
@@ -44,7 +43,7 @@ Color.new("selection_bg", "#000080")
 Color.new("comment_fg", "#5FD952")
 
 Group.new("Normal", c.fg, c.bg)
-Group.new("Cursor", c.fg, c.cursor_bg)
+Group.new("Cursor", c.subtle, c.cursor_bg)
 Color.new("cursor_line_bg", "#0F372B")
 Group.new("CursorLine", c.fg, c.cursor_line_bg)
 Color.new("cursorcolumn", "#202020")
@@ -97,9 +96,13 @@ Group.new("SpecialKey", c.subtle, c.bg, nil, c.bg)
 Group.new("NonText", c.subtle, c.bg, nil, c.bg)
 Group.new("BlinkCmpGhostText", c.subtle, c.bg)
 
-Color.new("vplit_fg", "#AEAEAE")
-Group.new("VertSplit", c.vplit_fg, c.bg, nil, c.bg)
-Group.new("WinSeparator", c.vplit_fg, c.bg, nil, c.bg)
+Group.new("VertSplit", c.subtle, c.bg, nil, c.bg)
+Group.new("WinSeparator", c.subtle, c.bg, nil, c.bg)
+
+Group.new("Title", c.fg) -- the info next to the tab title
+Group.new("TabLineSel", c.fg, c.bg) -- is the current (so to say) active tab label.
+Group.new("TabLine", c.subtle, c.bg) -- are the labels which are not currently active.
+Group.new("TabLineFill", c.subtle, c.bg) -- is the remaining of the tabline where there is no labels (background).
 
 Color.new("vis_fg", "#B4EEB5")
 Color.new("vis_bg", "#000080")
@@ -121,12 +124,10 @@ Group.new("DiagnosticVirtualTextWarn", c.diag_warn)
 Group.new("@DapBreakpoint", g.search, g.search)
 
 -- status line
-Color.new("slnc_fg", "#5E5E5E")
-Color.new("slnc_bg", "#AEAEAE")
 Group.new("StatusLine", c.fg, c.bg, nil, c.fg)
 Group.new("StatusLineNC", c.subtle, c.bg, nil, c.bg)
-Group.new("WinBar", g.StatusLine, g.StatusLine, nil, g.StatusLine)
-Group.new("WinBarNC", g.StatusLineNC, g.StatusLineNC, nil, g.StatusLineNC)
+Group.new("WinBar", g.StatusLine, g.StatusLine, nil)
+Group.new("WinBarNC", g.StatusLineNC, g.StatusLineNC, nil)
 
 -- pmenu and floats
 Group.new("PMenu", c.fg, c.bg)

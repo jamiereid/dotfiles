@@ -4,9 +4,9 @@
 
 -- https://github.com/prodhe/acme-setup/blob/master/acme-colors.md
 
-vim.cmd "hi clear"
-local colorbuddy = require "colorbuddy"
-colorbuddy.colorscheme "acme"
+vim.cmd("hi clear")
+local colorbuddy = require("colorbuddy")
+colorbuddy.colorscheme("acme")
 
 local Color = colorbuddy.Color
 local Group = colorbuddy.Group
@@ -133,3 +133,15 @@ Group.new("SpellBad", c.blend_dark_redish_to_bg_yellow, nil, s.underline)
 Group.new("SpellCap", c.medium_orange, nil, s.underline)
 Group.new("SpellRare", c.medium_orange)
 Group.new("SpellLocal", c.dark_redish, nil, s.underline)
+
+-- jai
+Color.new("offblack", "#C3C7B5")
+Group.new("jaiNull", c.number)
+Group.new("jaiClass", c.normal)
+Group.new("jaiConstant", c.normal)
+Group.new("jaiConstantDeclaration", c.normal)
+Group.new("jaiFor", c.white)
+Group.new("jaiIt", c.offblack)
+Group.new("jaiTypeInfo", c.offblack)
+Group.new("jaiTemplate", g.PreProc)
+Group.new("jaiTagNote", g.PreProc)
