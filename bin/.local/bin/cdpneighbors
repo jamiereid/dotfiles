@@ -10,6 +10,7 @@
 #  Changelog:
 #  2013/01/11 10:27 jrr - creation
 #  2013/01/14 16:00 jrr - added generate and sorting
+#  2025/02/18 10:00 jrr - hack in *some* support for snmp v3
 #
 #########################################
 
@@ -20,10 +21,10 @@ use strict;
 use Getopt::Long;
 use Net::SNMP;
 use Text::ASCIITable;
+use Encode qw( encode );
 
 ########################################################## globals and constants
 
-use constant SNMP_VERSION         => '2';
 use constant OID_CDPCACHEDEVICEID => '.1.3.6.1.4.1.9.9.23.1.2.1.1.6';
 use constant OID_IFDESCR          => '.1.3.6.1.2.1.2.2.1.2';
 
@@ -34,6 +35,16 @@ my $opt_help      = 0;
 my $opt_csv       = 0;
 my $opt_generate  = 0;
 my $opt_sort      = 'i';
+
+my $opt_snmp_version = 2;  # -V
+my $opt_snmp_user;  # -u
+my $opt_snmp_authpassword;  # -A
+my $opt_snmp_privpassword;  # -X
+
+my $opt_snmp_seclevel  = '';  # -l
+my $opt_snmp_authmode  = '';  # -a
+my $opt_snmp_privmode  = '';  # -x
+
 my %cdpCache;
 my %ifIndex;
 
@@ -42,15 +53,22 @@ my %ifIndex;
 ## get options from the cli
 GetOptions  (   'h=s'         => \$opt_host,
                 'c=s'         => \$opt_SNMPcommunity,
-                'x'           => \$opt_csv,
+                'z'           => \$opt_csv,
                 'help|?'      => \$opt_help,            # $opt_help will be 1|0
                 's=s'         => \$opt_sort,
                 'g'           => \$opt_generate,
+                'u=s'         => \$opt_snmp_user,
+                'A=s'         => \$opt_snmp_authpassword,
+                'X=s'         => \$opt_snmp_privpassword,
+		'V=i'         => \$opt_snmp_version,
             );
 
 
 ## check options and preceed accordingly
-usage() if (!defined($opt_host) || !defined($opt_SNMPcommunity) || $opt_help == 1);
+usage() if (!defined($opt_host) || 
+	( ($opt_snmp_version == 2 && !defined($opt_SNMPcommunity)) || 
+	  ($opt_snmp_version == 3 && (!defined($opt_snmp_user) && !defined($opt_snmp_authpassword) && !defined($opt_snmp_privpassword)))
+	) || $opt_help == 1);
 
 ## fix sort
 if ( lc($opt_sort) ne 'i' && lc($opt_sort) ne 'n' )
@@ -61,10 +79,28 @@ if ( lc($opt_sort) ne 'i' && lc($opt_sort) ne 'n' )
 }
 
 ## open SNMP connection
-my ($SNMPconn, $SNMPerr) = Net::SNMP->session(  -hostname  => $opt_host,
-                                                -version   => &SNMP_VERSION,
-                                                -community => $opt_SNMPcommunity,
-                                             );
+my $mode = 2;
+if (defined($opt_snmp_user)) { $mode = 3 };
+
+my ($SNMPconn, $SNMPerr);
+
+if ($mode == 2) {
+	($SNMPconn, $SNMPerr) = Net::SNMP->session(
+		-hostname  => $opt_host,
+		-version   => '2',
+		-community => $opt_SNMPcommunity,
+	);
+} else {
+	($SNMPconn, $SNMPerr) = Net::SNMP->session(
+		-hostname     => $opt_host,
+		-version      => '3',
+		-username     => $opt_snmp_user,
+		-authpassword => $opt_snmp_authpassword,
+		-privpassword => $opt_snmp_privpassword,
+		-authprotocol => 'sha',
+		-privprotocol => 'aes128',
+	);
+}
 
 if (!defined $SNMPconn)
 {
