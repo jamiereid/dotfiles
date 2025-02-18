@@ -14,7 +14,7 @@ fi
 
 REPO="$1"
 
-if [ "${REPO#mygh}" != "$REPO" ]; then
+if [ "${REPO#mygh}" != "$REPO" ] || [ "${REPO#work}" != "$REPO" ]; then
 	REPONAME="${REPO##*:}".git
 else
 	REPONAME="${REPO##*/}".git
