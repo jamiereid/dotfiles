@@ -4,11 +4,11 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        typescript = { { "prettierd", "prettier" } },
-        javascript = { { "prettierd", "prettier" } },
-        html = { { "prettierd", "prettier" } },
-        jinja = { { "prettierd", "prettier" } },
-        htmldjango = { { "prettierd", "prettier" } },
+        typescript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+        html = { "prettierd", "prettier", stop_after_first = true },
+        jinja = { "prettierd", "prettier", stop_after_first = true },
+        htmldjango = { "prettierd", "prettier", stop_after_first = true },
         python = { "isort", "black" },
         bash = { "shfmt", "shellcheck" },
         zsh = { "shfmt", "shellcheck" },
