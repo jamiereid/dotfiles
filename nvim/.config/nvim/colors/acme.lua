@@ -4,9 +4,9 @@
 
 -- https://github.com/prodhe/acme-setup/blob/master/acme-colors.md
 
-vim.cmd("hi clear")
-local colorbuddy = require("colorbuddy")
-colorbuddy.colorscheme("acme")
+vim.cmd "hi clear"
+local colorbuddy = require "colorbuddy"
+colorbuddy.colorscheme "acme"
 
 local Color = colorbuddy.Color
 local Group = colorbuddy.Group
@@ -53,6 +53,7 @@ Group.new("LineNr", c.dark_yellow_green, nil, s.italic)
 Group.new("Folded", c.dark_yellow_green, nil, s.italic)
 Group.new("FoldColumn", c.dark_yellow_green, nil)
 Group.new("SignColumn", c.dark_yellow_green, nil)
+Group.new("Whitespace", c.dark_yellow_green, nil) -- set listchars?
 
 Group.new("MatchParen", c.white, c.dark_greenish)
 
@@ -79,6 +80,8 @@ Group.new("Constant", c.black)
 Group.new("Label", c.dark_yellow_green)
 Group.new("PreProc", c.dark_yellow_green)
 Group.new("Delimiter", c.black)
+
+Group.new("@module", c.black)
 
 Group.new("@label", nil, nil, s.bold)
 
