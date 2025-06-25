@@ -201,9 +201,9 @@ config.color_schemes = {
 }
 
 --config.color_scheme = 'Gruvbox dark, hard (base16)'
-config.color_scheme = "naysayer"
+--config.color_scheme = "naysayer"
 --config.color_scheme = "sircmpwn"
---config.color_scheme = "acme"
+config.color_scheme = "acme"
 local colorscheme = os.getenv "JRR_THEME"
 if colorscheme ~= nil then
   config.color_scheme = colorscheme

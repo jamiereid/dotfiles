@@ -1,6 +1,6 @@
 # vim: ft=config
 font-family = Iosevka Nerd Font
-theme = naysayer
+theme = acme
 
 shell-integration-features = no-cursor
 cursor-style = block
