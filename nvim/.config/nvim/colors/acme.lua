@@ -78,12 +78,15 @@ Group.new("StorageClass", c.black)
 Group.new("Statement", c.black)
 Group.new("Constant", c.black)
 Group.new("Label", c.dark_yellow_green)
-Group.new("PreProc", c.dark_yellow_green)
 Group.new("Delimiter", c.black)
 
-Group.new("@module", c.black)
+Group.new("PreProc", nil, nil, s.bold)
 
-Group.new("@label", nil, nil, s.bold)
+Group.new("@type", c.black)
+Group.new("@module", c.black)
+Group.new("Type", g.preproc)
+
+Group.new("@label", c.black, nil, s.bold)
 
 Group.new("@tag", nil, nil, s.bold)
 Group.new("@tag.delimiter", c.black)

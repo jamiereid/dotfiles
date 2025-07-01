@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -eo pipefail
+
+usage() {
+	printf "Query the MAC Vendors webapi.\n"
+	printf "Syntax: %s <mac>\n" "$(basename "$0")"
+	exit 1
+}
+
+if [ -z "$1" ]; then
+	usage
+fi
+
+MAC="$1"
+
+curl -ks "https://api.macvendors.com/$MAC"

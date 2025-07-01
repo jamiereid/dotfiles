@@ -114,6 +114,11 @@ if status --is-interactive
 		abbr -a prun 'poetry run python'
 	end
 
+	if command -v uv > /dev/null
+		abbr -a ue 'uv run nvim'
+		abbr -a ur 'uv run'
+	end
+
 	abbr -a gs 'git status'
 	abbr -a gc 'git commit -m'
 	abbr -a ga 'git add -p'
