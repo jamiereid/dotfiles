@@ -19,8 +19,8 @@ set $exitscript $HOME/.local/bin/power-menu.sh
 set $lock_script $HOME/.local/bin/lock
 set $sleep $lock_script && sleep 3 && systemctl suspend
 
-# gaps inner 5
-# gaps outer 5
+gaps inner 5
+gaps outer 5
 
 # no border or title bar on new windows by default
 default_border pixel 2
@@ -29,15 +29,21 @@ default_border pixel 2
 client.focused           #a6a28c   #a6a28c     #a6a28c
 client.unfocused         #20201d   #20201d     #a6a28c
 
+
 ### Output configuration
 #output * bg `wallpaper` fill
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
 #output * bg #091b20 solid_color
-exec_always ~/.local/bin/sway-set-random-wallpaper
+output * bg ~/pics/wallpapers/wallhaven/wallhaven-weze1x.jpg fill
+#exec_always ~/.local/bin/sway-set-random-wallpaper
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 set $laptop_screen 'eDP-1'
 output $laptop_screen scale 1.5   pos 0 0
+
+set $external-touch "9589:1:Weida_Hi-Tech_CoolTouch_System"
+set $external-touch-display "Invalid Vendor Codename - RTK espresso 15 L56051794302"
+input $external-touch map_to_output $external-touch-display
 
 ### Idle configuration
 exec swayidle -w \
@@ -116,6 +122,17 @@ input 1267:12573:FTCS1000:00_04F3:311D_Touchpad {
 ## Special Keys
 bindsym XF86MonBrightnessUp   exec brightr -m 1 -e 4 up 10
 bindsym XF86MonBrightnessDown exec brightr -m 1 -e 4 down 10
+
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute     exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+
+bindsym XF86AudioNext  exec playerctl next
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioPlay  exec playerctl play-pause
+bindsym XF86AudioPrev  exec playerctl previous
+
 
     ##
     ## Screenshots via grim and slurp
@@ -277,6 +294,7 @@ bar {
     }
 }
 
+seat seat0 xcursor_theme Nordzy-cursors-white 28
 seat seat0 hide_cursor 5000
 
 include /etc/sway/config.d/*

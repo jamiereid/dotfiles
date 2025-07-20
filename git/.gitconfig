@@ -76,3 +76,5 @@
 
 [commit]
 	template = ~/.gitmessage
+[fetch]
+	prune = true

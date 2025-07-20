@@ -1,13 +1,13 @@
 {
     "layer": "bottom",
     "position": "top",
-    "height": 20,
+    "margin-top": 10,
     "reload_style_on_change": true,
 
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    //"modules-left": ["hyprland/workspaces", "hyprland/submap"],
-    //"modules-center": ["hyprland/window"],
+    //"modules-left": ["sway/workspaces", "sway/mode"],
+    //"modules-center": ["sway/window"],
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
     "modules-right": ["backlight", "pulseaudio", "idle_inhibitor", "network", "battery", "clock", "tray"],
 
     "hyprland/workspaces": {
