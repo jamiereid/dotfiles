@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bg=$($(dirname "$0")/get-random-wallpaper wallhaven)
+bg=$($(dirname "$0")/get-random-wallpaper current_rotation)
 hyprctl hyprpaper unload all
 hyprctl hyprpaper preload "$bg"
 hyprctl hyprpaper wallpaper ",$bg"

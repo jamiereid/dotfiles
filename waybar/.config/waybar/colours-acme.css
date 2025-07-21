@@ -1,0 +1,43 @@
+@define-color main-bg rgba(136, 136, 204, 1);
+@define-color alt-bg #EAFFFF;
+@define-color ter-bg rgba(136, 136, 204, 0.4);
+
+@define-color bg-bar rgba(255, 255, 255, 0);
+
+@define-color light #99994C;
+@define-color warning #FFCC33;
+@define-color critical #AA0000;
+@define-color white #FFFFFF;
+@define-color black #000000;
+@define-color text-muted @white;
+
+@define-color text-default @white;
+@define-color text-light @white;
+@define-color text-dark @black;
+
+@define-color bg-submap @main-bg;
+@define-color text-submap @white;
+
+@define-color bg-network @alt-bg;
+@define-color text-network @black;
+
+@define-color bg-pulseaudio @alt-bg;
+@define-color text-pulseaudio @black;
+
+@define-color bg-bluetooth @alt-bg;
+@define-color text-bluetooth @black;
+
+@define-color bg-updates @alt-bg;
+@define-color text-updates @black;
+
+@define-color bg-gamemode @alt-bg;
+@define-color text-gamemode @black;
+
+@define-color bg-workspaces rgba(255, 255, 255, 0);
+/*@define-color bg-workspaces @alt-bg;*/
+@define-color bg-workspacesfocused @main-bg;
+@define-color text-workspacesfocused @white;
+@define-color text-workspacesinactive @light;
+
+@define-color bg-tray @main-bg;
+@define-color text-tray @white;

@@ -52,6 +52,10 @@ if status --is-interactive
 		printf "%s\n" "exa not installed"
 	end
 
+	if command -v dysk > /dev/null
+		abbr -a df 'dysk'
+	end
+
 	if command -v zoxide > /dev/null
 		zoxide init fish | source
 		abbr -a cd 'z'
@@ -94,8 +98,6 @@ if status --is-interactive
 
 	if command -v mise > /dev/null
 		mise activate fish | source
-	else
-		printf "%s\n" "mise not installed"
 	end
 
 	if command -v op > /dev/null
@@ -117,6 +119,10 @@ if status --is-interactive
 	if command -v uv > /dev/null
 		abbr -a ue 'uv run nvim'
 		abbr -a ur 'uv run'
+	end
+
+	if command -v paru > /dev/null
+		abbr -a yay 'paru'
 	end
 
 	abbr -a gs 'git status'

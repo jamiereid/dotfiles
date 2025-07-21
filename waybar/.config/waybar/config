@@ -1,111 +1,152 @@
 {
-    "layer": "bottom",
-    "position": "top",
-    "margin-top": 10,
-    "reload_style_on_change": true,
+	"layer": "bottom",
+	"position": "top",
+	"reload_style_on_change": true,
 
-    //"modules-left": ["sway/workspaces", "sway/mode"],
-    //"modules-center": ["sway/window"],
-    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["backlight", "pulseaudio", "idle_inhibitor", "network", "battery", "clock", "tray"],
+	"modules-left": [ "clock", "custom/updates", "hyprland/submap", "idle_inhibitor", "gamemode", "custom/media"],
+	"modules-center": ["hyprland/workspaces"],
+	"modules-right": [ "pulseaudio", "bluetooth", "network", "battery", "backlight" , "tray"],
 
-    "hyprland/workspaces": {
-	    "on-scroll-up": "hyprctl dispatch workspace r-1",
-	    "on-scroll-down": "hyprctl dispatch workspace r+1",
-	    "on-click": "activate",
-	    "active-only": false,
-	    "all-outputs": false,
-	    "format": "{}",
-	    "format-icons": {
-		    "urgent": "",
-		    "active": "",
-		    "default": ""
-	    },
-//	    "persistent-workspaces": {
-//		    "*": 5
-//	    }
-    },
-    "hyprland/window": {
-	    "rewrite": {
-		    "(.*) — Mozilla Firefox": "$1",
-	    },
-	    "format": "{}",
-	    "separate-outputs": true,
-	    "hide-empty-text": true,
-    },
-    "hyprland/submap": {
-	    "format": " [{}]",
-	    "max-length": 30,
-	    "tooltip": false
-    },
-    "sway/mode": {
-        "format": "{}"
-    },
-    "sway/workspaces": {
-        "format": "{name}",
-        "disable-scroll": true
-    },
-    "sway/window": {
-        "max-length": 80,
-        "tooltip": false
-    },
-    "clock": {
-        "format": "{:%a %d %b %H:%M}",
-        "tooltip": false
-    },
-    "battery": {
-        "format": "{icon}",
-        "format-alt": "{capacity}% {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": ["󰂎", "󰁻", "󰁿", "󰂁", "󰁹"],
-        "format-charging": "{capacity}% 󰂄",
-        "interval": 30,
-        "states": {
-            "warning": 25,
-            "critical": 10
-        },
-        "tooltip": false
-    },
-    "network": {
-        "format": "{icon}",
-        "format-alt": "{ipaddr}/{cidr} {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": {
-            "wifi": ["󰤟", "󰤢" ,"󰤨"],
-            "ethernet": ["󰈀"],
-            "disconnected": ["󰲛"]
-        },
-        "on-click": "wezterm -e nmtui",
-	    "tooltip": false
-    },
-    "pulseaudio": {
-        "format": "{icon}",
-        "format-alt": "{volume} {icon}",
-        "format-alt-click": "click-right",
-        "format-muted": "",
-        "format-icons": {
-            "phone": ["󰖁", "󰕿", "󰖀", "󰕾"],
-            "default": ["󰖁", "󰕿", "󰖀", "󰕾"]
-        },
-        "scroll-step": 10,
-        "on-click": "pavucontrol",
-        "tooltip": false
-    },
-    "backlight": {
-        "format": "{icon}",
-        "format-alt": "{percent}% {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": ["󰌫", "󰌬"],
-        "on-scroll-down": "brightr -m 1 -e 4 down 10",
-        "on-scroll-up": "brightr -m 1 -e 4 up 10",
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "󱚰",
-            "deactivated": "󱚨"
-        },
-        "tooltip": false
-    }
+	"hyprland/workspaces": {
+		"on-scroll-up": "hyprctl dispatch workspace r-1",
+		"on-scroll-down": "hyprctl dispatch workspace r+1",
+		"on-click": "activate",
+		"active-only": false,
+		"all-outputs": false,
+		"format": "{}",
+		"format-icons": {
+			"urgent": "",
+			"focused": "",
+			"default": ""
+		}
+	},
+
+	"hyprland/window": {
+		"rewrite": {
+			"(.*) — Mozilla Firefox": "$1",
+		},
+		"format": "{}",
+		"separate-outputs": true,
+		"hide-empty-text": true,
+	},
+
+	"hyprland/submap": {
+		"format": " [{}]",
+		"max-length": 30,
+		"tooltip": false
+	},
+	
+	"custom/updates": {
+		"format": "{} {icon}",
+		"return-type": "json",
+		"format-icons": {
+			"has-updates": "󱍷",
+			"updated": "󰂪"
+		},
+		"exec-if": "which waybar-module-pacman-updates",
+		"exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 300"
+	},
+
+	"clock": {
+		"format": "{:%a %d %b %H:%M}",
+	//	"format": "  {:%H:%M   %e %b}",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"today-format": "<b>{}</b>",
+	//	"on-click": "gnome-calendar"
+	},
+
+	"gamemode": {
+		"format": "{glyph}",
+		"format-alt": "{glyph} {count}",
+		"hide-not-running": true,
+		"use-icon": true,
+		"glyph": "\udb80\ude97",
+		"tooltip": true,
+		"tooltip-format": "Games running: {count}"
+	},
+
+	"bluetooth": {
+		"interval": 30,
+		"format": "{icon}",
+		// "format-alt": "{status}",
+		"format-icons": {
+			"enabled": "\udb80\udcaf",
+			"disabled": "\udb80\udcb2"
+		},
+		"on-click": "blueberry"
+	},
+
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "\udb80\udd76",
+			"deactivated": "\udb83\udfaa"
+		},
+		"tooltip": "true"
+	},
+
+	"tray": {
+		"spacing": 5
+	},
+
+	"network": {
+		"format-wifi": "  {essid}",
+		"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "󰲛",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"family": "ipv4",
+		"tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n {bandwidthUpBits}  {bandwidthDownBits}",
+		"tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n {bandwidthUpBits}  {bandwidthDownBits}"
+	},
+
+	"pulseaudio": {
+		"scroll-step": 3, // %, can be a float
+		"format": "{icon}  {volume}%",
+		"format-muted": " 󰖁 ",
+		"format-icons": {
+			"phone": ["󰖁", "󰕿", "󰖀", "󰕾"],
+			"default": ["󰖁", "󰕿", "󰖀", "󰕾"]
+		},
+		"on-click": "pavucontrol",
+		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+	},
+
+	"custom/media": {
+		"format": "{icon} {text}",
+		"return-type": "json",
+		"max-length": 40,
+		"on-click": "playerctl play-pause",
+		"on-scroll-up": "playerctl next",
+		"on-scroll-down": "playerctl previous",
+		"format-icons": {
+			"spotify": "",
+			"default": "🎜"
+		},
+		"escape": true,
+		"exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null"
+	},
+
+	"backlight": {
+		"format": "{icon}",
+		"format-alt": "{percent}% {icon}",
+		"format-alt-click": "click-right",
+		"format-icons": ["󰌫", "󰌬"],
+		"on-scroll-down": "brightr -m 1 -e 4 down 10",
+		"on-scroll-up": "brightr -m 1 -e 4 up 10",
+	},
+
+	"battery": {
+		"format": "{icon}",
+		"format-alt": "{capacity}% {icon}",
+		"format-alt-click": "click-right",
+		"format-icons": ["󰂎", "󰁻", "󰁿", "󰂁", "󰁹"],
+		"format-charging": "{capacity}% 󰂄",
+		"interval": 30,
+		"states": {
+			"warning": 25,
+			"critical": 10
+		},
+		"tooltip": false
+	},
 }

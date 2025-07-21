@@ -1,0 +1,22 @@
+@define-color main-bg rgba(32, 32, 29, 0.8);
+@define-color alt-bg @main-bg;
+@define-color ter-bg @main-bg;
+
+@define-color bg-bar rgba(255, 255, 255, 0);
+
+@define-color light #A6A28C;
+@define-color warning #ebcb8b;
+@define-color critical #ED79A0;
+@define-color black @main-bg;
+
+@define-color text-default @light;
+@define-color text-light @light;
+@define-color text-dark @light;
+
+@define-color bg-submap @main-bg;
+@define-color text-submap @light;
+
+@define-color bg-workspacesfocused @main-bg;
+@define-color text-workspacesfocused @light;
+@define-color text-workspacesinactive @light;
+@define-color tray @main-bg;

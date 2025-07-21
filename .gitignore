@@ -19,3 +19,5 @@ fish/.config/fish/fish_plugins
 xfce4/.config/xfce4/terminal/accels.scm
 emacs/.emacs.d/**
 bin/.local/**
+hypr/.config/hypr/monitors.conf
+hypr/.config/hypr/local-env.conf
