@@ -5,7 +5,7 @@
 
 	"modules-left": [ "clock", "custom/updates", "hyprland/submap", "idle_inhibitor", "gamemode", "custom/media"],
 	"modules-center": ["hyprland/workspaces"],
-	"modules-right": [ "pulseaudio", "bluetooth", "network", "battery", "backlight" , "tray"],
+	"modules-right": [ "pulseaudio#input", "pulseaudio", "bluetooth", "network", "battery", "backlight" , "tray"],
 
 	"hyprland/workspaces": {
 		"on-scroll-up": "hyprctl dispatch workspace r-1",
@@ -110,6 +110,13 @@
 		},
 		"on-click": "pavucontrol",
 		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+	},
+
+	"pulseaudio#input": {
+		"format": "{format_source}",
+		"format-source": "",
+		"format-source-muted": " ",
+		"on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
 	},
 
 	"custom/media": {

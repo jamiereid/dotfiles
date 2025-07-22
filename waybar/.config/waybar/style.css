@@ -2,44 +2,44 @@
 @import url("colours-acme.css");
 
 @keyframes blink-warning {
-    70% {
-        color: @text-muted;
-    }
+	70% {
+		color: @text-muted;
+	}
 
-    to {
-        color: @text-muted;
-        background-color: @warning;
-    }
+	to {
+		color: @text-muted;
+		background-color: @warning;
+	}
 }
 
 @keyframes blink-critical {
-    70% {
-      color: @text-muted;
-    }
+	70% {
+		color: @text-muted;
+	}
 
-    to {
-        color: @text-muted;
-        background-color: @critical;
-    }
+	to {
+		color: @text-muted;
+		background-color: @critical;
+	}
 }
 
 
 
 /* Reset all styles */
 * {
-    border: none;
-    border-radius: 3px;
-    min-height: 0;
-    margin: 0.2em 0.3em 0.2em 0.3em;
+	border: none;
+	border-radius: 3px;
+	min-height: 0;
+	margin: 0.2em 0.3em 0.2em 0.3em;
 }
 
 /* The whole bar */
 #waybar {
-    background-color: @bg-bar;
-    color: @text-default;
-    font-family: "Cantarell", "Iosevka Nerd Font";
-    font-size: 14px;
-    font-weight: bold;
+	background-color: @bg-bar;
+	color: @text-default;
+	font-family: "Cantarell", "Iosevka Nerd Font";
+	font-size: 14px;
+	font-weight: bold;
 }
 
 #battery,
@@ -51,153 +51,154 @@
 #tray,
 #gamemode,
 #backlight {
-    padding-left: 0.6em;
-    padding-right: 0.6em;
+	padding-left: 0.6em;
+	padding-right: 0.6em;
 }
 
 #submap,
 #battery {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
 
 #battery.critical {
-    color: @critical;
+	color: @critical;
 }
 
 #submap,
 #battery.critical.discharging {
-    animation-name: blink-critical;
-    animation-duration: 2s;
+	animation-name: blink-critical;
+	animation-duration: 2s;
 }
 
 #network.disconnected,
 #battery.warning {
-    background: @warning;
-    color: @text-dark;
+	background: @warning;
+	color: @text-dark;
 }
 
 #battery.warning.discharging {
-    animation-name: blink-warning;
-    animation-duration: 3s;
+	animation-name: blink-warning;
+	animation-duration: 3s;
 }
 
 #submap {
-    color: @text-submap;
-    background: @bg-submap;
+	color: @text-submap;
+	background: @bg-submap;
 }
 
 #gamemode {
-    color: @text-gamemode;
-    background: @bg-gamemode;
+	color: @text-gamemode;
+	background: @bg-gamemode;
 }
 
 #workspaces {
-   background: @bg-workspaces;
+	background: @bg-workspaces;
 }
 
 #workspaces button {
-    font-weight: bold; /* Somewhy the bar-wide setting is ignored*/
-    padding: 0;
-    color: @text-workspacesinactive;
-    background: none;
-    font-size: 1em;
+	font-weight: bold;
+	/* Somewhy the bar-wide setting is ignored*/
+	padding: 0;
+	color: @text-workspacesinactive;
+	background: none;
+	font-size: 1em;
 }
 
 #workspaces button.visible {
-    background: @bg-workspacesfocused;
-    color: @text-workspacesfocused;
-    padding: 0 0.4em;
+	background: @bg-workspacesfocused;
+	color: @text-workspacesfocused;
+	padding: 0 0.4em;
 }
 
 #workspaces button.urgent {
-    border-color: @critical;
-    color: @critical;
-    opacity: 1;
+	border-color: @critical;
+	color: @critical;
+	opacity: 1;
 }
 
 #window {
-    margin-right: 40px;
-    margin-left: 40px;
-    font-weight: normal;
+	margin-right: 40px;
+	margin-left: 40px;
+	font-weight: normal;
 }
 
 #bluetooth {
-    background: @bg-bluetooth;
-    color: @text-bluetooth;
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 0 0.6em;
+	background: @bg-bluetooth;
+	color: @text-bluetooth;
+	font-size: 1.2em;
+	font-weight: bold;
+	padding: 0 0.6em;
 }
 
 #custom-updates {
-    background: @bg-updates;
-    color: @text-updates;
-    font-weight: bold;
-    padding: 0 0.6em;
+	background: @bg-updates;
+	color: @text-updates;
+	font-weight: bold;
+	padding: 0 0.6em;
 }
 
 #custom-media {
-    background: @bg-updates;
-    color: @text-updates;
-    font-weight: bold;
-    padding: 0 0.6em;
+	background: @bg-updates;
+	color: @text-updates;
+	font-weight: bold;
+	padding: 0 0.6em;
 }
 
 #idle_inhibitor {
-    background: @alt-bg;
-    color: @black;
-    /*font-size: 1.6em;*/
-    font-weight: bold;
-    padding: 0 0.6em;
-    padding-right: 1em;
+	background: @alt-bg;
+	color: @black;
+	/*font-size: 1.6em;*/
+	font-weight: bold;
+	padding: 0 0.6em;
+	padding-right: 1em;
 }
 
 #network {
-    background: @bg-network;
-    color: @text-network;
+	background: @bg-network;
+	color: @text-network;
 }
 
 #battery {
-    background: @alt-bg
+	background: @alt-bg
 }
 
 #backlight {
-    background: @alt-bg;
+	background: @alt-bg;
 }
 
 #clock {
-    background: @main-bg;
-    color: @text-light;
+	background: @main-bg;
+	color: @text-light;
 }
 
 #clock.date {
-    background: @main-bg;
+	background: @main-bg;
 }
 
 #clock.time {
-    background: @main-bg;
+	background: @main-bg;
 }
 
 #pulseaudio {
-    background: @bg-pulseaudio;
-    color: @text-pulseaudio;
+	background: @bg-pulseaudio;
+	color: @text-pulseaudio;
 }
 
 #pulseaudio.muted {
-    background: @critical;
-    color: @text-muted;
-    /* No styles */
+	background: @critical;
+	color: @text-muted;
+	/* No styles */
 }
 
-#pulseaudio.source-muted {
-    background: @critical;
-    color: @text-muted;
-    /* No styles */
+#pulseaudio.input.source-muted {
+	background: @critical;
+	color: @text-muted;
+	/* No styles */
 }
 
 #tray {
-    background: @bg-tray;
-    color: @text-tray;
+	background: @bg-tray;
+	color: @text-tray;
 }
