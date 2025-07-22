@@ -193,6 +193,12 @@
 }
 
 #pulseaudio.input.source-muted {
+	background: @bg-pulseaudio;
+	color: @text-pulseaudio;
+	/* No styles */
+}
+
+#pulseaudio.input {
 	background: @critical;
 	color: @text-muted;
 	/* No styles */
