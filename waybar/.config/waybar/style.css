@@ -1,5 +1,4 @@
-/* @import url("colours-nord.css"); */
-@import url("colours-acme.css");
+@import url("colours-gruv.css");
 
 @keyframes blink-warning {
 	70% {
@@ -83,6 +82,7 @@
 	animation-duration: 3s;
 }
 
+
 #submap {
 	color: @text-submap;
 	background: @bg-submap;
@@ -99,7 +99,6 @@
 
 #workspaces button {
 	font-weight: bold;
-	/* Somewhy the bar-wide setting is ignored*/
 	padding: 0;
 	color: @text-workspacesinactive;
 	background: none;
@@ -147,9 +146,8 @@
 }
 
 #idle_inhibitor {
-	background: @alt-bg;
-	color: @black;
-	/*font-size: 1.6em;*/
+	background: @bg-idle;
+	color: @text-idle;
 	font-weight: bold;
 	padding: 0 0.6em;
 	padding-right: 1em;
@@ -169,16 +167,9 @@
 }
 
 #clock {
-	background: @main-bg;
-	color: @text-light;
-}
-
-#clock.date {
-	background: @main-bg;
-}
-
-#clock.time {
-	background: @main-bg;
+	color: @text-clock;
+	background: @bg-clock;
+	font-size: 1.2em;
 }
 
 #pulseaudio {
@@ -189,22 +180,27 @@
 #pulseaudio.muted {
 	background: @critical;
 	color: @text-muted;
-	/* No styles */
 }
 
 #pulseaudio.input.source-muted {
 	background: @bg-pulseaudio;
 	color: @text-pulseaudio;
-	/* No styles */
 }
 
 #pulseaudio.input {
 	background: @critical;
 	color: @text-muted;
-	/* No styles */
 }
 
 #tray {
 	background: @bg-tray;
 	color: @text-tray;
+}
+
+tooltip label {
+	color: @text-tooltip-label;
+}
+
+tooltip {
+	background-color: @bg-tooltip;
 }

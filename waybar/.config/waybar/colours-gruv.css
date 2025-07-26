@@ -1,0 +1,51 @@
+@define-color main-bg #1E1F29;
+@define-color alt-bg #3C3836;
+@define-color ter-bg #A89984;
+
+@define-color bg-bar rgba(255, 255, 255, 0);
+
+@define-color light #F8E6BA;
+@define-color warning #FFCC33;
+@define-color critical #AA0000;
+@define-color white #FFFFFF;
+@define-color black #000000;
+@define-color text-muted @white;
+
+@define-color text-default @white;
+@define-color text-light @light;
+@define-color text-dark @alt-bg;
+
+@define-color bg-clock @alt-bg;
+@define-color text-clock @text-light;
+
+@define-color bg-submap @alt-bg;
+@define-color text-submap @white;
+
+@define-color bg-network @alt-bg;
+@define-color text-network @white;
+
+@define-color bg-pulseaudio @alt-bg;
+@define-color text-pulseaudio @white;
+
+@define-color bg-bluetooth @alt-bg;
+@define-color text-bluetooth @white;
+
+@define-color bg-updates @alt-bg;
+@define-color text-updates @white;
+
+@define-color bg-gamemode @alt-bg;
+@define-color text-gamemode @white;
+
+@define-color bg-idle @alt-bg;
+@define-color text-idle @white;
+
+@define-color bg-workspaces @alt-bg;
+@define-color bg-workspacesfocused @ter-bg;
+@define-color text-workspacesfocused @alt-bg;
+@define-color text-workspacesinactive @white;
+
+@define-color bg-tray @alt-bg;
+@define-color text-tray @white;
+
+@define-color text-tooltip-label @light;
+@define-color bg-tooltip @main-bg;

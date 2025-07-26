@@ -40,19 +40,28 @@
 		"format": "{} {icon}",
 		"return-type": "json",
 		"format-icons": {
-			"has-updates": "󱍷",
-			"updated": "󰂪"
+			"has-updates": "󱍷 ",
+			"updated": "󰂪 "
 		},
 		"exec-if": "which waybar-module-pacman-updates",
 		"exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 300"
 	},
 
 	"clock": {
-		"format": "{:%a %d %b %H:%M}",
-	//	"format": "  {:%H:%M   %e %b}",
-		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"today-format": "<b>{}</b>",
-	//	"on-click": "gnome-calendar"
+		"tooltip-format": "<big>{:%A, %d %B %Y}</big>\n\n<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode"          : "year",
+			"mode-mon-col"  : 3,
+			"weeks-pos"     : "right",
+			"on-scroll"     : 1,
+			"format": {
+				"months":     "<span color='#ffead3'><b>{}</b></span>",
+				"days":       "<span color='#ecc6d9'><b>{}</b></span>",
+				"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+				"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+				"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+			}
+		},
 	},
 
 	"gamemode": {
@@ -102,11 +111,11 @@
 
 	"pulseaudio": {
 		"scroll-step": 3, // %, can be a float
-		"format": "{icon}  {volume}%",
+		"format": "{volume}% {icon}",
 		"format-muted": " 󰖁 ",
 		"format-icons": {
-			"phone": ["󰖁", "󰕿", "󰖀", "󰕾"],
-			"default": ["󰖁", "󰕿", "󰖀", "󰕾"]
+			"headphone": "",
+			"default": ["󰕿", "󰖀", "󰕾"]
 		},
 		"on-click": "pavucontrol",
 		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
@@ -122,12 +131,12 @@
 	"custom/media": {
 		"format": "{icon} {text}",
 		"return-type": "json",
-		"max-length": 40,
+		//"max-length": 40,
 		"on-click": "playerctl play-pause",
 		"on-scroll-up": "playerctl next",
 		"on-scroll-down": "playerctl previous",
 		"format-icons": {
-			"spotify": "",
+			"spotify": " ",
 			"default": "🎜"
 		},
 		"escape": true,
@@ -138,7 +147,7 @@
 		"format": "{icon}",
 		"format-alt": "{percent}% {icon}",
 		"format-alt-click": "click-right",
-		"format-icons": ["󰌫", "󰌬"],
+		"format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
 		"on-scroll-down": "brightr -m 1 -e 4 down 10",
 		"on-scroll-up": "brightr -m 1 -e 4 up 10",
 	},
