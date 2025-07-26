@@ -69,7 +69,9 @@
 		"format-alt": "{glyph} {count}",
 		"hide-not-running": true,
 		"use-icon": true,
-		"glyph": "\udb80\ude97",
+		"icon-size": 18,
+		"icon-spacing": 0,
+		"glyph": "G",
 		"tooltip": true,
 		"tooltip-format": "Games running: {count}"
 	},

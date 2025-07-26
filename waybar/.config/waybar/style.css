@@ -54,6 +54,11 @@
 	padding-right: 0.6em;
 }
 
+#gamemode {
+	padding-left: 0.6em;
+	padding-right: 0;
+}
+
 #submap,
 #battery {
 	animation-timing-function: linear;
@@ -93,22 +98,31 @@
 	background: @bg-gamemode;
 }
 
-#workspaces {
-	background: @bg-workspaces;
-}
+/* #workspaces { */
+/* 	background: @bg-workspaces; */
+/* } */
 
 #workspaces button {
+	background: @bg-workspaces;
 	font-weight: bold;
 	padding: 0;
+	margin: 0;
 	color: @text-workspacesinactive;
-	background: none;
 	font-size: 1em;
+	border-radius: 0px;
+}
+
+#workspaces button:first-child {
+	border-radius: 3px 0px 0px 3px;
+}
+
+#workspaces button:last-child {
+	border-radius: 0px 3px 3px 0px;
 }
 
 #workspaces button.visible {
 	background: @bg-workspacesfocused;
 	color: @text-workspacesfocused;
-	padding: 0 0.4em;
 }
 
 #workspaces button.urgent {
