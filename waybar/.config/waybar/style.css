@@ -47,6 +47,7 @@
 #network,
 #pulseaudio,
 #custom-updates,
+#custom-tailscale,
 #tray,
 #gamemode,
 #backlight {
@@ -209,6 +210,16 @@
 #tray {
 	background: @bg-tray;
 	color: @text-tray;
+}
+
+#custom-tailscale {
+	background: @bg-vpn;
+	color: @text-vpn;
+}
+
+#custom-tailscale.connected {
+	background: @bg-vpn-connected;
+	color: @text-vpn;
 }
 
 tooltip label {

@@ -36,6 +36,10 @@
 @define-color bg-gamemode @alt-bg;
 @define-color text-gamemode @white;
 
+@define-color bg-vpn @alt-bg;
+@define-color bg-vpn-connected #98971A;
+@define-color text-vpn @white;
+
 @define-color bg-idle @alt-bg;
 @define-color text-idle @white;
 

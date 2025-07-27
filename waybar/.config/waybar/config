@@ -5,7 +5,7 @@
 
 	"modules-left": [ "clock", "custom/updates", "hyprland/submap", "idle_inhibitor", "gamemode", "custom/media"],
 	"modules-center": ["hyprland/workspaces"],
-	"modules-right": [ "pulseaudio#input", "pulseaudio", "bluetooth", "network", "battery", "backlight" , "tray"],
+	"modules-right": [ "pulseaudio#input", "pulseaudio", "bluetooth", "custom/tailscale", "network", "battery", "backlight" , "tray"],
 
 	"hyprland/workspaces": {
 		"on-scroll-up": "hyprctl dispatch workspace r-1",
@@ -109,6 +109,19 @@
 		"family": "ipv4",
 		"tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n {bandwidthUpBits}  {bandwidthDownBits}",
 		"tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n {bandwidthUpBits}  {bandwidthDownBits}"
+	},
+
+	"custom/tailscale" : {
+		"exec": "$HOME/.config/waybar/custom_modules/tailscale.sh --status",
+		"on-click-right": "exec $HOME/.config/waybar/custom_modules/tailscale.sh --toggle",
+		"format": "{icon}",
+		"format-icons": {
+			"connected": "󰒄 ",
+			"stopped": "󰅛 "
+		},
+		"tooltip": true,
+		"return-type": "json",
+		"interval": 10,
 	},
 
 	"pulseaudio": {
