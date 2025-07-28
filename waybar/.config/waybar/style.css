@@ -127,8 +127,8 @@
 }
 
 #workspaces button.urgent {
-	border-color: @critical;
-	color: @critical;
+	color: @white;
+	background: @critical;
 	opacity: 1;
 }
 
