@@ -151,3 +151,9 @@ Group.new("jaiIt", c.offblack)
 Group.new("jaiTypeInfo", c.offblack)
 Group.new("jaiTemplate", g.PreProc)
 Group.new("jaiTagNote", g.PreProc)
+
+-- diff
+Group.new("DiffAdd", c.white, c.dark_greenish)
+Group.new("DiffChange", c.white, c.blend_dark_redish_to_bg_yellow)
+Group.new("DiffDelete", c.white, c.dark_redish)
+Group.new("DiffText", c.white, c.medium_orange, s.bold)
