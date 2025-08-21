@@ -2,6 +2,11 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
+      formatters = {
+        shfmt = {
+          prepend_args = { "-i", "2", "-ci", "-bn" }, -- indent 2 spaces, indent switch/case, preserve binary ops avoid collapse
+        },
+      },
       formatters_by_ft = {
         lua = { "stylua" },
         typescript = { "prettierd", "prettier", stop_after_first = true },

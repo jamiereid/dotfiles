@@ -205,3 +205,64 @@ function fish_prompt
 	    printf '%s %s %s%s ' (uname -n|cut -d. -f1) (prompt_pwd) (__fish_git_prompt '[%s] ') "$__fish_prompt_lastchar"
     end
 end
+
+# 1 if fish_prompt leaves a space before the command, 0 otherwise
+set -q FISH_PROMPT_CMD_GAP; or set -g FISH_PROMPT_CMD_GAP 1
+
+function __stamp_prev_prompt_at_preexec --on-event fish_preexec
+    # Full command as a single string
+    set -l cmd (string join ' ' -- $argv)
+
+    # Left prompt as it was drawn
+    set -l lp (fish_prompt)
+
+    # Compute visible lengths (strip ANSI from prompt)
+    set -l lp_clean  (string replace -r '\e\[[0-9;]*m' '' -- $lp)
+    set -l lp_lines  (string split \n -- $lp_clean)
+    set -l phys_lines (count $lp_lines)
+    set -l lp_last_len 0
+    if test $phys_lines -gt 0
+        set lp_last_len (string length -- $lp_lines[-1])
+    end
+
+    set -l gap $FISH_PROMPT_CMD_GAP
+    set -l cmd_len (string length -- $cmd)
+
+    # How many extra rows did the last (prompt+command) line wrap *before*?
+    set -l used_last_old (math $lp_last_len + $gap + $cmd_len)
+    set -l wraps_old (math "ceil($used_last_old / $COLUMNS) - 1")
+    if test $wraps_old -lt 0
+        set wraps_old 0
+    end
+
+    # We want to start repainting at the *top* of the prompt block
+    set -l up_to_top (math $wraps_old + $phys_lines)
+
+    # Build the timestamp (colored like arguments)
+    set -l ts (date '+%H:%M:%S')
+    set -l ts_vis_len (math (string length -- $ts) + 1)  # +1 for the space
+
+    # After adding the timestamp, how many rows will it occupy?
+    set -l used_last_new (math $ts_vis_len + $lp_last_len + $gap + $cmd_len)
+    set -l wraps_new (math "ceil($used_last_new / $COLUMNS) - 1")
+    if test $wraps_new -lt 0
+        set wraps_new 0
+    end
+    set -l total_rows_new (math $phys_lines + $wraps_new)
+
+    # --- Paint ---
+    # Move to top-of-prompt row, column 1
+    printf '\e[%dA\r' $up_to_top
+
+    # Clear from here down (avoids ghost chars on shorter repaints)
+    printf '\e[J'
+
+    # Print: TIMESTAMP + space + original prompt + command
+    set_color $fish_color_param
+    printf '%s ' $ts
+    set_color normal
+    printf '%s%s' $lp $cmd
+
+    # Put cursor where fish expects: start of the line *after* the repainted block
+    printf '\e[%dB\r' $total_rows_new
+end

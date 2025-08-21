@@ -66,10 +66,10 @@ return {
 
         ghost_text = { enabled = true },
 
-        cmdline = {
-          completion = { menu = { auto_show = false } },
-          keymap = { preset = "inherit" },
-        },
+        -- cmdline = {
+        --   completion = { menu = { auto_show = false } },
+        --   keymap = { preset = "inherit" },
+        -- },
       },
 
       sources = {

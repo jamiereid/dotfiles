@@ -174,6 +174,12 @@ return {
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
         end,
       })
+
+      vim.diagnostic.config {
+        virtual_text = { spacing = 2, prefix = "●" },
+        float = { border = "rounded" },
+        severity_sort = true,
+      }
     end,
   },
 }
