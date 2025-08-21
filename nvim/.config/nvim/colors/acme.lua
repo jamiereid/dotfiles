@@ -38,6 +38,8 @@ Group.new("StatusLineNC", c.black, c.pale_gray_green)
 Group.new("WinBar", c.black, c.bg_yellow)
 Group.new("WinBarNC", c.dark_yellow_green, c.bg_yellow)
 Group.new("VertSplit", c.dark_greenish, c.bg_yellow)
+Group.new("TabLineSel", g.winbar, g.winbar)
+Group.new("TabLine", g.winbarnc, g.winbarnc)
 
 Group.new("Normal", c.black, c.bg_yellow)
 Group.new("NonText", c.dark_redish)
