@@ -136,6 +136,7 @@ if status --is-interactive
 	abbr -a gwr 'git worktree remove'
 	abbr -a httpserver 'python -m http.server 8000'
 	abbr -a ping 'ping -DO'
+	abbr -a rcp 'rsync -avhr --info=progress2'
 end
 
 set -g fish_prompt_pwd_dir_length 3
