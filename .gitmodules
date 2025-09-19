@@ -1,0 +1,3 @@
+[submodule "tmux/extrakto"]
+	path = tmux/.tmux/extrakto
+	url = https://github.com/laktak/extrakto

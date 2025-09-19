@@ -23,12 +23,29 @@ return {
         end,
         desc = "Open scratchpad",
       },
+      {
+        "<leader>ru",
+        function()
+          require("kulala.ui.auth_manager").open_auth_config()
+        end,
+        desc = "Open scratchpad",
+      },
+      {
+        "<leader>re",
+        function()
+          require("kulala.ui.env_manager").open()
+        end,
+        desc = "Open scratchpad",
+      },
     },
     ft = { "http", "rest" },
     opts = {
       global_keymaps = false,
       global_keymaps_prefix = "<leader>r",
       kulala_keymaps_prefix = "",
+      ui = {
+        max_response_size = 320000, -- 320kb
+      },
     },
     config = function(_, opts)
       require("kulala").setup(opts)
@@ -39,8 +56,7 @@ return {
         callback = function(ev)
           local name = vim.api.nvim_buf_get_name(ev.buf)
           local ft = vim.bo[ev.buf].filetype or ""
-          if (name and name:match "^kulala://ui") or ft:find("kulala_ui", 1, true) then
-            -- Stop quotes being concealed in the UI pane
+          if (name and name:match "^kulala://ui") or ft:find("kulala_ui", 1, true) or ft == "http" then
             vim.opt_local.conceallevel = 0
             vim.opt_local.concealcursor = ""
           end
