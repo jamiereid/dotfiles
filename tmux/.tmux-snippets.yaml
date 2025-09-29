@@ -1,0 +1,7 @@
+snippets:
+  - name: List network modules
+    description: Show the network modules installed from inventory
+    category: cisco
+    language: cisco
+    content: |
+      sh inventory | inc (NAME|NM)

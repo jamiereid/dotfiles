@@ -30,6 +30,7 @@ M.setup = function()
       "toml",
       "typescript",
       "mytodo",
+      "yaml",
     },
     matchup = { -- "andymass/vim-matchup"
       enable = true,

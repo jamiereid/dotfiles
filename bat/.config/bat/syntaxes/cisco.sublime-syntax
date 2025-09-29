@@ -1,0 +1,16 @@
+%YAML 1.2
+---
+name: Cisco
+file_extensions: [ios, cisco]
+scope: source.cisco
+
+contexts:
+  main:
+    - match: '^\s*!'
+      scope: comment.line
+    - match: '^\s*(interface|router|line|vlan|hostname|ip|access-list|enable|username|password|switchport|no|shutdown|description|end|exit)\b'
+      scope: keyword.control
+    - match: '\b\d+\.\d+\.\d+\.\d+(/\d+)?\b'
+      scope: constant.numeric
+    - match: '"[^"]*"'
+      scope: string.quoted
