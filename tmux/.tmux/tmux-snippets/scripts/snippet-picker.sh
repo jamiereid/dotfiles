@@ -328,9 +328,56 @@ RELOAD_EOF
     # Extract content (field 7) - need to handle the delimiter properly
     CONTENT=$(echo "$SELECTED" | awk -F"$DELIM" '{print $7}')
 
+    # Substitute variables
+    CONTENT=$(substitute_variables "$CONTENT")
+
     # Send to target pane
     tmux send-keys -t "$TARGET_PANE" "$CONTENT"
   fi
+}
+
+# Substitute variables in snippet content
+substitute_variables() {
+  local content="$1"
+
+  # Get current date and time
+  local date=$(date +%Y-%m-%d)
+  local time=$(date +%H:%M:%S)
+  local datetime=$(date +"%Y-%m-%d %H:%M:%S")
+  local timestamp=$(date +%s)
+  local year=$(date +%Y)
+  local month=$(date +%m)
+  local day=$(date +%d)
+
+  # Get clipboard content (try multiple clipboard commands)
+  local clipboard=""
+  if command -v xclip &>/dev/null; then
+    clipboard=$(xclip -selection clipboard -o 2>/dev/null || echo "")
+  elif command -v pbpaste &>/dev/null; then
+    clipboard=$(pbpaste 2>/dev/null || echo "")
+  elif command -v wl-paste &>/dev/null; then
+    clipboard=$(wl-paste 2>/dev/null || echo "")
+  elif command -v tmux &>/dev/null; then
+    clipboard=$(tmux show-buffer 2>/dev/null || echo "")
+  fi
+
+  # Get username and hostname
+  local username=$(whoami)
+  local hostname=$(hostname)
+
+  # Perform substitutions
+  content="${content//\{DATE\}/$date}"
+  content="${content//\{TIME\}/$time}"
+  content="${content//\{DATETIME\}/$datetime}"
+  content="${content//\{TIMESTAMP\}/$timestamp}"
+  content="${content//\{YEAR\}/$year}"
+  content="${content//\{MONTH\}/$month}"
+  content="${content//\{DAY\}/$day}"
+  content="${content//\{CLIPBOARD\}/$clipboard}"
+  content="${content//\{USER\}/$username}"
+  content="${content//\{HOSTNAME\}/$hostname}"
+
+  echo "$content"
 }
 
 main "$@"

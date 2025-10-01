@@ -1,3 +1,16 @@
+# VARIABLE SUBSTITUTION:
+# The following variables are automatically replaced when inserting snippets:
+# {DATE}       - Current date (YYYY-MM-DD)
+# {TIME}       - Current time (HH:MM:SS)
+# {DATETIME}   - Current date and time (YYYY-MM-DD HH:MM:SS)
+# {TIMESTAMP}  - Unix timestamp
+# {YEAR}       - Current year
+# {MONTH}      - Current month (01-12)
+# {DAY}        - Current day (01-31)
+# {CLIPBOARD}  - Clipboard content (xclip/pbpaste/wl-paste/tmux)
+# {USER}       - Current username
+# {HOSTNAME}   - Current hostname
+
 snippets:
   - name: List network modules
     description: Show the network modules installed from inventory
@@ -5,3 +18,8 @@ snippets:
     language: cisco
     content: |
       sh inventory | inc (NAME|NM)
+
+  - name: clogin clipboard
+    language: sh
+    content: |
+      clogin {CLIPBOARD}
