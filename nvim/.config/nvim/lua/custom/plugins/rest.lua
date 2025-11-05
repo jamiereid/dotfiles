@@ -46,6 +46,7 @@ return {
       ui = {
         max_response_size = 320000, -- 320kb
       },
+      urlencode_skip = "%x+:%x+", -- match colons in mac addresses
     },
     config = function(_, opts)
       require("kulala").setup(opts)
