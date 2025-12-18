@@ -1,6 +1,24 @@
 #!/bin/bash
 
 bg=$($(dirname "$0")/get-random-wallpaper current_rotation)
+
+filename=$(basename "$bg")
+filename_noext="${filename%.*}"
+extension="${filename##*.}"
+
 hyprctl hyprpaper unload all
 hyprctl hyprpaper preload "$bg"
-hyprctl hyprpaper wallpaper ",$bg"
+
+if [[ "$filename_noext" =~ _tile$ ]]; then
+  tiled_bg="/tmp/wallpaper_tiled.${extension}"
+  convert "$bg" -write mpr:tile +delete \
+    -size 3840x2160 tile:mpr:tile "$tiled_bg"
+
+  hyprctl hyprpaper preload "$tiled_bg"
+  hyprctl hyprpaper wallpaper ",$tiled_bg"
+  notify-send "Wallpaper Changed" "Tiled: $filename" -u low -t 3000
+else
+  hyprctl hyprpaper preload "$bg"
+  hyprctl hyprpaper wallpaper ",$bg"
+  notify-send "Wallpaper Changed" "$filename" -u low -t 3000
+fi
