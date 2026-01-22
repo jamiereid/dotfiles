@@ -86,7 +86,7 @@ Group.new("PreProc", nil, nil, s.bold)
 
 Group.new("@type", c.black)
 Group.new("@module", c.black)
-Group.new("Type", g.preproc)
+Group.new("Type", g.PreProc, g.PreProc, g.PreProc)
 
 Group.new("@label", c.black, nil, s.bold)
 
@@ -149,7 +149,7 @@ Group.new("jaiClass", c.normal)
 Group.new("jaiConstant", c.normal)
 Group.new("jaiConstantDeclaration", c.normal)
 Group.new("jaiFor", c.black, g.normal, s.bold)
-Group.new("jaiIt", c.offblack)
+Group.new("jaiIt", g.PreProc, g.PreProc, g.PreProc)
 Group.new("jaiTypeInfo", c.offblack)
 Group.new("jaiTemplate", g.PreProc)
 Group.new("jaiTagNote", g.PreProc)
