@@ -33,6 +33,9 @@
 @define-color bg-updates @alt-bg;
 @define-color text-updates @white;
 
+@define-color bg-espanso @alt-bg;
+@define-color text-espanso @white;
+
 @define-color bg-gamemode @alt-bg;
 @define-color text-gamemode @white;
 

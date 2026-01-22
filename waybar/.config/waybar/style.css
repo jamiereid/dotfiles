@@ -48,6 +48,7 @@
 #pulseaudio,
 #custom-updates,
 #custom-tailscale,
+#custom-espanso,
 #tray,
 #gamemode,
 #backlight {
@@ -149,6 +150,13 @@
 #custom-updates {
 	background: @bg-updates;
 	color: @text-updates;
+	font-weight: bold;
+	padding: 0 0.6em;
+}
+
+#custom-espanso {
+	background: @bg-espanso;
+	color: @text-espanso;
 	font-weight: bold;
 	padding: 0 0.6em;
 }

@@ -3,7 +3,7 @@
 	"position": "top",
 	"reload_style_on_change": true,
 
-	"modules-left": [ "clock", "custom/updates", "hyprland/submap", "idle_inhibitor", "gamemode", "custom/media"],
+	"modules-left": [ "clock", "custom/updates", "hyprland/submap", "idle_inhibitor", "custom/espanso", "gamemode", "custom/media"],
 	"modules-center": ["hyprland/workspaces"],
 	"modules-right": [ "pulseaudio#input", "pulseaudio", "bluetooth", "custom/tailscale", "network", "battery", "backlight" , "tray"],
 
@@ -35,7 +35,21 @@
 		"max-length": 30,
 		"tooltip": false
 	},
-	
+
+	"custom/espanso": {
+		"format": "{icon}",
+		"return-type": "json",
+		"format-icons": {
+			"running": "󰬴 ",
+			"stopped": "󰅙 "
+		},
+		"exec-if": "which espanso",
+		"exec": "espanso status | grep -q 'is running' && echo '{\"text\":\"\",\"alt\":\"running\",\"tooltip\":\"espanso running\"}' || echo '{\"text\":\"\",\"alt\":\"stopped\",\"tooltip\":\"espanso not running\"}'",
+		"interval": 5,
+		"on-click": "espanso cmd search",
+		"on-click-right": "espanso cmd toggle"
+	},
+
 	"custom/updates": {
 		"format": "{} {icon}",
 		"return-type": "json",
